@@ -1,13 +1,22 @@
 package io.turntabl.jetty;
 
+import io.turntabl.NewRelicJavaProfilerToolWindow;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletHandler;
+import org.eclipse.jetty.servlet.ServletHolder;
 
 public class JettyServer implements Runnable {
+    private final NewRelicJavaProfilerToolWindow toolWindowComponent; //main panel reference
+
+    public JettyServer(NewRelicJavaProfilerToolWindow content) {
+        this.toolWindowComponent = content;
+    }
+
     @Override
     public void run() {
         Server server = new Server(8787);
         ServletHandler handler = new ServletHandler();
+        handler.addServletWithMapping(new ServletHolder(new MetricHandler(toolWindowComponent)),"/events");
         handler.addServletWithMapping(io.turntabl.jetty.MetricHandler.class, "/metrics");
         server.setHandler(handler);
 

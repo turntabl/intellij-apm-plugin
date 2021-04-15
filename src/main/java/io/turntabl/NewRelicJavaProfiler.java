@@ -20,8 +20,8 @@ public class NewRelicJavaProfiler implements ToolWindowFactory {
         Content content = contentFactory.createContent(newRelicJavaProfilerToolWindow.getContent(), "NewRelic Profiler", false);
         toolWindow.getContentManager().addContent(content);
 
-        //run the jectey server
+        //run the jetty server
         ExecutorService service = Executors.newSingleThreadExecutor();
-        service.execute(new JettyServer());
+        service.execute(new JettyServer(newRelicJavaProfilerToolWindow));
     }
 }

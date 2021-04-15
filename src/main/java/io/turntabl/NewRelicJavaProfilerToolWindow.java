@@ -49,6 +49,9 @@ public class NewRelicJavaProfilerToolWindow {
         label.setText("Hello New Relic");
     }
 
+    public void setEventlableText(String text){
+        eventsLabel.setText(text);
+    }
     public JComponent getContent() {
         return mainPanel;
     }
