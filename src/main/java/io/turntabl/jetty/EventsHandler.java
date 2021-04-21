@@ -8,25 +8,21 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import java.io.*;
 
-public class MetricHandler extends HttpServlet {
-    private final NewRelicJavaProfilerToolWindow toolWindowComponent;
+public class EventsHandler extends HttpServlet {
+    private NewRelicJavaProfilerToolWindow toolWindowComponent;
     private final Logger logger = LoggerFactory.getLogger(MetricHandler.class);
     private final ServletUtils servletUtils = new ServletUtils();
 
-    public MetricHandler() {
-        toolWindowComponent = null;
-    }
-
-    public MetricHandler(NewRelicJavaProfilerToolWindow toolWindowComponent) {
+    public EventsHandler(NewRelicJavaProfilerToolWindow toolWindowComponent) {
         this.toolWindowComponent = toolWindowComponent;
     }
 
-
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String decompressedString = servletUtils.decompress(req);
-        toolWindowComponent.updateMetricPanelText(decompressedString);
+        toolWindowComponent.updateEventPanelText(decompressedString);
         resp.setContentType("application/json");
         resp.setStatus(HttpServletResponse.SC_OK);
         resp.getWriter().println("{ \"status\": \"ok\"}");
