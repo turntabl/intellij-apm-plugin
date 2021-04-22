@@ -1,9 +1,12 @@
 package io.turntabl;
 
+import com.intellij.execution.Executor;
+import com.intellij.execution.ProgramRunnerUtil;
 import com.intellij.execution.RunManager;
 import com.intellij.execution.RunnerAndConfigurationSettings;
 import com.intellij.execution.application.ApplicationConfiguration;
 import com.intellij.execution.application.ApplicationConfigurationType;
+import com.intellij.execution.executors.DefaultRunExecutor;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
@@ -53,8 +56,13 @@ public class RunWithJavaProfilerAction extends AnAction {
         applicationConfiguration.setModule(module);
         applicationConfiguration.setWorkingDirectory(currentProject.getBasePath());
         applicationConfiguration.setMainClass(psiClass);
-        
+
+        // adds and sets configuration settings
         runManager.addConfiguration(runnerAndConfigurationSettings);
         runManager.setSelectedConfiguration(runnerAndConfigurationSettings);
+
+        // run automatically on click
+        Executor runExecutor = new DefaultRunExecutor();
+        ProgramRunnerUtil.executeConfiguration(runnerAndConfigurationSettings, runExecutor);
     }
 }
