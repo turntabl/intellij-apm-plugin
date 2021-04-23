@@ -6,11 +6,8 @@ import com.intellij.openapi.wm.ToolWindowFactory;
 import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentFactory;
 import io.turntabl.jetty.JettyServer;
-import org.eclipse.jetty.util.Jetty;
+import io.turntabl.ui.NewRelicJavaProfilerToolWindow;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class NewRelicJavaProfiler implements ToolWindowFactory {
 

@@ -1,6 +1,6 @@
 package io.turntabl.jetty;
 
-import io.turntabl.NewRelicJavaProfilerToolWindow;
+import io.turntabl.ui.NewRelicJavaProfilerToolWindow;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

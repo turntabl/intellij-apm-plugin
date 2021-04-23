@@ -1,4 +1,4 @@
-package io.turntabl;
+package io.turntabl.ui;
 
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.ui.components.JBScrollPane;
