@@ -6,6 +6,7 @@ import com.intellij.openapi.wm.ToolWindowFactory;
 import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentFactory;
 import io.turntabl.jetty.JettyServer;
+import io.turntabl.ui.NewRelicJavaProfilerToolWindow;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.ExecutorService;
@@ -20,7 +21,7 @@ public class NewRelicJavaProfiler implements ToolWindowFactory {
         Content content = contentFactory.createContent(newRelicJavaProfilerToolWindow.getContent(), "NewRelic Profiler", false);
         toolWindow.getContentManager().addContent(content);
 
-        //run the jectey server
+        //run the jetty server
         ExecutorService service = Executors.newSingleThreadExecutor();
         service.execute(new JettyServer());
     }
