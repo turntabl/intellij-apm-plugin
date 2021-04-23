@@ -19,7 +19,7 @@
 
     <actions>
         <!-- Add your actions here -->
-        <action id="io.turntabl.RunWithJavaProfilerAction" class="io.turntabl.RunWithJavaProfilerAction" text="Run With NewRelic Profiler">
+        <action id="io.turntabl.action.RunWithJavaProfilerAction" class="io.turntabl.action.RunWithJavaProfilerAction" text="Run With NewRelic Profiler">
             <add-to-group group-id="RunMenu" anchor="first"/>
         </action>
     </actions>
