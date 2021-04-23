@@ -57,10 +57,6 @@ public class RunWithJavaProfilerAction extends AnAction {
         applicationConfiguration.setWorkingDirectory(currentProject.getBasePath());
         applicationConfiguration.setMainClass(psiClass);
 
-        // adds and sets configuration settings
-        runManager.addConfiguration(runnerAndConfigurationSettings);
-        runManager.setSelectedConfiguration(runnerAndConfigurationSettings);
-
         // run automatically on click
         Executor runExecutor = new DefaultRunExecutor();
         ProgramRunnerUtil.executeConfiguration(runnerAndConfigurationSettings, runExecutor);
