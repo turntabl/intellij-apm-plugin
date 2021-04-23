@@ -1,4 +1,4 @@
-package io.turntabl;
+package io.turntabl.action;
 
 import com.intellij.execution.Executor;
 import com.intellij.execution.ProgramRunnerUtil;
