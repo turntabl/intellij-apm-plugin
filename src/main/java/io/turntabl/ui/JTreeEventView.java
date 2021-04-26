@@ -4,7 +4,9 @@ import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
 import io.turntabl.ui.flight_recorder.DataLossPanel;
 import io.turntabl.ui.flight_recorder.TestNode;
+import io.turntabl.ui.java_application.JavaMonitorWaitPanel;
 import io.turntabl.ui.model.DataLoss;
+import io.turntabl.ui.model.JavaMonitorWait;
 
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
@@ -66,18 +68,33 @@ public class JTreeEventView {
                 )));
 
         componentMap.put("Data Loss", dataLoss.getDataLossComponent());
+
         for (String nodeName : flightRecorderSubNodes) {
             flightRecorderNode.add(new DefaultMutableTreeNode(nodeName));
             componentMap.put(nodeName, dataLoss.getDataLossComponent());
 
         }
 
+
+
         //add statistics branch node and its leaf nodes
         DefaultMutableTreeNode javaAppStatisticsNode = new DefaultMutableTreeNode("Statistics");
         for (String nodeName : javaAppStatisticsNodes) {
             javaAppStatisticsNode.add(new DefaultMutableTreeNode(nodeName));
         }
+
         javaApplicationNode.add(javaAppStatisticsNode);
+        //add Java Monitor wait to Java Applications
+        javaApplicationNode.add( new DefaultMutableTreeNode("Java Monitor Wait"));
+        JavaMonitorWaitPanel javaMonitorWaitPanel = new JavaMonitorWaitPanel( new JavaMonitorWaitPanel.JavaMonitorWaitTableModel(Arrays.asList(
+                new JavaMonitorWait("4/26/21, 4:08:26PM", "2.954ms", "4/26/21, 4:08:26PM","Finalizer","java.lang.Reference","Reference Handler","0s","false","0x17862862")
+        )));
+        componentMap.put("Java Monitor Wait", javaMonitorWaitPanel.getJavaMonitorWaitComponent());
+
+        for (String nodeName : javaAppSubNodes) {
+            javaAppStatisticsNode.add(new DefaultMutableTreeNode(nodeName));
+            componentMap.put(nodeName, javaMonitorWaitPanel.getJavaMonitorWaitComponent());
+        }
 
 
         DefaultMutableTreeNode jdkSecurityNode = new DefaultMutableTreeNode("Security");
