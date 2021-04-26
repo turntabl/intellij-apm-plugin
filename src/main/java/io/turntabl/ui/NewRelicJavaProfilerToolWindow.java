@@ -79,7 +79,8 @@ public class NewRelicJavaProfilerToolWindow {
     public void updateEventPanelText(String text) {
         eventTextArea.append(text);
     }
-    public void clearEventPanelText(){
+
+    public void clearEventPanelText() {
         eventTextArea.setText("");
     }
 
@@ -89,6 +90,10 @@ public class NewRelicJavaProfilerToolWindow {
 
     public JComponent getContent() {
         return mainPanel;
+    }
+
+    public void setSecondComponent(JComponent component) {
+        eventSplitter.setSecondComponent(component);
     }
 
 }
