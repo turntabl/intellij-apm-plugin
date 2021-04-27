@@ -6,7 +6,7 @@ import java.util.Date;
 public class JfrCompilation {
 
     private Date timestamp;
-    private Time duration;
+    private Integer duration;
     private String instrumentationName;
     private String hostHostname;
     private String threadName;
@@ -15,7 +15,7 @@ public class JfrCompilation {
     private Boolean succeeded;
     private String instrumentationProvider;
 
-    public JfrCompilation(Date timestamp, Time duration, String instrumentationName, String hostHostname, String threadName, String collectorName, String desc, Boolean succeeded, String instrumentationProvider) {
+    public JfrCompilation(Date timestamp, Integer duration, String instrumentationName, String hostHostname, String threadName, String collectorName, String desc, Boolean succeeded, String instrumentationProvider) {
         this.timestamp = timestamp;
         this.duration = duration;
         this.instrumentationName = instrumentationName;
@@ -31,7 +31,7 @@ public class JfrCompilation {
         return timestamp;
     }
 
-    public Date getDuration() {
+    public Integer getDuration() {
         return duration;
     }
 

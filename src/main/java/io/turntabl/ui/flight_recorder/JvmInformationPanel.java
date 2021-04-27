@@ -27,9 +27,9 @@ public class JvmInformationPanel {
         table.getColumnModel().getColumn(0).setPreferredWidth(350);
         table.getColumnModel().getColumn(1).setPreferredWidth(200);
         table.getColumnModel().getColumn(2).setPreferredWidth(700);
-        table.getColumnModel().getColumn(3).setPreferredWidth(350);
-        table.getColumnModel().getColumn(5).setPreferredWidth(200);
-        table.getColumnModel().getColumn(6).setPreferredWidth(700);
+//        table.getColumnModel().getColumn(3).setPreferredWidth(350);
+//        table.getColumnModel().getColumn(5).setPreferredWidth(200);
+//        table.getColumnModel().getColumn(6).setPreferredWidth(700);
 
         panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER),  BorderLayout.CENTER);
     }
@@ -51,10 +51,10 @@ public class JvmInformationPanel {
                 data[i][0] = jvmInformation.getTimeStamp().toString();
                 data[i][1] = jvmInformation.getJvmProperty();
                 data[i][2] = jvmInformation.getJvmPropertyValue();
-                data[i][3] = jvmInformation.getInstrumentationName();
-                data[i][4] = jvmInformation.getHostName();
-                data[i][5] = jvmInformation.getCollectorName();
-                data[i][6] = jvmInformation.getInstrumentationProvider();
+//                data[i][3] = jvmInformation.getInstrumentationName();
+//                data[i][4] = jvmInformation.getHostName();
+//                data[i][5] = jvmInformation.getCollectorName();
+//                data[i][6] = jvmInformation.getInstrumentationProvider();
             }
         }
 

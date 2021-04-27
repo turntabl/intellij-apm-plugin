@@ -30,12 +30,12 @@ public class JfrCompilationPanel {
         table.getColumnModel().getColumn(0).setPreferredWidth(350);
         table.getColumnModel().getColumn(1).setPreferredWidth(200);
         table.getColumnModel().getColumn(2).setPreferredWidth(700);
-        table.getColumnModel().getColumn(3).setPreferredWidth(350);
-        table.getColumnModel().getColumn(5).setPreferredWidth(200);
-        table.getColumnModel().getColumn(6).setPreferredWidth(700);
-        table.getColumnModel().getColumn(7).setPreferredWidth(350);
-        table.getColumnModel().getColumn(8).setPreferredWidth(200);
-        table.getColumnModel().getColumn(9).setPreferredWidth(700);
+//        table.getColumnModel().getColumn(3).setPreferredWidth(350);
+//        table.getColumnModel().getColumn(5).setPreferredWidth(200);
+//        table.getColumnModel().getColumn(6).setPreferredWidth(700);
+//        table.getColumnModel().getColumn(7).setPreferredWidth(350);
+//        table.getColumnModel().getColumn(8).setPreferredWidth(200);
+//        table.getColumnModel().getColumn(9).setPreferredWidth(700);
 
         panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER),  BorderLayout.CENTER);
     }
@@ -65,14 +65,14 @@ public class JfrCompilationPanel {
                 JfrCompilation jfrCompilation = jfrCompilationList.get(i);
                 data[i][0] = jfrCompilation.getTimestamp().toString();
                 data[i][1] = jfrCompilation.getDuration().toString();
-                data[i][1] = jfrCompilation.getInstrumentationName();
-                data[i][2] = jfrCompilation.getHostHostname();
-                data[i][0] = jfrCompilation.getThreadName();
-                data[i][1] = jfrCompilation.getCollectorName();
-                data[i][2] = jfrCompilation.getDesc();
-                data[i][0] = jfrCompilation.getSucceeded().toString();
-                data[i][1] = jfrCompilation.getInstrumentationProvider();
-                data[i][2] = jfrCompilation.getHostHostname();
+                data[i][2] = jfrCompilation.getInstrumentationName();
+//                data[i][3] = jfrCompilation.getHostHostname();
+//                data[i][4] = jfrCompilation.getThreadName();
+//                data[i][5] = jfrCompilation.getCollectorName();
+//                data[i][6] = jfrCompilation.getDesc();
+//                data[i][7] = jfrCompilation.getSucceeded().toString();
+//                data[i][8] = jfrCompilation.getInstrumentationProvider();
+//                data[i][9] = jfrCompilation.getHostHostname();
 
             }
         }

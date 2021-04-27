@@ -1,10 +1,16 @@
 package io.turntabl.ui;
 
+import com.fasterxml.jackson.module.kotlin.ReflectionCache;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
+import com.intellij.util.Time;
 import io.turntabl.ui.flight_recorder.DataLossPanel;
+import io.turntabl.ui.flight_recorder.JfrCompilationPanel;
+import io.turntabl.ui.flight_recorder.JvmInformationPanel;
 import io.turntabl.ui.flight_recorder.TestNode;
 import io.turntabl.ui.model.DataLoss;
+import io.turntabl.ui.model.JfrCompilation;
+import io.turntabl.ui.model.JvmInformation;
 
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
@@ -13,6 +19,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -69,6 +76,43 @@ public class JTreeEventView {
         for (String nodeName : flightRecorderSubNodes) {
             flightRecorderNode.add(new DefaultMutableTreeNode(nodeName));
             componentMap.put(nodeName, dataLoss.getDataLossComponent());
+
+        }
+
+        //add jvminfo noode to flight recorder branch node
+        flightRecorderNode.add(new DefaultMutableTreeNode("Jvm Information"));
+        JvmInformationPanel jvmInformation = new JvmInformationPanel(
+                new JvmInformationPanel.JvmInformationTableModel(Arrays.asList(
+                        new JvmInformation(new java.util.Date(),"jvmproperty","propertyValue","intruName", "hostName", "collectorName", "Intruprovider" ),
+                        new  JvmInformation(new java.util.Date(),"jvmproperty","propertyValue","intruName", "hostName", "collectorName", "Intruprovider" ),
+                        new JvmInformation(new java.util.Date(),"jvmproperty","propertyValue","intruName", "hostName", "collectorName", "Intruprovider" )
+                )));
+
+        componentMap.put("Jvm Information", jvmInformation.getJvmInformationComponent());
+        for (String nodeName : flightRecorderSubNodes) {
+            flightRecorderNode.add(new DefaultMutableTreeNode(nodeName));
+            componentMap.put(nodeName, jvmInformation.getJvmInformationComponent());
+
+        }
+
+        //add jvmCompilation noode to flight recorder branch node
+        flightRecorderNode.add(new DefaultMutableTreeNode("Jvm Compilation"));
+        JfrCompilationPanel jfrCompilation= new JfrCompilationPanel(
+                new JfrCompilationPanel.JfrCompilationTableModel(Arrays.asList(
+                        new JfrCompilation(new java.util.Date(), 2,
+                                "instrumentationName", "hostHstname", "treadName","collectorName","desc",true ,"instruProvider"),
+                        new JfrCompilation(new java.util.Date(), 3,
+                                "instrumentationName", "hostHostname", "treadName","collectorName","desc",true ,"instruProvider"),
+                        new JfrCompilation(new java.util.Date(),
+                                4,
+                                "instrumentationName",
+                                "hostHostname", "threadName","collectorName","desc",true ,"instruProvider")
+                )));
+
+        componentMap.put("Jvm Compilation", jfrCompilation.getJfrCompilationComponent());
+        for (String nodeName : flightRecorderSubNodes) {
+            flightRecorderNode.add(new DefaultMutableTreeNode(nodeName));
+            componentMap.put(nodeName, jfrCompilation.getJfrCompilationComponent());
 
         }
 
