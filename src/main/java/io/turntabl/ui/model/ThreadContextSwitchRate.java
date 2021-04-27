@@ -7,7 +7,7 @@ import org.apache.commons.net.ntp.TimeStamp;
 import java.sql.Timestamp;
 import java.util.Map;
 
-public class CpuLoadUser {
+public class ThreadContextSwitchRate {
     private String name;
     private String type;
     private Double value;
@@ -17,7 +17,7 @@ public class CpuLoadUser {
     //@JsonProperty("data") final Map<String, String> attributes
 
 
-    public CpuLoadUser(String name, String type, Double value, Timestamp timestamp, String attributes) {
+    public ThreadContextSwitchRate(String name, String type, Double value, Timestamp timestamp, String attributes) {
         this.name = name;
         this.type = type;
         this.value = value;
