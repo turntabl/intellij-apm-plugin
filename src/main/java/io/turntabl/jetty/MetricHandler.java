@@ -26,7 +26,7 @@ public class MetricHandler extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String decompressedString = servletUtils.decompress(req);
-        toolWindowComponent.updateMetricPanelText(decompressedString);
+        toolWindowComponent.updateMetricsPanelText(decompressedString);
         resp.setContentType("application/json");
         resp.setStatus(HttpServletResponse.SC_OK);
         resp.getWriter().println("{ \"status\": \"ok\"}");
