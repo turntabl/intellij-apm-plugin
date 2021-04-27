@@ -10,170 +10,585 @@
         },
         "metrics": [
             {
-                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "name": "jfr.GCHeapSummary.heapCommittedSize",
                 "type": "gauge",
-                "value": 1.95738E7,
-                "timestamp": 1619441624895,
+                "value": 2.65289728E8,
+                "timestamp": 1619441634271,
                 "attributes": {
-                    "thread.osName": "main",
+                    "heapStart": 31155290112,
+                    "reservedEnd": 34359738368,
+                    "committedEnd": 31420579840,
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.GCHeapSummary.reservedSize",
+                "type": "gauge",
+                "value": 3.204448256E9,
+                "timestamp": 1619441634271,
+                "attributes": {
+                    "heapStart": 31155290112,
+                    "reservedEnd": 34359738368,
+                    "committedEnd": 31420579840,
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.GCHeapSummary.heapUsed",
+                "type": "gauge",
+                "value": 1.39961312E8,
+                "timestamp": 1619441634271,
+                "attributes": {
+                    "heapStart": 31155290112,
+                    "reservedEnd": 34359738368,
+                    "committedEnd": 31420579840,
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.metaspace.committed",
+                "type": "gauge",
+                "value": 2.097152E7,
+                "timestamp": 1619441634271,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.metaspace.used",
+                "type": "gauge",
+                "value": 2.0466688E7,
+                "timestamp": 1619441634271,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.metaspace.reserved",
+                "type": "gauge",
+                "value": 1.092616192E9,
+                "timestamp": 1619441634271,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.dataSpace.committed",
+                "type": "gauge",
+                "value": 1.8874368E7,
+                "timestamp": 1619441634271,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.dataSpace.used",
+                "type": "gauge",
+                "value": 1.8565112E7,
+                "timestamp": 1619441634271,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.dataSpace.reserved",
+                "type": "gauge",
+                "value": 1.8874368E7,
+                "timestamp": 1619441634271,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.classSpace.committed",
+                "type": "gauge",
+                "value": 2097152.0,
+                "timestamp": 1619441634271,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.classSpace.used",
+                "type": "gauge",
+                "value": 1901576.0,
+                "timestamp": 1619441634271,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.classSpace.reserved",
+                "type": "gauge",
+                "value": 1.073741824E9,
+                "timestamp": 1619441634271,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.GCHeapSummary.heapCommittedSize",
+                "type": "gauge",
+                "value": 2.65289728E8,
+                "timestamp": 1619441634400,
+                "attributes": {
+                    "heapStart": 31155290112,
+                    "reservedEnd": 34359738368,
+                    "committedEnd": 31420579840,
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.GCHeapSummary.reservedSize",
+                "type": "gauge",
+                "value": 3.204448256E9,
+                "timestamp": 1619441634400,
+                "attributes": {
+                    "heapStart": 31155290112,
+                    "reservedEnd": 34359738368,
+                    "committedEnd": 31420579840,
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.GCHeapSummary.heapUsed",
+                "type": "gauge",
+                "value": 1.6407856E8,
+                "timestamp": 1619441634400,
+                "attributes": {
+                    "heapStart": 31155290112,
+                    "reservedEnd": 34359738368,
+                    "committedEnd": 31420579840,
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.metaspace.committed",
+                "type": "gauge",
+                "value": 2.097152E7,
+                "timestamp": 1619441634400,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.metaspace.used",
+                "type": "gauge",
+                "value": 2.0466688E7,
+                "timestamp": 1619441634400,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.metaspace.reserved",
+                "type": "gauge",
+                "value": 1.092616192E9,
+                "timestamp": 1619441634400,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.dataSpace.committed",
+                "type": "gauge",
+                "value": 1.8874368E7,
+                "timestamp": 1619441634400,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.dataSpace.used",
+                "type": "gauge",
+                "value": 1.8565112E7,
+                "timestamp": 1619441634400,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.dataSpace.reserved",
+                "type": "gauge",
+                "value": 1.8874368E7,
+                "timestamp": 1619441634400,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.classSpace.committed",
+                "type": "gauge",
+                "value": 2097152.0,
+                "timestamp": 1619441634400,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.classSpace.used",
+                "type": "gauge",
+                "value": 1901576.0,
+                "timestamp": 1619441634400,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.classSpace.reserved",
+                "type": "gauge",
+                "value": 1.073741824E9,
+                "timestamp": 1619441634400,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.GarbageCollection.longestPause",
+                "type": "gauge",
+                "value": 18686.0,
+                "timestamp": 1619441634271,
+                "attributes": {
+                    "name": "G1Old",
+                    "cause": "G1 Humongous Allocation"
+                }
+            },
+            {
+                "name": "jfr.ThreadCPULoad.user",
+                "type": "gauge",
+                "value": 0.004777687136083841,
+                "timestamp": 1619441634794,
+                "attributes": {
                     "thread.name": "main"
                 }
             },
             {
-                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "name": "jfr.ThreadCPULoad.system",
                 "type": "gauge",
-                "value": 0.0,
-                "timestamp": 1619441624895,
+                "value": 0.001365053467452526,
+                "timestamp": 1619441634794,
                 "attributes": {
-                    "thread.osName": "Reference Handler",
-                    "thread.name": "Reference Handler"
+                    "thread.name": "main"
                 }
             },
             {
-                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "name": "jfr.ThreadCPULoad.user",
                 "type": "gauge",
-                "value": 280.0,
-                "timestamp": 1619441624895,
+                "value": 1.7117217066697776E-4,
+                "timestamp": 1619441634794,
                 "attributes": {
-                    "thread.osName": "Finalizer",
-                    "thread.name": "Finalizer"
-                }
-            },
-            {
-                "name": "jfr.ThreadAllocationStatistics.allocated",
-                "type": "gauge",
-                "value": 0.0,
-                "timestamp": 1619441624895,
-                "attributes": {
-                    "thread.osName": "Signal Dispatcher",
-                    "thread.name": "Signal Dispatcher"
-                }
-            },
-            {
-                "name": "jfr.ThreadAllocationStatistics.allocated",
-                "type": "gauge",
-                "value": 513560.0,
-                "timestamp": 1619441624895,
-                "attributes": {
-                    "thread.osName": "Attach Listener",
                     "thread.name": "Attach Listener"
                 }
             },
             {
-                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "name": "jfr.ThreadCPULoad.system",
                 "type": "gauge",
                 "value": 0.0,
-                "timestamp": 1619441624895,
+                "timestamp": 1619441634794,
                 "attributes": {
-                    "thread.osName": "C2 CompilerThread0",
+                    "thread.name": "Attach Listener"
+                }
+            },
+            {
+                "name": "jfr.ThreadCPULoad.user",
+                "type": "gauge",
+                "value": 0.007018106523901224,
+                "timestamp": 1619441634794,
+                "attributes": {
                     "thread.name": "C2 CompilerThread0"
                 }
             },
             {
-                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "name": "jfr.ThreadCPULoad.system",
                 "type": "gauge",
-                "value": 9816.0,
-                "timestamp": 1619441624895,
+                "value": 2.567599876783788E-4,
+                "timestamp": 1619441634794,
                 "attributes": {
-                    "thread.osName": "C1 CompilerThread0",
+                    "thread.name": "C2 CompilerThread0"
+                }
+            },
+            {
+                "name": "jfr.ThreadCPULoad.user",
+                "type": "gauge",
+                "value": 0.004792887717485428,
+                "timestamp": 1619441634794,
+                "attributes": {
                     "thread.name": "C1 CompilerThread0"
                 }
             },
             {
-                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "name": "jfr.ThreadCPULoad.system",
                 "type": "gauge",
-                "value": 0.0,
-                "timestamp": 1619441624895,
+                "value": 2.5676185032352805E-4,
+                "timestamp": 1619441634794,
                 "attributes": {
-                    "thread.osName": "Sweeper thread",
-                    "thread.name": "Sweeper thread"
+                    "thread.name": "C1 CompilerThread0"
                 }
             },
             {
-                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "name": "jfr.ThreadCPULoad.user",
                 "type": "gauge",
-                "value": 0.0,
-                "timestamp": 1619441624895,
+                "value": 0.002581399865448475,
+                "timestamp": 1619441634794,
                 "attributes": {
-                    "thread.osName": "Common-Cleaner",
-                    "thread.name": "Common-Cleaner"
-                }
-            },
-            {
-                "name": "jfr.ThreadAllocationStatistics.allocated",
-                "type": "gauge",
-                "value": 1.709704E7,
-                "timestamp": 1619441624895,
-                "attributes": {
-                    "thread.osName": "pool-1-thread-1",
                     "thread.name": "pool-1-thread-1"
                 }
             },
             {
-                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "name": "jfr.ThreadCPULoad.system",
+                "type": "gauge",
+                "value": 0.0046096425503492355,
+                "timestamp": 1619441634794,
+                "attributes": {
+                    "thread.name": "pool-1-thread-1"
+                }
+            },
+            {
+                "name": "jfr.ThreadCPULoad.user",
                 "type": "gauge",
                 "value": 0.0,
-                "timestamp": 1619441624895,
+                "timestamp": 1619441634794,
                 "attributes": {
-                    "thread.osName": "Service Thread",
-                    "thread.name": "Service Thread"
-                }
-            },
-            {
-                "name": "jfr.ThreadAllocationStatistics.allocated",
-                "type": "gauge",
-                "value": 0.0,
-                "timestamp": 1619441624895,
-                "attributes": {
-                    "thread.osName": "JFR Recorder Thread",
-                    "thread.name": "JFR Recorder Thread"
-                }
-            },
-            {
-                "name": "jfr.ThreadAllocationStatistics.allocated",
-                "type": "gauge",
-                "value": 40.0,
-                "timestamp": 1619441624895,
-                "attributes": {
-                    "thread.osName": "C2 CompilerThread1",
-                    "thread.name": "C2 CompilerThread1"
-                }
-            },
-            {
-                "name": "jfr.ThreadAllocationStatistics.allocated",
-                "type": "gauge",
-                "value": 0.0,
-                "timestamp": 1619441624895,
-                "attributes": {
-                    "thread.osName": "C2 CompilerThread2",
-                    "thread.name": "C2 CompilerThread2"
-                }
-            },
-            {
-                "name": "jfr.ThreadAllocationStatistics.allocated",
-                "type": "gauge",
-                "value": 24.0,
-                "timestamp": 1619441624895,
-                "attributes": {
-                    "thread.osName": "JFR Periodic Tasks",
                     "thread.name": "JFR Periodic Tasks"
                 }
             },
             {
-                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "name": "jfr.ThreadCPULoad.system",
+                "type": "gauge",
+                "value": 0.012884986586868763,
+                "timestamp": 1619441634794,
+                "attributes": {
+                    "thread.name": "JFR Periodic Tasks"
+                }
+            },
+            {
+                "name": "jfr.ThreadCPULoad.user",
+                "type": "gauge",
+                "value": 0.00140527228359133,
+                "timestamp": 1619441634794,
+                "attributes": {
+                    "thread.name": "JfrController"
+                }
+            },
+            {
+                "name": "jfr.ThreadCPULoad.system",
                 "type": "gauge",
                 "value": 0.0,
-                "timestamp": 1619441624895,
+                "timestamp": 1619441634794,
                 "attributes": {
-                    "thread.osName": "JFR Recording Scheduler",
-                    "thread.name": "JFR Recording Scheduler"
+                    "thread.name": "JfrController"
+                }
+            },
+            {
+                "name": "jfr.ThreadCPULoad.user",
+                "type": "gauge",
+                "value": 0.0012234770692884922,
+                "timestamp": 1619441634794,
+                "attributes": {
+                    "thread.name": "Thread-1"
+                }
+            },
+            {
+                "name": "jfr.ThreadCPULoad.system",
+                "type": "gauge",
+                "value": 2.0391284488141537E-4,
+                "timestamp": 1619441634794,
+                "attributes": {
+                    "thread.name": "Thread-1"
+                }
+            },
+            {
+                "name": "jfr.ThreadContextSwitchRate",
+                "type": "gauge",
+                "value": 21703.333984375,
+                "timestamp": 1619441634798,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.CPULoad.jvmUser",
+                "type": "gauge",
+                "value": 0.10448416322469711,
+                "timestamp": 1619441634964,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.CPULoad.jvmSystem",
+                "type": "gauge",
+                "value": 0.017414027824997902,
+                "timestamp": 1619441634964,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.CPULoad.machineTotal",
+                "type": "gauge",
+                "value": 0.17614521086215973,
+                "timestamp": 1619441634964,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.ThreadCPULoad.user",
+                "type": "gauge",
+                "value": 0.0686943531036377,
+                "timestamp": 1619441625421,
+                "attributes": {
+                    "thread.name": "C2 CompilerThread2"
+                }
+            },
+            {
+                "name": "jfr.ThreadCPULoad.system",
+                "type": "gauge",
+                "value": 0.010991096496582031,
+                "timestamp": 1619441625421,
+                "attributes": {
+                    "thread.name": "C2 CompilerThread2"
+                }
+            },
+            {
+                "name": "jfr.CPULoad.jvmUser",
+                "type": "gauge",
+                "value": 0.25646382570266724,
+                "timestamp": 1619441625915,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.CPULoad.jvmSystem",
+                "type": "gauge",
+                "value": 0.031001122668385506,
+                "timestamp": 1619441625915,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.CPULoad.machineTotal",
+                "type": "gauge",
+                "value": 0.3926701843738556,
+                "timestamp": 1619441625915,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.CPULoad.jvmUser",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441626924,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.CPULoad.jvmSystem",
+                "type": "gauge",
+                "value": 0.013558532111346722,
+                "timestamp": 1619441626924,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.CPULoad.machineTotal",
+                "type": "gauge",
+                "value": 0.10944480448961258,
+                "timestamp": 1619441626924,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.CPULoad.jvmUser",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441627925,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.CPULoad.jvmSystem",
+                "type": "gauge",
+                "value": 0.013657440431416035,
+                "timestamp": 1619441627925,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.CPULoad.machineTotal",
+                "type": "gauge",
+                "value": 0.08691659569740295,
+                "timestamp": 1619441627925,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.CPULoad.jvmUser",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441628943,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.CPULoad.jvmSystem",
+                "type": "gauge",
+                "value": 0.017283981665968895,
+                "timestamp": 1619441628943,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.CPULoad.machineTotal",
+                "type": "gauge",
+                "value": 0.18036414682865143,
+                "timestamp": 1619441628943,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.CPULoad.jvmUser",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441629938,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.CPULoad.jvmSystem",
+                "type": "gauge",
+                "value": 0.013727949932217598,
+                "timestamp": 1619441629938,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.CPULoad.machineTotal",
+                "type": "gauge",
+                "value": 0.028262006118893623,
+                "timestamp": 1619441629938,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.ThreadCPULoad.user",
+                "type": "gauge",
+                "value": 0.04482103884220123,
+                "timestamp": 1619441633976,
+                "attributes": {
+                    "thread.name": "C2 CompilerThread1"
+                }
+            },
+            {
+                "name": "jfr.ThreadCPULoad.system",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441633976,
+                "attributes": {
+                    "thread.name": "C2 CompilerThread1"
+                }
+            },
+            {
+                "name": "jfr.ThreadCPULoad.user",
+                "type": "gauge",
+                "value": 0.10690335184335709,
+                "timestamp": 1619441634375,
+                "attributes": {
+                    "thread.name": "MyThread1"
+                }
+            },
+            {
+                "name": "jfr.ThreadCPULoad.system",
+                "type": "gauge",
+                "value": 0.0026073988992720842,
+                "timestamp": 1619441634375,
+                "attributes": {
+                    "thread.name": "MyThread1"
                 }
             },
             {
                 "name": "jfr.ThreadAllocationStatistics.allocated",
                 "type": "gauge",
                 "value": 1.95738E7,
-                "timestamp": 1619441625024,
+                "timestamp": 1619441625049,
                 "attributes": {
                     "thread.osName": "main",
                     "thread.name": "main"
@@ -183,7 +598,7 @@
                 "name": "jfr.ThreadAllocationStatistics.allocated",
                 "type": "gauge",
                 "value": 0.0,
-                "timestamp": 1619441625024,
+                "timestamp": 1619441625049,
                 "attributes": {
                     "thread.osName": "Reference Handler",
                     "thread.name": "Reference Handler"
@@ -193,7 +608,7 @@
                 "name": "jfr.ThreadAllocationStatistics.allocated",
                 "type": "gauge",
                 "value": 280.0,
-                "timestamp": 1619441625024,
+                "timestamp": 1619441625049,
                 "attributes": {
                     "thread.osName": "Finalizer",
                     "thread.name": "Finalizer"
@@ -203,7 +618,7 @@
                 "name": "jfr.ThreadAllocationStatistics.allocated",
                 "type": "gauge",
                 "value": 0.0,
-                "timestamp": 1619441625024,
+                "timestamp": 1619441625049,
                 "attributes": {
                     "thread.osName": "Signal Dispatcher",
                     "thread.name": "Signal Dispatcher"
@@ -213,7 +628,7 @@
                 "name": "jfr.ThreadAllocationStatistics.allocated",
                 "type": "gauge",
                 "value": 513560.0,
-                "timestamp": 1619441625024,
+                "timestamp": 1619441625049,
                 "attributes": {
                     "thread.osName": "Attach Listener",
                     "thread.name": "Attach Listener"
@@ -223,7 +638,7 @@
                 "name": "jfr.ThreadAllocationStatistics.allocated",
                 "type": "gauge",
                 "value": 0.0,
-                "timestamp": 1619441625024,
+                "timestamp": 1619441625049,
                 "attributes": {
                     "thread.osName": "C2 CompilerThread0",
                     "thread.name": "C2 CompilerThread0"
@@ -232,8 +647,8 @@
             {
                 "name": "jfr.ThreadAllocationStatistics.allocated",
                 "type": "gauge",
-                "value": 9944.0,
-                "timestamp": 1619441625024,
+                "value": 10088.0,
+                "timestamp": 1619441625049,
                 "attributes": {
                     "thread.osName": "C1 CompilerThread0",
                     "thread.name": "C1 CompilerThread0"
@@ -243,7 +658,7 @@
                 "name": "jfr.ThreadAllocationStatistics.allocated",
                 "type": "gauge",
                 "value": 0.0,
-                "timestamp": 1619441625024,
+                "timestamp": 1619441625049,
                 "attributes": {
                     "thread.osName": "Sweeper thread",
                     "thread.name": "Sweeper thread"
@@ -253,7 +668,7 @@
                 "name": "jfr.ThreadAllocationStatistics.allocated",
                 "type": "gauge",
                 "value": 0.0,
-                "timestamp": 1619441625024,
+                "timestamp": 1619441625049,
                 "attributes": {
                     "thread.osName": "Common-Cleaner",
                     "thread.name": "Common-Cleaner"
@@ -262,8 +677,8 @@
             {
                 "name": "jfr.ThreadAllocationStatistics.allocated",
                 "type": "gauge",
-                "value": 1.7718192E7,
-                "timestamp": 1619441625024,
+                "value": 1.8466992E7,
+                "timestamp": 1619441625049,
                 "attributes": {
                     "thread.osName": "pool-1-thread-1",
                     "thread.name": "pool-1-thread-1"
@@ -273,7 +688,7 @@
                 "name": "jfr.ThreadAllocationStatistics.allocated",
                 "type": "gauge",
                 "value": 0.0,
-                "timestamp": 1619441625024,
+                "timestamp": 1619441625049,
                 "attributes": {
                     "thread.osName": "Service Thread",
                     "thread.name": "Service Thread"
@@ -283,7 +698,7 @@
                 "name": "jfr.ThreadAllocationStatistics.allocated",
                 "type": "gauge",
                 "value": 0.0,
-                "timestamp": 1619441625024,
+                "timestamp": 1619441625049,
                 "attributes": {
                     "thread.osName": "JFR Recorder Thread",
                     "thread.name": "JFR Recorder Thread"
@@ -293,7 +708,7 @@
                 "name": "jfr.ThreadAllocationStatistics.allocated",
                 "type": "gauge",
                 "value": 40.0,
-                "timestamp": 1619441625024,
+                "timestamp": 1619441625049,
                 "attributes": {
                     "thread.osName": "C2 CompilerThread1",
                     "thread.name": "C2 CompilerThread1"
@@ -303,7 +718,7 @@
                 "name": "jfr.ThreadAllocationStatistics.allocated",
                 "type": "gauge",
                 "value": 0.0,
-                "timestamp": 1619441625024,
+                "timestamp": 1619441625049,
                 "attributes": {
                     "thread.osName": "C2 CompilerThread2",
                     "thread.name": "C2 CompilerThread2"
@@ -313,7 +728,7 @@
                 "name": "jfr.ThreadAllocationStatistics.allocated",
                 "type": "gauge",
                 "value": 64.0,
-                "timestamp": 1619441625024,
+                "timestamp": 1619441625049,
                 "attributes": {
                     "thread.osName": "JFR Periodic Tasks",
                     "thread.name": "JFR Periodic Tasks"
@@ -323,77 +738,1528 @@
                 "name": "jfr.ThreadAllocationStatistics.allocated",
                 "type": "gauge",
                 "value": 0.0,
-                "timestamp": 1619441625024,
+                "timestamp": 1619441625049,
                 "attributes": {
                     "thread.osName": "JFR Recording Scheduler",
                     "thread.name": "JFR Recording Scheduler"
                 }
             },
             {
+                "name": "jfr.ThreadCPULoad.user",
+                "type": "gauge",
+                "value": 0.04082856327295303,
+                "timestamp": 1619441626468,
+                "attributes": {
+                    "thread.name": "C2 CompilerThread1"
+                }
+            },
+            {
+                "name": "jfr.ThreadCPULoad.system",
+                "type": "gauge",
+                "value": 0.0010207140585407615,
+                "timestamp": 1619441626468,
+                "attributes": {
+                    "thread.name": "C2 CompilerThread1"
+                }
+            },
+            {
+                "name": "jfr.ThreadCPULoad.user",
+                "type": "gauge",
+                "value": 0.0392359122633934,
+                "timestamp": 1619441633976,
+                "attributes": {
+                    "thread.name": "C2 CompilerThread2"
+                }
+            },
+            {
+                "name": "jfr.ThreadCPULoad.system",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441633976,
+                "attributes": {
+                    "thread.name": "C2 CompilerThread2"
+                }
+            },
+            {
+                "name": "jfr.CPULoad.jvmUser",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441630940,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.CPULoad.jvmSystem",
+                "type": "gauge",
+                "value": 0.013641385361552238,
+                "timestamp": 1619441630940,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.CPULoad.machineTotal",
+                "type": "gauge",
+                "value": 0.03975353389978409,
+                "timestamp": 1619441630940,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.CPULoad.jvmUser",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441631948,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.CPULoad.jvmSystem",
+                "type": "gauge",
+                "value": 0.015504506416618824,
+                "timestamp": 1619441631948,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.CPULoad.machineTotal",
+                "type": "gauge",
+                "value": 0.04598057270050049,
+                "timestamp": 1619441631948,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.CPULoad.jvmUser",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441632950,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.CPULoad.jvmSystem",
+                "type": "gauge",
+                "value": 0.013645722530782223,
+                "timestamp": 1619441632950,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.CPULoad.machineTotal",
+                "type": "gauge",
+                "value": 0.2202463448047638,
+                "timestamp": 1619441632950,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.CPULoad.jvmUser",
+                "type": "gauge",
+                "value": 0.08747703582048416,
+                "timestamp": 1619441633954,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.CPULoad.jvmSystem",
+                "type": "gauge",
+                "value": 0.017495406791567802,
+                "timestamp": 1619441633954,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.CPULoad.machineTotal",
+                "type": "gauge",
+                "value": 0.16410548985004425,
+                "timestamp": 1619441633954,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.GCHeapSummary.heapCommittedSize",
+                "type": "gauge",
+                "value": 2.01326592E8,
+                "timestamp": 1619441625066,
+                "attributes": {
+                    "heapStart": 31155290112,
+                    "reservedEnd": 34359738368,
+                    "committedEnd": 31356616704,
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.GCHeapSummary.reservedSize",
+                "type": "gauge",
+                "value": 3.204448256E9,
+                "timestamp": 1619441625066,
+                "attributes": {
+                    "heapStart": 31155290112,
+                    "reservedEnd": 34359738368,
+                    "committedEnd": 31356616704,
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.GCHeapSummary.heapUsed",
+                "type": "gauge",
+                "value": 1.19968768E8,
+                "timestamp": 1619441625066,
+                "attributes": {
+                    "heapStart": 31155290112,
+                    "reservedEnd": 34359738368,
+                    "committedEnd": 31356616704,
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.metaspace.committed",
+                "type": "gauge",
+                "value": 1.9267584E7,
+                "timestamp": 1619441625066,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.metaspace.used",
+                "type": "gauge",
+                "value": 1.8665456E7,
+                "timestamp": 1619441625066,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.metaspace.reserved",
+                "type": "gauge",
+                "value": 1.092616192E9,
+                "timestamp": 1619441625066,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.dataSpace.committed",
+                "type": "gauge",
+                "value": 1.7301504E7,
+                "timestamp": 1619441625066,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.dataSpace.used",
+                "type": "gauge",
+                "value": 1.6938232E7,
+                "timestamp": 1619441625066,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.dataSpace.reserved",
+                "type": "gauge",
+                "value": 1.8874368E7,
+                "timestamp": 1619441625066,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.classSpace.committed",
+                "type": "gauge",
+                "value": 1966080.0,
+                "timestamp": 1619441625066,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.classSpace.used",
+                "type": "gauge",
+                "value": 1727224.0,
+                "timestamp": 1619441625066,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.classSpace.reserved",
+                "type": "gauge",
+                "value": 1.073741824E9,
+                "timestamp": 1619441625066,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.GCHeapSummary.heapCommittedSize",
+                "type": "gauge",
+                "value": 2.65289728E8,
+                "timestamp": 1619441625082,
+                "attributes": {
+                    "heapStart": 31155290112,
+                    "reservedEnd": 34359738368,
+                    "committedEnd": 31420579840,
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.GCHeapSummary.reservedSize",
+                "type": "gauge",
+                "value": 3.204448256E9,
+                "timestamp": 1619441625082,
+                "attributes": {
+                    "heapStart": 31155290112,
+                    "reservedEnd": 34359738368,
+                    "committedEnd": 31420579840,
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.GCHeapSummary.heapUsed",
+                "type": "gauge",
+                "value": 8.0740352E7,
+                "timestamp": 1619441625082,
+                "attributes": {
+                    "heapStart": 31155290112,
+                    "reservedEnd": 34359738368,
+                    "committedEnd": 31420579840,
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.metaspace.committed",
+                "type": "gauge",
+                "value": 1.9267584E7,
+                "timestamp": 1619441625082,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.metaspace.used",
+                "type": "gauge",
+                "value": 1.8665456E7,
+                "timestamp": 1619441625082,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.metaspace.reserved",
+                "type": "gauge",
+                "value": 1.092616192E9,
+                "timestamp": 1619441625082,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.dataSpace.committed",
+                "type": "gauge",
+                "value": 1.7301504E7,
+                "timestamp": 1619441625082,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.dataSpace.used",
+                "type": "gauge",
+                "value": 1.6938232E7,
+                "timestamp": 1619441625082,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.dataSpace.reserved",
+                "type": "gauge",
+                "value": 1.8874368E7,
+                "timestamp": 1619441625082,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.classSpace.committed",
+                "type": "gauge",
+                "value": 1966080.0,
+                "timestamp": 1619441625082,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.classSpace.used",
+                "type": "gauge",
+                "value": 1727224.0,
+                "timestamp": 1619441625082,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.classSpace.reserved",
+                "type": "gauge",
+                "value": 1.073741824E9,
+                "timestamp": 1619441625082,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.GarbageCollection.longestPause",
+                "type": "gauge",
+                "value": 158521.0,
+                "timestamp": 1619441625066,
+                "attributes": {
+                    "name": "G1New",
+                    "cause": "G1 Evacuation Pause"
+                }
+            },
+            {
+                "name": "jfr.GCHeapSummary.heapCommittedSize",
+                "type": "gauge",
+                "value": 2.65289728E8,
+                "timestamp": 1619441633954,
+                "attributes": {
+                    "heapStart": 31155290112,
+                    "reservedEnd": 34359738368,
+                    "committedEnd": 31420579840,
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.GCHeapSummary.reservedSize",
+                "type": "gauge",
+                "value": 3.204448256E9,
+                "timestamp": 1619441633954,
+                "attributes": {
+                    "heapStart": 31155290112,
+                    "reservedEnd": 34359738368,
+                    "committedEnd": 31420579840,
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.GCHeapSummary.heapUsed",
+                "type": "gauge",
+                "value": 1.572864E8,
+                "timestamp": 1619441633954,
+                "attributes": {
+                    "heapStart": 31155290112,
+                    "reservedEnd": 34359738368,
+                    "committedEnd": 31420579840,
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.metaspace.committed",
+                "type": "gauge",
+                "value": 2.097152E7,
+                "timestamp": 1619441633954,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.metaspace.used",
+                "type": "gauge",
+                "value": 2.0465496E7,
+                "timestamp": 1619441633954,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.metaspace.reserved",
+                "type": "gauge",
+                "value": 1.092616192E9,
+                "timestamp": 1619441633954,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.dataSpace.committed",
+                "type": "gauge",
+                "value": 1.8874368E7,
+                "timestamp": 1619441633954,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.dataSpace.used",
+                "type": "gauge",
+                "value": 1.856392E7,
+                "timestamp": 1619441633954,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.dataSpace.reserved",
+                "type": "gauge",
+                "value": 1.8874368E7,
+                "timestamp": 1619441633954,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.classSpace.committed",
+                "type": "gauge",
+                "value": 2097152.0,
+                "timestamp": 1619441633954,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.classSpace.used",
+                "type": "gauge",
+                "value": 1901576.0,
+                "timestamp": 1619441633954,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.classSpace.reserved",
+                "type": "gauge",
+                "value": 1.073741824E9,
+                "timestamp": 1619441633954,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.GCHeapSummary.heapCommittedSize",
+                "type": "gauge",
+                "value": 2.65289728E8,
+                "timestamp": 1619441633975,
+                "attributes": {
+                    "heapStart": 31155290112,
+                    "reservedEnd": 34359738368,
+                    "committedEnd": 31420579840,
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.GCHeapSummary.reservedSize",
+                "type": "gauge",
+                "value": 3.204448256E9,
+                "timestamp": 1619441633975,
+                "attributes": {
+                    "heapStart": 31155290112,
+                    "reservedEnd": 34359738368,
+                    "committedEnd": 31420579840,
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.GCHeapSummary.heapUsed",
+                "type": "gauge",
+                "value": 1.07729408E8,
+                "timestamp": 1619441633975,
+                "attributes": {
+                    "heapStart": 31155290112,
+                    "reservedEnd": 34359738368,
+                    "committedEnd": 31420579840,
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.metaspace.committed",
+                "type": "gauge",
+                "value": 2.097152E7,
+                "timestamp": 1619441633975,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.metaspace.used",
+                "type": "gauge",
+                "value": 2.0465496E7,
+                "timestamp": 1619441633975,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.metaspace.reserved",
+                "type": "gauge",
+                "value": 1.092616192E9,
+                "timestamp": 1619441633975,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.dataSpace.committed",
+                "type": "gauge",
+                "value": 1.8874368E7,
+                "timestamp": 1619441633975,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.dataSpace.used",
+                "type": "gauge",
+                "value": 1.856392E7,
+                "timestamp": 1619441633975,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.dataSpace.reserved",
+                "type": "gauge",
+                "value": 1.8874368E7,
+                "timestamp": 1619441633975,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.classSpace.committed",
+                "type": "gauge",
+                "value": 2097152.0,
+                "timestamp": 1619441633975,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.classSpace.used",
+                "type": "gauge",
+                "value": 1901576.0,
+                "timestamp": 1619441633975,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.classSpace.reserved",
+                "type": "gauge",
+                "value": 1.073741824E9,
+                "timestamp": 1619441633975,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.GarbageCollection.longestPause",
+                "type": "gauge",
+                "value": 210282.0,
+                "timestamp": 1619441633954,
+                "attributes": {
+                    "name": "G1New",
+                    "cause": "G1 Evacuation Pause"
+                }
+            },
+            {
+                "name": "jfr.GCHeapSummary.heapCommittedSize",
+                "type": "gauge",
+                "value": 2.65289728E8,
+                "timestamp": 1619441634199,
+                "attributes": {
+                    "heapStart": 31155290112,
+                    "reservedEnd": 34359738368,
+                    "committedEnd": 31420579840,
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.GCHeapSummary.reservedSize",
+                "type": "gauge",
+                "value": 3.204448256E9,
+                "timestamp": 1619441634199,
+                "attributes": {
+                    "heapStart": 31155290112,
+                    "reservedEnd": 34359738368,
+                    "committedEnd": 31420579840,
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.GCHeapSummary.heapUsed",
+                "type": "gauge",
+                "value": 1.79032576E8,
+                "timestamp": 1619441634199,
+                "attributes": {
+                    "heapStart": 31155290112,
+                    "reservedEnd": 34359738368,
+                    "committedEnd": 31420579840,
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.metaspace.committed",
+                "type": "gauge",
+                "value": 2.097152E7,
+                "timestamp": 1619441634199,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.metaspace.used",
+                "type": "gauge",
+                "value": 2.0466688E7,
+                "timestamp": 1619441634199,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.metaspace.reserved",
+                "type": "gauge",
+                "value": 1.092616192E9,
+                "timestamp": 1619441634199,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.dataSpace.committed",
+                "type": "gauge",
+                "value": 1.8874368E7,
+                "timestamp": 1619441634199,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.dataSpace.used",
+                "type": "gauge",
+                "value": 1.8565112E7,
+                "timestamp": 1619441634199,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.dataSpace.reserved",
+                "type": "gauge",
+                "value": 1.8874368E7,
+                "timestamp": 1619441634199,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.classSpace.committed",
+                "type": "gauge",
+                "value": 2097152.0,
+                "timestamp": 1619441634199,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.classSpace.used",
+                "type": "gauge",
+                "value": 1901576.0,
+                "timestamp": 1619441634199,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.classSpace.reserved",
+                "type": "gauge",
+                "value": 1.073741824E9,
+                "timestamp": 1619441634199,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.GCHeapSummary.heapCommittedSize",
+                "type": "gauge",
+                "value": 2.65289728E8,
+                "timestamp": 1619441634222,
+                "attributes": {
+                    "heapStart": 31155290112,
+                    "reservedEnd": 34359738368,
+                    "committedEnd": 31420579840,
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.GCHeapSummary.reservedSize",
+                "type": "gauge",
+                "value": 3.204448256E9,
+                "timestamp": 1619441634222,
+                "attributes": {
+                    "heapStart": 31155290112,
+                    "reservedEnd": 34359738368,
+                    "committedEnd": 31420579840,
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.GCHeapSummary.heapUsed",
+                "type": "gauge",
+                "value": 1.33169152E8,
+                "timestamp": 1619441634222,
+                "attributes": {
+                    "heapStart": 31155290112,
+                    "reservedEnd": 34359738368,
+                    "committedEnd": 31420579840,
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.metaspace.committed",
+                "type": "gauge",
+                "value": 2.097152E7,
+                "timestamp": 1619441634222,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.metaspace.used",
+                "type": "gauge",
+                "value": 2.0466688E7,
+                "timestamp": 1619441634222,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.metaspace.reserved",
+                "type": "gauge",
+                "value": 1.092616192E9,
+                "timestamp": 1619441634222,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.dataSpace.committed",
+                "type": "gauge",
+                "value": 1.8874368E7,
+                "timestamp": 1619441634222,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.dataSpace.used",
+                "type": "gauge",
+                "value": 1.8565112E7,
+                "timestamp": 1619441634222,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.dataSpace.reserved",
+                "type": "gauge",
+                "value": 1.8874368E7,
+                "timestamp": 1619441634222,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.classSpace.committed",
+                "type": "gauge",
+                "value": 2097152.0,
+                "timestamp": 1619441634222,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.classSpace.used",
+                "type": "gauge",
+                "value": 1901576.0,
+                "timestamp": 1619441634222,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.classSpace.reserved",
+                "type": "gauge",
+                "value": 1.073741824E9,
+                "timestamp": 1619441634222,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.GarbageCollection.longestPause",
+                "type": "gauge",
+                "value": 230959.0,
+                "timestamp": 1619441634199,
+                "attributes": {
+                    "name": "G1New",
+                    "cause": "G1 Evacuation Pause"
+                }
+            },
+            {
+                "name": "jfr.GCHeapSummary.heapCommittedSize",
+                "type": "gauge",
+                "value": 2.65289728E8,
+                "timestamp": 1619441634262,
+                "attributes": {
+                    "heapStart": 31155290112,
+                    "reservedEnd": 34359738368,
+                    "committedEnd": 31420579840,
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.GCHeapSummary.reservedSize",
+                "type": "gauge",
+                "value": 3.204448256E9,
+                "timestamp": 1619441634262,
+                "attributes": {
+                    "heapStart": 31155290112,
+                    "reservedEnd": 34359738368,
+                    "committedEnd": 31420579840,
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.GCHeapSummary.heapUsed",
+                "type": "gauge",
+                "value": 1.45752064E8,
+                "timestamp": 1619441634262,
+                "attributes": {
+                    "heapStart": 31155290112,
+                    "reservedEnd": 34359738368,
+                    "committedEnd": 31420579840,
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.metaspace.committed",
+                "type": "gauge",
+                "value": 2.097152E7,
+                "timestamp": 1619441634262,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.metaspace.used",
+                "type": "gauge",
+                "value": 2.0466688E7,
+                "timestamp": 1619441634262,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.metaspace.reserved",
+                "type": "gauge",
+                "value": 1.092616192E9,
+                "timestamp": 1619441634262,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.dataSpace.committed",
+                "type": "gauge",
+                "value": 1.8874368E7,
+                "timestamp": 1619441634262,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.dataSpace.used",
+                "type": "gauge",
+                "value": 1.8565112E7,
+                "timestamp": 1619441634262,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.dataSpace.reserved",
+                "type": "gauge",
+                "value": 1.8874368E7,
+                "timestamp": 1619441634262,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.classSpace.committed",
+                "type": "gauge",
+                "value": 2097152.0,
+                "timestamp": 1619441634262,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.classSpace.used",
+                "type": "gauge",
+                "value": 1901576.0,
+                "timestamp": 1619441634262,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.classSpace.reserved",
+                "type": "gauge",
+                "value": 1.073741824E9,
+                "timestamp": 1619441634262,
+                "attributes": {
+                    "when": "Before GC"
+                }
+            },
+            {
+                "name": "jfr.GCHeapSummary.heapCommittedSize",
+                "type": "gauge",
+                "value": 2.65289728E8,
+                "timestamp": 1619441634271,
+                "attributes": {
+                    "heapStart": 31155290112,
+                    "reservedEnd": 34359738368,
+                    "committedEnd": 31420579840,
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.GCHeapSummary.reservedSize",
+                "type": "gauge",
+                "value": 3.204448256E9,
+                "timestamp": 1619441634271,
+                "attributes": {
+                    "heapStart": 31155290112,
+                    "reservedEnd": 34359738368,
+                    "committedEnd": 31420579840,
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.GCHeapSummary.heapUsed",
+                "type": "gauge",
+                "value": 1.39961312E8,
+                "timestamp": 1619441634271,
+                "attributes": {
+                    "heapStart": 31155290112,
+                    "reservedEnd": 34359738368,
+                    "committedEnd": 31420579840,
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.metaspace.committed",
+                "type": "gauge",
+                "value": 2.097152E7,
+                "timestamp": 1619441634271,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.metaspace.used",
+                "type": "gauge",
+                "value": 2.0466688E7,
+                "timestamp": 1619441634271,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.metaspace.reserved",
+                "type": "gauge",
+                "value": 1.092616192E9,
+                "timestamp": 1619441634271,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.dataSpace.committed",
+                "type": "gauge",
+                "value": 1.8874368E7,
+                "timestamp": 1619441634271,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.dataSpace.used",
+                "type": "gauge",
+                "value": 1.8565112E7,
+                "timestamp": 1619441634271,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.dataSpace.reserved",
+                "type": "gauge",
+                "value": 1.8874368E7,
+                "timestamp": 1619441634271,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.classSpace.committed",
+                "type": "gauge",
+                "value": 2097152.0,
+                "timestamp": 1619441634271,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.classSpace.used",
+                "type": "gauge",
+                "value": 1901576.0,
+                "timestamp": 1619441634271,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.MetaspaceSummary.classSpace.reserved",
+                "type": "gauge",
+                "value": 1.073741824E9,
+                "timestamp": 1619441634271,
+                "attributes": {
+                    "when": "After GC"
+                }
+            },
+            {
+                "name": "jfr.GarbageCollection.longestPause",
+                "type": "gauge",
+                "value": 90750.0,
+                "timestamp": 1619441634262,
+                "attributes": {
+                    "name": "G1New",
+                    "cause": "G1 Humongous Allocation"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 1.9574328E7,
+                "timestamp": 1619441635174,
+                "attributes": {
+                    "thread.osName": "main",
+                    "thread.name": "main"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441635174,
+                "attributes": {
+                    "thread.osName": "Reference Handler",
+                    "thread.name": "Reference Handler"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 376.0,
+                "timestamp": 1619441635174,
+                "attributes": {
+                    "thread.osName": "Finalizer",
+                    "thread.name": "Finalizer"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441635174,
+                "attributes": {
+                    "thread.osName": "Signal Dispatcher",
+                    "thread.name": "Signal Dispatcher"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 513560.0,
+                "timestamp": 1619441635174,
+                "attributes": {
+                    "thread.osName": "Attach Listener",
+                    "thread.name": "Attach Listener"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441635174,
+                "attributes": {
+                    "thread.osName": "C2 CompilerThread0",
+                    "thread.name": "C2 CompilerThread0"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 12976.0,
+                "timestamp": 1619441635174,
+                "attributes": {
+                    "thread.osName": "C1 CompilerThread0",
+                    "thread.name": "C1 CompilerThread0"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441635174,
+                "attributes": {
+                    "thread.osName": "Sweeper thread",
+                    "thread.name": "Sweeper thread"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441635174,
+                "attributes": {
+                    "thread.osName": "Common-Cleaner",
+                    "thread.name": "Common-Cleaner"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 1.925948E7,
+                "timestamp": 1619441635174,
+                "attributes": {
+                    "thread.osName": "pool-1-thread-1",
+                    "thread.name": "pool-1-thread-1"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441635174,
+                "attributes": {
+                    "thread.osName": "Service Thread",
+                    "thread.name": "Service Thread"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441635174,
+                "attributes": {
+                    "thread.osName": "JFR Recorder Thread",
+                    "thread.name": "JFR Recorder Thread"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 35752.0,
+                "timestamp": 1619441635174,
+                "attributes": {
+                    "thread.osName": "JFR Periodic Tasks",
+                    "thread.name": "JFR Periodic Tasks"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441635174,
+                "attributes": {
+                    "thread.osName": "JFR Recording Scheduler",
+                    "thread.name": "JFR Recording Scheduler"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 9676832.0,
+                "timestamp": 1619441635174,
+                "attributes": {
+                    "thread.osName": "JfrController",
+                    "thread.name": "JfrController"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 3674904.0,
+                "timestamp": 1619441635174,
+                "attributes": {
+                    "thread.osName": "Thread-1",
+                    "thread.name": "Thread-1"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441635174,
+                "attributes": {
+                    "thread.osName": "Okio Watchdog",
+                    "thread.name": "Okio Watchdog"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 2512.0,
+                "timestamp": 1619441635174,
+                "attributes": {
+                    "thread.osName": "OkHttp TaskRunner",
+                    "thread.name": "OkHttp TaskRunner"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 1752.0,
+                "timestamp": 1619441635174,
+                "attributes": {
+                    "thread.osName": "OkHttp TaskRunner",
+                    "thread.name": "OkHttp TaskRunner"
+                }
+            },
+            {
                 "name": "jfr.GarbageCollection.minorDuration",
                 "type": "summary",
                 "value": {
-                    "count": 0,
-                    "sum": 0.0,
-                    "min": 9.223372036854E12,
-                    "max": -9.223372036854E12
+                    "count": 4,
+                    "sum": 69.0,
+                    "min": 9.0,
+                    "max": 23.0
                 },
-                "timestamp": 1619441613596,
-                "interval.ms": -1619441613596,
+                "timestamp": 1619441625210,
+                "interval.ms": 9052,
                 "attributes": {}
             },
             {
                 "name": "jfr.GarbageCollection.majorDuration",
                 "type": "summary",
                 "value": {
-                    "count": 0,
-                    "sum": 0.0,
-                    "min": 9.223372036854E12,
-                    "max": -9.223372036854E12
+                    "count": 1,
+                    "sum": 129.0,
+                    "min": 129.0,
+                    "max": 129.0
                 },
-                "timestamp": 1619441613596,
-                "interval.ms": -1619441613596,
+                "timestamp": 1619441625210,
+                "interval.ms": 9061,
                 "attributes": {}
             },
             {
                 "name": "jfr.G1GarbageCollection.duration",
                 "type": "summary",
                 "value": {
-                    "count": 0,
-                    "sum": 0.0,
-                    "min": 9.223372036854E12,
-                    "max": -9.223372036854E12
+                    "count": 4,
+                    "sum": 69.0,
+                    "min": 9.0,
+                    "max": 23.0
                 },
-                "timestamp": 1619441613598,
-                "interval.ms": -1619441613598,
+                "timestamp": 1619441625210,
+                "interval.ms": 9052,
                 "attributes": {}
             },
             {
                 "name": "jfr.GarbageCollection.duration",
                 "type": "summary",
                 "value": {
-                    "count": 0,
-                    "sum": 0.0,
-                    "min": 9.223372036854E12,
-                    "max": -9.223372036854E12
+                    "count": 10,
+                    "sum": 198.0,
+                    "min": 9.0,
+                    "max": 129.0
                 },
-                "timestamp": 1619441613599,
-                "interval.ms": -1619441613599,
+                "timestamp": 1619441625210,
+                "interval.ms": 9061,
                 "attributes": {}
+            },
+            {
+                "name": "jfr.SocketRead.bytesRead",
+                "type": "summary",
+                "value": {
+                    "count": 2,
+                    "sum": 320.0,
+                    "min": 160.0,
+                    "max": 160.0
+                },
+                "timestamp": 1619441625322,
+                "interval.ms": 163,
+                "attributes": {
+                    "thread.name": "Thread-1"
+                }
+            },
+            {
+                "name": "jfr.SocketRead.duration",
+                "type": "summary",
+                "value": {
+                    "count": 2,
+                    "sum": 147.0,
+                    "min": 18.0,
+                    "max": 128.0
+                },
+                "timestamp": 1619441625322,
+                "interval.ms": 163,
+                "attributes": {
+                    "thread.name": "Thread-1"
+                }
+            },
+            {
+                "name": "jfr.ObjectAllocationInNewTLAB.allocation",
+                "type": "summary",
+                "value": {
+                    "count": 2,
+                    "sum": 231960.0,
+                    "min": 113624.0,
+                    "max": 118336.0
+                },
+                "timestamp": 1619441625466,
+                "interval.ms": -153,
+                "attributes": {
+                    "thread.name": "OkHttp TaskRunner"
+                }
+            },
+            {
+                "name": "jfr.ObjectAllocationInNewTLAB.allocation",
+                "type": "summary",
+                "value": {
+                    "count": 6,
+                    "sum": 1817776.0,
+                    "min": 2048.0,
+                    "max": 522240.0
+                },
+                "timestamp": 1619441635180,
+                "interval.ms": -109,
+                "attributes": {
+                    "thread.name": "pool-1-thread-1"
+                }
+            },
+            {
+                "name": "jfr.ObjectAllocationInNewTLAB.allocation",
+                "type": "summary",
+                "value": {
+                    "count": 533,
+                    "sum": 1.68380416E8,
+                    "min": 2048.0,
+                    "max": 524288.0
+                },
+                "timestamp": 1619441634286,
+                "interval.ms": 0,
+                "attributes": {
+                    "thread.name": "MyThread1"
+                }
+            },
+            {
+                "name": "jfr.ObjectAllocationInNewTLAB.allocation",
+                "type": "summary",
+                "value": {
+                    "count": 1,
+                    "sum": 2048.0,
+                    "min": 2048.0,
+                    "max": 2048.0
+                },
+                "timestamp": 1619441633626,
+                "interval.ms": 0,
+                "attributes": {
+                    "thread.name": "main"
+                }
+            },
+            {
+                "name": "jfr.ObjectAllocationInNewTLAB.allocation",
+                "type": "summary",
+                "value": {
+                    "count": 2,
+                    "sum": 294312.0,
+                    "min": 118120.0,
+                    "max": 176192.0
+                },
+                "timestamp": 1619441625086,
+                "interval.ms": 10096,
+                "attributes": {
+                    "thread.name": "C1 CompilerThread0"
+                }
+            },
+            {
+                "name": "jfr.ObjectAllocationInNewTLAB.allocation",
+                "type": "summary",
+                "value": {
+                    "count": 1,
+                    "sum": 2048.0,
+                    "min": 2048.0,
+                    "max": 2048.0
+                },
+                "timestamp": 1619441634349,
+                "interval.ms": 0,
+                "attributes": {
+                    "thread.name": "Finalizer"
+                }
+            },
+            {
+                "name": "jfr.ObjectAllocationInNewTLAB.allocation",
+                "type": "summary",
+                "value": {
+                    "count": 28,
+                    "sum": 9960848.0,
+                    "min": 2048.0,
+                    "max": 524288.0
+                },
+                "timestamp": 1619441625082,
+                "interval.ms": 124,
+                "attributes": {
+                    "thread.name": "JfrController"
+                }
             },
             {
                 "name": "jfr.ObjectAllocationInNewTLAB.allocation",
                 "type": "summary",
                 "value": {
                     "count": 4,
-                    "sum": 1572848.0,
-                    "min": 2048.0,
-                    "max": 524288.0
+                    "sum": 786368.0,
+                    "min": 90976.0,
+                    "max": 346048.0
                 },
-                "timestamp": 1619441625031,
-                "interval.ms": -116,
+                "timestamp": 1619441625082,
+                "interval.ms": 9189,
                 "attributes": {
-                    "thread.name": "pool-1-thread-1"
+                    "thread.name": "JFR Periodic Tasks"
+                }
+            },
+            {
+                "name": "jfr.ObjectAllocationInNewTLAB.allocation",
+                "type": "summary",
+                "value": {
+                    "count": 10,
+                    "sum": 3619776.0,
+                    "min": 2048.0,
+                    "max": 465192.0
+                },
+                "timestamp": 1619441625217,
+                "interval.ms": 246,
+                "attributes": {
+                    "thread.name": "Thread-1"
+                }
+            },
+            {
+                "name": "jfr.ObjectAllocationOutsideTLAB.allocation",
+                "type": "summary",
+                "value": {
+                    "count": 2,
+                    "sum": 1.8232336E7,
+                    "min": 7292936.0,
+                    "max": 1.09394E7
+                },
+                "timestamp": 1619441633833,
+                "interval.ms": 439,
+                "attributes": {
+                    "thread.name": "MyThread1"
                 }
             },
             {
@@ -401,14 +2267,29 @@
                 "type": "summary",
                 "value": {
                     "count": 1,
-                    "sum": 2064.0,
-                    "min": 2064.0,
-                    "max": 2064.0
+                    "sum": 2672.0,
+                    "min": 2672.0,
+                    "max": 2672.0
                 },
-                "timestamp": 1619441624858,
+                "timestamp": 1619441625153,
                 "interval.ms": 0,
                 "attributes": {
-                    "thread.name": "pool-1-thread-1"
+                    "thread.name": "JfrController"
+                }
+            },
+            {
+                "name": "jfr.ObjectAllocationOutsideTLAB.allocation",
+                "type": "summary",
+                "value": {
+                    "count": 6,
+                    "sum": 342568.0,
+                    "min": 3088.0,
+                    "max": 130016.0
+                },
+                "timestamp": 1619441625234,
+                "interval.ms": 87,
+                "attributes": {
+                    "thread.name": "Thread-1"
                 }
             }
         ]
