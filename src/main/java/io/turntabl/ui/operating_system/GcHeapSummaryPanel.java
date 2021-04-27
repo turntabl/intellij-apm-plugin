@@ -1,8 +1,8 @@
-package io.turntabl.ui.cpu_load;
+package io.turntabl.ui.operating_system;
 
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
-import io.turntabl.ui.model.CpuLoad;
+import io.turntabl.ui.model.GcHeapSummary;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableColumnModel;
@@ -10,14 +10,14 @@ import javax.swing.table.TableModel;
 import java.awt.*;
 import java.util.List;
 
-public class CpuLoadPanel {
+public class GcHeapSummaryPanel {
     JPanel panel;
     JTable table;
 
     TableModel myData;
     DefaultTableColumnModel columnModel;
 
-    public CpuLoadPanel(TableModel tableModel) {
+    public GcHeapSummaryPanel(TableModel tableModel) {
         panel = new JPanel(new BorderLayout());
         table = new JBTable(tableModel);
 
@@ -33,30 +33,30 @@ public class CpuLoadPanel {
         panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER),  BorderLayout.CENTER);
     }
 
-    public JPanel getCpuLoadComponent() {
+    public JPanel getGcHeapSummaryComponent() {
         return panel;
     }
 
-    public static class CpuLoadTableModel extends AbstractTableModel {
-        String[] columnNames = {"StartTime", "JVM User", "JVM System", "Machine Total"};
+    public static class GcHeapSummaryTableModel extends AbstractTableModel {
+        String[] columnNames = {"StartTime", "Heap Committed Size", "Reserved Size", "Heap Used"};
         String[][] data;
-        private java.util.List<CpuLoad> cpuLoadList;
+        private java.util.List<GcHeapSummary> gcHeapSummaryList;
 
-        public CpuLoadTableModel(List<CpuLoad> cpuLoadList) {
-            this.cpuLoadList = cpuLoadList;
-            data = new String[cpuLoadList.size()][columnNames.length];
-            for (int i = 0; i < cpuLoadList.size(); i++) {
-                CpuLoad cpuLoad = cpuLoadList.get(i);
-                data[i][0] = String.valueOf(cpuLoad.getStartTime());
-                data[i][1] = String.valueOf(cpuLoad.getJvmUserValue());
-                data[i][2] = String.valueOf(cpuLoad.getJvmSystemValue());
-                data[i][3] = String.valueOf(cpuLoad.getMachineTotalValue());
+        public GcHeapSummaryTableModel(List<GcHeapSummary> gcHeapSummaryList) {
+            this.gcHeapSummaryList = gcHeapSummaryList;
+            data = new String[gcHeapSummaryList.size()][columnNames.length];
+            for (int i = 0; i < gcHeapSummaryList.size(); i++) {
+                GcHeapSummary gcHeapSummary = gcHeapSummaryList.get(i);
+                data[i][0] = String.valueOf(gcHeapSummary.getStartTime());
+                data[i][1] = String.valueOf(gcHeapSummary.getHeapCommittedSize());
+                data[i][2] = String.valueOf(gcHeapSummary.getReservedSize());
+                data[i][3] = String.valueOf(gcHeapSummary.getHeapUsed());
             }
         }
 
         @Override
         public int getRowCount() {
-            return cpuLoadList.size();
+            return gcHeapSummaryList.size();
         }
 
         @Override
