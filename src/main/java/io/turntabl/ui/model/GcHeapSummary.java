@@ -8,6 +8,8 @@ public class GcHeapSummary {
     private Double reservedSize;
     private Double heapUsed;
 
+    // add type and attributes
+
     public GcHeapSummary(Date startTime, Double heapCommittedSize, Double reservedSize, Double heapUsed) {
         this.startTime = startTime;
         this.heapCommittedSize = heapCommittedSize;
