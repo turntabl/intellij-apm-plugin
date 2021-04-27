@@ -1,4 +1,4 @@
-package io.turntabl.ui.cpu_load;
+package io.turntabl.ui.operating_system;
 
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
