@@ -1,13 +1,12 @@
 package io.turntabl.ui;
 
-import com.fasterxml.jackson.module.kotlin.ReflectionCache;
+
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
 import com.intellij.util.Time;
 import io.turntabl.ui.flight_recorder.DataLossPanel;
 import io.turntabl.ui.flight_recorder.JfrCompilationPanel;
 import io.turntabl.ui.flight_recorder.JvmInformationPanel;
-import io.turntabl.ui.flight_recorder.TestNode;
 import io.turntabl.ui.model.DataLoss;
 import io.turntabl.ui.model.JfrCompilation;
 import io.turntabl.ui.model.JvmInformation;
@@ -23,7 +22,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class JTreeEventView {
+public class EventsTree {
     private JPanel treePanel;
     private JTree tree;
     private String rootNodeName = "Events by type";
@@ -52,7 +51,7 @@ public class JTreeEventView {
     private final NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow;
     private Map<String, JComponent> componentMap;
 
-    public JTreeEventView(NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow) {
+    public EventsTree(NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow) {
         this.newRelicJavaProfilerToolWindow = newRelicJavaProfilerToolWindow;
         componentMap = new HashMap<>();
         DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(rootNodeName);
@@ -133,7 +132,6 @@ public class JTreeEventView {
         for (String nodeName : jvmNodes) {
             jvmNode.add(new DefaultMutableTreeNode(nodeName));
         }
-        jvmNode.add(new DefaultMutableTreeNode(new TestNode()));
 
         for (String nodeName : osNodes) {
             osNode.add(new DefaultMutableTreeNode(nodeName));
@@ -154,26 +152,22 @@ public class JTreeEventView {
 
         treePanel.add(treeScrollPane, BorderLayout.CENTER);
 
-        tree.getSelectionModel().addTreeSelectionListener(new TreeSelectionListener() {
-            @Override
-            public void valueChanged(TreeSelectionEvent e) {
+        tree.getSelectionModel().addTreeSelectionListener(e -> {
 
-//                System.out.println("map size " + componentMap.size());
-                Object[] pathArray = e.getPath().getPath();
-                String selectedNode = pathArray[pathArray.length - 1].toString();
+            Object[] pathArray = e.getPath().getPath();
+            String selectedNode = pathArray[pathArray.length - 1].toString();
 
-                JComponent selected = componentMap.get(selectedNode);
-                if (selected != null) {
-                    System.out.println("not null");
-                    newRelicJavaProfilerToolWindow.setSecondComponent(selected);
-                } else {
-                    System.out.println("null");
-                    newRelicJavaProfilerToolWindow.clearEventPanelText();
-                    newRelicJavaProfilerToolWindow.updateEventPanelText(e.getPath().toString());
-
-                }
+            JComponent selected = componentMap.get(selectedNode);
+            if (selected != null) {
+                System.out.println("not null");
+                newRelicJavaProfilerToolWindow.setEventSecondComponent(selected);
+            } else {
+                System.out.println("null");
+                newRelicJavaProfilerToolWindow.clearEventPanelText();
+                newRelicJavaProfilerToolWindow.updateEventPanelText(e.getPath().toString());
 
             }
+
         });
 
     }
