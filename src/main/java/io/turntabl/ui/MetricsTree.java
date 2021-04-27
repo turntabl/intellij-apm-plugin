@@ -1,14 +1,22 @@
 package io.turntabl.ui;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.intellij.icons.AllIcons;
+import com.intellij.json.JsonParser;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
+import io.turntabl.ui.flight_recorder.CpuLoadUserPanel;
 import io.turntabl.ui.flight_recorder.DataLossPanel;
+import io.turntabl.ui.model.CpuLoadUser;
 import io.turntabl.ui.model.DataLoss;
+import jdk.nashorn.internal.ir.debug.JSONWriter;
+import org.apache.commons.net.ntp.TimeStamp;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
+import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -56,6 +64,24 @@ public class MetricsTree {
         for (String nodeName : flightRecorderSubNodes) {
             flightRecorderNode.add(new DefaultMutableTreeNode(nodeName));
             componentMap.put(nodeName, dataLoss.getDataLossComponent());
+
+        }
+
+        //add CpuLoadUserPanel to flight recorder branch node
+        flightRecorderNode.add(new DefaultMutableTreeNode("Cpu Load User"));
+        CpuLoadUserPanel cpuLoadUserPanel = new CpuLoadUserPanel(
+                new CpuLoadUserPanel.CpuLoadUserTableModel(Arrays.asList(
+
+                        new CpuLoadUser("jfr.ThreadCPULoad.user","gauge",0.004792887717485428,  Timestamp.valueOf("2014-01-01 00:00:00"), "thread.name: C1 CompilerThread0"),
+                        new CpuLoadUser("jfr.ThreadCPULoad.user","gauge",0.004792987717485428,  Timestamp.valueOf("2014-01-01 00:00:00"), "thread.name: C1 CompilerThread0"),
+                        new CpuLoadUser("jfr.ThreadCPULoad.user","gauge",0.004793787717485428,  Timestamp.valueOf("2014-01-01 00:00:00"), "thread.name: C1 CompilerThread0")
+//
+                )));
+
+        componentMap.put("Cpu Load User", cpuLoadUserPanel.getCpuLoadUserComponent());
+        for (String nodeName : flightRecorderSubNodes) {
+            flightRecorderNode.add(new DefaultMutableTreeNode(nodeName));
+            componentMap.put(nodeName, cpuLoadUserPanel.getCpuLoadUserComponent());
 
         }
 
