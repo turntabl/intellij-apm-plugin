@@ -5,25 +5,23 @@ import com.intellij.ui.JBSplitter;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.components.JBTabbedPane;
 import com.intellij.ui.components.JBTextArea;
-import io.turntabl.ui.JTreeEventView;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class NewRelicJavaProfilerToolWindow {
 
-    private JLabel label, flameGraphLabel, callTreeLabel, methodListLabel;
+    private JLabel flameGraphLabel, callTreeLabel, methodListLabel;
     private JPanel mainPanel, flameGraphPanel,
             callTreePanel, methodListPanel, eventsPanel,
-            metricPanel;
+            metricsPanel;
     private JTabbedPane tabbedPane;
-    private JTextArea eventTextArea, metricTextArea;
-    private JScrollPane eventScrollPane, metricScrollPane;
-    private JTreeEventView jTreeEventView;
-    JBSplitter eventSplitter;
+    private JTextArea eventTextArea, metricsTextArea;
+    private EventsTree eventsTree;
+    private MetricsTree metricsTree;
+    private JBSplitter eventSplitter, metricsSplitter;
 
     public NewRelicJavaProfilerToolWindow(ToolWindow toolWindow) {
-        label = new JLabel("NewRelic Profiler");
 
         mainPanel = new JPanel(new GridLayout(1, 1));
 
@@ -31,16 +29,13 @@ public class NewRelicJavaProfilerToolWindow {
         callTreePanel = new JPanel();
         methodListPanel = new JPanel();
         eventsPanel = new JPanel(new BorderLayout());
-        metricPanel = new JPanel(new BorderLayout());
+        metricsPanel = new JPanel(new BorderLayout());
 
         eventTextArea = new JBTextArea();
         eventTextArea.setLineWrap(true);
 
-        metricTextArea = new JBTextArea();
-        metricTextArea.setLineWrap(true);
-
-        eventScrollPane = new JBScrollPane(eventTextArea);
-        metricScrollPane = new JBScrollPane(metricTextArea);
+        metricsTextArea = new JBTextArea();
+        metricsTextArea.setLineWrap(true);
 
         flameGraphLabel = new JLabel("Flame Graph is displayed here!!!!!!!!!!!");
         callTreeLabel = new JLabel("Call Tree is displayed here!!!!!!!!!!!");
@@ -51,17 +46,26 @@ public class NewRelicJavaProfilerToolWindow {
         methodListPanel.add(methodListLabel);
 
         eventTextArea.setBackground(eventsPanel.getBackground());
-        metricTextArea.setBackground(eventsPanel.getBackground());
+        metricsTextArea.setBackground(eventsPanel.getBackground());
 
         //events view
         eventSplitter = new JBSplitter(false, 0.12f);
         eventSplitter.setDividerWidth(2);
-        jTreeEventView = new JTreeEventView(this);
-        eventSplitter.setFirstComponent(new JBScrollPane(jTreeEventView.getEventTree()));
-        eventSplitter.setSecondComponent(eventsPanel);
 
-        eventsPanel.add(eventScrollPane, BorderLayout.CENTER);
-        metricPanel.add(metricScrollPane, BorderLayout.CENTER);
+        metricsSplitter = new JBSplitter(false, 0.12f);
+        metricsSplitter.setDividerWidth(2);
+
+        eventsTree = new EventsTree(this);
+        metricsTree = new MetricsTree(this);
+
+        eventsPanel.add(new JBScrollPane(eventTextArea), BorderLayout.CENTER);
+        metricsPanel.add(new JBScrollPane(metricsTextArea), BorderLayout.CENTER);
+
+        eventSplitter.setFirstComponent(new JBScrollPane(eventsTree.getEventTree(), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
+        eventSplitter.setSecondComponent(new JBScrollPane(eventsPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
+
+        metricsSplitter.setFirstComponent(new JBScrollPane(metricsTree.getMetricsTree(), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
+        metricsSplitter.setSecondComponent(new JBScrollPane(metricsPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
 
         tabbedPane = new JBTabbedPane();
 
@@ -69,7 +73,7 @@ public class NewRelicJavaProfilerToolWindow {
         tabbedPane.add("Call Tree", callTreePanel);
         tabbedPane.add("Method List", methodListPanel);
         tabbedPane.add("Events", eventSplitter);
-        tabbedPane.add("Metrics", metricPanel);
+        tabbedPane.add("Metrics", metricsSplitter);
         tabbedPane.setSelectedIndex(3);
 
         mainPanel.add(tabbedPane);
@@ -84,16 +88,23 @@ public class NewRelicJavaProfilerToolWindow {
         eventTextArea.setText("");
     }
 
-    public void updateMetricPanelText(String text) {
-        metricTextArea.append(text);
+    public void clearMetricsPanelText() {
+        metricsTextArea.setText("");
+    }
+
+    public void updateMetricsPanelText(String text) {
+        metricsTextArea.append(text);
     }
 
     public JComponent getContent() {
         return mainPanel;
     }
 
-    public void setSecondComponent(JComponent component) {
+    public void setEventSecondComponent(JComponent component) {
         eventSplitter.setSecondComponent(component);
     }
 
+    public void setMetricsSecondComponent(JComponent component) {
+        metricsSplitter.setSecondComponent(component);
+    }
 }
