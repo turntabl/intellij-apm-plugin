@@ -3,8 +3,10 @@ package io.turntabl.ui;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
 import io.turntabl.ui.flight_recorder.DataLossPanel;
+import io.turntabl.ui.flight_recorder.FlightRecordingPanel;
 import io.turntabl.ui.flight_recorder.TestNode;
 import io.turntabl.ui.model.DataLoss;
+import io.turntabl.ui.model.FlightRecording;
 
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
@@ -66,11 +68,25 @@ public class JTreeEventView {
                 )));
 
         componentMap.put("Data Loss", dataLoss.getDataLossComponent());
+
+
+        FlightRecordingPanel flightRecording = new FlightRecordingPanel(
+          new FlightRecordingPanel.FlightRecordingTableModel(Arrays.asList(
+                  new FlightRecording("20201-06-02 12:09:12:30", "10", "20201-06-02 14:09:12:30", "Hello", 1,"There","C:/Turntabl/Pro", "23", "2B", "10mins" )
+          ))
+        );
+        componentMap.put("Flight Recording", flightRecording.getFlightRecordingComponent());
+
         for (String nodeName : flightRecorderSubNodes) {
             flightRecorderNode.add(new DefaultMutableTreeNode(nodeName));
             componentMap.put(nodeName, dataLoss.getDataLossComponent());
 
+
+        //for(String nodeName : flightRecorderSubNodes) {
+            //flightRecorderNode.add(new DefaultMutableTreeNode(nodeName));
+            componentMap.put(nodeName, flightRecording.getFlightRecordingComponent());
         }
+        //}
 
         //add statistics branch node and its leaf nodes
         DefaultMutableTreeNode javaAppStatisticsNode = new DefaultMutableTreeNode("Statistics");
