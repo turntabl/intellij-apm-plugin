@@ -2,8 +2,10 @@ package io.turntabl.ui;
 
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
+import io.turntabl.ui.flight_recorder.MetaspaceSummaryMetaspaceCommittedPanel;
 import io.turntabl.ui.flight_recorder.ThreadContextSwitchRatePanel;
 import io.turntabl.ui.flight_recorder.DataLossPanel;
+import io.turntabl.ui.model.MetaspaceSummaryMetaspaceCommitted;
 import io.turntabl.ui.model.ThreadContextSwitchRate;
 import io.turntabl.ui.model.DataLoss;
 
@@ -62,7 +64,7 @@ public class MetricsTree {
 
         }
 
-        //add CpuLoadUserPanel to flight recorder branch node
+        //addThreadContextSwitchRatePanel to flight recorder branch node
         flightRecorderNode.add(new DefaultMutableTreeNode("Thread Context Switch"));
         ThreadContextSwitchRatePanel threadContextSwitchRatePanel = new ThreadContextSwitchRatePanel(
                 new ThreadContextSwitchRatePanel.ThreadContextSwitchRateTableModel(Arrays.asList(
@@ -76,6 +78,23 @@ public class MetricsTree {
         for (String nodeName : flightRecorderSubNodes) {
             flightRecorderNode.add(new DefaultMutableTreeNode(nodeName));
             componentMap.put(nodeName, threadContextSwitchRatePanel.getThreadContextSwitchRateComponent());
+
+        }
+
+        //add MetaspaceSummaryMetaspaceCommittedPanel to flight recorder branch node
+        flightRecorderNode.add(new DefaultMutableTreeNode("MetaspaceSummaryMetaspaceCommitted"));
+        MetaspaceSummaryMetaspaceCommittedPanel summaryMetaspaceCommittedPanel = new MetaspaceSummaryMetaspaceCommittedPanel(
+                new MetaspaceSummaryMetaspaceCommittedPanel.MetaspaceSummaryMetaspaceCommittedTableModel(Arrays.asList(
+
+                        new MetaspaceSummaryMetaspaceCommitted("jfr.MetaspaceSummary.metaspace.committed","gauge",0.25646382570266724, Timestamp.valueOf("2014-01-01 00:00:00"), new HashMap<>())
+                        //new MetaspaceSummaryMetaspaceCommitted("jfr.ThreadCPULoad.user","gauge",0.004792987717485428,  Timestamp.valueOf("2014-01-01 00:00:00"), new HashMap<>()),
+                        //new MetaspaceSummaryMetaspaceCommitted("jfr.ThreadCPULoad.user","gauge",0.004793787717485428,  Timestamp.valueOf("2014-01-01 00:00:00"), new HashMap<>())
+                )));
+
+        componentMap.put("MetaspaceSummaryMetaspaceCommitted", summaryMetaspaceCommittedPanel.getMetaspaceSummaryMetaspaceCommittedComponent());
+        for (String nodeName : flightRecorderSubNodes) {
+            flightRecorderNode.add(new DefaultMutableTreeNode(nodeName));
+            componentMap.put(nodeName, summaryMetaspaceCommittedPanel.getMetaspaceSummaryMetaspaceCommittedComponent());
 
         }
 
