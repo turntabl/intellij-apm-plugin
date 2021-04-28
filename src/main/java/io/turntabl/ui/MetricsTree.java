@@ -63,20 +63,19 @@ public class MetricsTree {
         }
 
         //add CpuLoadUserPanel to flight recorder branch node
-        flightRecorderNode.add(new DefaultMutableTreeNode("Cpu Load User"));
+        flightRecorderNode.add(new DefaultMutableTreeNode("Thread Context Switch"));
         ThreadContextSwitchRatePanel threadContextSwitchRatePanel = new ThreadContextSwitchRatePanel(
-                new ThreadContextSwitchRatePanel.CpuLoadUserTableModel(Arrays.asList(
+                new ThreadContextSwitchRatePanel.ThreadContextSwitchRateTableModel(Arrays.asList(
 
-                        new ThreadContextSwitchRate("jfr.ThreadCPULoad.user","gauge",0.004792887717485428,  Timestamp.valueOf("2014-01-01 00:00:00"), "thread.name: C1 CompilerThread0"),
-                        new ThreadContextSwitchRate("jfr.ThreadCPULoad.user","gauge",0.004792987717485428,  Timestamp.valueOf("2014-01-01 00:00:00"), "thread.name: C1 CompilerThread0"),
-                        new ThreadContextSwitchRate("jfr.ThreadCPULoad.user","gauge",0.004793787717485428,  Timestamp.valueOf("2014-01-01 00:00:00"), "thread.name: C1 CompilerThread0")
-//
+                        new ThreadContextSwitchRate("jfr.ThreadCPULoad.user","gauge",0.004792887717485428,  Timestamp.valueOf("2014-01-01 00:00:00"), new HashMap<>() ),
+                        new ThreadContextSwitchRate("jfr.ThreadCPULoad.user","gauge",0.004792987717485428,  Timestamp.valueOf("2014-01-01 00:00:00"), new HashMap<>()),
+                        new ThreadContextSwitchRate("jfr.ThreadCPULoad.user","gauge",0.004793787717485428,  Timestamp.valueOf("2014-01-01 00:00:00"), new HashMap<>())
                 )));
 
-        componentMap.put("Cpu Load User", threadContextSwitchRatePanel.getCpuLoadUserComponent());
+        componentMap.put("Thread Context Switch", threadContextSwitchRatePanel.getThreadContextSwitchRateComponent());
         for (String nodeName : flightRecorderSubNodes) {
             flightRecorderNode.add(new DefaultMutableTreeNode(nodeName));
-            componentMap.put(nodeName, threadContextSwitchRatePanel.getCpuLoadUserComponent());
+            componentMap.put(nodeName, threadContextSwitchRatePanel.getThreadContextSwitchRateComponent());
 
         }
 

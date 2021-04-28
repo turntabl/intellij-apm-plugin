@@ -5,6 +5,7 @@ import org.apache.commons.net.ntp.TimeStamp;
 
 
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.Map;
 
 public class ThreadContextSwitchRate {
@@ -12,12 +13,10 @@ public class ThreadContextSwitchRate {
     private String type;
     private Double value;
     private Timestamp timestamp;
-    private String attributes;
-    //private Map<String, String> attributes;
-    //@JsonProperty("data") final Map<String, String> attributes
+    private HashMap<String, String> attributes;
 
 
-    public ThreadContextSwitchRate(String name, String type, Double value, Timestamp timestamp, String attributes) {
+    public ThreadContextSwitchRate(String name, String type, Double value, Timestamp timestamp, HashMap<String, String> attributes) {
         this.name = name;
         this.type = type;
         this.value = value;
@@ -41,13 +40,10 @@ public class ThreadContextSwitchRate {
         return timestamp;
     }
 
-    public String getAttributes() {
+    public HashMap<String, String> getAttributes() {
         return attributes;
     }
 
-    /*    public Map<String, String> getAttributes() {
-        return attributes;
-    }*/
 
 
 }

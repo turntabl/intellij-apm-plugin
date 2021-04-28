@@ -31,20 +31,21 @@ public class ThreadContextSwitchRatePanel {
             table.getColumnModel().getColumn(2).setPreferredWidth(700);
             table.getColumnModel().getColumn(3).setPreferredWidth(200);
             table.getColumnModel().getColumn(4).setPreferredWidth(700);
+            //table.getColumnModel().getColumn(5).setPreferredWidth(700);
 
             panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER),  BorderLayout.CENTER);
         }
 
-        public JPanel getCpuLoadUserComponent() {
+        public JPanel getThreadContextSwitchRateComponent() {
             return panel;
         }
 
-        public static class CpuLoadUserTableModel extends AbstractTableModel {
+        public static class ThreadContextSwitchRateTableModel extends AbstractTableModel {
             String[] columnNames = {"name", "type", "value","timestamp","attributes"};
             String[][] data;
             private java.util.List<ThreadContextSwitchRate> threadContextSwitchRateList;
 
-            public CpuLoadUserTableModel(List<ThreadContextSwitchRate> threadContextSwitchRateList) {
+            public ThreadContextSwitchRateTableModel(List<ThreadContextSwitchRate> threadContextSwitchRateList) {
                 this.threadContextSwitchRateList = threadContextSwitchRateList;
                 data = new String[threadContextSwitchRateList.size()][columnNames.length];
                 for (int i = 0; i < threadContextSwitchRateList.size(); i++) {
@@ -53,7 +54,8 @@ public class ThreadContextSwitchRatePanel {
                     data[i][1] = threadContextSwitchRate.getType();
                     data[i][2] = threadContextSwitchRate.getValue().toString();
                     data[i][3] = threadContextSwitchRate.getTimestamp().toString();
-                    data[i][4] = threadContextSwitchRate.getAttributes().toString();
+                    data[i][4] = threadContextSwitchRate.getAttributes().toString() == null ? "": threadContextSwitchRate.getAttributes().toString();
+                    //data[i][5] = threadContextSwitchRate.getAttributes().toString();
                 }
             }
 
