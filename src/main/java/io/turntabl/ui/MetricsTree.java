@@ -2,12 +2,8 @@ package io.turntabl.ui;
 
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
-import io.turntabl.ui.flight_recorder.MetaspaceSummaryDataspaceCommittedPanel;
-import io.turntabl.ui.flight_recorder.MetaspaceSummaryMetaspaceUsedPanel;
-import io.turntabl.ui.flight_recorder.ThreadContextSwitchRatePanel;
-import io.turntabl.ui.flight_recorder.DataLossPanel;
-import io.turntabl.ui.model.MetaspaceSummaryDataspaceCommitted;
-import io.turntabl.ui.model.SummaryMetaspaceUsed;
+import io.turntabl.ui.flight_recorder.*;
+import io.turntabl.ui.model.SummaryMetaspace;
 import io.turntabl.ui.model.ThreadContextSwitchRate;
 import io.turntabl.ui.model.DataLoss;
 
@@ -83,40 +79,27 @@ public class MetricsTree {
 
         }
 
-        //add MetaspaceSummaryDataspaceCommittedPanel to flight recorder branch node
-        flightRecorderNode.add(new DefaultMutableTreeNode("MetaspaceSummaryDataspaceCommitted"));
-        MetaspaceSummaryDataspaceCommittedPanel summaryMetaspaceCommittedPanel = new MetaspaceSummaryDataspaceCommittedPanel(
-                new MetaspaceSummaryDataspaceCommittedPanel.MetaspaceSummaryMetaspaceCommittedTableModel(Arrays.asList(
-
-                        new MetaspaceSummaryDataspaceCommitted("jfr.MetaspaceSummary.metaspace.committed","gauge",0.25646382570266724, Timestamp.valueOf("2014-01-01 00:00:00"), new HashMap<>())
-                        //new MetaspaceSummaryMetaspaceCommitted("jfr.ThreadCPULoad.user","gauge",0.004792987717485428,  Timestamp.valueOf("2014-01-01 00:00:00"), new HashMap<>()),
-                        //new MetaspaceSummaryMetaspaceCommitted("jfr.ThreadCPULoad.user","gauge",0.004793787717485428,  Timestamp.valueOf("2014-01-01 00:00:00"), new HashMap<>())
-                )));
-
-        componentMap.put("Metaspace Summary Dataspace Committed", summaryMetaspaceCommittedPanel.getMetaspaceSummaryMetaspaceCommittedComponent());
-        for (String nodeName : flightRecorderSubNodes) {
-            flightRecorderNode.add(new DefaultMutableTreeNode(nodeName));
-            componentMap.put(nodeName, summaryMetaspaceCommittedPanel.getMetaspaceSummaryMetaspaceCommittedComponent());
-
-        }
 
 
         //add MetaspaceSummaryMetaspaceUsedPanel to flight recorder branch node
-        flightRecorderNode.add(new DefaultMutableTreeNode("Summary Metaspace Used"));
-        MetaspaceSummaryMetaspaceUsedPanel summaryMetaspaceUsedPanel = new MetaspaceSummaryMetaspaceUsedPanel(
-                new MetaspaceSummaryMetaspaceUsedPanel.MetaspaceSummaryMetaspaceCommittedTableModel(Arrays.asList(
+        flightRecorderNode.add(new DefaultMutableTreeNode("Summary Metaspace"));
+        SummaryMetaspacePanel summaryMetaspacePanel = new SummaryMetaspacePanel(
+                new SummaryMetaspacePanel.SummaryMetaspaceTableModel(Arrays.asList(
 
-                        new SummaryMetaspaceUsed("jfr.MetaspaceSummary.metaspace.committed","gauge",0.25646382570266724, Timestamp.valueOf("2014-01-01 00:00:010"), new HashMap<>()),
-                        new SummaryMetaspaceUsed("jfr.ThreadCPULoad.user","gauge",0.004792987717485428,  Timestamp.valueOf("2014-01-01 00:00:30"), new HashMap<>()),
-                        new SummaryMetaspaceUsed("jfr.ThreadCPULoad.user","gauge",0.004793787717485428,  Timestamp.valueOf("2014-01-01 00:10:50"), new HashMap<>())
+                        new SummaryMetaspace()
+//                        new SummaryMetaspace(),
+//                        new SummaryMetaspace()
+
                 )));
 
-        componentMap.put("Summary Metaspace Used", summaryMetaspaceCommittedPanel.getMetaspaceSummaryMetaspaceCommittedComponent());
+        componentMap.put("Summary Metaspace", summaryMetaspacePanel.getSummaryMetaspaceComponent());
         for (String nodeName : flightRecorderSubNodes) {
             flightRecorderNode.add(new DefaultMutableTreeNode(nodeName));
-            componentMap.put(nodeName, summaryMetaspaceCommittedPanel.getMetaspaceSummaryMetaspaceCommittedComponent());
+            componentMap.put(nodeName, summaryMetaspacePanel.getSummaryMetaspaceComponent());
 
         }
+
+
 
         DefaultMutableTreeNode jdkSecurityNode = new DefaultMutableTreeNode("Security");
         for (String nodeName : jdkSecurityNodes) {
