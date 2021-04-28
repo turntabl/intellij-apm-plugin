@@ -3,7 +3,9 @@ package io.turntabl.ui;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
 import io.turntabl.ui.flight_recorder.DataLossPanel;
+import io.turntabl.ui.java_application.statistics.ThreadAllocationStatisticsPanel;
 import io.turntabl.ui.model.DataLoss;
+import io.turntabl.ui.model.ThreadAllocationStatistics;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -18,6 +20,7 @@ public class MetricsTree {
     private JTree tree;
     private String rootNodeName = "Metrics by type";
     private String flightRecorderNodeName = "Flight Recorder";
+    private String javaAppNodeName = "Java Application";
     private String jdkNodeName = "Java Development Kit";
     private String jvmNodeName = "Java Virtual Machine";
     private String osNodeName = "Operating System";
@@ -28,6 +31,8 @@ public class MetricsTree {
             "X509 Validation"};
 
     private String[] jvmNodes = {"Initial System Property", "JVM Information"};
+    private String[] javaAppStatisticsNodes = {"Class Loader Statistics", "Class Loading Statistics",
+            "Exception Statistics", "Thread Allocated Statistics"};
 
     private String[] osNodes = {"Initial Environment Variable", "OS Information", "System Process"};
     private final NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow;
@@ -39,6 +44,7 @@ public class MetricsTree {
         DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(rootNodeName);
 
         DefaultMutableTreeNode flightRecorderNode = new DefaultMutableTreeNode(flightRecorderNodeName);
+        DefaultMutableTreeNode javaApplicationNode = new DefaultMutableTreeNode(javaAppNodeName);
         DefaultMutableTreeNode jdkNode = new DefaultMutableTreeNode(jdkNodeName);
         DefaultMutableTreeNode jvmNode = new DefaultMutableTreeNode(jvmNodeName);
         DefaultMutableTreeNode osNode = new DefaultMutableTreeNode(osNodeName);
@@ -59,6 +65,21 @@ public class MetricsTree {
 
         }
 
+        ThreadAllocationStatisticsPanel threadAllocationStatisticsPanel = new ThreadAllocationStatisticsPanel(
+                new ThreadAllocationStatisticsPanel.ThreadAllocationStatisticsTableModel(Arrays.asList(
+                        new ThreadAllocationStatistics("2021-06-01 11:08:12:20", "18.4 MiB", "Main", new HashMap<String, String>())
+
+                )));
+
+        componentMap.put("Thread Allocated Statistics", threadAllocationStatisticsPanel.getThreadAllocationStatisticsComponent());
+        //add statistics branch node and its leaf nodes
+        DefaultMutableTreeNode javaAppStatisticsNode = new DefaultMutableTreeNode("Statistics");
+        for (String nodeName : javaAppStatisticsNodes) {
+            javaAppStatisticsNode.add(new DefaultMutableTreeNode(nodeName));
+            componentMap.put(nodeName, threadAllocationStatisticsPanel.getThreadAllocationStatisticsComponent());
+        }
+        javaApplicationNode.add(javaAppStatisticsNode);
+
         DefaultMutableTreeNode jdkSecurityNode = new DefaultMutableTreeNode("Security");
         for (String nodeName : jdkSecurityNodes) {
             jdkSecurityNode.add(new DefaultMutableTreeNode(nodeName));
@@ -74,6 +95,7 @@ public class MetricsTree {
         }
 
         rootNode.add(flightRecorderNode);
+        rootNode.add(javaApplicationNode);
         rootNode.add(jdkNode);
         rootNode.add(jvmNode);
         rootNode.add(osNode);

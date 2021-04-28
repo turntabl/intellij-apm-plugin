@@ -26,8 +26,10 @@ public class ThreadAllocationStatisticsPanel {
         table.setRowSelectionInterval(0, 0);
 
         table.getColumnModel().getColumn(0).setPreferredWidth(350);
-        table.getColumnModel().getColumn(1).setPreferredWidth(200);
-        table.getColumnModel().getColumn(2).setPreferredWidth(700);
+        table.getColumnModel().getColumn(1).setPreferredWidth(350);
+        table.getColumnModel().getColumn(2).setPreferredWidth(350);
+        table.getColumnModel().getColumn(3).setPreferredWidth(350);
+        table.getColumnModel().getColumn(4).setPreferredWidth(350);
 
         panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER),  BorderLayout.CENTER);
     }
@@ -37,7 +39,7 @@ public class ThreadAllocationStatisticsPanel {
 
     public static class ThreadAllocationStatisticsTableModel extends AbstractTableModel {
 
-        String[] columnNames = {"Start Time", "Allocated", "Thread"};
+        String[] columnNames = {"Start Time", "Allocated", "Thread", "Thread OS Name", "Thread Name"};
         String[][] data;
         private List<ThreadAllocationStatistics> threadAllocationStatisticsList;
 
@@ -49,6 +51,9 @@ public class ThreadAllocationStatisticsPanel {
                 data[i][0]= threadAllocationStatistics.getStartTime();
                 data[i][1]= threadAllocationStatistics.getAllocated();
                 data[i][2]= threadAllocationStatistics.getThread();
+                data[i][3]= threadAllocationStatistics.getAttributes().get("thread.osName") == null ? "" : threadAllocationStatistics.getAttributes().get("thread.osName");
+                data[i][4]= threadAllocationStatistics.getAttributes().get("thread.name") == null ? "" : threadAllocationStatistics.getAttributes().get("thread.name");
+
             }
             }
 
