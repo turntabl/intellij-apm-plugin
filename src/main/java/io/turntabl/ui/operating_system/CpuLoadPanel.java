@@ -29,6 +29,8 @@ public class CpuLoadPanel {
         table.getColumnModel().getColumn(2).setPreferredWidth(350);
         table.getColumnModel().getColumn(3).setPreferredWidth(350);
         table.getColumnModel().getColumn(4).setPreferredWidth(350);
+        table.getColumnModel().getColumn(5).setPreferredWidth(350);
+        table.getColumnModel().getColumn(6).setPreferredWidth(350);
 
 
 
@@ -40,7 +42,7 @@ public class CpuLoadPanel {
     }
 
     public static class CpuLoadTableModel extends AbstractTableModel {
-        String[] columnNames = {"StartTime", "Type", "JVM User", "JVM System", "Machine Total"};
+        String[] columnNames = {"StartTime", "Type", "JVM User", "JVM System", "Machine Total", "Thread Name", "Thread OS Name"};
         String[][] data;
         private java.util.List<CpuLoad> cpuLoadList;
 
@@ -54,6 +56,8 @@ public class CpuLoadPanel {
                 data[i][2] = String.valueOf(cpuLoad.getJvmUserValue());
                 data[i][3] = String.valueOf(cpuLoad.getJvmSystemValue());
                 data[i][4] = String.valueOf(cpuLoad.getMachineTotalValue());
+                data[i][5] = String.valueOf(cpuLoad.getAttributes().get("thread.name") == null ? "" : cpuLoad.getAttributes().get("thread.name"));
+                data[i][6] = String.valueOf(cpuLoad.getAttributes().get("thread.osName") == null ? "" : cpuLoad.getAttributes().get("thread.osName"));
             }
         }
 

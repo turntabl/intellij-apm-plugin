@@ -40,7 +40,7 @@ public class CpuLoad {
         return machineTotalValue;
     }
 
-    public Object getAttributes() {
+    public HashMap<String, String> getAttributes() {
         return attributes;
     }
 }
