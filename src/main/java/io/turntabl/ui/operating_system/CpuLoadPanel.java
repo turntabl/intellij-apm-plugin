@@ -40,7 +40,7 @@ public class CpuLoadPanel {
     }
 
     public static class CpuLoadTableModel extends AbstractTableModel {
-        String[] columnNames = {"StartTime", "Type", "JVM User", "JVM System", "Machine Total", "Thread OS Name", "Thread Name"};
+        String[] columnNames = {"Start Time", "Type", "JVM User", "JVM System", "Machine Total", "Thread OS Name", "Thread Name"};
         String[][] data;
         private java.util.List<CpuLoad> cpuLoadList;
 
