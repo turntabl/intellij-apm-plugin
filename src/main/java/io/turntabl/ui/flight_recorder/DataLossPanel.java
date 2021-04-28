@@ -64,5 +64,10 @@ public class DataLossPanel {
         public Object getValueAt(int rowIndex, int columnIndex) {
             return data[rowIndex][columnIndex];
         }
+
+        @Override
+        public String getColumnName(int column) {
+            return columnNames[column];
+        }
     }
 }
