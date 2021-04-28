@@ -2,107 +2,107 @@ package io.turntabl.ui.model;
 
 public class FlightRecording {
 
-    private String startTime;
-    private String duration;
-    private String endTime;
-    private String eventThread;
-    private int id;
-    private String name;
-    private String destination;
-    private String max_age;
-    private String max_size;
-    private String recording_duration;
+    private String StartTime;
+    private String Duration;
+    private String EndTime;
+    private String EventThread;
+    private int Id;
+    private String Name;
+    private String Destination;
+    private String MaxAge;
+    private String MaxSize;
+    private String RecordingDuration;
 
-    public FlightRecording(String startTime, String duration, String endTime, String eventThread, int id, String name, String destination, String max_age, String max_size, String recording_duration) {
-        this.startTime = startTime;
-        this.duration = duration;
-        this.endTime = endTime;
-        this.eventThread = eventThread;
-        this.id = id;
-        this.name = name;
-        this.destination = destination;
-        this.max_age = max_age;
-        this.max_size = max_size;
-        this.recording_duration = recording_duration;
+    public FlightRecording(String StartTime, String Duration, String EndTime, String EventThread, int Id, String Name, String Destination, String MaxAge, String MaxSize, String RecordingDuration) {
+        this.StartTime = StartTime;
+        this.Duration = Duration;
+        this.EndTime = EndTime;
+        this.EventThread = EventThread;
+        this.Id = Id;
+        this.Name = Name;
+        this.Destination = Destination;
+        this.MaxAge = MaxAge;
+        this.MaxSize = MaxSize;
+        this.RecordingDuration = RecordingDuration;
     }
 
     public String getStartTime() {
-        return startTime;
+        return StartTime;
     }
 
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
+    public void setStartTime(String StartTime) {
+        this.StartTime = StartTime;
     }
 
     public String getDuration() {
-        return duration;
+        return Duration;
     }
 
-    public void setDuration(String duration) {
-        this.duration = duration;
+    public void setDuration(String Duration) {
+        this.Duration = Duration;
     }
 
     public String getEndTime() {
-        return endTime;
+        return EndTime;
     }
 
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
+    public void setEndTime(String EndTime) {
+        this.EndTime = EndTime;
     }
 
     public String getEventThread() {
-        return eventThread;
+        return EventThread;
     }
 
     public void setEventThread(String eventThread) {
-        this.eventThread = eventThread;
+        this.EventThread = EventThread;
     }
 
     public int getId() {
-        return id;
+        return Id;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.Id = Id;
     }
 
     public String getName() {
-        return name;
+        return Name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.Name = Name;
     }
 
     public String getDestination(){
-        return destination;
+        return Destination;
     }
 
     public void setDestination(String destination) {
-        this.destination = destination;
+        this.Destination = Destination;
     }
 
     public String getMax_age() {
-        return max_age;
+        return MaxAge;
     }
 
-    public void setMax_age(String max_age) {
-        this.max_age = max_age;
+    public void setMax_age(String MaxAge) {
+        this.MaxAge = MaxAge;
     }
 
     public String getMax_size() {
-        return max_size;
+        return MaxSize;
     }
 
-    public void setMax_size(String max_size) {
-        this.max_size = max_size;
+    public void setMax_size(String MaxSize) {
+        this.MaxSize = MaxSize;
     }
 
     public String getRecording_duration() {
-        return recording_duration;
+        return RecordingDuration;
     }
 
-    public void setRecording_duration(String recording_duration) {
-        this.recording_duration = recording_duration;
+    public void setRecording_duration(String RecordingDuration) {
+        this.RecordingDuration = RecordingDuration;
     }
 }
