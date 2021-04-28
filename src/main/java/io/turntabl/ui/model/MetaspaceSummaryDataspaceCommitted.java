@@ -6,14 +6,14 @@ import org.bouncycastle.util.Times;
 import java.sql.Timestamp;
 import java.util.HashMap;
 
-public class MetaspaceSummaryMetaspaceCommitted {
+public class MetaspaceSummaryDataspaceCommitted {
     private String name;
     private String type;
     private Double value;
     private Timestamp timestamp;
     private HashMap<String, String> attributes;
 
-    public MetaspaceSummaryMetaspaceCommitted(String name, String type, Double value, Timestamp timestamp, HashMap<String, String> attributes) {
+    public MetaspaceSummaryDataspaceCommitted(String name, String type, Double value, Timestamp timestamp, HashMap<String, String> attributes) {
         this.name = name;
         this.type = type;
         this.value = value;
