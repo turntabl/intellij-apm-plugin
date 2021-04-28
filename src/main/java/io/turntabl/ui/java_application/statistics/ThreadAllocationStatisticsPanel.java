@@ -18,7 +18,7 @@ public class ThreadAllocationStatisticsPanel {
     TableModel myData;
     DefaultTableColumnModel columnModel;
 
-    public ThreadAllocationStatisticsPanel (TableModel tableModel){
+    public ThreadAllocationStatisticsPanel(TableModel tableModel) {
         panel = new JPanel(new BorderLayout());
         table = new JBTable(tableModel);
 
@@ -31,8 +31,9 @@ public class ThreadAllocationStatisticsPanel {
         table.getColumnModel().getColumn(3).setPreferredWidth(350);
         table.getColumnModel().getColumn(4).setPreferredWidth(350);
 
-        panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER),  BorderLayout.CENTER);
+        panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER), BorderLayout.CENTER);
     }
+
     public JPanel getThreadAllocationStatisticsComponent() {
         return panel;
     }
@@ -43,19 +44,19 @@ public class ThreadAllocationStatisticsPanel {
         String[][] data;
         private List<ThreadAllocationStatistics> threadAllocationStatisticsList;
 
-        public ThreadAllocationStatisticsTableModel(List<ThreadAllocationStatistics> threadAllocationStatisticsList){
+        public ThreadAllocationStatisticsTableModel(List<ThreadAllocationStatistics> threadAllocationStatisticsList) {
             this.threadAllocationStatisticsList = threadAllocationStatisticsList;
             data = new String[threadAllocationStatisticsList.size()][columnNames.length];
-            for(int i = 0; i < threadAllocationStatisticsList.size(); i++){
+            for (int i = 0; i < threadAllocationStatisticsList.size(); i++) {
                 ThreadAllocationStatistics threadAllocationStatistics = threadAllocationStatisticsList.get(i);
-                data[i][0]= threadAllocationStatistics.getStartTime();
-                data[i][1]= threadAllocationStatistics.getAllocated();
-                data[i][2]= threadAllocationStatistics.getThread();
-                data[i][3]= threadAllocationStatistics.getAttributes().get("thread.osName") == null ? "" : threadAllocationStatistics.getAttributes().get("thread.osName");
-                data[i][4]= threadAllocationStatistics.getAttributes().get("thread.name") == null ? "" : threadAllocationStatistics.getAttributes().get("thread.name");
+                data[i][0] = threadAllocationStatistics.getStartTime();
+                data[i][1] = threadAllocationStatistics.getAllocated();
+                data[i][2] = threadAllocationStatistics.getThread();
+                data[i][3] = threadAllocationStatistics.getAttributes().get("thread.osName") == null ? "" : threadAllocationStatistics.getAttributes().get("thread.osName");
+                data[i][4] = threadAllocationStatistics.getAttributes().get("thread.name") == null ? "" : threadAllocationStatistics.getAttributes().get("thread.name");
 
             }
-            }
+        }
 
         @Override
         public int getRowCount() {
