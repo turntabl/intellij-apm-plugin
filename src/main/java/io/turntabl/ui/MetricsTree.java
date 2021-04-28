@@ -2,13 +2,16 @@ package io.turntabl.ui;
 
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
+import io.turntabl.ui.operating_system.CpuLoadPanel;
 import io.turntabl.ui.flight_recorder.DataLossPanel;
+import io.turntabl.ui.model.CpuLoad;
 import io.turntabl.ui.model.DataLoss;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
+import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -69,6 +72,15 @@ public class MetricsTree {
             jvmNode.add(new DefaultMutableTreeNode(nodeName));
         }
 
+        //add sub node to os branch node
+        osNode.add(new DefaultMutableTreeNode("CPU Load"));
+        CpuLoadPanel cpuLoadPanel = new CpuLoadPanel(
+                new CpuLoadPanel.CpuLoadTableModel(Arrays.asList(
+                        new CpuLoad(new Timestamp(1619441627925L), "gauge", 0.25646382570266724, 0.031001122668385506, 0.3926701843738556, new HashMap<>())
+                ))
+        );
+
+        componentMap.put("CPU Load", cpuLoadPanel.getCpuLoadComponent());
         for (String nodeName : osNodes) {
             osNode.add(new DefaultMutableTreeNode(nodeName));
         }
