@@ -77,7 +77,7 @@ public class MetricsTree {
         osNode.add(new DefaultMutableTreeNode("GC Heap Summary"));
         GcHeapSummaryPanel gcHeapSummaryPanel = new GcHeapSummaryPanel(
                 new GcHeapSummaryPanel.GcHeapSummaryTableModel(Arrays.asList(
-                        new GcHeapSummary(new Timestamp(1619441634271L), "gauge", 2.65289728E8, 3.204448256E9, 1.39961312E8, new HashMap<>())
+                        new GcHeapSummary("jfr.GCHeapSummary.heapCommittedSize",1619441634271L, "gauge", 2.65289728E8, 3.204448256E9, 1.39961312E8, new HashMap<>())
                 ))
         );
         componentMap.put("GC Heap Summary", gcHeapSummaryPanel.getGcHeapSummaryComponent());
