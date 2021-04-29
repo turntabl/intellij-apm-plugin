@@ -1,6 +1,8 @@
 package io.turntabl.ui.model;
 
 
+import java.util.HashMap;
+
 public class JavaMonitorWait {
     private String startTime;
     private String duration;
@@ -11,8 +13,9 @@ public class JavaMonitorWait {
     private String timeOut;
     private String timedOut;
     private String monitorAddress;
+    private HashMap<String, String> attributes;
 
-    public JavaMonitorWait(String startTime, String duration, String endTime, String eventThread, String monitorClass, String notifierThread, String timeOut, String timedOut, String monitorAddress) {
+    public JavaMonitorWait(String startTime, String duration, String endTime, String eventThread, String monitorClass, String notifierThread, String timeOut, String timedOut, String monitorAddress, HashMap<String, String> attributes) {
         this.startTime = startTime;
         this.duration = duration;
         this.endTime = endTime;
@@ -22,6 +25,18 @@ public class JavaMonitorWait {
         this.timeOut = timeOut;
         this.timedOut = timedOut;
         this.monitorAddress = monitorAddress;
+        this.attributes = attributes;
+    }
+
+    public JavaMonitorWait() {
+    }
+
+    public HashMap<String, String> getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(HashMap<String, String> attributes) {
+        this.attributes = attributes;
     }
 
     public String getStartTime() {
@@ -94,5 +109,21 @@ public class JavaMonitorWait {
 
     public void setMonitorAddress(String monitorAddress) {
         this.monitorAddress = monitorAddress;
+    }
+
+    @Override
+    public String toString() {
+        return "JavaMonitorWait{" +
+                "startTime='" + startTime + '\'' +
+                ", duration='" + duration + '\'' +
+                ", endTime='" + endTime + '\'' +
+                ", eventThread='" + eventThread + '\'' +
+                ", monitorClass='" + monitorClass + '\'' +
+                ", notifierThread='" + notifierThread + '\'' +
+                ", timeOut='" + timeOut + '\'' +
+                ", timedOut='" + timedOut + '\'' +
+                ", monitorAddress='" + monitorAddress + '\'' +
+                ", attributes=" + attributes +
+                '}';
     }
 }

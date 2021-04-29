@@ -6,8 +6,6 @@ import io.turntabl.ui.flight_recorder.DataLossPanel;
 import io.turntabl.ui.model.DataLoss;
 
 import javax.swing.*;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
@@ -59,9 +57,9 @@ public class EventsTree {
         flightRecorderNode.add(new DefaultMutableTreeNode("Data Loss"));
         DataLossPanel dataLoss = new DataLossPanel(
                 new DataLossPanel.DataLossTableModel(Arrays.asList(
-                        new DataLoss("2021-06-01 11:08:12:20", "10", "10"),
-                        new DataLoss("2021-06-01 11:08:12:21", "15", "25"),
-                        new DataLoss("2021-06-01 11:08:12:22", "20", "45")
+                        new DataLoss("2021-06-01 11:08:12:20", "10", "10", new HashMap<String, String>()),
+                        new DataLoss("2021-06-01 11:08:12:21", "15", "25", new HashMap<String, String>()),
+                        new DataLoss("2021-06-01 11:08:12:22", "20", "45", new HashMap<String, String>())
                 )));
 
         componentMap.put("Data Loss", dataLoss.getDataLossComponent());
