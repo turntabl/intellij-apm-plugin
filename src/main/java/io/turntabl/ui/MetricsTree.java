@@ -2,10 +2,12 @@ package io.turntabl.ui;
 
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
+import io.turntabl.ui.model.GcHeapSummary;
 import io.turntabl.ui.operating_system.CpuLoadPanel;
 import io.turntabl.ui.flight_recorder.DataLossPanel;
 import io.turntabl.ui.model.CpuLoad;
 import io.turntabl.ui.model.DataLoss;
+import io.turntabl.ui.operating_system.GcHeapSummaryPanel;
 import io.turntabl.ui.model.ThreadCpuLoad;
 import io.turntabl.ui.operating_system.ThreadCpuLoadPanel;
 
@@ -74,6 +76,16 @@ public class MetricsTree {
             jvmNode.add(new DefaultMutableTreeNode(nodeName));
         }
 
+
+        //add sub node to os branch node
+        osNode.add(new DefaultMutableTreeNode("GC Heap Summary"));
+        GcHeapSummaryPanel gcHeapSummaryPanel = new GcHeapSummaryPanel(
+                new GcHeapSummaryPanel.GcHeapSummaryTableModel(Arrays.asList(
+                        new GcHeapSummary("jfr.GCHeapSummary.heapCommittedSize",1619441634271L, "gauge", 2.65289728E8, 3.204448256E9, 1.39961312E8, new HashMap<>())
+                ))
+        );
+        componentMap.put("GC Heap Summary", gcHeapSummaryPanel.getGcHeapSummaryComponent());
+
         //add sub node to os branch node
         osNode.add(new DefaultMutableTreeNode("Thread CPU Load"));
         ThreadCpuLoadPanel threadCpuLoadPanel = new ThreadCpuLoadPanel(
@@ -92,6 +104,7 @@ public class MetricsTree {
         );
 
         componentMap.put("CPU Load", cpuLoadPanel.getCpuLoadComponent());
+
 
         for (String nodeName : osNodes) {
             osNode.add(new DefaultMutableTreeNode(nodeName));
