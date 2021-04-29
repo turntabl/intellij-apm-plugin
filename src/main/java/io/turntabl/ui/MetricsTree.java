@@ -3,7 +3,9 @@ package io.turntabl.ui;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
 import io.turntabl.ui.flight_recorder.DataLossPanel;
+import io.turntabl.ui.model.CpuLoad;
 import io.turntabl.ui.model.DataLoss;
+import io.turntabl.ui.operating_system.CpuLoadPanel;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -32,6 +34,7 @@ public class MetricsTree {
     private String[] osNodes = {"Initial Environment Variable", "OS Information", "System Process"};
     private final NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow;
     private Map<String, JComponent> componentMap;
+    private CpuLoadPanel cpuLoadPanel;
 
     public MetricsTree(NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow) {
         this.newRelicJavaProfilerToolWindow = newRelicJavaProfilerToolWindow;
@@ -69,6 +72,15 @@ public class MetricsTree {
             jvmNode.add(new DefaultMutableTreeNode(nodeName));
         }
 
+        //add sub node to os branch node
+        osNode.add(new DefaultMutableTreeNode("CPU Load"));
+        cpuLoadPanel = new CpuLoadPanel(
+                new CpuLoadPanel.CpuLoadTableModel(Arrays.asList(
+                        new CpuLoad("cpuLoad", 1619441627925L, "gauge", 0.25646382570266724, 0.031001122668385506, 0.3926701843738556, new HashMap<>())
+                ))
+        );
+
+        componentMap.put("CPU Load", cpuLoadPanel.getCpuLoadComponent());
         for (String nodeName : osNodes) {
             osNode.add(new DefaultMutableTreeNode(nodeName));
         }
@@ -92,10 +104,8 @@ public class MetricsTree {
 
             JComponent selected = componentMap.get(selectedNode);
             if (selected != null) {
-                System.out.println("not null");
                 newRelicJavaProfilerToolWindow.setMetricsSecondComponent(selected);
             } else {
-                System.out.println("null");
                 newRelicJavaProfilerToolWindow.clearMetricsPanelText();
                 newRelicJavaProfilerToolWindow.updateMetricsPanelText(e.getPath().toString());
 
@@ -107,5 +117,14 @@ public class MetricsTree {
 
     public JPanel getMetricsTree() {
         return this.treePanel;
+    }
+
+    public void updateComponentMap(String key, JComponent component) {
+        componentMap.put(key, component);
+        newRelicJavaProfilerToolWindow.setMetricsSecondComponent(component);
+    }
+
+    public JTable getCpuLoadTable() {
+        return this.cpuLoadPanel.getTable();
     }
 }

@@ -1,6 +1,6 @@
 package io.turntabl.utils;
 
-import io.turntabl.ui.model.CPULoad;
+import io.turntabl.ui.model.CpuLoad;
 
 import java.util.Collections;
 import java.util.List;
@@ -13,9 +13,8 @@ public class CPULoadUtil {
     }
 
 
-    public List<CPULoad> getCPUMetric() {
+    public List<CpuLoad> getCPUMetric() {
 //        JSONArray cpuInfoArray = jsonUtils.readJsonFile("CPU");
-
 
         return Collections.emptyList();
     }

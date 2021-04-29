@@ -2,14 +2,14 @@ package io.turntabl.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.turntabl.ui.model.CPULoad;
+import io.turntabl.ui.model.CpuLoad;
 import io.turntabl.ui.model.ThreadAllocationStatistics;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-
-import java.io.FileReader;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.Spliterators;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -20,11 +20,10 @@ public class JsonUtility {
     private ObjectMapper mapper = new ObjectMapper();
 
     @SuppressWarnings("unchecked")
-    public JSONArray readMetricsJson() {
+    public Optional<JSONArray> readMetricsJson(String jsonString) {
         JSONArray metricJSONArray = null;
         try {
-            String filepath = "src/main/resources/metrics.json";
-            JSONArray parsedObject = (JSONArray) jsonParser.parse(new FileReader(filepath));
+            JSONArray parsedObject = (JSONArray) jsonParser.parse(jsonString);
 
             JSONObject jsonObject = (JSONObject) parsedObject.get(0);
             metricJSONArray = (JSONArray) jsonObject.get("metrics");
@@ -33,7 +32,7 @@ public class JsonUtility {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return metricJSONArray;
+        return Optional.ofNullable(metricJSONArray);
 
     }
 
@@ -43,15 +42,15 @@ public class JsonUtility {
                 .stream(Spliterators.spliteratorUnknownSize(array.iterator(), 0), false);
     }
 
-    public List<CPULoad> getCPULoad(JSONArray metricsArray) {
-        Stream<JSONObject>cpuLoadMetric = getStream(metricsArray);
+    public List<CpuLoad> getCPULoad(JSONArray metricsArray) {
+        Stream<JSONObject> cpuLoadMetric = getStream(metricsArray);
 
-        return cpuLoadMetric
-                .filter(m -> m.get("name").toString().startsWith("jfr.CPULoad"))
+        Map<Long, List<CpuLoad>> cpuLoadMap = cpuLoadMetric
+                .filter(m -> m.get("name").toString().toLowerCase().startsWith("jfr.cpuload"))
                 .map(c -> {
-                    CPULoad cpuLoad = null;
+                    CpuLoad cpuLoad = null;
                     try {
-                        cpuLoad = mapper.readValue(c.toJSONString(), CPULoad.class);
+                        cpuLoad = mapper.readValue(c.toJSONString(), CpuLoad.class);
 
                         String name = cpuLoad.getName().toLowerCase();
                         double value = Double.parseDouble(c.get("value").toString());
@@ -59,7 +58,7 @@ public class JsonUtility {
                         if (name.endsWith("jvmuser")) {
                             cpuLoad.setJvmUserValue(value);
                         } else if (name.endsWith("jvmsystem")) {
-                            cpuLoad.setJvmSytemValue(value);
+                            cpuLoad.setJvmSystemValue(value);
                         } else {
                             cpuLoad.setMachineTotalValue(value);
                         }
@@ -67,8 +66,32 @@ public class JsonUtility {
                         e.printStackTrace();
                     }
                     return cpuLoad;
-                }).collect(Collectors.toList());
+                }).collect(Collectors.groupingBy(CpuLoad::getStartTime));
 
+        return cpuLoadMap.entrySet().stream()
+                .map(s -> {
+                    CpuLoad cpu = s.getValue().get(0);
+                    CpuLoad cpu2 = s.getValue().get(1);
+                    CpuLoad cpu3 = s.getValue().get(2);
+
+                    if (cpu2.getName().toLowerCase().endsWith("jvmuser")) {
+                        cpu.setJvmUserValue(cpu2.getJvmUserValue());
+                    } else if (cpu2.getName().toLowerCase().endsWith("jvmsystem")) {
+                        cpu.setJvmSystemValue(cpu2.getJvmSystemValue());
+                    } else {
+                        cpu.setMachineTotalValue(cpu2.getMachineTotalValue());
+                    }
+
+                    if (cpu3.getName().toLowerCase().endsWith("jvmuser")) {
+                        cpu.setJvmUserValue(cpu3.getJvmUserValue());
+                    } else if (cpu3.getName().toLowerCase().endsWith("jvmsystem")) {
+                        cpu.setJvmSystemValue(cpu3.getJvmSystemValue());
+                    } else {
+                        cpu.setMachineTotalValue(cpu3.getMachineTotalValue());
+                    }
+
+                    return cpu;
+                }).collect(Collectors.toList());
     }
 
     public List<ThreadAllocationStatistics> getThreadAllocationStatistics(JSONArray jsonArray) {
@@ -88,10 +111,4 @@ public class JsonUtility {
                 }).collect(Collectors.toList());
     }
 
-    public static void main(String[] args) {
-        JsonUtility util = new JsonUtility();
-        JSONArray jsonArray = util.readMetricsJson();
-        util.getCPULoad(jsonArray).forEach(System.out::println);
-//        util.getThreadAllocationStatistics(jsonArray).forEach(System.out::println);
-    }
 }
