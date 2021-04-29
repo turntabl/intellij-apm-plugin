@@ -76,7 +76,7 @@ public class MetricsTree {
         osNode.add(new DefaultMutableTreeNode("Thread CPU Load"));
         ThreadCpuLoadPanel threadCpuLoadPanel = new ThreadCpuLoadPanel(
                 new ThreadCpuLoadPanel.ThreadCpuLoadTableModel(Arrays.asList(
-                        new ThreadCpuLoad(new Timestamp(1619441626468L), "gauge", 0.04082856327295303, 0.0010207140585407615, new HashMap<>())
+                        new ThreadCpuLoad("jfr.ThreadCPULoad.user",1619441626468L, "gauge", 0.04082856327295303, 0.0010207140585407615, new HashMap<>())
                 ))
         );
 
