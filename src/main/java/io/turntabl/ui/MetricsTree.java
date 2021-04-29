@@ -6,6 +6,8 @@ import io.turntabl.ui.operating_system.CpuLoadPanel;
 import io.turntabl.ui.flight_recorder.DataLossPanel;
 import io.turntabl.ui.model.CpuLoad;
 import io.turntabl.ui.model.DataLoss;
+import io.turntabl.ui.model.ThreadCpuLoad;
+import io.turntabl.ui.operating_system.ThreadCpuLoadPanel;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -73,6 +75,15 @@ public class MetricsTree {
         }
 
         //add sub node to os branch node
+        osNode.add(new DefaultMutableTreeNode("Thread CPU Load"));
+        ThreadCpuLoadPanel threadCpuLoadPanel = new ThreadCpuLoadPanel(
+                new ThreadCpuLoadPanel.ThreadCpuLoadTableModel(Arrays.asList(
+                        new ThreadCpuLoad("jfr.ThreadCPULoad.user",1619441626468L, "gauge", 0.04082856327295303, 0.0010207140585407615, new HashMap<>())
+                ))
+        );
+
+        componentMap.put("Thread CPU Load", threadCpuLoadPanel.getThreadCpuLoadComponent());
+
         osNode.add(new DefaultMutableTreeNode("CPU Load"));
         CpuLoadPanel cpuLoadPanel = new CpuLoadPanel(
                 new CpuLoadPanel.CpuLoadTableModel(Arrays.asList(
@@ -81,6 +92,7 @@ public class MetricsTree {
         );
 
         componentMap.put("CPU Load", cpuLoadPanel.getCpuLoadComponent());
+
         for (String nodeName : osNodes) {
             osNode.add(new DefaultMutableTreeNode(nodeName));
         }
