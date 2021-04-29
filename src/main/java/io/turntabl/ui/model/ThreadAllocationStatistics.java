@@ -8,11 +8,24 @@ public class ThreadAllocationStatistics {
     private String thread;
     private HashMap<String, String> attributes;
 
+    public ThreadAllocationStatistics() {
+    }
+
     public ThreadAllocationStatistics(String startTime, String allocated, String thread, HashMap<String, String> attributes) {
         this.startTime = startTime;
         this.allocated = allocated;
         this.thread = thread;
         this.attributes = attributes;
+    }
+
+    @Override
+    public String toString() {
+        return "ThreadAllocationStatistics{" +
+                "startTime='" + startTime + '\'' +
+                ", allocated='" + allocated + '\'' +
+                ", thread='" + thread + '\'' +
+                ", attributes=" + attributes +
+                '}';
     }
 
     public HashMap<String, String> getAttributes() {
