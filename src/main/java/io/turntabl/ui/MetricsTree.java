@@ -6,10 +6,14 @@ import io.turntabl.ui.flight_recorder.JfrSocketReadBytesReadPanel;
 import io.turntabl.ui.flight_recorder.JfrSocketReadDurationPanel;
 import io.turntabl.ui.model.JfrSocketReadBytesRead;
 import io.turntabl.ui.model.JfrSocketReadDuration;
+import io.turntabl.ui.model.GcHeapSummary;
 import io.turntabl.ui.operating_system.CpuLoadPanel;
 import io.turntabl.ui.flight_recorder.DataLossPanel;
 import io.turntabl.ui.model.CpuLoad;
 import io.turntabl.ui.model.DataLoss;
+import io.turntabl.ui.operating_system.GcHeapSummaryPanel;
+import io.turntabl.ui.model.ThreadCpuLoad;
+import io.turntabl.ui.operating_system.ThreadCpuLoadPanel;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -102,7 +106,26 @@ public class MetricsTree {
             jvmNode.add(new DefaultMutableTreeNode(nodeName));
         }
 
+
         //add sub node to os branch node
+        osNode.add(new DefaultMutableTreeNode("GC Heap Summary"));
+        GcHeapSummaryPanel gcHeapSummaryPanel = new GcHeapSummaryPanel(
+                new GcHeapSummaryPanel.GcHeapSummaryTableModel(Arrays.asList(
+                        new GcHeapSummary("jfr.GCHeapSummary.heapCommittedSize",1619441634271L, "gauge", 2.65289728E8, 3.204448256E9, 1.39961312E8, new HashMap<>())
+                ))
+        );
+        componentMap.put("GC Heap Summary", gcHeapSummaryPanel.getGcHeapSummaryComponent());
+
+        //add sub node to os branch node
+        osNode.add(new DefaultMutableTreeNode("Thread CPU Load"));
+        ThreadCpuLoadPanel threadCpuLoadPanel = new ThreadCpuLoadPanel(
+                new ThreadCpuLoadPanel.ThreadCpuLoadTableModel(Arrays.asList(
+                        new ThreadCpuLoad("jfr.ThreadCPULoad.user",1619441626468L, "gauge", 0.04082856327295303, 0.0010207140585407615, new HashMap<>())
+                ))
+        );
+
+        componentMap.put("Thread CPU Load", threadCpuLoadPanel.getThreadCpuLoadComponent());
+
         osNode.add(new DefaultMutableTreeNode("CPU Load"));
         CpuLoadPanel cpuLoadPanel = new CpuLoadPanel(
                 new CpuLoadPanel.CpuLoadTableModel(Arrays.asList(
@@ -111,6 +134,8 @@ public class MetricsTree {
         );
 
         componentMap.put("CPU Load", cpuLoadPanel.getCpuLoadComponent());
+
+
         for (String nodeName : osNodes) {
             osNode.add(new DefaultMutableTreeNode(nodeName));
         }
