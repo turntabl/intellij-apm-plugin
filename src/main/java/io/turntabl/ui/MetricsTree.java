@@ -4,7 +4,9 @@ import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
 import io.turntabl.ui.flight_recorder.DataLossPanel;
 import io.turntabl.ui.java_application.statistics.ThreadAllocationStatisticsPanel;
+import io.turntabl.ui.java_virtual_machine.GarbageCollectionPanel;
 import io.turntabl.ui.model.DataLoss;
+import io.turntabl.ui.model.GarbageCollection;
 import io.turntabl.ui.model.ThreadAllocationStatistics;
 
 import javax.swing.*;
@@ -30,7 +32,7 @@ public class MetricsTree {
     private String[] jdkSecurityNodes = {"Security Property Modification", "TLS Handshake", "X509 Certificate",
             "X509 Validation"};
 
-    private String[] jvmNodes = {"Initial System Property", "JVM Information"};
+    private String[] jvmNodes = {"Initial System Property", "JVM Information","Garbage Collection"};
     private String[] javaAppStatisticsNodes = {"Class Loader Statistics", "Class Loading Statistics",
             "Exception Statistics", "Thread Allocated Statistics"};
 
@@ -53,9 +55,9 @@ public class MetricsTree {
         flightRecorderNode.add(new DefaultMutableTreeNode("Data Loss"));
         DataLossPanel dataLoss = new DataLossPanel(
                 new DataLossPanel.DataLossTableModel(Arrays.asList(
-                        new DataLoss("2021-06-01 11:08:12:20", "10", "10", new HashMap<String, String>()),
-                        new DataLoss("2021-06-01 11:08:12:21", "15", "25", new HashMap<String, String>()),
-                        new DataLoss("2021-06-01 11:08:12:22", "20", "45", new HashMap<String, String>())
+                        new DataLoss("2021-06-01 11:08:12:20", "10", "10"),
+                        new DataLoss("2021-06-01 11:08:12:21", "15", "25"),
+                        new DataLoss("2021-06-01 11:08:12:22", "20", "45")
                 )));
 
         componentMap.put("Data Loss", dataLoss.getDataLossComponent());
@@ -86,8 +88,15 @@ public class MetricsTree {
         }
         jdkNode.add(jdkSecurityNode);
 
+        GarbageCollectionPanel garbageCollectionPanel = new GarbageCollectionPanel(
+                new GarbageCollectionPanel.GarbageCollectionTableModel(Arrays.asList(
+                        new GarbageCollection("jfr.GarbageCollection.majorDuration","summary",new HashMap<String,String>(), 1619441613596L,-1619441613596L,new HashMap<String, String>())
+                ))
+        );
+        componentMap.put("Garbage Collection",garbageCollectionPanel.getGarbageCollectionComponent());
         for (String nodeName : jvmNodes) {
             jvmNode.add(new DefaultMutableTreeNode(nodeName));
+            componentMap.put(nodeName,garbageCollectionPanel.getGarbageCollectionComponent());
         }
 
         for (String nodeName : osNodes) {
