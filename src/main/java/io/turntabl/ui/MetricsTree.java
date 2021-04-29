@@ -2,6 +2,10 @@ package io.turntabl.ui;
 
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
+import io.turntabl.ui.flight_recorder.JfrSocketReadBytesReadPanel;
+import io.turntabl.ui.flight_recorder.JfrSocketReadDurationPanel;
+import io.turntabl.ui.model.JfrSocketReadBytesRead;
+import io.turntabl.ui.model.JfrSocketReadDuration;
 import io.turntabl.ui.model.GcHeapSummary;
 import io.turntabl.ui.operating_system.CpuLoadPanel;
 import io.turntabl.ui.flight_recorder.DataLossPanel;
@@ -37,6 +41,9 @@ public class MetricsTree {
     private String[] jvmNodes = {"Initial System Property", "JVM Information"};
 
     private String[] osNodes = {"Initial Environment Variable", "OS Information", "System Process"};
+
+    private String[] socketNodes = {"Bytes Read", "Duration"};
+
     private final NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow;
     private Map<String, JComponent> componentMap;
 
@@ -49,6 +56,29 @@ public class MetricsTree {
         DefaultMutableTreeNode jdkNode = new DefaultMutableTreeNode(jdkNodeName);
         DefaultMutableTreeNode jvmNode = new DefaultMutableTreeNode(jvmNodeName);
         DefaultMutableTreeNode osNode = new DefaultMutableTreeNode(osNodeName);
+
+        // add sub node to flight recorder branch node
+        DefaultMutableTreeNode socketNode = new DefaultMutableTreeNode("JFR Socket Read");
+        for (String nodeName : socketNodes) {
+            socketNode.add(new DefaultMutableTreeNode(nodeName));
+        }
+        flightRecorderNode.add(socketNode);
+
+        // add sub node to socket sub node of flight recorder branch node
+        JfrSocketReadBytesReadPanel jfrSocketReadBytesReadPanel = new JfrSocketReadBytesReadPanel(
+                new JfrSocketReadBytesReadPanel.JfrSocketReadBytesReadTableModel(Arrays.asList(
+                        new JfrSocketReadBytesRead("jfr.SocketRead.bytesRead", 1619441645442L, "summary", new HashMap<>(), 46, new HashMap<>())
+                ))
+        );
+        componentMap.put("Bytes Read", jfrSocketReadBytesReadPanel.getJfrSocketReadBytesReadComponent());
+
+        // add sub node to socket sub node of flight recorder branch node
+        JfrSocketReadDurationPanel jfrSocketReadDurationPanel = new JfrSocketReadDurationPanel(
+                new JfrSocketReadDurationPanel.JfrSocketReadDurationTableModel(Arrays.asList(
+                        new JfrSocketReadDuration("jfr.SocketRead.duration", 1619441645442L, "summary", new HashMap<>(), 50, new HashMap<>())
+                ))
+        );
+        componentMap.put("Duration", jfrSocketReadDurationPanel.getJfrSocketReadDurationComponent());
 
         //add sub node to flight recorder branch node
         flightRecorderNode.add(new DefaultMutableTreeNode("Data Loss"));
