@@ -13,6 +13,9 @@ public class FlightRecording {
     private String MaxSize;
     private String RecordingDuration;
 
+    public FlightRecording() {
+    }
+
     public FlightRecording(String StartTime, String Duration, String EndTime, String EventThread, int Id, String Name, String Destination, String MaxAge, String MaxSize, String RecordingDuration) {
         this.StartTime = StartTime;
         this.Duration = Duration;
