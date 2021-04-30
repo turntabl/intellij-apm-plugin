@@ -3,7 +3,6 @@ package io.turntabl.ui.operating_system;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
 import io.turntabl.ui.model.CpuLoad;
-
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
@@ -12,8 +11,10 @@ import java.util.Date;
 import java.util.List;
 
 public class CpuLoadPanel {
-    JPanel panel;
-    JTable table;
+    private JPanel panel;
+    private JTable table;
+    private TableModel myData;
+    private DefaultTableColumnModel columnModel;
 
     public CpuLoadPanel(TableModel tableModel) {
         panel = new JPanel(new BorderLayout());
@@ -46,6 +47,7 @@ public class CpuLoadPanel {
             data = new String[cpuLoadList.size()][columnNames.length];
             for (int i = 0; i < cpuLoadList.size(); i++) {
                 CpuLoad cpuLoad = cpuLoadList.get(i);
+
                 data[i][0] = String.valueOf(new Date(cpuLoad.getStartTime()));
                 data[i][1] = cpuLoad.getType();
                 data[i][2] = String.valueOf(cpuLoad.getJvmUserValue() == null ? "" : cpuLoad.getJvmUserValue());
@@ -75,7 +77,6 @@ public class CpuLoadPanel {
         public String getColumnName(int column) {
             return columnNames[column];
         }
-    }
 
     public JTable getTable() {
         return this.table;

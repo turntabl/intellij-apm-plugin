@@ -1,0 +1,416 @@
+[
+    {
+        "common": {
+            "attributes": {
+                "instrumentation.name": "JFR",
+                "host.hostname": "DESKTOP-8AO41P3/172.21.224.1",
+                "collector.name": "JFR-Uploader",
+                "instrumentation.provider": "JFR-Uploader"
+            }
+        },
+        "metrics": [
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 1.95738E7,
+                "timestamp": 1619441624895,
+                "attributes": {
+                    "thread.osName": "main",
+                    "thread.name": "main"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441624895,
+                "attributes": {
+                    "thread.osName": "Reference Handler",
+                    "thread.name": "Reference Handler"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 280.0,
+                "timestamp": 1619441624895,
+                "attributes": {
+                    "thread.osName": "Finalizer",
+                    "thread.name": "Finalizer"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441624895,
+                "attributes": {
+                    "thread.osName": "Signal Dispatcher",
+                    "thread.name": "Signal Dispatcher"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 513560.0,
+                "timestamp": 1619441624895,
+                "attributes": {
+                    "thread.osName": "Attach Listener",
+                    "thread.name": "Attach Listener"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441624895,
+                "attributes": {
+                    "thread.osName": "C2 CompilerThread0",
+                    "thread.name": "C2 CompilerThread0"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 9816.0,
+                "timestamp": 1619441624895,
+                "attributes": {
+                    "thread.osName": "C1 CompilerThread0",
+                    "thread.name": "C1 CompilerThread0"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441624895,
+                "attributes": {
+                    "thread.osName": "Sweeper thread",
+                    "thread.name": "Sweeper thread"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441624895,
+                "attributes": {
+                    "thread.osName": "Common-Cleaner",
+                    "thread.name": "Common-Cleaner"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 1.709704E7,
+                "timestamp": 1619441624895,
+                "attributes": {
+                    "thread.osName": "pool-1-thread-1",
+                    "thread.name": "pool-1-thread-1"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441624895,
+                "attributes": {
+                    "thread.osName": "Service Thread",
+                    "thread.name": "Service Thread"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441624895,
+                "attributes": {
+                    "thread.osName": "JFR Recorder Thread",
+                    "thread.name": "JFR Recorder Thread"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 40.0,
+                "timestamp": 1619441624895,
+                "attributes": {
+                    "thread.osName": "C2 CompilerThread1",
+                    "thread.name": "C2 CompilerThread1"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441624895,
+                "attributes": {
+                    "thread.osName": "C2 CompilerThread2",
+                    "thread.name": "C2 CompilerThread2"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 24.0,
+                "timestamp": 1619441624895,
+                "attributes": {
+                    "thread.osName": "JFR Periodic Tasks",
+                    "thread.name": "JFR Periodic Tasks"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441624895,
+                "attributes": {
+                    "thread.osName": "JFR Recording Scheduler",
+                    "thread.name": "JFR Recording Scheduler"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 1.95738E7,
+                "timestamp": 1619441625024,
+                "attributes": {
+                    "thread.osName": "main",
+                    "thread.name": "main"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441625024,
+                "attributes": {
+                    "thread.osName": "Reference Handler",
+                    "thread.name": "Reference Handler"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 280.0,
+                "timestamp": 1619441625024,
+                "attributes": {
+                    "thread.osName": "Finalizer",
+                    "thread.name": "Finalizer"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441625024,
+                "attributes": {
+                    "thread.osName": "Signal Dispatcher",
+                    "thread.name": "Signal Dispatcher"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 513560.0,
+                "timestamp": 1619441625024,
+                "attributes": {
+                    "thread.osName": "Attach Listener",
+                    "thread.name": "Attach Listener"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441625024,
+                "attributes": {
+                    "thread.osName": "C2 CompilerThread0",
+                    "thread.name": "C2 CompilerThread0"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 9944.0,
+                "timestamp": 1619441625024,
+                "attributes": {
+                    "thread.osName": "C1 CompilerThread0",
+                    "thread.name": "C1 CompilerThread0"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441625024,
+                "attributes": {
+                    "thread.osName": "Sweeper thread",
+                    "thread.name": "Sweeper thread"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441625024,
+                "attributes": {
+                    "thread.osName": "Common-Cleaner",
+                    "thread.name": "Common-Cleaner"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 1.7718192E7,
+                "timestamp": 1619441625024,
+                "attributes": {
+                    "thread.osName": "pool-1-thread-1",
+                    "thread.name": "pool-1-thread-1"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441625024,
+                "attributes": {
+                    "thread.osName": "Service Thread",
+                    "thread.name": "Service Thread"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441625024,
+                "attributes": {
+                    "thread.osName": "JFR Recorder Thread",
+                    "thread.name": "JFR Recorder Thread"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 40.0,
+                "timestamp": 1619441625024,
+                "attributes": {
+                    "thread.osName": "C2 CompilerThread1",
+                    "thread.name": "C2 CompilerThread1"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441625024,
+                "attributes": {
+                    "thread.osName": "C2 CompilerThread2",
+                    "thread.name": "C2 CompilerThread2"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 64.0,
+                "timestamp": 1619441625024,
+                "attributes": {
+                    "thread.osName": "JFR Periodic Tasks",
+                    "thread.name": "JFR Periodic Tasks"
+                }
+            },
+            {
+                "name": "jfr.ThreadAllocationStatistics.allocated",
+                "type": "gauge",
+                "value": 0.0,
+                "timestamp": 1619441625024,
+                "attributes": {
+                    "thread.osName": "JFR Recording Scheduler",
+                    "thread.name": "JFR Recording Scheduler"
+                }
+            },
+            {
+                "name": "jfr.GarbageCollection.minorDuration",
+                "type": "summary",
+                "value": {
+                    "count": 0,
+                    "sum": 0.0,
+                    "min": 9.223372036854E12,
+                    "max": -9.223372036854E12
+                },
+                "timestamp": 1619441613596,
+                "interval.ms": -1619441613596,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.GarbageCollection.majorDuration",
+                "type": "summary",
+                "value": {
+                    "count": 0,
+                    "sum": 0.0,
+                    "min": 9.223372036854E12,
+                    "max": -9.223372036854E12
+                },
+                "timestamp": 1619441613596,
+                "interval.ms": -1619441613596,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.G1GarbageCollection.duration",
+                "type": "summary",
+                "value": {
+                    "count": 0,
+                    "sum": 0.0,
+                    "min": 9.223372036854E12,
+                    "max": -9.223372036854E12
+                },
+                "timestamp": 1619441613598,
+                "interval.ms": -1619441613598,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.GarbageCollection.duration",
+                "type": "summary",
+                "value": {
+                    "count": 0,
+                    "sum": 0.0,
+                    "min": 9.223372036854E12,
+                    "max": -9.223372036854E12
+                },
+                "timestamp": 1619441613599,
+                "interval.ms": -1619441613599,
+                "attributes": {}
+            },
+            {
+                "name": "jfr.ObjectAllocationInNewTLAB.allocation",
+                "type": "summary",
+                "value": {
+                    "count": 4,
+                    "sum": 1572848.0,
+                    "min": 2048.0,
+                    "max": 524288.0
+                },
+                "timestamp": 1619441625031,
+                "interval.ms": -116,
+                "attributes": {
+                    "thread.name": "pool-1-thread-1"
+                }
+            },
+            {
+                "name": "jfr.ObjectAllocationOutsideTLAB.allocation",
+                "type": "summary",
+                "value": {
+                    "count": 1,
+                    "sum": 2064.0,
+                    "min": 2064.0,
+                    "max": 2064.0
+                },
+                "timestamp": 1619441624858,
+                "interval.ms": 0,
+                "attributes": {
+                    "thread.name": "pool-1-thread-1"
+                }
+            }
+        ]
+    }
+]
