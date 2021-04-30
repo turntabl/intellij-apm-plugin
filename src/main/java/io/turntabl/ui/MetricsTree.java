@@ -6,6 +6,8 @@ import io.turntabl.ui.flight_recorder.JfrSocketReadBytesReadPanel;
 import io.turntabl.ui.flight_recorder.JfrSocketReadDurationPanel;
 import io.turntabl.ui.flight_recorder.SummaryMetaspacePanel;
 import io.turntabl.ui.flight_recorder.ThreadContextSwitchRatePanel;
+import io.turntabl.ui.java_application.ObjectAllocationInNewTLabPanel;
+import io.turntabl.ui.java_application.ObjectAllocationOutsideTLabPanel;
 import io.turntabl.ui.model.*;
 import io.turntabl.ui.operating_system.CpuLoadPanel;
 import io.turntabl.ui.operating_system.GcHeapSummaryPanel;
@@ -23,12 +25,14 @@ public class MetricsTree {
     private JTree tree;
     private String rootNodeName = "Metrics by type";
     private String flightRecorderNodeName = "Flight Recorder";
+    private String javaAppNodeName = "Java Application";
     private String osNodeName = "Operating System";
     private String flightRecorderSubNodes = "Flight Recording";
     private final NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow;
     private Map<String, JComponent> componentMap;
     private CpuLoadPanel cpuLoadPanel;
     private String[] socketNodes = {"Bytes Read", "Duration"};
+    private String[] javaAppSubNodes = {"Allocation in new TLAB", "Allocation outside TLAB"};
 
     public MetricsTree(NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow) {
         this.newRelicJavaProfilerToolWindow = newRelicJavaProfilerToolWindow;
@@ -36,6 +40,7 @@ public class MetricsTree {
         DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(rootNodeName);
 
         DefaultMutableTreeNode flightRecorderNode = new DefaultMutableTreeNode(flightRecorderNodeName);
+        DefaultMutableTreeNode javaApplicationNode = new DefaultMutableTreeNode(javaAppNodeName);
         DefaultMutableTreeNode osNode = new DefaultMutableTreeNode(osNodeName);
 
         // add sub node to flight recorder branch node
@@ -82,6 +87,24 @@ public class MetricsTree {
         componentMap.put("Summary Metaspace", summaryMetaspacePanel.getSummaryMetaspaceComponent());
 
 
+        javaApplicationNode.add(new DefaultMutableTreeNode("Object Allocation In New TLab"));
+        ObjectAllocationInNewTLabPanel objectAllocationInNewTLabPanel = new ObjectAllocationInNewTLabPanel(
+                new ObjectAllocationInNewTLabPanel.ObjectAllocationInNewTLabTableModel(Arrays.asList(
+                        new ObjectAllocationInNewTLab("jfr allocation", "Summary", new HashMap<>(), 16667896L, 50, new HashMap<>())
+                )));
+
+        componentMap.put("Object Allocation In New TLab", objectAllocationInNewTLabPanel.getObjectAllocationInNewTLabComponent());
+
+
+        javaApplicationNode.add(new DefaultMutableTreeNode("Object Allocation Outside TLab"));
+        ObjectAllocationOutsideTLabPanel objectAllocationOutsideTLabPanel = new ObjectAllocationOutsideTLabPanel(
+                new ObjectAllocationOutsideTLabPanel.ObjectAllocationOutsideTLabTableModel(Arrays.asList(
+                        new ObjectAllocationOutsideTLab("jfr allocation", "Summary", new HashMap<>(), 16667896L, 50, new HashMap<>())
+                )));
+
+        componentMap.put("Object Allocation Outside TLab", objectAllocationOutsideTLabPanel.getObjectAllocationOutsideTLabComponent());
+
+
         //add sub node to os branch node
         osNode.add(new DefaultMutableTreeNode("GC Heap Summary"));
         GcHeapSummaryPanel gcHeapSummaryPanel = new GcHeapSummaryPanel(
@@ -112,6 +135,7 @@ public class MetricsTree {
         componentMap.put("CPU Load", cpuLoadPanel.getCpuLoadComponent());
 
         rootNode.add(flightRecorderNode);
+        rootNode.add(javaApplicationNode);
         rootNode.add(osNode);
 
         treePanel = new JPanel(new BorderLayout());
