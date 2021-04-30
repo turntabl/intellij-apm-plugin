@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +22,7 @@ public class MetricHandler extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger(MetricHandler.class);
     private final ServletUtils servletUtils = new ServletUtils();
     private final JsonUtility jsonUtil = new JsonUtility();
+    private List<CpuLoad> cumulativeCpuLoadList = new ArrayList<>();
 
     public MetricHandler() {
         toolWindowComponent = null;
@@ -45,8 +47,9 @@ public class MetricHandler extends HttpServlet {
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
         if (jsonArray.isPresent()) {
             List<CpuLoad> cpuLoadList = jsonUtil.getCPULoad(jsonArray.get());
-            toolWindowComponent.getMetricsTree().getCpuLoadTable().setModel(new CpuLoadPanel.CpuLoadTableModel(cpuLoadList));
-            toolWindowComponent.getMetricsTree().updateComponentMap("CPU Load", (new CpuLoadPanel(new CpuLoadPanel.CpuLoadTableModel(cpuLoadList))).getCpuLoadComponent());
+            cumulativeCpuLoadList.addAll(cpuLoadList);
+            toolWindowComponent.getMetricsTree().getCpuLoadTable().setModel(new CpuLoadPanel.CpuLoadTableModel(cumulativeCpuLoadList));
+            toolWindowComponent.getMetricsTree().updateComponentMap("CPU Load", (new CpuLoadPanel(new CpuLoadPanel.CpuLoadTableModel(cumulativeCpuLoadList))).getCpuLoadComponent());
         }
     }
 }
