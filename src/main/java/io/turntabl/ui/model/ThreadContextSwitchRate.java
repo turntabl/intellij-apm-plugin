@@ -1,22 +1,17 @@
 package io.turntabl.ui.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.apache.commons.net.ntp.TimeStamp;
 
-
-import java.sql.Timestamp;
 import java.util.HashMap;
-import java.util.Map;
 
 public class ThreadContextSwitchRate {
     private String name;
     private String type;
     private Double value;
-    private Timestamp timestamp;
+    private Long timestamp;
     private HashMap<String, String> attributes;
 
 
-    public ThreadContextSwitchRate(String name, String type, Double value, Timestamp timestamp, HashMap<String, String> attributes) {
+    public ThreadContextSwitchRate(String name, String type, Double value, Long timestamp, HashMap<String, String> attributes) {
         this.name = name;
         this.type = type;
         this.value = value;
@@ -36,7 +31,7 @@ public class ThreadContextSwitchRate {
         return value;
     }
 
-    public Timestamp getTimestamp() {
+    public Long getTimestamp() {
         return timestamp;
     }
 
