@@ -44,7 +44,7 @@ public class DataLossPanel {
 
         public DataLossTableModel(List<DataLoss> dataLossList) {
             this.dataLossList = dataLossList;
-            data = new double[dataLossList.size()][columnNames.length];
+            data = new String[dataLossList.size()][columnNames.length];
             for (int i = 0; i < dataLossList.size(); i++) {
                 DataLoss dataLoss = dataLossList.get(i);
                 data[i][0] = String.valueOf(dataLoss.getStartTime());
