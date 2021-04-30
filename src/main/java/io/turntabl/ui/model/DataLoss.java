@@ -1,37 +1,37 @@
 package io.turntabl.ui.model;
 
 public class DataLoss {
-    private String startTime;
-    private String amount;
-    private String total;
+    private long startTime;
+    private double amount;
+    private double total;
 
-    public DataLoss(String startTime, String amount, String total) {
+    public DataLoss(long startTime, double amount, double total) {
         this.startTime = startTime;
         this.amount = amount;
         this.total = total;
     }
 
-    public String getStartTime() {
+    public long getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(String startTime) {
+    public void setStartTime(long startTime) {
         this.startTime = startTime;
     }
 
-    public String getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
-    public String getTotal() {
+    public double getTotal() {
         return total;
     }
 
-    public void setTotal(String total) {
+    public void setTotal(double total) {
         this.total = total;
     }
 }
