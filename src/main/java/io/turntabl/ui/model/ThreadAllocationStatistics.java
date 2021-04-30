@@ -1,62 +1,78 @@
 package io.turntabl.ui.model;
 
-import java.util.HashMap;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Map;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ThreadAllocationStatistics {
-    private String startTime;
-    private String allocated;
-    private String thread;
-    private HashMap<String, String> attributes;
+    private String name;
+    private String type;
+    private double value;
+    @JsonProperty("timestamp")
+    private long startTime;
+    private Map<String, String> attributes;
 
     public ThreadAllocationStatistics() {
     }
 
-    public ThreadAllocationStatistics(String startTime, String allocated, String thread, HashMap<String, String> attributes) {
+    public ThreadAllocationStatistics(String name, String type, double value, long startTime, Map<String, String> attributes) {
+        this.name = name;
+        this.type = type;
+        this.value = value;
         this.startTime = startTime;
-        this.allocated = allocated;
-        this.thread = thread;
+        this.attributes = attributes;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public double getValue() {
+        return value;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
+    }
+
+    public long getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
+    }
+
+    public Map<String, String> getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(Map<String, String> attributes) {
         this.attributes = attributes;
     }
 
     @Override
     public String toString() {
         return "ThreadAllocationStatistics{" +
-                "startTime='" + startTime + '\'' +
-                ", allocated='" + allocated + '\'' +
-                ", thread='" + thread + '\'' +
+                "name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", value=" + value +
+                ", startTime=" + startTime +
                 ", attributes=" + attributes +
                 '}';
-    }
-
-    public HashMap<String, String> getAttributes() {
-        return attributes;
-    }
-
-    public void setAttributes(HashMap<String, String> attributes) {
-        this.attributes = attributes;
-    }
-
-    public String getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
-
-    public String getAllocated() {
-        return allocated;
-    }
-
-    public void setAllocated(String allocated) {
-        this.allocated = allocated;
-    }
-
-    public String getThread() {
-        return thread;
-    }
-
-    public void setThread(String thread) {
-        this.thread = thread;
     }
 }

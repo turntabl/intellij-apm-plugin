@@ -26,6 +26,7 @@ public class DataLossPanel {
         table.getColumnModel().getColumn(0).setPreferredWidth(350);
         table.getColumnModel().getColumn(1).setPreferredWidth(200);
         table.getColumnModel().getColumn(2).setPreferredWidth(350);
+        table.getColumnModel().getColumn(3).setPreferredWidth(350);
 
 
         panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER), BorderLayout.CENTER);
@@ -36,7 +37,7 @@ public class DataLossPanel {
     }
 
     public static class DataLossTableModel extends AbstractTableModel {
-        String[] columnNames = {"Start Time", "Amount", "Total"};
+        String[] columnNames = {"Start Time", "Amount", "Total","Attributes"};
         String[][] data;
         private List<DataLoss> dataLossList;
 
@@ -48,9 +49,7 @@ public class DataLossPanel {
                 data[i][0] = dataLoss.getStartTime();
                 data[i][1] = dataLoss.getAmount();
                 data[i][2] = dataLoss.getTotal();
-
-
-
+                data[i][3] = dataLoss.getAttributes().get("")  == null ? "" : dataLoss.getAttributes().get("");
             }
         }
 
