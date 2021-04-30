@@ -128,7 +128,7 @@ public class MetricsTree {
         osNode.add(new DefaultMutableTreeNode("CPU Load"));
         CpuLoadPanel cpuLoadPanel = new CpuLoadPanel(
                 new CpuLoadPanel.CpuLoadTableModel(Arrays.asList(
-                        new CpuLoad(new Timestamp(1619441627925L), "gauge", 0.25646382570266724, 0.031001122668385506, 0.3926701843738556, new HashMap<>())
+                        new CpuLoad("jfr.CPULoad", 1619441627925L, "gauge", 0.25646382570266724, 0.031001122668385506, 0.3926701843738556, new HashMap<>())
 
                 ))
         );
