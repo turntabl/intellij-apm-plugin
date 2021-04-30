@@ -24,7 +24,6 @@ public class MetricsTree {
     private String rootNodeName = "Metrics by type";
     private String flightRecorderNodeName = "Flight Recorder";
     private String osNodeName = "Operating System";
-    private String flightRecorderSubNodes = "Flight Recording";
     private final NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow;
     private Map<String, JComponent> componentMap;
     private CpuLoadPanel cpuLoadPanel;
@@ -60,8 +59,6 @@ public class MetricsTree {
                 ))
         );
         componentMap.put("Duration", jfrSocketReadDurationPanel.getJfrSocketReadDurationComponent());
-
-        flightRecorderNode.add(new DefaultMutableTreeNode(flightRecorderSubNodes));
 
         //addThreadContextSwitchRatePanel to flight recorder branch node
         flightRecorderNode.add(new DefaultMutableTreeNode("Thread Context Switch Rate"));
