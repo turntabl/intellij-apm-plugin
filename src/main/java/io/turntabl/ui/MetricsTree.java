@@ -2,6 +2,9 @@ package io.turntabl.ui;
 
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
+import io.turntabl.ui.flight_recorder.*;
+import io.turntabl.ui.model.SummaryMetaspace;
+import io.turntabl.ui.model.ThreadContextSwitchRate;
 import io.turntabl.ui.flight_recorder.JfrSocketReadBytesReadPanel;
 import io.turntabl.ui.flight_recorder.JfrSocketReadDurationPanel;
 import io.turntabl.ui.model.JfrSocketReadBytesRead;
@@ -10,6 +13,7 @@ import io.turntabl.ui.model.GcHeapSummary;
 import io.turntabl.ui.operating_system.CpuLoadPanel;
 import io.turntabl.ui.flight_recorder.DataLossPanel;
 import io.turntabl.ui.model.CpuLoad;
+
 import io.turntabl.ui.model.DataLoss;
 import io.turntabl.ui.operating_system.GcHeapSummaryPanel;
 import io.turntabl.ui.model.ThreadCpuLoad;
@@ -93,6 +97,45 @@ public class MetricsTree {
             componentMap.put(nodeName, dataLoss.getDataLossComponent());
 
         }
+
+        //addThreadContextSwitchRatePanel to flight recorder branch node
+        flightRecorderNode.add(new DefaultMutableTreeNode("Thread Context Switch Rate"));
+        ThreadContextSwitchRatePanel threadContextSwitchRatePanel = new ThreadContextSwitchRatePanel(
+                new ThreadContextSwitchRatePanel.ThreadContextSwitchRateTableModel(Arrays.asList(
+
+                        new ThreadContextSwitchRate("jfr.ThreadCPULoad.user","gauge",0.004792887717485428,  Timestamp.valueOf("2014-01-01 00:00:00"), new HashMap<>() ),
+                        new ThreadContextSwitchRate("jfr.ThreadCPULoad.user","gauge",0.004792986717485428,  Timestamp.valueOf("2014-01-01 01:00:00"), new HashMap<>()),
+                        new ThreadContextSwitchRate("jfr.ThreadCPULoad.user","gauge",0.004793797717485428,  Timestamp.valueOf("2014-01-01 02:00:00"), new HashMap<>())
+                )));
+
+        componentMap.put("Thread Context Switch Rate", threadContextSwitchRatePanel.getThreadContextSwitchRateComponent());
+        for (String nodeName : flightRecorderSubNodes) {
+            flightRecorderNode.add(new DefaultMutableTreeNode(nodeName));
+            componentMap.put(nodeName, threadContextSwitchRatePanel.getThreadContextSwitchRateComponent());
+
+        }
+
+
+
+        //add MetaspaceSummaryMetaspaceUsedPanel to flight recorder branch node
+        flightRecorderNode.add(new DefaultMutableTreeNode("Summary Metaspace"));
+        SummaryMetaspacePanel summaryMetaspacePanel = new SummaryMetaspacePanel(
+                new SummaryMetaspacePanel.SummaryMetaspaceTableModel(Arrays.asList(
+
+                        new SummaryMetaspace("jfr.MetaspaceSummary.dataSpace.committed", "type", 0.209283, 0.209283, 0.209283, 28364347L, new HashMap<>() )
+//                        new SummaryMetaspace(),
+//                        new SummaryMetaspace()
+
+                )));
+
+        componentMap.put("Summary Metaspace", summaryMetaspacePanel.getSummaryMetaspaceComponent());
+        for (String nodeName : flightRecorderSubNodes) {
+            flightRecorderNode.add(new DefaultMutableTreeNode(nodeName));
+            componentMap.put(nodeName, summaryMetaspacePanel.getSummaryMetaspaceComponent());
+
+        }
+
+
 
         DefaultMutableTreeNode jdkSecurityNode = new DefaultMutableTreeNode("Security");
         for (String nodeName : jdkSecurityNodes) {
