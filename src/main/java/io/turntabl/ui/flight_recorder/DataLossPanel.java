@@ -37,7 +37,7 @@ public class DataLossPanel {
     }
 
     public static class DataLossTableModel extends AbstractTableModel {
-        String[] columnNames = {"Start Time", "Amount", "Total"};
+        String[] columnNames = {"Start Time", "Amount", "Total","Attributes"};
         String[][] data;
         private List<DataLoss> dataLossList;
 
@@ -49,6 +49,7 @@ public class DataLossPanel {
                 data[i][0] = dataLoss.getStartTime();
                 data[i][1] = dataLoss.getAmount();
                 data[i][2] = dataLoss.getTotal();
+                data[i][3] = dataLoss.getAttributes().get("")  == null ? "" : dataLoss.getAttributes().get("");
             }
         }
 

@@ -15,6 +15,8 @@ public class JavaMonitorWait {
     private String monitorAddress;
     private HashMap<String, String> attributes;
 
+
+
     public JavaMonitorWait(String startTime, String duration, String endTime, String eventThread, String monitorClass, String notifierThread, String timeOut, String timedOut, String monitorAddress, HashMap<String, String> attributes) {
         this.startTime = startTime;
         this.duration = duration;

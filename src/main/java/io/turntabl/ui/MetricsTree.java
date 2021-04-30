@@ -2,24 +2,20 @@ package io.turntabl.ui;
 
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
+import io.turntabl.ui.flight_recorder.DataLossPanel;
 import io.turntabl.ui.flight_recorder.JfrSocketReadBytesReadPanel;
 import io.turntabl.ui.flight_recorder.JfrSocketReadDurationPanel;
-import io.turntabl.ui.model.JfrSocketReadBytesRead;
-import io.turntabl.ui.model.JfrSocketReadDuration;
-import io.turntabl.ui.model.GcHeapSummary;
-import io.turntabl.ui.operating_system.CpuLoadPanel;
-import io.turntabl.ui.flight_recorder.DataLossPanel;
 import io.turntabl.ui.java_application.statistics.ThreadAllocationStatisticsPanel;
-import io.turntabl.ui.model.ThreadAllocationStatistics;
-import io.turntabl.ui.model.CpuLoad;
-import io.turntabl.ui.model.DataLoss;
+import io.turntabl.ui.model.*;
+import io.turntabl.ui.operating_system.CpuLoadPanel;
 import io.turntabl.ui.operating_system.GcHeapSummaryPanel;
-import io.turntabl.ui.model.ThreadCpuLoad;
 import io.turntabl.ui.operating_system.ThreadCpuLoadPanel;
+
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
+import java.security.Timestamp;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -104,7 +100,7 @@ public class MetricsTree {
 
         ThreadAllocationStatisticsPanel threadAllocationStatisticsPanel = new ThreadAllocationStatisticsPanel(
                 new ThreadAllocationStatisticsPanel.ThreadAllocationStatisticsTableModel(Arrays.asList(
-                        new ThreadAllocationStatistics("2021-06-01 11:08:12:20", "18.4 MiB", "Main", new HashMap<String, String>())
+                        new ThreadAllocationStatistics("2021-06-01 11:08:12:20", "18.4 MiB", 70.52, 5376373L , new HashMap<String,String>())
 
                 )));
 
@@ -147,9 +143,9 @@ public class MetricsTree {
         componentMap.put("Thread CPU Load", threadCpuLoadPanel.getThreadCpuLoadComponent());
 
         osNode.add(new DefaultMutableTreeNode("CPU Load"));
-        CpuLoadPanel cpuLoadPanel = new CpuLoadPanel(
+        CpuLoadPanel  cpuLoadPanel = new CpuLoadPanel(
                 new CpuLoadPanel.CpuLoadTableModel(Arrays.asList(
-                        new CpuLoad(new Timestamp(1619441627925L), "gauge", 0.25646382570266724, 0.031001122668385506, 0.3926701843738556, new HashMap<>())
+                        new CpuLoad("jfr.CPULoad", 1619441627925L, "gauge", 0.25646382570266724, 0.031001122668385506, 0.3926701843738556, new HashMap<>())
 
                 ))
         );
