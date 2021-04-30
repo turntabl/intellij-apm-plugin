@@ -5,6 +5,8 @@ import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
 import com.intellij.util.Time;
 import io.turntabl.ui.flight_recorder.DataLossPanel;
+import io.turntabl.ui.java_application.JavaMonitorWaitPanel;
+import io.turntabl.ui.model.JavaMonitorWait;
 import io.turntabl.ui.flight_recorder.JfrCompilationPanel;
 import io.turntabl.ui.flight_recorder.JvmInformationPanel;
 import io.turntabl.ui.model.DataLoss;
@@ -12,8 +14,6 @@ import io.turntabl.ui.model.JfrCompilation;
 import io.turntabl.ui.model.JvmInformation;
 
 import javax.swing.*;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
@@ -119,6 +119,20 @@ public class EventsTree {
             javaAppStatisticsNode.add(new DefaultMutableTreeNode(nodeName));
         }
         javaApplicationNode.add(javaAppStatisticsNode);
+
+        //add Java Monitor wait to Java Applications
+        javaApplicationNode.add( new DefaultMutableTreeNode("Java Monitor Wait"));
+        JavaMonitorWaitPanel javaMonitorWaitPanel = new JavaMonitorWaitPanel( new JavaMonitorWaitPanel.JavaMonitorWaitTableModel(Arrays.asList(
+                new JavaMonitorWait("4/26/21, 4:08:26PM", "2.954ms", "4/26/21, 4:08:26PM","Finalizer","java.lang.Reference","Reference Handler","0s","false","0x17862862",new HashMap<String, String>())
+        )));
+        componentMap.put("Java Monitor Wait", javaMonitorWaitPanel.getJavaMonitorWaitComponent());
+
+        DefaultMutableTreeNode javaAppSubNode = new DefaultMutableTreeNode("Java Monitor Wait");
+        for (String nodeName : javaAppSubNodes) {
+            javaAppSubNode.add(new DefaultMutableTreeNode(nodeName));
+            componentMap.put(nodeName, javaMonitorWaitPanel.getJavaMonitorWaitComponent());
+        }
+        javaApplicationNode.add(javaAppSubNode);
 
 
         DefaultMutableTreeNode jdkSecurityNode = new DefaultMutableTreeNode("Security");
