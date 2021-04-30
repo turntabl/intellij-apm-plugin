@@ -14,24 +14,15 @@ public class ThreadAllocationStatistics {
     private long startTime;
     private Map<String, String> attributes;
 
-    public Map<String, String> getAttributes() {
-        return attributes;
-    }
-
-    public void setAttributes(Map<String, String> attributes) {
-        this.attributes = attributes;
-    }
-
-    public double getValue() {
-        return value;
-    }
-
-    public void setValue(double value) {
-        this.value = value;
-    }
-
-
     public ThreadAllocationStatistics() {
+    }
+
+    public ThreadAllocationStatistics(String name, String type, double value, long startTime, Map<String, String> attributes) {
+        this.name = name;
+        this.type = type;
+        this.value = value;
+        this.startTime = startTime;
+        this.attributes = attributes;
     }
 
     public String getName() {
@@ -50,6 +41,15 @@ public class ThreadAllocationStatistics {
         this.type = type;
     }
 
+    public double getValue() {
+        return value;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
+    }
+
+
     public long getStartTime() {
         return startTime;
     }
@@ -58,11 +58,11 @@ public class ThreadAllocationStatistics {
         this.startTime = startTime;
     }
 
-    public ThreadAllocationStatistics(String name, String type, double value, long startTime, Map<String, String> attributes) {
-        this.name = name;
-        this.type = type;
-        this.value = value;
-        this.startTime = startTime;
+    public Map<String, String> getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(Map<String, String> attributes) {
         this.attributes = attributes;
     }
 

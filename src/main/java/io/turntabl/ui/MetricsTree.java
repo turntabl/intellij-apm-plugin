@@ -2,8 +2,11 @@ package io.turntabl.ui;
 
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
+import io.turntabl.ui.flight_recorder.DataLossPanel;
 import io.turntabl.ui.flight_recorder.JfrSocketReadBytesReadPanel;
 import io.turntabl.ui.flight_recorder.JfrSocketReadDurationPanel;
+import io.turntabl.ui.java_application.statistics.ThreadAllocationStatisticsPanel;
+import io.turntabl.ui.java_virtual_machine.GarbageCollectionPanel;
 import io.turntabl.ui.flight_recorder.SummaryMetaspacePanel;
 import io.turntabl.ui.flight_recorder.ThreadContextSwitchRatePanel;
 import io.turntabl.ui.java_application.ObjectAllocationInNewTLabPanel;
@@ -12,6 +15,7 @@ import io.turntabl.ui.model.*;
 import io.turntabl.ui.operating_system.CpuLoadPanel;
 import io.turntabl.ui.operating_system.GcHeapSummaryPanel;
 import io.turntabl.ui.operating_system.ThreadCpuLoadPanel;
+
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
@@ -26,7 +30,12 @@ public class MetricsTree {
     private String rootNodeName = "Metrics by type";
     private String flightRecorderNodeName = "Flight Recorder";
     private String javaAppNodeName = "Java Application";
+    private String jvmNodeName = "Java Virtual Machine";
+   
+    private String[] jvmNodes = {"Garbage Collection"};
+    private String[] javaAppStatisticsNodes = {"Thread Allocated Statistics"};
     private String osNodeName = "Operating System";
+  
     private final NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow;
     private Map<String, JComponent> componentMap;
     private CpuLoadPanel cpuLoadPanel;
@@ -40,6 +49,7 @@ public class MetricsTree {
 
         DefaultMutableTreeNode flightRecorderNode = new DefaultMutableTreeNode(flightRecorderNodeName);
         DefaultMutableTreeNode javaApplicationNode = new DefaultMutableTreeNode(javaAppNodeName);
+        DefaultMutableTreeNode jvmNode = new DefaultMutableTreeNode(jvmNodeName);
         DefaultMutableTreeNode osNode = new DefaultMutableTreeNode(osNodeName);
 
         // add sub node to flight recorder branch node
@@ -74,6 +84,7 @@ public class MetricsTree {
 
         componentMap.put("Thread Context Switch Rate", threadContextSwitchRatePanel.getThreadContextSwitchRateComponent());
 
+
         //add MetaspaceSummaryMetaspaceUsedPanel to flight recorder branch node
         flightRecorderNode.add(new DefaultMutableTreeNode("Summary Metaspace"));
         SummaryMetaspacePanel summaryMetaspacePanel = new SummaryMetaspacePanel(
@@ -84,6 +95,34 @@ public class MetricsTree {
         componentMap.put("Summary Metaspace", summaryMetaspacePanel.getSummaryMetaspaceComponent());
 
 
+        ThreadAllocationStatisticsPanel threadAllocationStatisticsPanel = new ThreadAllocationStatisticsPanel(
+                new ThreadAllocationStatisticsPanel.ThreadAllocationStatisticsTableModel(Arrays.asList(
+                        new ThreadAllocationStatistics("2021-06-01 11:08:12:20", "18.4 MiB", 70.52, 5376373L , new HashMap<String,String>())
+
+                )));
+
+        componentMap.put("Thread Allocated Statistics", threadAllocationStatisticsPanel.getThreadAllocationStatisticsComponent());
+        //add statistics branch node and its leaf nodes
+        DefaultMutableTreeNode javaAppStatisticsNode = new DefaultMutableTreeNode("Statistics");
+        for (String nodeName : javaAppStatisticsNodes) {
+            javaAppStatisticsNode.add(new DefaultMutableTreeNode(nodeName));
+            componentMap.put(nodeName, threadAllocationStatisticsPanel.getThreadAllocationStatisticsComponent());
+        }
+        javaApplicationNode.add(javaAppStatisticsNode);
+
+
+        GarbageCollectionPanel garbageCollectionPanel = new GarbageCollectionPanel(
+                new GarbageCollectionPanel.GarbageCollectionTableModel(Arrays.asList(
+                        new GarbageCollection("jfr.GarbageCollection.majorDuration","summary",new HashMap<String,String>(), 1619441613596L,-1619441613596L,new HashMap<String, String>())
+                ))
+        );
+        componentMap.put("Garbage Collection",garbageCollectionPanel.getGarbageCollectionComponent());
+        for (String nodeName : jvmNodes) {
+            jvmNode.add(new DefaultMutableTreeNode(nodeName));
+            componentMap.put(nodeName,garbageCollectionPanel.getGarbageCollectionComponent());
+        }
+      
+      
         javaApplicationNode.add(new DefaultMutableTreeNode("Object Allocation In New TLab"));
         ObjectAllocationInNewTLabPanel objectAllocationInNewTLabPanel = new ObjectAllocationInNewTLabPanel(
                 new ObjectAllocationInNewTLabPanel.ObjectAllocationInNewTLabTableModel(Arrays.asList(
@@ -122,6 +161,7 @@ public class MetricsTree {
         componentMap.put("Thread CPU Load", threadCpuLoadPanel.getThreadCpuLoadComponent());
 
         osNode.add(new DefaultMutableTreeNode("CPU Load"));
+
         cpuLoadPanel = new CpuLoadPanel(
                 new CpuLoadPanel.CpuLoadTableModel(Arrays.asList(
                         new CpuLoad("jfr.CPULoad", 1619441627925L, "gauge", 0.25646382570266724, 0.031001122668385506, 0.3926701843738556, new HashMap<>())
@@ -133,6 +173,7 @@ public class MetricsTree {
 
         rootNode.add(flightRecorderNode);
         rootNode.add(javaApplicationNode);
+        rootNode.add(jvmNode);
         rootNode.add(osNode);
 
         treePanel = new JPanel(new BorderLayout());
