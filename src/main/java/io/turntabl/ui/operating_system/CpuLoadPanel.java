@@ -5,6 +5,7 @@ import com.intellij.ui.table.JBTable;
 import io.turntabl.ui.model.CpuLoad;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableModel;
 import java.awt.*;
 import java.util.Date;
@@ -77,6 +78,7 @@ public class CpuLoadPanel {
         public String getColumnName(int column) {
             return columnNames[column];
         }
+    }
 
     public JTable getTable() {
         return this.table;
