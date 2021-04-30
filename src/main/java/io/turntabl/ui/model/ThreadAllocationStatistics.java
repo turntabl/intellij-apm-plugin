@@ -3,7 +3,6 @@ package io.turntabl.ui.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.math.BigInteger;
 import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -12,7 +11,7 @@ public class ThreadAllocationStatistics {
     private String type;
     private double value;
     @JsonProperty("timestamp")
-    private BigInteger startTime;
+    private long startTime;
     private Map<String, String> attributes;
 
     public Map<String, String> getAttributes() {
@@ -51,15 +50,15 @@ public class ThreadAllocationStatistics {
         this.type = type;
     }
 
-    public BigInteger getStartTime() {
+    public long getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(BigInteger startTime) {
+    public void setStartTime(long startTime) {
         this.startTime = startTime;
     }
 
-    public ThreadAllocationStatistics(String name, String type, double value, BigInteger startTime, Map<String, String> attributes) {
+    public ThreadAllocationStatistics(String name, String type, double value, long startTime, Map<String, String> attributes) {
         this.name = name;
         this.type = type;
         this.value = value;

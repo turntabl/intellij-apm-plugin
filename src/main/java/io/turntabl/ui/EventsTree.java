@@ -59,9 +59,7 @@ public class EventsTree {
         flightRecorderNode.add(new DefaultMutableTreeNode("Data Loss"));
         DataLossPanel dataLoss = new DataLossPanel(
                 new DataLossPanel.DataLossTableModel(Arrays.asList(
-                        new DataLoss("2021-06-01 11:08:12:20", "10", "10"),
-                        new DataLoss("2021-06-01 11:08:12:21", "15", "25"),
-                        new DataLoss("2021-06-01 11:08:12:22", "20", "45")
+                        new DataLoss(12343123423L, 0.10, 20.0)
                 )));
 
         componentMap.put("Data Loss", dataLoss.getDataLossComponent());
