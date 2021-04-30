@@ -25,9 +25,11 @@ public class DataLossPanel {
 
         table.getColumnModel().getColumn(0).setPreferredWidth(350);
         table.getColumnModel().getColumn(1).setPreferredWidth(200);
-        table.getColumnModel().getColumn(2).setPreferredWidth(700);
+        table.getColumnModel().getColumn(2).setPreferredWidth(350);
+        table.getColumnModel().getColumn(3).setPreferredWidth(350);
 
-        panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER),  BorderLayout.CENTER);
+
+        panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER), BorderLayout.CENTER);
     }
 
     public JPanel getDataLossComponent() {
@@ -35,8 +37,9 @@ public class DataLossPanel {
     }
 
     public static class DataLossTableModel extends AbstractTableModel {
-        String[] columnNames = {"Start Time", "Amount", "Total"};
-        double[][] data;
+        String[] columnNames = {"Start Time", "Amount", "Total", "Attributes"};
+        String[][] data;
+
         private List<DataLoss> dataLossList;
 
         public DataLossTableModel(List<DataLoss> dataLossList) {
@@ -44,9 +47,10 @@ public class DataLossPanel {
             data = new double[dataLossList.size()][columnNames.length];
             for (int i = 0; i < dataLossList.size(); i++) {
                 DataLoss dataLoss = dataLossList.get(i);
-                data[i][0] = dataLoss.getStartTime();
-                data[i][1] = dataLoss.getAmount();
-                data[i][2] = dataLoss.getTotal();
+                data[i][0] = String.valueOf(dataLoss.getStartTime());
+                data[i][1] = String.valueOf(dataLoss.getAmount());
+                data[i][2] = String.valueOf(dataLoss.getTotal());
+                data[i][3] = dataLoss.getAttributes().get("")  == null ? "" : dataLoss.getAttributes().get("");
             }
         }
 
@@ -63,6 +67,11 @@ public class DataLossPanel {
         @Override
         public Object getValueAt(int rowIndex, int columnIndex) {
             return data[rowIndex][columnIndex];
+        }
+
+        @Override
+        public String getColumnName(int column) {
+            return columnNames[column];
         }
     }
 }
