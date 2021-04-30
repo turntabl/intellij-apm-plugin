@@ -74,7 +74,7 @@ public class NewRelicJavaProfilerToolWindow {
         tabbedPane.add("Method List", methodListPanel);
         tabbedPane.add("Events", eventSplitter);
         tabbedPane.add("Metrics", metricsSplitter);
-        tabbedPane.setSelectedIndex(3);
+        tabbedPane.setSelectedIndex(4);
 
         mainPanel.add(tabbedPane);
 
@@ -102,6 +102,10 @@ public class NewRelicJavaProfilerToolWindow {
 
     public void setEventSecondComponent(JComponent component) {
         eventSplitter.setSecondComponent(component);
+    }
+
+    public MetricsTree getMetricsTree() {
+        return this.metricsTree;
     }
 
     public void setMetricsSecondComponent(JComponent component) {

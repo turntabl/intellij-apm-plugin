@@ -115,10 +115,8 @@ public class EventsTree {
 
             JComponent selected = componentMap.get(selectedNode);
             if (selected != null) {
-                System.out.println("not null");
                 newRelicJavaProfilerToolWindow.setEventSecondComponent(selected);
             } else {
-                System.out.println("null");
                 newRelicJavaProfilerToolWindow.clearEventPanelText();
                 newRelicJavaProfilerToolWindow.updateEventPanelText(e.getPath().toString());
 
