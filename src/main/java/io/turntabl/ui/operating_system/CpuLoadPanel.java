@@ -1,5 +1,6 @@
 package io.turntabl.ui.operating_system;
 
+import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
 import io.turntabl.ui.model.CpuLoad;
@@ -12,13 +13,13 @@ import java.util.Date;
 import java.util.List;
 
 public class CpuLoadPanel {
-    private JPanel panel;
+    private JBPanel panel;
     private JTable table;
     private TableModel myData;
     private DefaultTableColumnModel columnModel;
 
     public CpuLoadPanel(TableModel tableModel) {
-        panel = new JPanel(new BorderLayout());
+        panel = new JBPanel(new BorderLayout());
         table = new JBTable(tableModel);
 
         table.setRowSelectionAllowed(true);
@@ -34,7 +35,7 @@ public class CpuLoadPanel {
         panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER), BorderLayout.CENTER);
     }
 
-    public JPanel getCpuLoadComponent() {
+    public JBPanel getCpuLoadComponent() {
         return panel;
     }
 

@@ -1,6 +1,7 @@
 package io.turntabl.ui;
 
 
+import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
 import com.intellij.util.Time;
@@ -23,7 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EventsTree {
-    private JPanel treePanel;
+    private JBPanel treePanel;
     private JTree tree;
     private String rootNodeName = "Events by type";
     private String flightRecorderNodeName = "Flight Recorder";
@@ -155,7 +156,7 @@ public class EventsTree {
         rootNode.add(jvmNode);
         rootNode.add(osNode);
 
-        treePanel = new JPanel(new BorderLayout());
+        treePanel = new JBPanel(new BorderLayout());
         tree = new Tree(rootNode);
         tree.setBackground(treePanel.getBackground());
         tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
@@ -182,7 +183,7 @@ public class EventsTree {
 
     }
 
-    public JPanel getEventTree() {
+    public JBPanel getEventTree() {
         return this.treePanel;
     }
 

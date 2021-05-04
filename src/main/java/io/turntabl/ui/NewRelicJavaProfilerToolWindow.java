@@ -2,6 +2,7 @@ package io.turntabl.ui;
 
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.ui.JBSplitter;
+import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.components.JBTabbedPane;
 import com.intellij.ui.components.JBTextArea;
@@ -12,7 +13,7 @@ import java.awt.*;
 public class NewRelicJavaProfilerToolWindow {
 
     private JLabel flameGraphLabel, callTreeLabel, methodListLabel;
-    private JPanel mainPanel, flameGraphPanel,
+    private JBPanel mainPanel, flameGraphPanel,
             callTreePanel, methodListPanel, eventsPanel,
             metricsPanel;
     private JTabbedPane tabbedPane;
@@ -23,13 +24,13 @@ public class NewRelicJavaProfilerToolWindow {
 
     public NewRelicJavaProfilerToolWindow(ToolWindow toolWindow) {
 
-        mainPanel = new JPanel(new GridLayout(1, 1));
+        mainPanel = new JBPanel(new GridLayout(1, 1));
 
-        flameGraphPanel = new JPanel();
-        callTreePanel = new JPanel();
-        methodListPanel = new JPanel();
-        eventsPanel = new JPanel(new BorderLayout());
-        metricsPanel = new JPanel(new BorderLayout());
+        flameGraphPanel = new JBPanel();
+        callTreePanel = new JBPanel();
+        methodListPanel = new JBPanel();
+        eventsPanel = new JBPanel(new BorderLayout());
+        metricsPanel = new JBPanel(new BorderLayout());
 
         eventTextArea = new JBTextArea();
         eventTextArea.setLineWrap(true);
