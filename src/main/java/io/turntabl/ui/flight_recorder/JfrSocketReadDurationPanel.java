@@ -1,5 +1,6 @@
 package io.turntabl.ui.flight_recorder;
 
+import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
 import io.turntabl.ui.model.JfrSocketReadDuration;
@@ -12,14 +13,14 @@ import java.awt.*;
 import java.util.List;
 
 public class JfrSocketReadDurationPanel {
-    JPanel panel;
+    JBPanel panel;
     JTable table;
 
     TableModel myData;
     DefaultTableColumnModel columnModel;
 
     public JfrSocketReadDurationPanel(TableModel tableModel) {
-        panel = new JPanel(new BorderLayout());
+        panel = new JBPanel(new BorderLayout());
         table = new JBTable(tableModel);
 
         table.setRowSelectionAllowed(true);
@@ -38,7 +39,7 @@ public class JfrSocketReadDurationPanel {
         panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER),  BorderLayout.CENTER);
     }
 
-    public JPanel getJfrSocketReadDurationComponent() {
+    public JBPanel getJfrSocketReadDurationComponent() {
         return panel;
     }
 
