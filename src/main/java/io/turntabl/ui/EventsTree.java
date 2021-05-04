@@ -155,6 +155,7 @@ public class EventsTree {
         rootNode.add(osNode);
 
         treePanel = new BorderLayoutPanel(0, 0);
+
         tree = new Tree(rootNode);
         tree.setBackground(treePanel.getBackground());
         tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);

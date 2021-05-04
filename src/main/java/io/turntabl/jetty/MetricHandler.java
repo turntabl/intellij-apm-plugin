@@ -51,10 +51,13 @@ public class MetricHandler extends HttpServlet {
 
     public void updateCpuLoadPanel(String jsonString) {
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
+
         if (jsonArray.isPresent()) {
             List<CpuLoad> cpuLoadList = cpuLoadUtil.getCPULoad(jsonArray.get());
             List<CpuLoad> consolidatedList = cpuLoadUtil.getCPULoadConsolidated(cpuLoadList);
+
             cumulativeCpuLoadList.addAll(consolidatedList);
+
             toolWindowComponent.getMetricsTree().getCpuLoadTable().setModel(new CpuLoadPanel.CpuLoadTableModel(cumulativeCpuLoadList));
             toolWindowComponent.getMetricsTree().updateComponentMap("CPU Load", (new CpuLoadPanel(new CpuLoadPanel.CpuLoadTableModel(cumulativeCpuLoadList))).getCpuLoadComponent());
 

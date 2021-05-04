@@ -1,5 +1,6 @@
 package io.turntabl.ui.java_application;
 
+import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
 import io.turntabl.ui.model.ObjectAllocationOutsideTLab;
@@ -10,14 +11,14 @@ import java.awt.*;
 import java.util.List;
 
 public class ObjectAllocationOutsideTLabPanel {
-    JPanel panel;
+    JBPanel panel;
     JTable table;
 
     TableModel myData;
     DefaultTableColumnModel columnModel;
 
     public ObjectAllocationOutsideTLabPanel(TableModel tableModel) {
-        panel = new JPanel(new BorderLayout());
+        panel = new JBPanel(new BorderLayout());
         table = new JBTable(tableModel);
 
         table.setRowSelectionAllowed(true);
@@ -36,7 +37,7 @@ public class ObjectAllocationOutsideTLabPanel {
         panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER), BorderLayout.CENTER);
     }
 
-    public JPanel getObjectAllocationOutsideTLabComponent() {
+    public JBPanel getObjectAllocationOutsideTLabComponent() {
         return panel;
     }
 

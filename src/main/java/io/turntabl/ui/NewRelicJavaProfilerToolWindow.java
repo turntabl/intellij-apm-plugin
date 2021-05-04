@@ -21,6 +21,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
+
 public class NewRelicJavaProfilerToolWindow implements Disposable {
     private CpuGraph cpuGraph;
     private JBPanel mainPanel, flameGraphPanel, cpuLoadGraphPanel,
