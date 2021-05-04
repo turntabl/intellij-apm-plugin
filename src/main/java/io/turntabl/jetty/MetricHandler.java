@@ -1,9 +1,12 @@
 package io.turntabl.jetty;
 
+import io.turntabl.ui.CpuGraph;
 import io.turntabl.ui.NewRelicJavaProfilerToolWindow;
 import io.turntabl.ui.model.CpuLoad;
 import io.turntabl.ui.operating_system.CpuLoadPanel;
+import io.turntabl.utils.CPULoadUtil;
 import io.turntabl.utils.JsonUtility;
+import org.jfree.data.xy.XYDataset;
 import org.json.simple.JSONArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +25,7 @@ public class MetricHandler extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger(MetricHandler.class);
     private final ServletUtils servletUtils = new ServletUtils();
     private final JsonUtility jsonUtil = new JsonUtility();
+    private final CPULoadUtil cpuLoadUtil = new CPULoadUtil(jsonUtil);
     private List<CpuLoad> cumulativeCpuLoadList = new ArrayList<>();
 
     public MetricHandler() {
@@ -36,20 +40,26 @@ public class MetricHandler extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String decompressedString = servletUtils.decompress(req);
         updateCpuLoadPanel(decompressedString); //update the cpuload table
+
         resp.setContentType("application/json");
         resp.setStatus(HttpServletResponse.SC_OK);
         resp.getWriter().println("{ \"status\": \"ok\"}");
-        toolWindowComponent.getContent().repaint();
-        toolWindowComponent.getContent().validate();
+
+//        toolWindowComponent.getContent().repaint();
+//        toolWindowComponent.getContent().validate();
     }
 
     public void updateCpuLoadPanel(String jsonString) {
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
         if (jsonArray.isPresent()) {
-            List<CpuLoad> cpuLoadList = jsonUtil.getCPULoad(jsonArray.get());
-            cumulativeCpuLoadList.addAll(cpuLoadList);
+            List<CpuLoad> cpuLoadList = cpuLoadUtil.getCPULoad(jsonArray.get());
+            List<CpuLoad> consolidatedList = cpuLoadUtil.getCPULoadConsolidated(cpuLoadList);
+            cumulativeCpuLoadList.addAll(consolidatedList);
             toolWindowComponent.getMetricsTree().getCpuLoadTable().setModel(new CpuLoadPanel.CpuLoadTableModel(cumulativeCpuLoadList));
             toolWindowComponent.getMetricsTree().updateComponentMap("CPU Load", (new CpuLoadPanel(new CpuLoadPanel.CpuLoadTableModel(cumulativeCpuLoadList))).getCpuLoadComponent());
+
+            XYDataset dataset = cpuLoadUtil.createDataSet(cumulativeCpuLoadList);
+            toolWindowComponent.getMetricsTree().updateCpuLoadGraph(new CpuGraph(dataset, "CPU Load Metric", "Values", "Start Time"));
         }
     }
 }

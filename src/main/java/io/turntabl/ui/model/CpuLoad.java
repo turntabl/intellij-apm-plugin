@@ -1,10 +1,7 @@
 package io.turntabl.ui.model;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.HashMap;
-import java.util.Date;
 import java.util.HashMap;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -18,8 +15,8 @@ public class CpuLoad {
     private Double machineTotalValue;
     private HashMap<String, String> attributes;
 
-
-    public CpuLoad(){}
+    public CpuLoad() {
+    }
 
     public CpuLoad(String name, Long startTime, String type, Double jvmUserValue, Double jvmSystemValue, Double machineTotalValue, HashMap<String, String> attributes) {
         this.name = name;

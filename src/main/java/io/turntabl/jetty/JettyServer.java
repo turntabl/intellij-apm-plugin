@@ -25,7 +25,7 @@ public class JettyServer implements Runnable {
 
         try {
             server.start();
-            System.out.println("Jetty server started on port 8787");
+            System.out.println("Jetty Server started on port 8787");
             server.join();
         } catch (Exception e) {
             e.printStackTrace();

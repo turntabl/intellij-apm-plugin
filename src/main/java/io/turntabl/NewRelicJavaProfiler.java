@@ -13,7 +13,8 @@ public class NewRelicJavaProfiler implements ToolWindowFactory {
 
     @Override
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
-        NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow = new NewRelicJavaProfilerToolWindow(toolWindow);
+        System.out.println("About to start server");
+        NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow = new NewRelicJavaProfilerToolWindow(toolWindow, project);
 
         Thread serverThread = new Thread(new JettyServer(newRelicJavaProfilerToolWindow));
         serverThread.start();

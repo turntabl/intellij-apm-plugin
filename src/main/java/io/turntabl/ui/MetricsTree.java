@@ -1,16 +1,17 @@
 package io.turntabl.ui;
 
+import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
-import io.turntabl.ui.flight_recorder.DataLossPanel;
+import com.intellij.util.ui.components.BorderLayoutPanel;
 import io.turntabl.ui.flight_recorder.JfrSocketReadBytesReadPanel;
 import io.turntabl.ui.flight_recorder.JfrSocketReadDurationPanel;
-import io.turntabl.ui.java_application.statistics.ThreadAllocationStatisticsPanel;
-import io.turntabl.ui.java_virtual_machine.GarbageCollectionPanel;
 import io.turntabl.ui.flight_recorder.SummaryMetaspacePanel;
 import io.turntabl.ui.flight_recorder.ThreadContextSwitchRatePanel;
 import io.turntabl.ui.java_application.ObjectAllocationInNewTLabPanel;
 import io.turntabl.ui.java_application.ObjectAllocationOutsideTLabPanel;
+import io.turntabl.ui.java_application.statistics.ThreadAllocationStatisticsPanel;
+import io.turntabl.ui.java_virtual_machine.GarbageCollectionPanel;
 import io.turntabl.ui.model.*;
 import io.turntabl.ui.operating_system.CpuLoadPanel;
 import io.turntabl.ui.operating_system.GcHeapSummaryPanel;
@@ -25,17 +26,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MetricsTree {
-    private JPanel treePanel;
+    private JBPanel treePanel;
     private JTree tree;
     private String rootNodeName = "Metrics by type";
     private String flightRecorderNodeName = "Flight Recorder";
     private String javaAppNodeName = "Java Application";
     private String jvmNodeName = "Java Virtual Machine";
-   
+
     private String[] jvmNodes = {"Garbage Collection"};
     private String[] javaAppStatisticsNodes = {"Thread Allocated Statistics"};
     private String osNodeName = "Operating System";
-  
+    private CpuGraph cpuGraph;
     private final NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow;
     private Map<String, JComponent> componentMap;
     private CpuLoadPanel cpuLoadPanel;
@@ -97,7 +98,7 @@ public class MetricsTree {
 
         ThreadAllocationStatisticsPanel threadAllocationStatisticsPanel = new ThreadAllocationStatisticsPanel(
                 new ThreadAllocationStatisticsPanel.ThreadAllocationStatisticsTableModel(Arrays.asList(
-                        new ThreadAllocationStatistics("2021-06-01 11:08:12:20", "18.4 MiB", 70.52, 5376373L , new HashMap<String,String>())
+                        new ThreadAllocationStatistics("2021-06-01 11:08:12:20", "18.4 MiB", 70.52, 5376373L, new HashMap<String, String>())
 
                 )));
 
@@ -113,16 +114,16 @@ public class MetricsTree {
 
         GarbageCollectionPanel garbageCollectionPanel = new GarbageCollectionPanel(
                 new GarbageCollectionPanel.GarbageCollectionTableModel(Arrays.asList(
-                        new GarbageCollection("jfr.GarbageCollection.majorDuration","summary",new HashMap<String,String>(), 1619441613596L,-1619441613596L,new HashMap<String, String>())
+                        new GarbageCollection("jfr.GarbageCollection.majorDuration", "summary", new HashMap<String, String>(), 1619441613596L, -1619441613596L, new HashMap<String, String>())
                 ))
         );
-        componentMap.put("Garbage Collection",garbageCollectionPanel.getGarbageCollectionComponent());
+        componentMap.put("Garbage Collection", garbageCollectionPanel.getGarbageCollectionComponent());
+
         for (String nodeName : jvmNodes) {
             jvmNode.add(new DefaultMutableTreeNode(nodeName));
-            componentMap.put(nodeName,garbageCollectionPanel.getGarbageCollectionComponent());
         }
-      
-      
+
+
         javaApplicationNode.add(new DefaultMutableTreeNode("Object Allocation In New TLab"));
         ObjectAllocationInNewTLabPanel objectAllocationInNewTLabPanel = new ObjectAllocationInNewTLabPanel(
                 new ObjectAllocationInNewTLabPanel.ObjectAllocationInNewTLabTableModel(Arrays.asList(
@@ -161,22 +162,23 @@ public class MetricsTree {
         componentMap.put("Thread CPU Load", threadCpuLoadPanel.getThreadCpuLoadComponent());
 
         osNode.add(new DefaultMutableTreeNode("CPU Load"));
+        osNode.add(new DefaultMutableTreeNode("CPU Load Graph"));
 
         cpuLoadPanel = new CpuLoadPanel(
                 new CpuLoadPanel.CpuLoadTableModel(Arrays.asList(
                         new CpuLoad("jfr.CPULoad", 1619441627925L, "gauge", 0.25646382570266724, 0.031001122668385506, 0.3926701843738556, new HashMap<>())
-
                 ))
         );
 
         componentMap.put("CPU Load", cpuLoadPanel.getCpuLoadComponent());
+        componentMap.put("CPU Load Graph", new JBPanel());
 
         rootNode.add(flightRecorderNode);
         rootNode.add(javaApplicationNode);
         rootNode.add(jvmNode);
         rootNode.add(osNode);
 
-        treePanel = new JPanel(new BorderLayout());
+        treePanel = new BorderLayoutPanel(0, 0);
         tree = new Tree(rootNode);
         tree.setBackground(treePanel.getBackground());
         tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
@@ -200,13 +202,18 @@ public class MetricsTree {
 
     }
 
-    public JPanel getMetricsTree() {
+    public JBPanel getMetricsTree() {
         return this.treePanel;
     }
 
     public void updateComponentMap(String key, JComponent component) {
         componentMap.put(key, component);
         newRelicJavaProfilerToolWindow.setMetricsSecondComponent(component);
+    }
+
+    public void updateCpuLoadGraph(CpuGraph cpuGraph) {
+        this.cpuGraph = cpuGraph;
+        componentMap.put("CPU Load Graph", cpuGraph.getChart());
     }
 
     public JTable getCpuLoadTable() {
