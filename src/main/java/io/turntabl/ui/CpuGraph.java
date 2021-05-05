@@ -9,8 +9,6 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.data.xy.XYDataset;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,8 +18,6 @@ public class CpuGraph {
     private String title;
 
     public CpuGraph(XYDataset dataSet, String title, String xAxisLabel, String yAxisLabel) {
-//        XYDataset dataset = createDataset();
-//        XYDataset dataset = createDataset();
         this.title = title;
 
         JFreeChart chart = ChartFactory.createXYLineChart(
@@ -63,22 +59,6 @@ public class CpuGraph {
         chartPanel = new ChartPanel(chart);
         chartPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
         chartPanel.setBackground(Color.BLACK);
-    }
-
-    private XYDataset createDataset() {
-
-        XYSeries series = new XYSeries("2016");
-        series.add(18, 567);
-        series.add(20, 612);
-        series.add(25, 800);
-        series.add(30, 980);
-        series.add(40, 1410);
-        series.add(50, 2350);
-
-        XYSeriesCollection dataset = new XYSeriesCollection();
-        dataset.addSeries(series);
-
-        return dataset;
     }
 
     public ChartPanel getChart() {

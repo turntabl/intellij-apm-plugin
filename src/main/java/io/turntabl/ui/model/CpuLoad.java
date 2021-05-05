@@ -10,9 +10,9 @@ public class CpuLoad {
     @JsonProperty("timestamp")
     private Long startTime;
     private String type;
-    private Double jvmUserValue;
-    private Double jvmSystemValue;
-    private Double machineTotalValue;
+    private double jvmUserValue;
+    private double jvmSystemValue;
+    private double machineTotalValue;
     private HashMap<String, String> attributes;
 
     public CpuLoad() {
@@ -44,15 +44,15 @@ public class CpuLoad {
         return type;
     }
 
-    public Double getJvmUserValue() {
+    public double getJvmUserValue() {
         return jvmUserValue;
     }
 
-    public Double getJvmSystemValue() {
+    public double getJvmSystemValue() {
         return jvmSystemValue;
     }
 
-    public Double getMachineTotalValue() {
+    public double getMachineTotalValue() {
         return machineTotalValue;
     }
 
@@ -68,15 +68,15 @@ public class CpuLoad {
         this.type = type;
     }
 
-    public void setJvmUserValue(Double jvmUserValue) {
+    public void setJvmUserValue(double jvmUserValue) {
         this.jvmUserValue = jvmUserValue;
     }
 
-    public void setJvmSystemValue(Double jvmSystemValue) {
+    public void setJvmSystemValue(double jvmSystemValue) {
         this.jvmSystemValue = jvmSystemValue;
     }
 
-    public void setMachineTotalValue(Double machineTotalValue) {
+    public void setMachineTotalValue(double machineTotalValue) {
         this.machineTotalValue = machineTotalValue;
     }
 

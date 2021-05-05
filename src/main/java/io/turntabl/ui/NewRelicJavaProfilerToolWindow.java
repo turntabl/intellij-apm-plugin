@@ -80,8 +80,8 @@ public class NewRelicJavaProfilerToolWindow implements Disposable {
 
         runnerTab = new JBRunnerTabs(project, ActionManager.getInstance(), IdeFocusManager.findInstance(), this);
 
-        JBPanel[] tabPanels = new JBPanel[]{flameGraphPanel, callTreePanel, methodListPanel, eventsRootPanel, metricsRootPanel};
-        String[] tabNames = new String[]{"Flame Graph", "CallTree", "Method List", "Events", "Metrics"};
+        JBPanel[] tabPanels = {flameGraphPanel, callTreePanel, methodListPanel, eventsRootPanel, metricsRootPanel};
+        String[] tabNames = {"Flame Graph", "CallTree", "Method List", "Events", "Metrics"};
 
         for (int i = 0; i < tabPanels.length; ++i) {
             runnerTab.addTab(new TabInfo(tabPanels[i]).setText(tabNames[i]));

@@ -11,7 +11,6 @@ import io.turntabl.ui.flight_recorder.ThreadContextSwitchRatePanel;
 import io.turntabl.ui.java_application.ObjectAllocationInNewTLabPanel;
 import io.turntabl.ui.java_application.ObjectAllocationOutsideTLabPanel;
 import io.turntabl.ui.java_application.statistics.ThreadAllocationStatisticsPanel;
-import io.turntabl.ui.java_virtual_machine.GarbageCollectionPanel;
 import io.turntabl.ui.java_virtual_machine.garbage_collection.*;
 import io.turntabl.ui.model.*;
 import io.turntabl.ui.operating_system.CpuLoadPanel;
@@ -33,7 +32,6 @@ public class MetricsTree {
     private String flightRecorderNodeName = "Flight Recorder";
     private String javaAppNodeName = "Java Application";
     private String jvmNodeName = "Java Virtual Machine";
-    private String[] jvmNodes = {"G1 GC Duration", "GC Duration", "GC LongestPause", "GC Minor Duration", "GC Major Duration"};
     private String osNodeName = "Operating System";
     private CpuGraph cpuGraph;
     private final NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow;

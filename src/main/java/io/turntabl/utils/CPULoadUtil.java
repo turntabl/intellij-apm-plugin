@@ -8,7 +8,6 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -87,25 +86,29 @@ public class CPULoadUtil {
                 }).collect(Collectors.toList());
     }
 
-    public String formatDate(Date date){
-        DateFormat formatter = new SimpleDateFormat("HH:mm:ss.mmm");
+    public String formatDate(Long timestamp) {
+        Date date = new Date(timestamp);
+        DateFormat formatter = new SimpleDateFormat("ss");
         return formatter.format(date);
     }
 
     public XYDataset createDataSet(List<CpuLoad> cpuLoadList) {
+        cpuLoadList.forEach(System.out::println);
         XYSeries jvmUserSeries = new XYSeries("JVM User");
         XYSeries jvmSystemSeries = new XYSeries("JVM System");
         XYSeries machineTotalSeries = new XYSeries("Machine Total");
 
         for (int i = 0; i < cpuLoadList.size(); i++) {
-            Long startTime = cpuLoadList.get(i).getStartTime();
+            int startTime = Integer.parseInt(formatDate(cpuLoadList.get(i).getStartTime()));
+
             if (cpuLoadList.get(i).getName().toLowerCase().endsWith("jvmuser")) {
                 jvmUserSeries.add(cpuLoadList.get(i).getJvmUserValue(), startTime);
-            }else if(cpuLoadList.get(i).getName().toLowerCase().endsWith("jvmsystem")){
+            } else if (cpuLoadList.get(i).getName().toLowerCase().endsWith("jvmsystem")) {
                 jvmSystemSeries.add(cpuLoadList.get(i).getJvmSystemValue(), startTime);
-            }else{
+            } else {
                 machineTotalSeries.add(cpuLoadList.get(i).getMachineTotalValue(), startTime);
             }
+
         }
 
         XYSeriesCollection dataset = new XYSeriesCollection();
