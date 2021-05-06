@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MetricsTree {
+    private final NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow;
     private JBPanel treePanel;
     private JTree tree;
     private String rootNodeName = "Metrics by type";
@@ -33,10 +34,19 @@ public class MetricsTree {
     private String jvmNodeName = "Java Virtual Machine";
     private String osNodeName = "Operating System";
     private CpuGraph cpuGraph;
-    private final NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow;
     private Map<String, JComponent> componentMap;
     private CpuLoadPanel cpuLoadPanel;
     private GcHeapSummaryPanel gcHeapSummaryPanel;
+    private GCMinorDurationPanel gcMinorDurationPanel;
+    private GCMajorDurationPanel gcMajorDurationPanel;
+    private G1GarbageCollectionDurationPanel g1GarbageCollectionDurationPanel;
+    private GCDurationPanel gcDurationPanel;
+    private GCLongestPausePanel gcLongestPausePanel;
+    private GcHeapSummaryPanel gcHeapSummaryPanel;
+    private ThreadCpuLoadPanel threadCpuLoadPanel;
+    private JfrSocketReadBytesReadPanel jfrSocketReadBytesReadPanel;
+    private JfrSocketReadDurationPanel jfrSocketReadDurationPanel;
+    private ThreadAllocationStatisticsPanel threadAllocationStatisticsPanel;
 
     public MetricsTree(NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow) {
         this.newRelicJavaProfilerToolWindow = newRelicJavaProfilerToolWindow;
@@ -53,14 +63,14 @@ public class MetricsTree {
         // define sub nodes of socket branch
         String[] socketNodes = {"Bytes Read", "Duration"};
         // defining table info for socket branch sub nodes
-        JfrSocketReadBytesReadPanel jfrSocketReadBytesReadPanel = new JfrSocketReadBytesReadPanel(
+        jfrSocketReadBytesReadPanel = new JfrSocketReadBytesReadPanel(
                 new JfrSocketReadBytesReadPanel.JfrSocketReadBytesReadTableModel(Arrays.asList(
                         new JfrSocketReadBytesRead("jfr.SocketRead.bytesRead", 1619441645442L, "summary", new HashMap<>(), 46, new HashMap<>())
                 ))
         );
 
         // defining table info for socket branch sub nodes
-        JfrSocketReadDurationPanel jfrSocketReadDurationPanel = new JfrSocketReadDurationPanel(
+        jfrSocketReadDurationPanel = new JfrSocketReadDurationPanel(
                 new JfrSocketReadDurationPanel.JfrSocketReadDurationTableModel(Arrays.asList(
                         new JfrSocketReadDuration("jfr.SocketRead.duration", 1619441645442L, "summary", new HashMap<>(), 50, new HashMap<>())
                 ))
@@ -91,6 +101,7 @@ public class MetricsTree {
         // define components for flight recorder sub nodes without children
         JBPanel[] flightRecorderComponents = {threadContextSwitchRatePanel.getThreadContextSwitchRateComponent(),
                 summaryMetaspacePanel.getSummaryMetaspaceComponent()};
+
         // add sub nodes to flight recorder
         for (int i = 0; i < flightRecorderNodes.length; i++) {
             flightRecorderNode.add(new DefaultMutableTreeNode(flightRecorderNodes[i]));
@@ -103,8 +114,9 @@ public class MetricsTree {
 
         // define sub nodes for statistics sub node
         String[] javaAppStatisticsNodes = {"Thread Allocated Statistics"};
+
         // define table for statistics sub node
-        ThreadAllocationStatisticsPanel threadAllocationStatisticsPanel = new ThreadAllocationStatisticsPanel(
+        threadAllocationStatisticsPanel = new ThreadAllocationStatisticsPanel(
                 new ThreadAllocationStatisticsPanel.ThreadAllocationStatisticsTableModel(Arrays.asList(
                         new ThreadAllocationStatistics("2021-06-01 11:08:12:20", "18.4 MiB", 70.52, 5376373L, new HashMap<String, String>())
 
@@ -112,6 +124,7 @@ public class MetricsTree {
 
         // define statistics components
         JBPanel[] statisticsComponent = {threadAllocationStatisticsPanel.getThreadAllocationStatisticsComponent()};
+
         // add sub nodes to statistics sub node
         for (int i = 0; i < javaAppStatisticsNodes.length; i++) {
             javaAppStatisticsNode.add(new DefaultMutableTreeNode(javaAppStatisticsNodes[i]));
@@ -132,50 +145,58 @@ public class MetricsTree {
 
         // define components for java application sub nodes without children
         JBPanel[] javaAppComponents = {objectAllocationInNewTLabPanel.getObjectAllocationInNewTLabComponent(), objectAllocationOutsideTLabPanel.getObjectAllocationOutsideTLabComponent()};
+
         // adding sub nodes to java application root node
         javaApplicationNode.add(javaAppStatisticsNode);
         for (int i = 0; i < javaAppSubNodes.length; i++) {
             javaApplicationNode.add(new DefaultMutableTreeNode(javaAppSubNodes[i]));
             componentMap.put(javaAppSubNodes[i], javaAppComponents[i]);
         }
+
         // define GC sub nodes
         DefaultMutableTreeNode jvmSubNode = new DefaultMutableTreeNode("Garbage Collections");
         // define sub nodes of socket branch
         String[] jvmSubNodes = {"G1 GC Duration", "GC Duration", "GC Longest Pause", "GC Major Duration", "GC Minor Duration", "GC Heap Summary"};
+      
+//         DefaultMutableTreeNode jvmSubNode = new DefaultMutableTreeNode("Garbage Collection");
+
+//         String[] jvmSubNodes = {"GC Minor Duration", "GC Major Duration", "G1 GC Duration", "GC Duration", "GC Longest Pause", "GC Heap Summary"};
 
         // defining table info for GC branch sub nodes
-        G1GarbageCollectionDurationPanel g1GarbageCollectionDurationPanel = new G1GarbageCollectionDurationPanel(
-                new G1GarbageCollectionDurationPanel.G1GarbageCollectionDurationTableModel(Arrays.asList(
-                        new G1GarbageCollectionDuration("jfr.G1GarbageCollection.duration", "summary", new HashMap<String, String>(), 1619441613596L, -1619441613596L, new HashMap<String, String>())
-                ))
-        );
-
-        // defining table info for GC branch sub nodes
-        GCDurationPanel gcDurationPanel = new GCDurationPanel(
-                new GCDurationPanel.GCDurationTableModel(Arrays.asList(
-                        new GCDuration("jfr.GarbageCollection.duration", "summary", new HashMap<String, String>(), 1619441613596L, -1619441613596L, new HashMap<String, String>())
-                ))
-        );
-        // defining table info for GC branch sub nodes
-        GCLongestPausePanel gcLongestPausePanel = new GCLongestPausePanel(
-                new GCLongestPausePanel.GCLongestPauseTableModel(Arrays.asList(
-                        new GCLongestPause("jfr.GarbageCollection.longestPause", "summary", new HashMap<String, String>(), 1619441613596L, -1619441613596L, new HashMap<String, String>())
-                ))
-        );
-
-        // defining table info for GC branch sub nodes
-        GCMajorDurationPanel gcMajorDurationPanel = new GCMajorDurationPanel(
-                new GCMajorDurationPanel.GCMajorDurationTableModel(Arrays.asList(
-                        new GCMajorDuration("jfr.GarbageCollection.MajorDuration", "summary", new HashMap<String, String>(), 1619441613596L, -1619441613596L, new HashMap<String, String>())
-                ))
-        );
-
-        // defining table info for GC branch sub nodes
-        GCMinorDurationPanel gcMinorDurationPanel = new GCMinorDurationPanel(
+        gcMinorDurationPanel = new GCMinorDurationPanel(
                 new GCMinorDurationPanel.GCMinorDurationTableModel(Arrays.asList(
-                        new GCMinorDuration("jfr.GarbageCollection.MinorDuration", "summary", new HashMap<String, String>(), 1619441613596L, -1619441613596L, new HashMap<String, String>())
+                        new GCMinorDuration("jfr.GarbageCollection.MinorDuration", "summary", new HashMap<String, Double>(), 1619441613596L, -1619441613596L, new HashMap<String, String>())
                 ))
         );
+
+        // defining table info for GC branch sub nodes
+        gcMajorDurationPanel = new GCMajorDurationPanel(
+                new GCMajorDurationPanel.GCMajorDurationTableModel(Arrays.asList(
+                        new GCMajorDuration("jfr.GarbageCollection.MajorDuration", "summary", new HashMap<String, Double>(), 1619441613596L, -1619441613596L, new HashMap<String, String>())
+                ))
+        );
+
+        // defining table info for GC branch sub nodes
+        g1GarbageCollectionDurationPanel = new G1GarbageCollectionDurationPanel(
+                new G1GarbageCollectionDurationPanel.G1GarbageCollectionDurationTableModel(Arrays.asList(
+                        new G1GarbageCollectionDuration("jfr.G1GarbageCollection.duration", "summary", new HashMap<String, Double>(), 1619441613596L, -1619441613596L, new HashMap<String, String>())
+                ))
+        );
+
+        // defining table info for GC branch sub nodes
+        gcDurationPanel = new GCDurationPanel(
+                new GCDurationPanel.GCDurationTableModel(Arrays.asList(
+                        new GCDuration("jfr.GarbageCollection.duration", "summary", new HashMap<String, Double>(), 1619441613596L, -1619441613596L, new HashMap<String, String>())
+                ))
+        );
+
+        // defining table info for GC branch sub nodes
+        gcLongestPausePanel = new GCLongestPausePanel(
+                new GCLongestPausePanel.GCLongestPauseTableModel(Arrays.asList(
+                        new GCLongestPause("jfr.GarbageCollection.longestPause", "summary", 123455.67, 1619441613596L, new HashMap<String, String>())
+                ))
+        );
+
 
         // defining table info for GC branch sub nodes
         gcHeapSummaryPanel = new GcHeapSummaryPanel(
@@ -184,13 +205,22 @@ public class MetricsTree {
                 ))
         );
 
+
         JBPanel[] gcComponents = {g1GarbageCollectionDurationPanel.getG1GarbageCollectionDurationComponent(),
                 gcDurationPanel.getGCDurationComponent(),
                 gcLongestPausePanel.getGCLongestPauseComponent(),
                 gcMajorDurationPanel.getGCMajorDurationComponent(),
                 gcMinorDurationPanel.getGCMinorDurationComponent(),
-                gcHeapSummaryPanel.getGcHeapSummaryComponent()
-        };
+
+        // define components for jvm sub node
+//         JBPanel[] gcComponents = {gcMinorDurationPanel.getGCMinorDurationComponent(),
+//                 gcMajorDurationPanel.getGCMajorDurationComponent(),
+//                 g1GarbageCollectionDurationPanel.getG1GarbageCollectionDurationComponent(),
+//                 gcDurationPanel.getGCDurationComponent(),
+//                 gcLongestPausePanel.getGCLongestPauseComponent(),
+
+//                 gcHeapSummaryPanel.getGcHeapSummaryComponent()
+//         };
 
         for (int i = 0; i < jvmSubNodes.length; i++) {
             jvmSubNode.add(new DefaultMutableTreeNode(jvmSubNodes[i]));
@@ -201,7 +231,7 @@ public class MetricsTree {
 
         // define sub nodes for os
         String[] osNodes = {"Thread CPU Load", "CPU Load", "CPU Load Graph"};
-        ThreadCpuLoadPanel threadCpuLoadPanel = new ThreadCpuLoadPanel(
+         threadCpuLoadPanel = new ThreadCpuLoadPanel(
                 new ThreadCpuLoadPanel.ThreadCpuLoadTableModel(Arrays.asList(
                         new ThreadCpuLoad("jfr.ThreadCPULoad.user", 1619441626468L, "gauge", 0.04082856327295303, 0.0010207140585407615, new HashMap<>())
                 ))
@@ -268,6 +298,37 @@ public class MetricsTree {
 
     public JTable getCpuLoadTable() {
         return this.cpuLoadPanel.getTable();
+    }
+  
+    public JTable getThreadCpuTable(){return this.threadCpuLoadPanel.getTable();}
+
+    public JTable getJfrSocketReadBytesReadTable(){
+        return this.jfrSocketReadBytesReadPanel.getTable();
+    }
+
+    public JTable getJfrSocketReadDurationTable(){
+        return this.jfrSocketReadDurationPanel.getTable();
+    }
+        public JTable getThreadAllocatedStatisticsTable(){return this.threadAllocationStatisticsPanel.getTable();}
+
+    public JTable getGCMinorDurationTable() {
+        return this.gcMinorDurationPanel.getTable();
+    }
+
+    public JTable getGCMajorDurationTable() {
+        return this.gcMajorDurationPanel.getTable();
+    }
+
+    public JTable getG1GCDurationTable() {
+        return this.g1GarbageCollectionDurationPanel.getTable();
+    }
+
+    public JTable getGCDurationTable() {
+        return this.gcDurationPanel.getTable();
+    }
+
+    public JTable getGCLongestPauseTable() {
+        return this.gcLongestPausePanel.getTable();
     }
 
     public JTable getGcHeapSummaryTable(){
