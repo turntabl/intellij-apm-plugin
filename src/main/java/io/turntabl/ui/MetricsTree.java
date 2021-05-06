@@ -4,18 +4,13 @@ import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
 import com.intellij.util.ui.components.BorderLayoutPanel;
-import io.turntabl.ui.flight_recorder.JfrSocketReadBytesReadPanel;
-import io.turntabl.ui.flight_recorder.JfrSocketReadDurationPanel;
-import io.turntabl.ui.flight_recorder.SummaryMetaspacePanel;
-import io.turntabl.ui.flight_recorder.ThreadContextSwitchRatePanel;
-import io.turntabl.ui.java_application.ObjectAllocationInNewTLabPanel;
-import io.turntabl.ui.java_application.ObjectAllocationOutsideTLabPanel;
+import io.turntabl.ui.flight_recorder.*;
+import io.turntabl.ui.java_application.*;
 import io.turntabl.ui.java_application.statistics.ThreadAllocationStatisticsPanel;
+import io.turntabl.ui.java_virtual_machine.GcHeapSummaryPanel;
 import io.turntabl.ui.java_virtual_machine.garbage_collection.*;
 import io.turntabl.ui.model.*;
-import io.turntabl.ui.operating_system.CpuLoadPanel;
-import io.turntabl.ui.java_virtual_machine.GcHeapSummaryPanel;
-import io.turntabl.ui.operating_system.ThreadCpuLoadPanel;
+import io.turntabl.ui.operating_system.*;
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
@@ -42,7 +37,6 @@ public class MetricsTree {
     private G1GarbageCollectionDurationPanel g1GarbageCollectionDurationPanel;
     private GCDurationPanel gcDurationPanel;
     private GCLongestPausePanel gcLongestPausePanel;
-    private GcHeapSummaryPanel gcHeapSummaryPanel;
     private ThreadCpuLoadPanel threadCpuLoadPanel;
     private JfrSocketReadBytesReadPanel jfrSocketReadBytesReadPanel;
     private JfrSocketReadDurationPanel jfrSocketReadDurationPanel;
@@ -157,7 +151,7 @@ public class MetricsTree {
         DefaultMutableTreeNode jvmSubNode = new DefaultMutableTreeNode("Garbage Collections");
         // define sub nodes of socket branch
         String[] jvmSubNodes = {"G1 GC Duration", "GC Duration", "GC Longest Pause", "GC Major Duration", "GC Minor Duration", "GC Heap Summary"};
-      
+
 //         DefaultMutableTreeNode jvmSubNode = new DefaultMutableTreeNode("Garbage Collection");
 
 //         String[] jvmSubNodes = {"GC Minor Duration", "GC Major Duration", "G1 GC Duration", "GC Duration", "GC Longest Pause", "GC Heap Summary"};
@@ -205,12 +199,12 @@ public class MetricsTree {
                 ))
         );
 
-
         JBPanel[] gcComponents = {g1GarbageCollectionDurationPanel.getG1GarbageCollectionDurationComponent(),
                 gcDurationPanel.getGCDurationComponent(),
                 gcLongestPausePanel.getGCLongestPauseComponent(),
                 gcMajorDurationPanel.getGCMajorDurationComponent(),
                 gcMinorDurationPanel.getGCMinorDurationComponent(),
+                gcHeapSummaryPanel.getGcHeapSummaryComponent()};
 
         // define components for jvm sub node
 //         JBPanel[] gcComponents = {gcMinorDurationPanel.getGCMinorDurationComponent(),
@@ -231,7 +225,7 @@ public class MetricsTree {
 
         // define sub nodes for os
         String[] osNodes = {"Thread CPU Load", "CPU Load", "CPU Load Graph"};
-         threadCpuLoadPanel = new ThreadCpuLoadPanel(
+        threadCpuLoadPanel = new ThreadCpuLoadPanel(
                 new ThreadCpuLoadPanel.ThreadCpuLoadTableModel(Arrays.asList(
                         new ThreadCpuLoad("jfr.ThreadCPULoad.user", 1619441626468L, "gauge", 0.04082856327295303, 0.0010207140585407615, new HashMap<>())
                 ))
@@ -299,17 +293,22 @@ public class MetricsTree {
     public JTable getCpuLoadTable() {
         return this.cpuLoadPanel.getTable();
     }
-  
-    public JTable getThreadCpuTable(){return this.threadCpuLoadPanel.getTable();}
 
-    public JTable getJfrSocketReadBytesReadTable(){
+    public JTable getThreadCpuTable() {
+        return this.threadCpuLoadPanel.getTable();
+    }
+
+    public JTable getJfrSocketReadBytesReadTable() {
         return this.jfrSocketReadBytesReadPanel.getTable();
     }
 
-    public JTable getJfrSocketReadDurationTable(){
+    public JTable getJfrSocketReadDurationTable() {
         return this.jfrSocketReadDurationPanel.getTable();
     }
-        public JTable getThreadAllocatedStatisticsTable(){return this.threadAllocationStatisticsPanel.getTable();}
+
+    public JTable getThreadAllocatedStatisticsTable() {
+        return this.threadAllocationStatisticsPanel.getTable();
+    }
 
     public JTable getGCMinorDurationTable() {
         return this.gcMinorDurationPanel.getTable();
@@ -331,7 +330,7 @@ public class MetricsTree {
         return this.gcLongestPausePanel.getTable();
     }
 
-    public JTable getGcHeapSummaryTable(){
+    public JTable getGcHeapSummaryTable() {
         return this.gcHeapSummaryPanel.getTable();
     }
 
