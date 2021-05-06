@@ -16,6 +16,8 @@ import io.turntabl.ui.model.*;
 import io.turntabl.ui.operating_system.CpuLoadPanel;
 import io.turntabl.ui.operating_system.GcHeapSummaryPanel;
 import io.turntabl.ui.operating_system.ThreadCpuLoadPanel;
+import org.jfree.data.xy.XYDatasetTableModel;
+
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
@@ -279,4 +281,7 @@ public class MetricsTree {
         return this.cpuLoadPanel.getTable();
     }
 
+    public XYDatasetTableModel getObjectAllocationInNewTLabTable() {
+        return null;
+    }
 }

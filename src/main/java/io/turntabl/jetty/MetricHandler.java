@@ -2,10 +2,13 @@ package io.turntabl.jetty;
 
 import io.turntabl.ui.CpuGraph;
 import io.turntabl.ui.NewRelicJavaProfilerToolWindow;
+import io.turntabl.ui.java_application.ObjectAllocationInNewTLabPanel;
 import io.turntabl.ui.model.CpuLoad;
+import io.turntabl.ui.model.ObjectAllocationInNewTLab;
 import io.turntabl.ui.operating_system.CpuLoadPanel;
 import io.turntabl.utils.CPULoadUtil;
 import io.turntabl.utils.JsonUtility;
+import io.turntabl.utils.ObjectAllocationInNewTLabUtil;
 import org.jfree.data.xy.XYDataset;
 import org.json.simple.JSONArray;
 import org.slf4j.Logger;
@@ -26,6 +29,8 @@ public class MetricHandler extends HttpServlet {
     private final ServletUtils servletUtils = new ServletUtils();
     private final JsonUtility jsonUtil = new JsonUtility();
     private final CPULoadUtil cpuLoadUtil = new CPULoadUtil(jsonUtil);
+    private final ObjectAllocationInNewTLabUtil objectAllocationInNewTLabUtil = new ObjectAllocationInNewTLabUtil(jsonUtil);
+    private List<ObjectAllocationInNewTLab> objectAllocationList = new ArrayList<>();
     private List<CpuLoad> cumulativeCpuLoadList = new ArrayList<>();
 
     public MetricHandler() {
@@ -40,6 +45,7 @@ public class MetricHandler extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String decompressedString = servletUtils.decompress(req);
         updateCpuLoadPanel(decompressedString); //update the cpuload table
+        updateObjectAllocationInNewTLabPanel(decompressedString);
 
         resp.setContentType("application/json");
         resp.setStatus(HttpServletResponse.SC_OK);
@@ -48,6 +54,7 @@ public class MetricHandler extends HttpServlet {
 //        toolWindowComponent.getContent().repaint();
 //        toolWindowComponent.getContent().validate();
     }
+
 
     public void updateCpuLoadPanel(String jsonString) {
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
@@ -63,6 +70,20 @@ public class MetricHandler extends HttpServlet {
 
             XYDataset dataset = cpuLoadUtil.createDataSet(cumulativeCpuLoadList);
             toolWindowComponent.getMetricsTree().updateCpuLoadGraph(new CpuGraph(dataset, "CPU Load Metric", "Values", "Start Time"));
+        }
+    }
+
+    public void updateObjectAllocationInNewTLabPanel(String jsonString) {
+        Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
+
+        if (jsonArray.isPresent()) {
+            List<ObjectAllocationInNewTLab> objectAllocationInNewTLabsList = objectAllocationInNewTLabUtil.getObjectAllocationInNewTLab(jsonArray.get());
+
+
+            toolWindowComponent.getMetricsTree().getObjectAllocationInNewTLabTable().setModel(new ObjectAllocationInNewTLabPanel.ObjectAllocationInNewTLabTableModel());
+            toolWindowComponent.getMetricsTree().updateComponentMap("CPU Load", (new ObjectAllocationInNewTLabPanel(new ObjectAllocationInNewTLabPanel.ObjectAllocationInNewTLabTableModel(cumulativeCpuLoadList))).getObjectAllocationInNewTLabComponent());
+
+
         }
     }
 }
