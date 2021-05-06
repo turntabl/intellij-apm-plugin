@@ -24,7 +24,8 @@ public class GCMajorDurationPanel {
         table = new JBTable(tableModel);
 
         table.setRowSelectionAllowed(true);
-        table.setRowSelectionInterval(0, 0);
+//        table.setRowSelectionInterval(0, 0);
+
 
         table.getColumnModel().getColumn(0).setPreferredWidth(350);
         table.getColumnModel().getColumn(1).setPreferredWidth(350);
@@ -37,6 +38,7 @@ public class GCMajorDurationPanel {
         table.getColumnModel().getColumn(8).setPreferredWidth(350);
 
         panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER), BorderLayout.CENTER);
+
     }
 
     public JBPanel getGCMajorDurationComponent() {
@@ -44,7 +46,7 @@ public class GCMajorDurationPanel {
     }
 
     public static class GCMajorDurationTableModel extends AbstractTableModel {
-        String[] columnNames = {"Timestamp", "Type", "Value Count", "Value Sum", "Value Min", "Value Max", "Interval", "Attribute Name", "Attribute Cause"};
+        String[] columnNames = {"Timestamp", "Type", "Value Count", "Value Sum", "Value Min", "Value Max", "Interval ms", "Attribute Name", "Attribute Cause"};
         String[][] data;
 
         private List<GCMajorDuration> gcMajorDurationList;
@@ -56,12 +58,13 @@ public class GCMajorDurationPanel {
             for (int i = 0; i < gcMajorDurationList.size(); i++) {
                 GCMajorDuration gcMajorDuration = gcMajorDurationList.get(i);
 
+
                 data[i][0] = String.valueOf(gcMajorDuration.getTimestamp());
                 data[i][1] = gcMajorDuration.getType();
-                data[i][2] = String.valueOf(gcMajorDuration.getValues().get("values.count") == null ? "" : gcMajorDuration.getValues().get("values.count"));
-                data[i][3] = String.valueOf(gcMajorDuration.getValues().get("values.sum") == null ? "" : gcMajorDuration.getValues().get("values.sum"));
-                data[i][4] = String.valueOf(gcMajorDuration.getValues().get("values.min") == null ? "" : gcMajorDuration.getValues().get("values.min"));
-                data[i][5] = String.valueOf(gcMajorDuration.getValues().get("values.max") == null ? "" : gcMajorDuration.getValues().get("values.max"));
+                data[i][2] = String.valueOf(gcMajorDuration.getValue().get("count") == null ? "" : gcMajorDuration.getValue().get("count"));
+                data[i][3] = String.valueOf(gcMajorDuration.getValue().get("sum") == null ? "" : gcMajorDuration.getValue().get("sum"));
+                data[i][4] = String.valueOf(gcMajorDuration.getValue().get("min") == null ? "" : gcMajorDuration.getValue().get("min"));
+                data[i][5] = String.valueOf(gcMajorDuration.getValue().get("max") == null ? "" : gcMajorDuration.getValue().get("max"));
                 data[i][6] = String.valueOf(gcMajorDuration.getInterval());
                 data[i][7] = String.valueOf(gcMajorDuration.getAttributes().get("name") == null ? "" : gcMajorDuration.getAttributes().get("name"));
                 data[i][8] = String.valueOf(gcMajorDuration.getAttributes().get("cause") == null ? "" : gcMajorDuration.getAttributes().get("cause"));
@@ -87,5 +90,9 @@ public class GCMajorDurationPanel {
         public String getColumnName(int column) {
             return columnNames[column];
         }
+    }
+
+    public JTable getTable() {
+        return this.table;
     }
 }

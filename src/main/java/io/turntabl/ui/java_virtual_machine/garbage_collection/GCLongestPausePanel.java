@@ -24,17 +24,14 @@ public class GCLongestPausePanel {
         table = new JBTable(tableModel);
 
         table.setRowSelectionAllowed(true);
-        table.setRowSelectionInterval(0, 0);
+//        table.setRowSelectionInterval(0, 0);
 
         table.getColumnModel().getColumn(0).setPreferredWidth(350);
         table.getColumnModel().getColumn(1).setPreferredWidth(350);
         table.getColumnModel().getColumn(2).setPreferredWidth(350);
         table.getColumnModel().getColumn(3).setPreferredWidth(350);
         table.getColumnModel().getColumn(4).setPreferredWidth(350);
-        table.getColumnModel().getColumn(5).setPreferredWidth(350);
-        table.getColumnModel().getColumn(6).setPreferredWidth(350);
-        table.getColumnModel().getColumn(7).setPreferredWidth(350);
-        table.getColumnModel().getColumn(8).setPreferredWidth(350);
+
 
         panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER), BorderLayout.CENTER);
     }
@@ -45,7 +42,7 @@ public class GCLongestPausePanel {
 
     public static class GCLongestPauseTableModel extends AbstractTableModel {
 
-        String[] columnNames = {"Timestamp", "Type", "Value Count", "Value Sum", "Value Min", "Value Max", "Interval", "Attribute Name", "Attribute Cause"};
+        String[] columnNames = {"Timestamp", "Type", "Value", "Attribute Name", "Attribute Cause"};
         String[][] data;
         private List<GCLongestPause> gcLongestPauseList;
 
@@ -58,13 +55,9 @@ public class GCLongestPausePanel {
 
                 data[i][0] = String.valueOf(gcLongestPause.getTimestamp());
                 data[i][1] = gcLongestPause.getType();
-                data[i][2] = String.valueOf(gcLongestPause.getValues().get("values.count") == null ? "" : gcLongestPause.getValues().get("values.count"));
-                data[i][3] = String.valueOf(gcLongestPause.getValues().get("values.sum") == null ? "" : gcLongestPause.getValues().get("values.sum"));
-                data[i][4] = String.valueOf(gcLongestPause.getValues().get("values.min") == null ? "" : gcLongestPause.getValues().get("values.min"));
-                data[i][5] = String.valueOf(gcLongestPause.getValues().get("values.max") == null ? "" : gcLongestPause.getValues().get("values.max"));
-                data[i][6] = String.valueOf(gcLongestPause.getInterval());
-                data[i][7] = String.valueOf(gcLongestPause.getAttributes().get("name") == null ? "" : gcLongestPause.getAttributes().get("name"));
-                data[i][8] = String.valueOf(gcLongestPause.getAttributes().get("cause") == null ? "" : gcLongestPause.getAttributes().get("cause"));
+                data[i][2] = String.valueOf(gcLongestPause.getValue());
+                data[i][3] = String.valueOf(gcLongestPause.getAttributes().get("name") == null ? "" : gcLongestPause.getAttributes().get("name"));
+                data[i][4] = String.valueOf(gcLongestPause.getAttributes().get("cause") == null ? "" : gcLongestPause.getAttributes().get("cause"));
             }
         }
 
@@ -87,5 +80,9 @@ public class GCLongestPausePanel {
         public String getColumnName(int column) {
             return columnNames[column];
         }
+    }
+
+    public JTable getTable() {
+        return this.table;
     }
 }

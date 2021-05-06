@@ -1,24 +1,25 @@
 package io.turntabl.ui.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.HashMap;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class GCLongestPause {
     private String name;
     private String type;
-    private HashMap<String, String> values;
+    private double value;
     private Long timestamp;
-    private Long interval;
     private HashMap<String, String> attributes;
 
     public GCLongestPause() {
     }
 
-    public GCLongestPause(String name, String type, HashMap<String, String> values, Long timestamp, Long interval, HashMap<String, String> attributes) {
+    public GCLongestPause(String name, String type, double value, Long timestamp, HashMap<String, String> attributes) {
         this.name = name;
         this.type = type;
-        this.values = values;
+        this.value = value;
         this.timestamp = timestamp;
-        this.interval = interval;
         this.attributes = attributes;
     }
 
@@ -38,12 +39,12 @@ public class GCLongestPause {
         this.type = type;
     }
 
-    public HashMap<String, String> getValues() {
-        return values;
+    public double getValue() {
+        return value;
     }
 
-    public void setValues(HashMap<String, String> values) {
-        this.values = values;
+    public void setValue(double value) {
+        this.value = value;
     }
 
     public Long getTimestamp() {
@@ -52,14 +53,6 @@ public class GCLongestPause {
 
     public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
-    }
-
-    public Long getInterval() {
-        return interval;
-    }
-
-    public void setInterval(Long interval) {
-        this.interval = interval;
     }
 
     public HashMap<String, String> getAttributes() {
@@ -75,9 +68,8 @@ public class GCLongestPause {
         return "GCLongestPause{" +
                 "name='" + name + '\'' +
                 ", type='" + type + '\'' +
-                ", values=" + values +
+                ", value=" + value +
                 ", timestamp=" + timestamp +
-                ", interval=" + interval +
                 ", attributes=" + attributes +
                 '}';
     }

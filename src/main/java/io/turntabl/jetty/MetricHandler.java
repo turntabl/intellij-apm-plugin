@@ -2,9 +2,11 @@ package io.turntabl.jetty;
 
 import io.turntabl.ui.CpuGraph;
 import io.turntabl.ui.NewRelicJavaProfilerToolWindow;
-import io.turntabl.ui.model.CpuLoad;
+import io.turntabl.ui.java_virtual_machine.garbage_collection.*;
+import io.turntabl.ui.model.*;
 import io.turntabl.ui.operating_system.CpuLoadPanel;
 import io.turntabl.utils.CPULoadUtil;
+import io.turntabl.utils.GarbageCollectionUtil;
 import io.turntabl.utils.JsonUtility;
 import org.jfree.data.xy.XYDataset;
 import org.json.simple.JSONArray;
@@ -15,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.table.TableModel;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +30,13 @@ public class MetricHandler extends HttpServlet {
     private final JsonUtility jsonUtil = new JsonUtility();
     private final CPULoadUtil cpuLoadUtil = new CPULoadUtil(jsonUtil);
     private List<CpuLoad> cumulativeCpuLoadList = new ArrayList<>();
+    private final GarbageCollectionUtil gcUtil = new GarbageCollectionUtil(jsonUtil);
+    private List<GCMinorDuration> cumulativeGcMinorDurationList = new ArrayList<>();
+    private List<GCMajorDuration> cumulativeGcMajorDurationList = new ArrayList<>();
+    private List<G1GarbageCollectionDuration> cumulativeG1GCDurationList = new ArrayList<>();
+    private List<GCDuration> cumulativeGCDurationList = new ArrayList<>();
+    private List<GCLongestPause> cumulativeGCLongestPauseList = new ArrayList<>();
+
 
     public MetricHandler() {
         toolWindowComponent = null;
@@ -40,6 +50,7 @@ public class MetricHandler extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String decompressedString = servletUtils.decompress(req);
         updateCpuLoadPanel(decompressedString); //update the cpuload table
+        updateGarbageCollectionPanel(decompressedString);
 
         resp.setContentType("application/json");
         resp.setStatus(HttpServletResponse.SC_OK);
@@ -63,6 +74,43 @@ public class MetricHandler extends HttpServlet {
 
             XYDataset dataset = cpuLoadUtil.createDataSet(cumulativeCpuLoadList);
             toolWindowComponent.getMetricsTree().updateCpuLoadGraph(new CpuGraph(dataset, "CPU Load Metric", "Values", "Start Time"));
+        }
+    }
+
+    public void updateGarbageCollectionPanel(String jsonString) {
+        Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
+
+        if (jsonArray.isPresent()){
+            List<GCMinorDuration> gcMinorDurationList = gcUtil.getGCMinorDuration(jsonArray.get());
+            List<GCMajorDuration> gcMajorDurationList = gcUtil.getGCMajorDuration(jsonArray.get());
+            List<G1GarbageCollectionDuration> g1GCDurationList = gcUtil.getG1GarbageCollectionDuration(jsonArray.get());
+            List<GCDuration> gcDurationList = gcUtil.getGCDuration(jsonArray.get());
+            List<GCLongestPause> gcLongestPauseList = gcUtil.getGCLongestPause(jsonArray.get());
+
+            cumulativeGcMinorDurationList.addAll(gcMinorDurationList);
+            cumulativeGcMajorDurationList.addAll(gcMajorDurationList);
+            cumulativeG1GCDurationList.addAll(g1GCDurationList);
+            cumulativeGCDurationList.addAll(gcDurationList);
+            cumulativeGCLongestPauseList.addAll(gcLongestPauseList);
+
+            TableModel gcMinorTableModel = new GCMinorDurationPanel.GCMinorDurationTableModel(cumulativeGcMinorDurationList);
+            TableModel gcMajorTableModel = new GCMajorDurationPanel.GCMajorDurationTableModel(cumulativeGcMajorDurationList);
+            TableModel g1GCTableModel = new G1GarbageCollectionDurationPanel.G1GarbageCollectionDurationTableModel(cumulativeG1GCDurationList);
+            TableModel gcDurationTableModel = new GCDurationPanel.GCDurationTableModel(cumulativeGCDurationList);
+            TableModel gcLongestPauseTableModel = new GCLongestPausePanel.GCLongestPauseTableModel(cumulativeGCLongestPauseList);
+
+            toolWindowComponent.getMetricsTree().getGCMinorDurationTable().setModel(gcMinorTableModel);
+            toolWindowComponent.getMetricsTree().getGCMajorDurationTable().setModel(gcMajorTableModel);
+            toolWindowComponent.getMetricsTree().getG1GCDurationTable().setModel(g1GCTableModel);
+            toolWindowComponent.getMetricsTree().getGCDurationTable().setModel(gcDurationTableModel);
+            toolWindowComponent.getMetricsTree().getGCLongestPauseTable().setModel(gcLongestPauseTableModel);
+
+            toolWindowComponent.getMetricsTree().updateComponentMap("GC Minor Duration", (new GCMinorDurationPanel(gcMinorTableModel)).getGCMinorDurationComponent());
+            toolWindowComponent.getMetricsTree().updateComponentMap("GC Major Duration", (new GCMajorDurationPanel(gcMajorTableModel)).getGCMajorDurationComponent());
+            toolWindowComponent.getMetricsTree().updateComponentMap("G1 GC Duration", (new G1GarbageCollectionDurationPanel(g1GCTableModel)).getG1GarbageCollectionDurationComponent());
+            toolWindowComponent.getMetricsTree().updateComponentMap("GC Duration", (new GCDurationPanel(gcDurationTableModel)).getGCDurationComponent());
+            toolWindowComponent.getMetricsTree().updateComponentMap("GC Longest Pause", (new GCLongestPausePanel(gcLongestPauseTableModel)).getGCLongestPauseComponent());
+
         }
     }
 }

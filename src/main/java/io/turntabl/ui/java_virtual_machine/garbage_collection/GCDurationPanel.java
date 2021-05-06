@@ -24,7 +24,7 @@ public class GCDurationPanel {
         table = new JBTable(tableModel);
 
         table.setRowSelectionAllowed(true);
-        table.setRowSelectionInterval(0, 0);
+//        table.setRowSelectionInterval(0, 0);
 
 
         table.getColumnModel().getColumn(0).setPreferredWidth(350);
@@ -46,13 +46,14 @@ public class GCDurationPanel {
     }
 
     public static class GCDurationTableModel extends AbstractTableModel {
-        String[] columnNames = {"Timestamp", "Type", "Value Count", "Value Sum", "Value Min", "Value Max", "Interval", "Attribute Name", "Attribute Cause"};
+        String[] columnNames = {"Timestamp", "Type", "Value Count", "Value Sum", "Value Min", "Value Max", "Interval ms", "Attribute Name", "Attribute Cause"};
         String[][] data;
 
         private List<GCDuration> gcDurationList;
 
         public GCDurationTableModel(List<GCDuration> gcDurationList) {
             this.gcDurationList = gcDurationList;
+
             data = new String[gcDurationList.size()][columnNames.length];
             for (int i = 0; i < gcDurationList.size(); i++) {
                 GCDuration gcDuration = gcDurationList.get(i);
@@ -60,16 +61,15 @@ public class GCDurationPanel {
 
                 data[i][0] = String.valueOf(gcDuration.getTimestamp());
                 data[i][1] = gcDuration.getType();
-                data[i][2] = String.valueOf(gcDuration.getValues().get("values.count") == null ? "" : gcDuration.getValues().get("values.count"));
-                data[i][3] = String.valueOf(gcDuration.getValues().get("values.sum") == null ? "" : gcDuration.getValues().get("values.sum"));
-                data[i][4] = String.valueOf(gcDuration.getValues().get("values.min") == null ? "" : gcDuration.getValues().get("values.min"));
-                data[i][5] = String.valueOf(gcDuration.getValues().get("values.max") == null ? "" : gcDuration.getValues().get("values.max"));
+                data[i][2] = String.valueOf(gcDuration.getValue().get("count") == null ? "" : gcDuration.getValue().get("count"));
+                data[i][3] = String.valueOf(gcDuration.getValue().get("sum") == null ? "" : gcDuration.getValue().get("sum"));
+                data[i][4] = String.valueOf(gcDuration.getValue().get("min") == null ? "" : gcDuration.getValue().get("min"));
+                data[i][5] = String.valueOf(gcDuration.getValue().get("max") == null ? "" : gcDuration.getValue().get("max"));
                 data[i][6] = String.valueOf(gcDuration.getInterval());
                 data[i][7] = String.valueOf(gcDuration.getAttributes().get("name") == null ? "" : gcDuration.getAttributes().get("name"));
                 data[i][8] = String.valueOf(gcDuration.getAttributes().get("cause") == null ? "" : gcDuration.getAttributes().get("cause"));
             }
         }
-
 
         @Override
         public int getRowCount() {
@@ -92,4 +92,7 @@ public class GCDurationPanel {
         }
     }
 
+    public JTable getTable() {
+        return this.table;
+    }
 }
