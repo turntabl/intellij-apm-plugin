@@ -36,6 +36,8 @@ public class MetricsTree {
     private final NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow;
     private Map<String, JComponent> componentMap;
     private CpuLoadPanel cpuLoadPanel;
+    private JfrSocketReadBytesReadPanel jfrSocketReadBytesReadPanel;
+    private JfrSocketReadDurationPanel jfrSocketReadDurationPanel;
 
     public MetricsTree(NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow) {
         this.newRelicJavaProfilerToolWindow = newRelicJavaProfilerToolWindow;
@@ -52,14 +54,14 @@ public class MetricsTree {
         // define sub nodes of socket branch
         String[] socketNodes = {"Bytes Read", "Duration"};
         // defining table info for socket branch sub nodes
-        JfrSocketReadBytesReadPanel jfrSocketReadBytesReadPanel = new JfrSocketReadBytesReadPanel(
+        jfrSocketReadBytesReadPanel = new JfrSocketReadBytesReadPanel(
                 new JfrSocketReadBytesReadPanel.JfrSocketReadBytesReadTableModel(Arrays.asList(
                         new JfrSocketReadBytesRead("jfr.SocketRead.bytesRead", 1619441645442L, "summary", new HashMap<>(), 46, new HashMap<>())
                 ))
         );
 
         // defining table info for socket branch sub nodes
-        JfrSocketReadDurationPanel jfrSocketReadDurationPanel = new JfrSocketReadDurationPanel(
+        jfrSocketReadDurationPanel = new JfrSocketReadDurationPanel(
                 new JfrSocketReadDurationPanel.JfrSocketReadDurationTableModel(Arrays.asList(
                         new JfrSocketReadDuration("jfr.SocketRead.duration", 1619441645442L, "summary", new HashMap<>(), 50, new HashMap<>())
                 ))
@@ -277,6 +279,14 @@ public class MetricsTree {
 
     public JTable getCpuLoadTable() {
         return this.cpuLoadPanel.getTable();
+    }
+
+    public JTable getJfrSocketReadBytesReadTable(){
+        return this.jfrSocketReadBytesReadPanel.getTable();
+    }
+
+    public JTable getJfrSocketReadDurationTable(){
+        return this.jfrSocketReadDurationPanel.getTable();
     }
 
 }
