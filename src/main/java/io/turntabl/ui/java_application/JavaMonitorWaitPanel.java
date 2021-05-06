@@ -1,5 +1,6 @@
 package io.turntabl.ui.java_application;
 
+import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
 import io.turntabl.ui.model.JavaMonitorWait;
@@ -10,14 +11,14 @@ import java.awt.*;
 import java.util.List;
 
 public class JavaMonitorWaitPanel {
-    JPanel panel;
+    JBPanel panel;
     JTable table;
 
     TableModel myData;
     DefaultTableColumnModel columnModel;
 
     public JavaMonitorWaitPanel (TableModel tableModel) {
-        panel = new JPanel(new BorderLayout());
+        panel = new JBPanel(new BorderLayout());
         table = new JBTable(tableModel);
         table.setRowSelectionAllowed(true);
         table.setRowSelectionInterval(0, 0);
@@ -35,7 +36,7 @@ public class JavaMonitorWaitPanel {
         panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER),  BorderLayout.CENTER);
     }
 
-    public JPanel getJavaMonitorWaitComponent (){
+    public JBPanel getJavaMonitorWaitComponent (){
         return panel;
     }
 

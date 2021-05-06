@@ -1,5 +1,6 @@
 package io.turntabl.ui.flight_recorder;
 
+import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
 import io.turntabl.ui.model.DataLoss;
@@ -10,14 +11,14 @@ import java.awt.*;
 import java.util.List;
 
 public class DataLossPanel {
-    JPanel panel;
+    JBPanel panel;
     JTable table;
 
     TableModel myData;
     DefaultTableColumnModel columnModel;
 
     public DataLossPanel(TableModel tableModel) {
-        panel = new JPanel(new BorderLayout());
+        panel = new JBPanel(new BorderLayout());
         table = new JBTable(tableModel);
 
         table.setRowSelectionAllowed(true);
@@ -32,7 +33,7 @@ public class DataLossPanel {
         panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER), BorderLayout.CENTER);
     }
 
-    public JPanel getDataLossComponent() {
+    public JBPanel getDataLossComponent() {
         return panel;
     }
 
@@ -44,7 +45,7 @@ public class DataLossPanel {
 
         public DataLossTableModel(List<DataLoss> dataLossList) {
             this.dataLossList = dataLossList;
-            data = new double[dataLossList.size()][columnNames.length];
+            data = new String[dataLossList.size()][columnNames.length];
             for (int i = 0; i < dataLossList.size(); i++) {
                 DataLoss dataLoss = dataLossList.get(i);
                 data[i][0] = String.valueOf(dataLoss.getStartTime());

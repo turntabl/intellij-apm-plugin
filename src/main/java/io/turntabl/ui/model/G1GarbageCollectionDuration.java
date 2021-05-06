@@ -1,29 +1,27 @@
 package io.turntabl.ui.model;
 
 import java.util.HashMap;
+import java.util.Map;
 
-public class SummaryMetaspace {
+public class G1GarbageCollectionDuration {
     private String name;
     private String type;
-    private Double committedValue;
-    private Double usedValue;
-    private Double reservedValue;
+    private HashMap<String, String> values;
     private Long timestamp;
+    private Long interval;
     private HashMap<String, String> attributes;
 
-    public SummaryMetaspace() {
+    public G1GarbageCollectionDuration() {
     }
 
-    public SummaryMetaspace(String name, String type, Double committedValue, Double usedValue, Double reservedValue, Long timestamp, HashMap<String, String> attributes) {
+    public G1GarbageCollectionDuration(String name, String type, HashMap<String, String> values, Long timestamp, Long interval, HashMap<String, String> attributes) {
         this.name = name;
         this.type = type;
-        this.committedValue = committedValue;
-        this.usedValue = usedValue;
-        this.reservedValue = reservedValue;
+        this.values = values;
         this.timestamp = timestamp;
+        this.interval = interval;
         this.attributes = attributes;
     }
-
 
     public String getName() {
         return name;
@@ -41,28 +39,12 @@ public class SummaryMetaspace {
         this.type = type;
     }
 
-    public Double getCommittedValue() {
-        return committedValue;
+    public HashMap<String, String> getValues() {
+        return values;
     }
 
-    public void setCommittedValue(Double committedValue) {
-        this.committedValue = committedValue;
-    }
-
-    public Double getUsedValue() {
-        return usedValue;
-    }
-
-    public void setUsedValue(Double usedValue) {
-        this.usedValue = usedValue;
-    }
-
-    public Double getReservedValue() {
-        return reservedValue;
-    }
-
-    public void setReservedValue(Double reservedValue) {
-        this.reservedValue = reservedValue;
+    public void setValues(HashMap<String, String> values) {
+        this.values = values;
     }
 
     public Long getTimestamp() {
@@ -71,6 +53,14 @@ public class SummaryMetaspace {
 
     public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public Long getInterval() {
+        return interval;
+    }
+
+    public void setInterval(Long interval) {
+        this.interval = interval;
     }
 
     public HashMap<String, String> getAttributes() {
@@ -83,13 +73,12 @@ public class SummaryMetaspace {
 
     @Override
     public String toString() {
-        return "SummaryMetaspace{" +
+        return "G1GarbageCollectionDuration{" +
                 "name='" + name + '\'' +
                 ", type='" + type + '\'' +
-                ", committedValue=" + committedValue +
-                ", usedValue=" + usedValue +
-                ", reservedValue=" + reservedValue +
+                ", values=" + values +
                 ", timestamp=" + timestamp +
+                ", interval=" + interval +
                 ", attributes=" + attributes +
                 '}';
     }

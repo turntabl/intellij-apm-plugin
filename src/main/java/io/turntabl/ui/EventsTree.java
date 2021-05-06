@@ -1,15 +1,16 @@
 package io.turntabl.ui;
 
 
+import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
-import com.intellij.util.Time;
+import com.intellij.util.ui.components.BorderLayoutPanel;
 import io.turntabl.ui.flight_recorder.DataLossPanel;
-import io.turntabl.ui.java_application.JavaMonitorWaitPanel;
-import io.turntabl.ui.model.JavaMonitorWait;
 import io.turntabl.ui.flight_recorder.JfrCompilationPanel;
 import io.turntabl.ui.flight_recorder.JvmInformationPanel;
+import io.turntabl.ui.java_application.JavaMonitorWaitPanel;
 import io.turntabl.ui.model.DataLoss;
+import io.turntabl.ui.model.JavaMonitorWait;
 import io.turntabl.ui.model.JfrCompilation;
 import io.turntabl.ui.model.JvmInformation;
 
@@ -18,12 +19,11 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class EventsTree {
-    private JPanel treePanel;
+    private JBPanel treePanel;
     private JTree tree;
     private String rootNodeName = "Events by type";
     private String flightRecorderNodeName = "Flight Recorder";
@@ -31,7 +31,6 @@ public class EventsTree {
     private String jdkNodeName = "Java Development Kit";
     private String jvmNodeName = "Java Virtual Machine";
     private String osNodeName = "Operating System";
-    private JScrollPane treeScrollPane;
     private String[] flightRecorderSubNodes = {"Flight Recording", "Recording Reason", "Recording Setting"};
 
     private String[] javaAppStatisticsNodes = {"Class Loader Statistics", "Class Loading Statistics",
@@ -66,7 +65,7 @@ public class EventsTree {
         flightRecorderNode.add(new DefaultMutableTreeNode("Data Loss"));
         DataLossPanel dataLoss = new DataLossPanel(
                 new DataLossPanel.DataLossTableModel(Arrays.asList(
-                        new DataLoss(12343123423L, 0.10, 20.0)
+                        new DataLoss(12343123423L, 0.10, 20.0, new HashMap<>())
                 )));
 
         componentMap.put("Data Loss", dataLoss.getDataLossComponent());
@@ -155,14 +154,13 @@ public class EventsTree {
         rootNode.add(jvmNode);
         rootNode.add(osNode);
 
-        treePanel = new JPanel(new BorderLayout());
+        treePanel = new BorderLayoutPanel(0, 0);
+
         tree = new Tree(rootNode);
         tree.setBackground(treePanel.getBackground());
         tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 
-        treeScrollPane = new JBScrollPane(tree);
-
-        treePanel.add(treeScrollPane, BorderLayout.CENTER);
+        treePanel.add(new JBScrollPane(tree), BorderLayout.CENTER);
 
         tree.getSelectionModel().addTreeSelectionListener(e -> {
 
@@ -182,7 +180,7 @@ public class EventsTree {
 
     }
 
-    public JPanel getEventTree() {
+    public JBPanel getEventTree() {
         return this.treePanel;
     }
 

@@ -1,10 +1,7 @@
 package io.turntabl.ui.model;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.HashMap;
-import java.util.Date;
 import java.util.HashMap;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -13,13 +10,13 @@ public class CpuLoad {
     @JsonProperty("timestamp")
     private Long startTime;
     private String type;
-    private Double jvmUserValue;
-    private Double jvmSystemValue;
-    private Double machineTotalValue;
+    private double jvmUserValue;
+    private double jvmSystemValue;
+    private double machineTotalValue;
     private HashMap<String, String> attributes;
 
-
-    public CpuLoad(){}
+    public CpuLoad() {
+    }
 
     public CpuLoad(String name, Long startTime, String type, Double jvmUserValue, Double jvmSystemValue, Double machineTotalValue, HashMap<String, String> attributes) {
         this.name = name;
@@ -47,15 +44,15 @@ public class CpuLoad {
         return type;
     }
 
-    public Double getJvmUserValue() {
+    public double getJvmUserValue() {
         return jvmUserValue;
     }
 
-    public Double getJvmSystemValue() {
+    public double getJvmSystemValue() {
         return jvmSystemValue;
     }
 
-    public Double getMachineTotalValue() {
+    public double getMachineTotalValue() {
         return machineTotalValue;
     }
 
@@ -71,15 +68,15 @@ public class CpuLoad {
         this.type = type;
     }
 
-    public void setJvmUserValue(Double jvmUserValue) {
+    public void setJvmUserValue(double jvmUserValue) {
         this.jvmUserValue = jvmUserValue;
     }
 
-    public void setJvmSystemValue(Double jvmSystemValue) {
+    public void setJvmSystemValue(double jvmSystemValue) {
         this.jvmSystemValue = jvmSystemValue;
     }
 
-    public void setMachineTotalValue(Double machineTotalValue) {
+    public void setMachineTotalValue(double machineTotalValue) {
         this.machineTotalValue = machineTotalValue;
     }
 

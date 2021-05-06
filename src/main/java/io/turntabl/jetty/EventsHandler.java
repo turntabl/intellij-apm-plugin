@@ -27,6 +27,6 @@ public class EventsHandler extends HttpServlet {
         resp.setStatus(HttpServletResponse.SC_OK);
         resp.getWriter().println("{ \"status\": \"ok\"}");
         toolWindowComponent.getContent().repaint();
-        toolWindowComponent.getContent().validate();
+//        toolWindowComponent.getContent().validate();
     }
 }

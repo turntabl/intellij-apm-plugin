@@ -1,5 +1,6 @@
 package io.turntabl.ui.operating_system;
 
+import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
 import io.turntabl.ui.model.CpuLoad;
@@ -12,13 +13,13 @@ import java.util.Date;
 import java.util.List;
 
 public class CpuLoadPanel {
-    private JPanel panel;
+    private JBPanel panel;
     private JTable table;
     private TableModel myData;
     private DefaultTableColumnModel columnModel;
 
     public CpuLoadPanel(TableModel tableModel) {
-        panel = new JPanel(new BorderLayout());
+        panel = new JBPanel(new BorderLayout());
         table = new JBTable(tableModel);
 
         table.setRowSelectionAllowed(true);
@@ -34,7 +35,7 @@ public class CpuLoadPanel {
         panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER), BorderLayout.CENTER);
     }
 
-    public JPanel getCpuLoadComponent() {
+    public JBPanel getCpuLoadComponent() {
         return panel;
     }
 
@@ -51,9 +52,9 @@ public class CpuLoadPanel {
 
                 data[i][0] = String.valueOf(new Date(cpuLoad.getStartTime()));
                 data[i][1] = cpuLoad.getType();
-                data[i][2] = String.valueOf(cpuLoad.getJvmUserValue() == null ? "" : cpuLoad.getJvmUserValue());
-                data[i][3] = String.valueOf(cpuLoad.getJvmSystemValue() == null ? "" : cpuLoad.getJvmSystemValue());
-                data[i][4] = String.valueOf(cpuLoad.getMachineTotalValue() == null ? "" : cpuLoad.getMachineTotalValue());
+                data[i][2] = String.valueOf(cpuLoad.getJvmUserValue());
+                data[i][3] = String.valueOf(cpuLoad.getJvmSystemValue());
+                data[i][4] = String.valueOf(cpuLoad.getMachineTotalValue());
                 data[i][5] = cpuLoad.getAttributes().get("thread.osName") == null ? "" : cpuLoad.getAttributes().get("thread.osName");
                 data[i][6] = cpuLoad.getAttributes().get("thread.name") == null ? "" : cpuLoad.getAttributes().get("thread.name");
             }
