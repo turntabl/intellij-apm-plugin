@@ -4,16 +4,11 @@ import io.turntabl.ui.CpuGraph;
 import io.turntabl.ui.NewRelicJavaProfilerToolWindow;
 import io.turntabl.ui.flight_recorder.JfrSocketReadBytesReadPanel;
 import io.turntabl.ui.flight_recorder.JfrSocketReadDurationPanel;
-import io.turntabl.ui.model.CpuLoad;
-import io.turntabl.ui.model.ThreadCpuLoad;
-import io.turntabl.ui.model.JfrSocketReadBytesRead;
-import io.turntabl.ui.model.JfrSocketReadDuration;
+import io.turntabl.ui.java_application.statistics.ThreadAllocationStatisticsPanel;
+import io.turntabl.ui.model.*;
 import io.turntabl.ui.operating_system.CpuLoadPanel;
 import io.turntabl.ui.operating_system.ThreadCpuLoadPanel;
-import io.turntabl.utils.CPULoadUtil;
-import io.turntabl.utils.JfrSocketReadUtil;
-import io.turntabl.utils.JsonUtility;
-import io.turntabl.utils.ThreadCpuLoadUtil;
+import io.turntabl.utils.*;
 import org.jfree.data.xy.XYDataset;
 import org.json.simple.JSONArray;
 import org.slf4j.Logger;
@@ -42,6 +37,9 @@ public class MetricHandler extends HttpServlet {
     private List<JfrSocketReadBytesRead> cumulativeBytesReadList = new ArrayList<>();
     private List<JfrSocketReadDuration> cumulativeDurationList = new ArrayList<>();
 
+    private final ThreadAllocatedStatisticsUtil threadAllocatedStatisticsUtil = new ThreadAllocatedStatisticsUtil(jsonUtil);
+    private List<ThreadAllocationStatistics> cumulativeThreadAllocatedStatisticsList = new ArrayList<>();
+
     public MetricHandler() {
         toolWindowComponent = null;
     }
@@ -56,6 +54,7 @@ public class MetricHandler extends HttpServlet {
 
         updateCpuLoadPanel(decompressedString); //update the cpuload table
         updateThreadLoadPanel(decompressedString); //update the threadCpuLoad table
+        updateThreadAllocatedStatisticsPanel(decompressedString); //Update threadAllocatedStatistics table
 
         updateJfrSocketReadPanels(decompressedString);
 
@@ -121,5 +120,15 @@ public class MetricHandler extends HttpServlet {
             toolWindowComponent.getMetricsTree().updateComponentMap("Bytes Read", new JfrSocketReadBytesReadPanel(bytesReadTableModel).getJfrSocketReadBytesReadComponent());
             toolWindowComponent.getMetricsTree().updateComponentMap("Duration", new JfrSocketReadDurationPanel(durationTableModel).getJfrSocketReadDurationComponent());
         }
+    }
+
+    private void updateThreadAllocatedStatisticsPanel(String jsonString){
+        Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
+        List<ThreadAllocationStatistics> threadAllocationStatisticsList = threadAllocatedStatisticsUtil.getThreadAllocatedStatistics(jsonArray.get());
+
+        cumulativeThreadAllocatedStatisticsList.addAll(threadAllocationStatisticsList);
+        toolWindowComponent.getMetricsTree().getThreadAllocatedStatisticsTable().setModel(new ThreadAllocationStatisticsPanel.ThreadAllocationStatisticsTableModel(cumulativeThreadAllocatedStatisticsList));
+        toolWindowComponent.getMetricsTree().updateComponentMap("Thread Allocated Statistics",(new ThreadAllocationStatisticsPanel(new ThreadCpuLoadPanel.ThreadCpuLoadTableModel(cumulativeThreadCpuLoadList))).getThreadAllocationStatisticsComponent());
+
     }
 }

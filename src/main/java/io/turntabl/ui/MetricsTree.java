@@ -39,6 +39,7 @@ public class MetricsTree {
     private ThreadCpuLoadPanel threadCpuLoadPanel;
     private JfrSocketReadBytesReadPanel jfrSocketReadBytesReadPanel;
     private JfrSocketReadDurationPanel jfrSocketReadDurationPanel;
+    private ThreadAllocationStatisticsPanel threadAllocationStatisticsPanel;
 
     public MetricsTree(NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow) {
         this.newRelicJavaProfilerToolWindow = newRelicJavaProfilerToolWindow;
@@ -106,7 +107,7 @@ public class MetricsTree {
         // define sub nodes for statistics sub node
         String[] javaAppStatisticsNodes = {"Thread Allocated Statistics"};
         // define table for statistics sub node
-        ThreadAllocationStatisticsPanel threadAllocationStatisticsPanel = new ThreadAllocationStatisticsPanel(
+        threadAllocationStatisticsPanel = new ThreadAllocationStatisticsPanel(
                 new ThreadAllocationStatisticsPanel.ThreadAllocationStatisticsTableModel(Arrays.asList(
                         new ThreadAllocationStatistics("2021-06-01 11:08:12:20", "18.4 MiB", 70.52, 5376373L, new HashMap<String, String>())
 
@@ -291,5 +292,6 @@ public class MetricsTree {
     public JTable getJfrSocketReadDurationTable(){
         return this.jfrSocketReadDurationPanel.getTable();
     }
+        public JTable getThreadAllocatedStatisticsTable(){return this.threadAllocationStatisticsPanel.getTable();}
 
 }
