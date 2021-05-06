@@ -62,9 +62,6 @@ public class MetricHandler extends HttpServlet {
         resp.setContentType("application/json");
         resp.setStatus(HttpServletResponse.SC_OK);
         resp.getWriter().println("{ \"status\": \"ok\"}");
-
-//        toolWindowComponent.getContent().repaint();
-//        toolWindowComponent.getContent().validate();
     }
 
     public void updateCpuLoadPanel(String jsonString) {
@@ -95,9 +92,6 @@ public class MetricHandler extends HttpServlet {
             cumulativeThreadCpuLoadList.addAll(consolidatedList);
             toolWindowComponent.getMetricsTree().getThreadCpuTable().setModel(new ThreadCpuLoadPanel.ThreadCpuLoadTableModel(cumulativeThreadCpuLoadList));
             toolWindowComponent.getMetricsTree().updateComponentMap("Thread CPU Load",(new ThreadCpuLoadPanel(new ThreadCpuLoadPanel.ThreadCpuLoadTableModel(cumulativeThreadCpuLoadList))).getThreadCpuLoadComponent());
-
-
-
 
         }
     }
