@@ -14,7 +14,7 @@ import io.turntabl.ui.java_application.statistics.ThreadAllocationStatisticsPane
 import io.turntabl.ui.java_virtual_machine.garbage_collection.*;
 import io.turntabl.ui.model.*;
 import io.turntabl.ui.operating_system.CpuLoadPanel;
-import io.turntabl.ui.operating_system.GcHeapSummaryPanel;
+import io.turntabl.ui.java_virtual_machine.GcHeapSummaryPanel;
 import io.turntabl.ui.operating_system.ThreadCpuLoadPanel;
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -36,6 +36,7 @@ public class MetricsTree {
     private final NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow;
     private Map<String, JComponent> componentMap;
     private CpuLoadPanel cpuLoadPanel;
+    private GcHeapSummaryPanel gcHeapSummaryPanel;
 
     public MetricsTree(NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow) {
         this.newRelicJavaProfilerToolWindow = newRelicJavaProfilerToolWindow;
@@ -193,7 +194,7 @@ public class MetricsTree {
         // define sub nodes for jvm
         String[] jvmNodes = {"GC Heap Summary"};
 
-        GcHeapSummaryPanel gcHeapSummaryPanel = new GcHeapSummaryPanel(
+        gcHeapSummaryPanel = new GcHeapSummaryPanel(
                 new GcHeapSummaryPanel.GcHeapSummaryTableModel(Arrays.asList(
                         new GcHeapSummary("jfr.GCHeapSummary.heapCommittedSize", 1619441634271L, "gauge", 2.65289728E8, 3.204448256E9, 1.39961312E8, new HashMap<>())
                 ))
@@ -277,6 +278,10 @@ public class MetricsTree {
 
     public JTable getCpuLoadTable() {
         return this.cpuLoadPanel.getTable();
+    }
+
+    public JTable getGcHeapSummaryTable(){
+        return this.gcHeapSummaryPanel.getTable();
     }
 
 }
