@@ -45,7 +45,7 @@ public class MetricHandler extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String decompressedString = servletUtils.decompress(req);
-//        updateCpuLoadPanel(decompressedString); //update the cpuload table
+        updateCpuLoadPanel(decompressedString); //update the cpuload table
         updateGcHeapSummaryPanel(decompressedString);
 
         resp.setContentType("application/json");

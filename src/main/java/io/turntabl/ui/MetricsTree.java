@@ -141,7 +141,7 @@ public class MetricsTree {
         // define GC sub nodes
         DefaultMutableTreeNode jvmSubNode = new DefaultMutableTreeNode("Garbage Collections");
         // define sub nodes of socket branch
-        String[] jvmSubNodes = {"G1 GC Duration", "GC Duration", "GC Longest Pause", "GC Major Duration", "GC Minor Duration"};
+        String[] jvmSubNodes = {"G1 GC Duration", "GC Duration", "GC Longest Pause", "GC Major Duration", "GC Minor Duration", "GC Heap Summary"};
 
         // defining table info for GC branch sub nodes
         G1GarbageCollectionDurationPanel g1GarbageCollectionDurationPanel = new G1GarbageCollectionDurationPanel(
@@ -177,37 +177,27 @@ public class MetricsTree {
                 ))
         );
 
-        JBPanel[] gcComponents = {g1GarbageCollectionDurationPanel.getG1GarbageCollectionDurationComponent(),
-                gcDurationPanel.getGCDurationComponent(),
-                gcLongestPausePanel.getGCLongestPauseComponent(),
-                gcMajorDurationPanel.getGCMajorDurationComponent(),
-                gcMinorDurationPanel.getGCMinorDurationComponent()
-        };
-        for (int i = 0; i < jvmSubNodes.length; i++) {
-            jvmSubNode.add(new DefaultMutableTreeNode(jvmSubNodes[i]));
-            componentMap.put(jvmSubNodes[i], gcComponents[i]);
-        }
-
-        jvmNode.add(jvmSubNode);
-
-        // defining table info for socket branch sub nodes
-        // define sub nodes for jvm
-        String[] jvmNodes = {"GC Heap Summary"};
-
+        // defining table info for GC branch sub nodes
         gcHeapSummaryPanel = new GcHeapSummaryPanel(
                 new GcHeapSummaryPanel.GcHeapSummaryTableModel(Arrays.asList(
                         new GcHeapSummary("jfr.GCHeapSummary.heapCommittedSize", 1619441634271L, "gauge", 2.65289728E8, 3.204448256E9, 1.39961312E8, new HashMap<>())
                 ))
         );
 
-        // define components for jvm sub nodes
-        JBPanel[] jvmComponents = {gcHeapSummaryPanel.getGcHeapSummaryComponent()};
-        // adding sub nodes to jvm root node
-        for (int i = 0; i < jvmNodes.length; i++) {
-            jvmNode.add(new DefaultMutableTreeNode(jvmNodes[i]));
-            componentMap.put(jvmNodes[i], jvmComponents[i]);
+        JBPanel[] gcComponents = {g1GarbageCollectionDurationPanel.getG1GarbageCollectionDurationComponent(),
+                gcDurationPanel.getGCDurationComponent(),
+                gcLongestPausePanel.getGCLongestPauseComponent(),
+                gcMajorDurationPanel.getGCMajorDurationComponent(),
+                gcMinorDurationPanel.getGCMinorDurationComponent(),
+                gcHeapSummaryPanel.getGcHeapSummaryComponent()
+        };
+
+        for (int i = 0; i < jvmSubNodes.length; i++) {
+            jvmSubNode.add(new DefaultMutableTreeNode(jvmSubNodes[i]));
+            componentMap.put(jvmSubNodes[i], gcComponents[i]);
         }
 
+        jvmNode.add(jvmSubNode);
 
         // define sub nodes for os
         String[] osNodes = {"Thread CPU Load", "CPU Load", "CPU Load Graph"};
