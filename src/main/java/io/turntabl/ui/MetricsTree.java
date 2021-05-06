@@ -16,7 +16,6 @@ import io.turntabl.ui.model.*;
 import io.turntabl.ui.operating_system.CpuLoadPanel;
 import io.turntabl.ui.operating_system.GcHeapSummaryPanel;
 import io.turntabl.ui.operating_system.ThreadCpuLoadPanel;
-
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
@@ -43,6 +42,10 @@ public class MetricsTree {
     private GCDurationPanel gcDurationPanel;
     private GCLongestPausePanel gcLongestPausePanel;
     private GcHeapSummaryPanel gcHeapSummaryPanel;
+    private ThreadCpuLoadPanel threadCpuLoadPanel;
+    private JfrSocketReadBytesReadPanel jfrSocketReadBytesReadPanel;
+    private JfrSocketReadDurationPanel jfrSocketReadDurationPanel;
+    private ThreadAllocationStatisticsPanel threadAllocationStatisticsPanel;
 
     public MetricsTree(NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow) {
         this.newRelicJavaProfilerToolWindow = newRelicJavaProfilerToolWindow;
@@ -59,14 +62,14 @@ public class MetricsTree {
         // define sub nodes of socket branch
         String[] socketNodes = {"Bytes Read", "Duration"};
         // defining table info for socket branch sub nodes
-        JfrSocketReadBytesReadPanel jfrSocketReadBytesReadPanel = new JfrSocketReadBytesReadPanel(
+        jfrSocketReadBytesReadPanel = new JfrSocketReadBytesReadPanel(
                 new JfrSocketReadBytesReadPanel.JfrSocketReadBytesReadTableModel(Arrays.asList(
                         new JfrSocketReadBytesRead("jfr.SocketRead.bytesRead", 1619441645442L, "summary", new HashMap<>(), 46, new HashMap<>())
                 ))
         );
 
         // defining table info for socket branch sub nodes
-        JfrSocketReadDurationPanel jfrSocketReadDurationPanel = new JfrSocketReadDurationPanel(
+        jfrSocketReadDurationPanel = new JfrSocketReadDurationPanel(
                 new JfrSocketReadDurationPanel.JfrSocketReadDurationTableModel(Arrays.asList(
                         new JfrSocketReadDuration("jfr.SocketRead.duration", 1619441645442L, "summary", new HashMap<>(), 50, new HashMap<>())
                 ))
@@ -112,7 +115,7 @@ public class MetricsTree {
         String[] javaAppStatisticsNodes = {"Thread Allocated Statistics"};
 
         // define table for statistics sub node
-        ThreadAllocationStatisticsPanel threadAllocationStatisticsPanel = new ThreadAllocationStatisticsPanel(
+        threadAllocationStatisticsPanel = new ThreadAllocationStatisticsPanel(
                 new ThreadAllocationStatisticsPanel.ThreadAllocationStatisticsTableModel(Arrays.asList(
                         new ThreadAllocationStatistics("2021-06-01 11:08:12:20", "18.4 MiB", 70.52, 5376373L, new HashMap<String, String>())
 
@@ -214,7 +217,7 @@ public class MetricsTree {
 
         // define sub nodes for os
         String[] osNodes = {"Thread CPU Load", "CPU Load", "CPU Load Graph"};
-        ThreadCpuLoadPanel threadCpuLoadPanel = new ThreadCpuLoadPanel(
+         threadCpuLoadPanel = new ThreadCpuLoadPanel(
                 new ThreadCpuLoadPanel.ThreadCpuLoadTableModel(Arrays.asList(
                         new ThreadCpuLoad("jfr.ThreadCPULoad.user", 1619441626468L, "gauge", 0.04082856327295303, 0.0010207140585407615, new HashMap<>())
                 ))
@@ -282,6 +285,17 @@ public class MetricsTree {
     public JTable getCpuLoadTable() {
         return this.cpuLoadPanel.getTable();
     }
+  
+    public JTable getThreadCpuTable(){return this.threadCpuLoadPanel.getTable();}
+
+    public JTable getJfrSocketReadBytesReadTable(){
+        return this.jfrSocketReadBytesReadPanel.getTable();
+    }
+
+    public JTable getJfrSocketReadDurationTable(){
+        return this.jfrSocketReadDurationPanel.getTable();
+    }
+        public JTable getThreadAllocatedStatisticsTable(){return this.threadAllocationStatisticsPanel.getTable();}
 
     public JTable getGCMinorDurationTable() {
         return this.gcMinorDurationPanel.getTable();

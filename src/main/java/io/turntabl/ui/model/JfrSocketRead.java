@@ -1,12 +1,18 @@
 package io.turntabl.ui.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.HashMap;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class JfrSocketRead {
     protected String name;
+    @JsonProperty("timestamp")
     protected Long startTime;
     protected String type;
     protected HashMap<String, Double> value;
+    @JsonProperty("interval.ms")
     protected int interval;
     protected HashMap<String, String> attributes;
 

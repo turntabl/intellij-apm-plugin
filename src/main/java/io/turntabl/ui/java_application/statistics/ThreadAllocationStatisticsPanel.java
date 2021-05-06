@@ -23,7 +23,7 @@ public class ThreadAllocationStatisticsPanel {
         panel = new JBPanel(new BorderLayout());
         table = new JBTable(tableModel);
 
-        table.setRowSelectionAllowed(true);
+//        table.setRowSelectionAllowed(true);
 
         table.getColumnModel().getColumn(0).setPreferredWidth(350);
         table.getColumnModel().getColumn(1).setPreferredWidth(350);
@@ -75,6 +75,9 @@ public class ThreadAllocationStatisticsPanel {
         public String getColumnName(int column) {
             return columnNames[column];
         }
+    }
+    public JTable getTable() {
+        return this.table;
     }
 }
 
