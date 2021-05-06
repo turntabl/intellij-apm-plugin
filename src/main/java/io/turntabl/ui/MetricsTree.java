@@ -36,6 +36,7 @@ public class MetricsTree {
     private final NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow;
     private Map<String, JComponent> componentMap;
     private CpuLoadPanel cpuLoadPanel;
+    private ThreadCpuLoadPanel threadCpuLoadPanel;
     private JfrSocketReadBytesReadPanel jfrSocketReadBytesReadPanel;
     private JfrSocketReadDurationPanel jfrSocketReadDurationPanel;
 
@@ -212,7 +213,7 @@ public class MetricsTree {
 
         // define sub nodes for os
         String[] osNodes = {"Thread CPU Load", "CPU Load", "CPU Load Graph"};
-        ThreadCpuLoadPanel threadCpuLoadPanel = new ThreadCpuLoadPanel(
+         threadCpuLoadPanel = new ThreadCpuLoadPanel(
                 new ThreadCpuLoadPanel.ThreadCpuLoadTableModel(Arrays.asList(
                         new ThreadCpuLoad("jfr.ThreadCPULoad.user", 1619441626468L, "gauge", 0.04082856327295303, 0.0010207140585407615, new HashMap<>())
                 ))
@@ -280,6 +281,8 @@ public class MetricsTree {
     public JTable getCpuLoadTable() {
         return this.cpuLoadPanel.getTable();
     }
+  
+    public JTable getThreadCpuTable(){return this.threadCpuLoadPanel.getTable();}
 
     public JTable getJfrSocketReadBytesReadTable(){
         return this.jfrSocketReadBytesReadPanel.getTable();
