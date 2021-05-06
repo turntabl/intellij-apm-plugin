@@ -1,9 +1,10 @@
-package io.turntabl.ui.operating_system;
+package io.turntabl.ui.java_virtual_machine;
 
 import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
 import io.turntabl.ui.model.GcHeapSummary;
+
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableColumnModel;
@@ -22,8 +23,7 @@ public class GcHeapSummaryPanel {
         panel = new JBPanel(new BorderLayout());
         table = new JBTable(tableModel);
 
-        table.setRowSelectionAllowed(true);
-        table.setRowSelectionInterval(0, 0);
+//        table.setRowSelectionAllowed(true);
 
         table.getColumnModel().getColumn(0).setPreferredWidth(350);
         table.getColumnModel().getColumn(1).setPreferredWidth(350);
@@ -36,11 +36,15 @@ public class GcHeapSummaryPanel {
         table.getColumnModel().getColumn(8).setPreferredWidth(350);
 
 
-        panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER),  BorderLayout.CENTER);
+        panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER), BorderLayout.CENTER);
     }
 
     public JBPanel getGcHeapSummaryComponent() {
         return panel;
+    }
+
+    public JTable getTable() {
+        return this.table;
     }
 
     public static class GcHeapSummaryTableModel extends AbstractTableModel {

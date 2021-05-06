@@ -2,16 +2,16 @@ package io.turntabl.jetty;
 
 import io.turntabl.ui.CpuGraph;
 import io.turntabl.ui.NewRelicJavaProfilerToolWindow;
+import io.turntabl.ui.java_virtual_machine.GcHeapSummaryPanel;
+import io.turntabl.utils.GcHeapSummaryUtil;
 import io.turntabl.ui.java_virtual_machine.garbage_collection.*;
 import io.turntabl.ui.model.*;
-import io.turntabl.ui.operating_system.CpuLoadPanel;
 import io.turntabl.utils.CPULoadUtil;
 import io.turntabl.utils.GarbageCollectionUtil;
 import io.turntabl.utils.JsonUtility;
 import io.turntabl.ui.flight_recorder.JfrSocketReadBytesReadPanel;
 import io.turntabl.ui.flight_recorder.JfrSocketReadDurationPanel;
 import io.turntabl.ui.java_application.statistics.ThreadAllocationStatisticsPanel;
-import io.turntabl.ui.model.*;
 import io.turntabl.ui.operating_system.CpuLoadPanel;
 import io.turntabl.ui.operating_system.ThreadCpuLoadPanel;
 import io.turntabl.utils.*;
@@ -36,6 +36,8 @@ public class MetricHandler extends HttpServlet {
     private final JsonUtility jsonUtil = new JsonUtility();
     private final CPULoadUtil cpuLoadUtil = new CPULoadUtil(jsonUtil);
     private List<CpuLoad> cumulativeCpuLoadList = new ArrayList<>();
+    private final GcHeapSummaryUtil gcHeapSummaryUtil = new GcHeapSummaryUtil(jsonUtil);
+    private List<GcHeapSummary> cumulativeGcHeapSummaryList = new ArrayList<>();
     private final GarbageCollectionUtil gcUtil = new GarbageCollectionUtil(jsonUtil);
     private List<GCMinorDuration> cumulativeGcMinorDurationList = new ArrayList<>();
     private List<GCMajorDuration> cumulativeGcMajorDurationList = new ArrayList<>();
@@ -63,6 +65,7 @@ public class MetricHandler extends HttpServlet {
         String decompressedString = servletUtils.decompress(req);
 
         updateCpuLoadPanel(decompressedString); //update the cpuload table
+        updateGcHeapSummaryPanel(decompressedString);
         updateGarbageCollectionPanel(decompressedString);
         updateThreadLoadPanel(decompressedString); //update the threadCpuLoad table
         updateThreadAllocatedStatisticsPanel(decompressedString); //Update threadAllocatedStatistics table
@@ -170,6 +173,22 @@ public class MetricHandler extends HttpServlet {
             toolWindowComponent.getMetricsTree().updateComponentMap("GC Duration", (new GCDurationPanel(gcDurationTableModel)).getGCDurationComponent());
             toolWindowComponent.getMetricsTree().updateComponentMap("GC Longest Pause", (new GCLongestPausePanel(gcLongestPauseTableModel)).getGCLongestPauseComponent());
 
+        }
+    }
+
+    public void updateGcHeapSummaryPanel(String jsonString){
+        Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
+
+        if (jsonArray.isPresent()){
+            List<GcHeapSummary> gcHeapSummaryList = gcHeapSummaryUtil.getGcHeapSummary(jsonArray.get());
+            List<GcHeapSummary> consolidatedList = gcHeapSummaryUtil.getGcHeapSummaryConsolidated(gcHeapSummaryList);
+
+            cumulativeGcHeapSummaryList.addAll(consolidatedList);
+
+            TableModel tableModel = new GcHeapSummaryPanel.GcHeapSummaryTableModel(cumulativeGcHeapSummaryList);
+
+            toolWindowComponent.getMetricsTree().getGcHeapSummaryTable().setModel(tableModel);
+            toolWindowComponent.getMetricsTree().updateComponentMap("GC Heap Summary", (new GcHeapSummaryPanel(tableModel)).getGcHeapSummaryComponent());
         }
     }
 }
