@@ -2,6 +2,16 @@ package io.turntabl.jetty;
 
 import io.turntabl.ui.CpuGraph;
 import io.turntabl.ui.NewRelicJavaProfilerToolWindow;
+
+import io.turntabl.ui.java_application.ObjectAllocationInNewTLabPanel;
+import io.turntabl.ui.java_application.ObjectAllocationOutsideTLabPanel;
+import io.turntabl.ui.model.CpuLoad;
+import io.turntabl.ui.model.ObjectAllocationInNewTLab;
+import io.turntabl.ui.operating_system.CpuLoadPanel;
+import io.turntabl.utils.CPULoadUtil;
+import io.turntabl.utils.JsonUtility;
+import io.turntabl.utils.ObjectAllocationInNewTLabUtil;
+
 import io.turntabl.ui.java_virtual_machine.GcHeapSummaryPanel;
 import io.turntabl.ui.java_virtual_machine.garbage_collection.*;
 import io.turntabl.ui.model.*;
@@ -9,6 +19,7 @@ import io.turntabl.ui.flight_recorder.*;
 import io.turntabl.ui.java_application.statistics.ThreadAllocationStatisticsPanel;
 import io.turntabl.ui.operating_system.*;
 import io.turntabl.utils.*;
+
 import org.jfree.data.xy.XYDataset;
 import org.json.simple.JSONArray;
 import org.slf4j.Logger;
@@ -29,6 +40,12 @@ public class MetricHandler extends HttpServlet {
     private final ServletUtils servletUtils = new ServletUtils();
     private final JsonUtility jsonUtil = new JsonUtility();
     private final CPULoadUtil cpuLoadUtil = new CPULoadUtil(jsonUtil);
+    private final ObjectAllocationInNewTLabUtil objectAllocationInNewTLabUtil = new ObjectAllocationInNewTLabUtil(jsonUtil);
+    private List<ObjectAllocationInNewTLab> cumulativeObjectAllocationList = new ArrayList<>();
+
+    private final ObjectAllocationOutsideTLabUtil objectAllocationOutsideTLabUtil = new ObjectAllocationOutsideTLabUtil(jsonUtil);
+    private List<ObjectAllocationOutsideTLab> cumulativeObjectAllocationOutsideList = new ArrayList<>();
+
     private List<CpuLoad> cumulativeCpuLoadList = new ArrayList<>();
     private final GcHeapSummaryUtil gcHeapSummaryUtil = new GcHeapSummaryUtil(jsonUtil);
     private List<GcHeapSummary> cumulativeGcHeapSummaryList = new ArrayList<>();
@@ -59,16 +76,22 @@ public class MetricHandler extends HttpServlet {
         String decompressedString = servletUtils.decompress(req);
 
         updateCpuLoadPanel(decompressedString); //update the cpuload table
+
+        updateObjectAllocationInNewTLabPanel(decompressedString);
+
+        updateObjectAllocationOutsideTLabPanel(decompressedString);
         updateGcHeapSummaryPanel(decompressedString);
         updateGarbageCollectionPanel(decompressedString);
         updateThreadLoadPanel(decompressedString); //update the threadCpuLoad table
         updateThreadAllocatedStatisticsPanel(decompressedString); //Update threadAllocatedStatistics table
         updateJfrSocketReadPanels(decompressedString);
 
+
         resp.setContentType("application/json");
         resp.setStatus(HttpServletResponse.SC_OK);
         resp.getWriter().println("{ \"status\": \"ok\"}");
     }
+
 
     public void updateCpuLoadPanel(String jsonString) {
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
@@ -183,6 +206,34 @@ public class MetricHandler extends HttpServlet {
 
             toolWindowComponent.getMetricsTree().getGcHeapSummaryTable().setModel(tableModel);
             toolWindowComponent.getMetricsTree().updateComponentMap("GC Heap Summary", (new GcHeapSummaryPanel(tableModel)).getGcHeapSummaryComponent());
+        }
+    }
+
+    public void updateObjectAllocationInNewTLabPanel(String jsonString) {
+        Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
+
+        if (jsonArray.isPresent()) {
+            List<ObjectAllocationInNewTLab> objectAllocationInNewTLabsList = objectAllocationInNewTLabUtil.getObjectAllocationInNewTLab(jsonArray.get());
+        cumulativeObjectAllocationList.addAll(objectAllocationInNewTLabsList);
+
+            toolWindowComponent.getMetricsTree().getObjectAllocationInNewTLabTable().setModel(new ObjectAllocationInNewTLabPanel.ObjectAllocationInNewTLabTableModel(cumulativeObjectAllocationList));
+            toolWindowComponent.getMetricsTree().updateComponentMap("Object Allocation in new TLAB", (new ObjectAllocationInNewTLabPanel(new ObjectAllocationInNewTLabPanel.ObjectAllocationInNewTLabTableModel(cumulativeObjectAllocationList))).getObjectAllocationInNewTLabComponent());
+
+
+        }
+    }
+
+    public void updateObjectAllocationOutsideTLabPanel(String jsonString) {
+        Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
+
+        if (jsonArray.isPresent()) {
+            List<ObjectAllocationOutsideTLab> objectAllocationOutsideTLabsList = objectAllocationOutsideTLabUtil.getObjectAllocationOutsideTLab(jsonArray.get());
+            cumulativeObjectAllocationOutsideList.addAll(objectAllocationOutsideTLabsList);
+
+            toolWindowComponent.getMetricsTree().getObjectAllocationInNewTLabTable().setModel(new ObjectAllocationOutsideTLabPanel.ObjectAllocationOutsideTLabTableModel(cumulativeObjectAllocationOutsideList));
+            toolWindowComponent.getMetricsTree().updateComponentMap("Object Allocation outside TLAB", (new ObjectAllocationOutsideTLabPanel(new ObjectAllocationOutsideTLabPanel.ObjectAllocationOutsideTLabTableModel(cumulativeObjectAllocationOutsideList))).getObjectAllocationOutsideTLabComponent());
+
+
         }
     }
 }
