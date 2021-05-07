@@ -89,4 +89,8 @@ public class ObjectAllocationOutsideTLabPanel {
 
     }
 
+    public JTable getTable() {
+        return this.table;
+    }
+
 }
