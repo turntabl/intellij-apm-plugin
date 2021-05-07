@@ -1,25 +1,31 @@
 package io.turntabl.ui.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.HashMap;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class GarbageCollection {
-    private String name;
-    private String type;
-    private HashMap<String, String> values;
-    private Long timestamp;
-    private Long interval;
-    private HashMap<String, String> attributes;
+    protected String name;
+    protected String type;
+    protected HashMap<String, Double> value;
+    protected Long timestamp;
+    @JsonProperty("interval.ms")
+    protected Long interval;
+    protected HashMap<String, String> attributes;
 
-    public GarbageCollection(String name, String type, HashMap<String, String> values, Long timestamp, Long interval, HashMap<String, String> attributes) {
+
+    public GarbageCollection() {
+    }
+
+    public GarbageCollection(String name, String type, HashMap<String, Double> value, Long timestamp, Long interval, HashMap<String, String> attributes) {
         this.name = name;
         this.type = type;
-        this.values = values;
+        this.value = value;
         this.timestamp = timestamp;
         this.interval = interval;
         this.attributes = attributes;
-    }
-
-    public GarbageCollection() {
     }
 
     public String getName() {
@@ -38,12 +44,12 @@ public class GarbageCollection {
         this.type = type;
     }
 
-    public HashMap<String, String> getValues() {
-        return values;
+    public HashMap<String, Double> getValue() {
+        return value;
     }
 
-    public void setValues(HashMap<String, String> values) {
-        this.values = values;
+    public void setValue(HashMap<String, Double> value) {
+        this.value = value;
     }
 
     public Long getTimestamp() {
@@ -75,7 +81,7 @@ public class GarbageCollection {
         return "GarbageCollection{" +
                 "name='" + name + '\'' +
                 ", type='" + type + '\'' +
-                ", values=" + values +
+                ", value=" + value +
                 ", timestamp=" + timestamp +
                 ", interval=" + interval +
                 ", attributes=" + attributes +

@@ -16,7 +16,6 @@ import com.intellij.util.ui.components.BorderLayoutPanel;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;

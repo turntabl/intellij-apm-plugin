@@ -24,7 +24,7 @@ public class GCMinorDurationPanel {
         table = new JBTable(tableModel);
 
         table.setRowSelectionAllowed(true);
-        table.setRowSelectionInterval(0, 0);
+//        table.setRowSelectionInterval(0, 0);
 
 
         table.getColumnModel().getColumn(0).setPreferredWidth(350);
@@ -46,7 +46,7 @@ public class GCMinorDurationPanel {
     }
 
     public static class GCMinorDurationTableModel extends AbstractTableModel {
-        String[] columnNames = {"Timestamp", "Type", "Value Count", "Value Sum", "Value Min", "Value Max", "Interval", "Attribute Name", "Attribute Cause"};
+        String[] columnNames = {"Timestamp", "Type", "Value Count", "Value Sum", "Value Min", "Value Max", "Interval ms", "Attribute Name", "Attribute Cause"};
         String[][] data;
 
         private List<GCMinorDuration> gcMinorDurationList;
@@ -61,10 +61,10 @@ public class GCMinorDurationPanel {
 
                 data[i][0] = String.valueOf(gcMinorDuration.getTimestamp());
                 data[i][1] = gcMinorDuration.getType();
-                data[i][2] = String.valueOf(gcMinorDuration.getValues().get("values.count") == null ? "" : gcMinorDuration.getValues().get("values.count"));
-                data[i][3] = String.valueOf(gcMinorDuration.getValues().get("values.sum") == null ? "" : gcMinorDuration.getValues().get("values.sum"));
-                data[i][4] = String.valueOf(gcMinorDuration.getValues().get("values.min") == null ? "" : gcMinorDuration.getValues().get("values.min"));
-                data[i][5] = String.valueOf(gcMinorDuration.getValues().get("values.max") == null ? "" : gcMinorDuration.getValues().get("values.max"));
+                data[i][2] = String.valueOf(gcMinorDuration.getValue().get("count") == null ? "" : gcMinorDuration.getValue().get("count"));
+                data[i][3] = String.valueOf(gcMinorDuration.getValue().get("sum") == null ? "" : gcMinorDuration.getValue().get("sum"));
+                data[i][4] = String.valueOf(gcMinorDuration.getValue().get("min") == null ? "" : gcMinorDuration.getValue().get("min"));
+                data[i][5] = String.valueOf(gcMinorDuration.getValue().get("max") == null ? "" : gcMinorDuration.getValue().get("max"));
                 data[i][6] = String.valueOf(gcMinorDuration.getInterval());
                 data[i][7] = String.valueOf(gcMinorDuration.getAttributes().get("name") == null ? "" : gcMinorDuration.getAttributes().get("name"));
                 data[i][8] = String.valueOf(gcMinorDuration.getAttributes().get("cause") == null ? "" : gcMinorDuration.getAttributes().get("cause"));
@@ -90,5 +90,9 @@ public class GCMinorDurationPanel {
         public String getColumnName(int column) {
             return columnNames[column];
         }
+    }
+
+    public JTable getTable() {
+        return this.table;
     }
 }
