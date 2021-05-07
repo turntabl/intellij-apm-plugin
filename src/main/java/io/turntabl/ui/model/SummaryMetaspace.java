@@ -1,6 +1,5 @@
 package io.turntabl.ui.model;
 
-import java.sql.Timestamp;
 import java.util.HashMap;
 
 public class SummaryMetaspace {

@@ -2,7 +2,9 @@ package io.turntabl.jetty;
 
 import io.turntabl.ui.CpuGraph;
 import io.turntabl.ui.NewRelicJavaProfilerToolWindow;
-
+import io.turntabl.ui.flight_recorder.SummaryMetaspacePanel;
+import io.turntabl.ui.model.SummaryMetaspace;
+import io.turntabl.utils.SummaryMetaspaceUtil;
 import io.turntabl.ui.java_application.ObjectAllocationInNewTLabPanel;
 import io.turntabl.ui.java_application.ObjectAllocationOutsideTLabPanel;
 import io.turntabl.ui.model.CpuLoad;
@@ -11,7 +13,6 @@ import io.turntabl.ui.operating_system.CpuLoadPanel;
 import io.turntabl.utils.CPULoadUtil;
 import io.turntabl.utils.JsonUtility;
 import io.turntabl.utils.ObjectAllocationInNewTLabUtil;
-
 import io.turntabl.ui.java_virtual_machine.GcHeapSummaryPanel;
 import io.turntabl.ui.java_virtual_machine.garbage_collection.*;
 import io.turntabl.ui.model.*;
@@ -19,7 +20,6 @@ import io.turntabl.ui.flight_recorder.*;
 import io.turntabl.ui.java_application.statistics.ThreadAllocationStatisticsPanel;
 import io.turntabl.ui.operating_system.*;
 import io.turntabl.utils.*;
-
 import org.jfree.data.xy.XYDataset;
 import org.json.simple.JSONArray;
 import org.slf4j.Logger;
@@ -63,6 +63,8 @@ public class MetricHandler extends HttpServlet {
     private final ThreadAllocatedStatisticsUtil threadAllocatedStatisticsUtil = new ThreadAllocatedStatisticsUtil(jsonUtil);
     private List<ThreadAllocationStatistics> cumulativeThreadAllocatedStatisticsList = new ArrayList<>();
 
+    private final SummaryMetaspaceUtil summaryMetaspaceUtil = new SummaryMetaspaceUtil(jsonUtil);
+    private List<SummaryMetaspace> cumulativeSummaryMetaspaceList = new ArrayList<>();
     public MetricHandler() {
         toolWindowComponent = null;
     }
@@ -77,8 +79,8 @@ public class MetricHandler extends HttpServlet {
 
         updateCpuLoadPanel(decompressedString); //update the cpuload table
 
+        updateSummaryMetaspacePanel(decompressedString);
         updateObjectAllocationInNewTLabPanel(decompressedString);
-
         updateObjectAllocationOutsideTLabPanel(decompressedString);
         updateGcHeapSummaryPanel(decompressedString);
         updateGarbageCollectionPanel(decompressedString);
@@ -209,6 +211,21 @@ public class MetricHandler extends HttpServlet {
         }
     }
 
+
+    public void updateSummaryMetaspacePanel(String jsonString) {
+        Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
+
+        if (jsonArray.isPresent()) {
+            List<SummaryMetaspace> summaryMetaspaceList = summaryMetaspaceUtil.getSummaryMetaspaceMetric(jsonArray.get());
+            List<SummaryMetaspace> consolidatedList = summaryMetaspaceUtil.getSummaryMetaspaceConsolidated(summaryMetaspaceList);
+
+            cumulativeSummaryMetaspaceList.addAll(consolidatedList);
+
+            toolWindowComponent.getMetricsTree().getCpuLoadTable().setModel(new SummaryMetaspacePanel.SummaryMetaspaceTableModel(cumulativeSummaryMetaspaceList));
+            toolWindowComponent.getMetricsTree().updateComponentMap("Summary Metaspace", (new SummaryMetaspacePanel(new SummaryMetaspacePanel.SummaryMetaspaceTableModel(cumulativeSummaryMetaspaceList))).getSummaryMetaspaceComponent());
+        }
+    }
+  
     public void updateObjectAllocationInNewTLabPanel(String jsonString) {
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
 
@@ -218,8 +235,6 @@ public class MetricHandler extends HttpServlet {
 
             toolWindowComponent.getMetricsTree().getObjectAllocationInNewTLabTable().setModel(new ObjectAllocationInNewTLabPanel.ObjectAllocationInNewTLabTableModel(cumulativeObjectAllocationList));
             toolWindowComponent.getMetricsTree().updateComponentMap("Object Allocation in new TLAB", (new ObjectAllocationInNewTLabPanel(new ObjectAllocationInNewTLabPanel.ObjectAllocationInNewTLabTableModel(cumulativeObjectAllocationList))).getObjectAllocationInNewTLabComponent());
-
-
         }
     }
 
@@ -232,8 +247,6 @@ public class MetricHandler extends HttpServlet {
 
             toolWindowComponent.getMetricsTree().getObjectAllocationInNewTLabTable().setModel(new ObjectAllocationOutsideTLabPanel.ObjectAllocationOutsideTLabTableModel(cumulativeObjectAllocationOutsideList));
             toolWindowComponent.getMetricsTree().updateComponentMap("Object Allocation outside TLAB", (new ObjectAllocationOutsideTLabPanel(new ObjectAllocationOutsideTLabPanel.ObjectAllocationOutsideTLabTableModel(cumulativeObjectAllocationOutsideList))).getObjectAllocationOutsideTLabComponent());
-
-
         }
     }
 }

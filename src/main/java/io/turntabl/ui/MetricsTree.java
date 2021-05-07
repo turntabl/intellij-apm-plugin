@@ -10,14 +10,10 @@ import io.turntabl.ui.java_application.statistics.ThreadAllocationStatisticsPane
 import io.turntabl.ui.java_virtual_machine.GcHeapSummaryPanel;
 import io.turntabl.ui.java_virtual_machine.garbage_collection.*;
 import io.turntabl.ui.model.*;
-
 import io.turntabl.ui.operating_system.CpuLoadPanel;
 import io.turntabl.ui.operating_system.ThreadCpuLoadPanel;
 import org.jfree.data.xy.XYDatasetTableModel;
-
-
 import io.turntabl.ui.operating_system.*;
-
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
@@ -51,6 +47,7 @@ public class MetricsTree {
     private JfrSocketReadBytesReadPanel jfrSocketReadBytesReadPanel;
     private JfrSocketReadDurationPanel jfrSocketReadDurationPanel;
     private ThreadAllocationStatisticsPanel threadAllocationStatisticsPanel;
+    private SummaryMetaspacePanel summaryMetaspacePanel;
 
 
     public MetricsTree(NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow) {
@@ -350,5 +347,7 @@ public class MetricsTree {
         return this.gcHeapSummaryPanel.getTable();
     }
 
-
+    public JTable getSummaryMetaspace() {
+        return this.summaryMetaspacePanel.getTable();
+    }
 }
