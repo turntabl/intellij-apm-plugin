@@ -5,15 +5,9 @@ import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
 import com.intellij.util.ui.components.BorderLayoutPanel;
-import io.turntabl.ui.flight_recorder.DataLossPanel;
-import io.turntabl.ui.flight_recorder.JfrCompilationPanel;
-import io.turntabl.ui.flight_recorder.JvmInformationPanel;
+import io.turntabl.ui.flight_recorder.*;
 import io.turntabl.ui.java_application.JavaMonitorWaitPanel;
-import io.turntabl.ui.model.DataLoss;
-import io.turntabl.ui.model.JavaMonitorWait;
-import io.turntabl.ui.model.JfrCompilation;
-import io.turntabl.ui.model.JvmInformation;
-
+import io.turntabl.ui.model.*;
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;

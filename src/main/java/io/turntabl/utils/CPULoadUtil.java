@@ -93,7 +93,6 @@ public class CPULoadUtil {
     }
 
     public XYDataset createDataSet(List<CpuLoad> cpuLoadList) {
-        cpuLoadList.forEach(System.out::println);
         XYSeries jvmUserSeries = new XYSeries("JVM User");
         XYSeries jvmSystemSeries = new XYSeries("JVM System");
         XYSeries machineTotalSeries = new XYSeries("Machine Total");

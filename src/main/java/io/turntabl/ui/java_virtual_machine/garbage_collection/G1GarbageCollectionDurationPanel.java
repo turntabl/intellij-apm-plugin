@@ -24,7 +24,7 @@ public class G1GarbageCollectionDurationPanel {
         table = new JBTable(tableModel);
 
         table.setRowSelectionAllowed(true);
-        table.setRowSelectionInterval(0, 0);
+//        table.setRowSelectionInterval(0, 0);
 
         table.getColumnModel().getColumn(0).setPreferredWidth(350);
         table.getColumnModel().getColumn(1).setPreferredWidth(350);
@@ -44,7 +44,7 @@ public class G1GarbageCollectionDurationPanel {
     }
 
     public static class G1GarbageCollectionDurationTableModel extends AbstractTableModel {
-        String[] columnNames = {"Timestamp", "Type", "Value Count", "Value Sum", "Value Min", "Value Max", "Interval", "Attribute Name", "Attribute Cause"};
+        String[] columnNames = {"Timestamp", "Type", "Value Count", "Value Sum", "Value Min", "Value Max", "Interval ms", "Attribute Name", "Attribute Cause"};
         String[][] data;
         private List<G1GarbageCollectionDuration> g1GarbageCollectionDurationList;
 
@@ -56,17 +56,16 @@ public class G1GarbageCollectionDurationPanel {
                 G1GarbageCollectionDuration g1GarbageCollectionDuration = g1GarbageCollectionDurationList.get(i);
                 data[i][0] = String.valueOf(g1GarbageCollectionDuration.getTimestamp());
                 data[i][1] = g1GarbageCollectionDuration.getType();
-                data[i][2] = String.valueOf(g1GarbageCollectionDuration.getValues().get("values.count") == null ? "" : g1GarbageCollectionDuration.getValues().get("values.count"));
-                data[i][3] = String.valueOf(g1GarbageCollectionDuration.getValues().get("values.sum") == null ? "" : g1GarbageCollectionDuration.getValues().get("values.sum"));
-                data[i][4] = String.valueOf(g1GarbageCollectionDuration.getValues().get("values.min") == null ? "" : g1GarbageCollectionDuration.getValues().get("values.min"));
-                data[i][5] = String.valueOf(g1GarbageCollectionDuration.getValues().get("values.max") == null ? "" : g1GarbageCollectionDuration.getValues().get("values.max"));
+                data[i][2] = String.valueOf(g1GarbageCollectionDuration.getValue().get("count") == null ? "" : g1GarbageCollectionDuration.getValue().get("count"));
+                data[i][3] = String.valueOf(g1GarbageCollectionDuration.getValue().get("sum") == null ? "" : g1GarbageCollectionDuration.getValue().get("sum"));
+                data[i][4] = String.valueOf(g1GarbageCollectionDuration.getValue().get("min") == null ? "" : g1GarbageCollectionDuration.getValue().get("min"));
+                data[i][5] = String.valueOf(g1GarbageCollectionDuration.getValue().get("max") == null ? "" : g1GarbageCollectionDuration.getValue().get("max"));
                 data[i][6] = String.valueOf(g1GarbageCollectionDuration.getInterval());
                 data[i][7] = String.valueOf(g1GarbageCollectionDuration.getAttributes().get("name") == null ? "" : g1GarbageCollectionDuration.getAttributes().get("name"));
                 data[i][8] = String.valueOf(g1GarbageCollectionDuration.getAttributes().get("cause") == null ? "" : g1GarbageCollectionDuration.getAttributes().get("cause"));
 
             }
         }
-
 
         @Override
         public int getRowCount() {
@@ -87,5 +86,9 @@ public class G1GarbageCollectionDurationPanel {
         public String getColumnName(int column) {
             return columnNames[column];
         }
+    }
+
+    public JTable getTable() {
+        return this.table;
     }
 }
