@@ -43,6 +43,7 @@ public class SummaryMetaspacePanel {
         return panel;
     }
 
+
     public static class SummaryMetaspaceTableModel extends AbstractTableModel {
         String[] columnNames = {"Timestamp", "Type", "Committed Value", "Used Value", "Reserved Value", "When"};
         String[][] data;
@@ -82,6 +83,10 @@ public class SummaryMetaspacePanel {
         public String getColumnName(int column) {
             return columnNames[column];
         }
+
+    }
+    public JTable getTable() {
+        return this.table;
     }
 }
 

@@ -41,6 +41,7 @@ public class MetricsTree {
     private JfrSocketReadBytesReadPanel jfrSocketReadBytesReadPanel;
     private JfrSocketReadDurationPanel jfrSocketReadDurationPanel;
     private ThreadAllocationStatisticsPanel threadAllocationStatisticsPanel;
+    private SummaryMetaspacePanel summaryMetaspacePanel;
 
     public MetricsTree(NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow) {
         this.newRelicJavaProfilerToolWindow = newRelicJavaProfilerToolWindow;
@@ -332,6 +333,10 @@ public class MetricsTree {
 
     public JTable getGcHeapSummaryTable() {
         return this.gcHeapSummaryPanel.getTable();
+    }
+
+    public JTable getSummaryMetaspace() {
+        return this.summaryMetaspacePanel.getTable();
     }
 
 }
