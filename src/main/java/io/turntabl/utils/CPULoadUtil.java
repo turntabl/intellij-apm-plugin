@@ -101,13 +101,12 @@ public class CPULoadUtil {
             int startTime = Integer.parseInt(formatDate(cpuLoadList.get(i).getStartTime()));
 
             if (cpuLoadList.get(i).getName().toLowerCase().endsWith("jvmuser")) {
-                jvmUserSeries.add(cpuLoadList.get(i).getJvmUserValue(), startTime);
+                jvmUserSeries.add(startTime, cpuLoadList.get(i).getJvmUserValue());
             } else if (cpuLoadList.get(i).getName().toLowerCase().endsWith("jvmsystem")) {
-                jvmSystemSeries.add(cpuLoadList.get(i).getJvmSystemValue(), startTime);
+                jvmSystemSeries.add(startTime, cpuLoadList.get(i).getJvmSystemValue());
             } else {
-                machineTotalSeries.add(cpuLoadList.get(i).getMachineTotalValue(), startTime);
+                machineTotalSeries.add(startTime, cpuLoadList.get(i).getMachineTotalValue());
             }
-
         }
 
         XYSeriesCollection dataset = new XYSeriesCollection();

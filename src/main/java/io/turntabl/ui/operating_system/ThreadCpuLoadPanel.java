@@ -4,27 +4,24 @@ import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
 import io.turntabl.ui.model.ThreadCpuLoad;
+import io.turntabl.utils.JsonUtility;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableModel;
 import java.awt.*;
 import java.util.List;
 
 public class ThreadCpuLoadPanel {
-    JBPanel panel;
-    JTable table;
-
-    TableModel myData;
-    DefaultTableColumnModel columnModel;
+    private JBPanel panel;
+    private JTable table;
+    private static final JsonUtility jsonUtil = new JsonUtility();
 
     public ThreadCpuLoadPanel(TableModel tableModel) {
         panel = new JBPanel(new BorderLayout());
         table = new JBTable(tableModel);
 
         table.setRowSelectionAllowed(true);
-//        table.setRowSelectionInterval(0, 0);
 
         table.getColumnModel().getColumn(0).setPreferredWidth(350);
         table.getColumnModel().getColumn(1).setPreferredWidth(350);
@@ -33,7 +30,7 @@ public class ThreadCpuLoadPanel {
         table.getColumnModel().getColumn(4).setPreferredWidth(350);
         table.getColumnModel().getColumn(5).setPreferredWidth(350);
 
-        panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER),  BorderLayout.CENTER);
+        panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER), BorderLayout.CENTER);
     }
 
     public JBPanel getThreadCpuLoadComponent() {
@@ -50,7 +47,7 @@ public class ThreadCpuLoadPanel {
             data = new String[threadCpuLoadList.size()][columnNames.length];
             for (int i = 0; i < threadCpuLoadList.size(); i++) {
                 ThreadCpuLoad threadCpuLoad = threadCpuLoadList.get(i);
-                data[i][0] = String.valueOf(threadCpuLoad.getStartTime());
+                data[i][0] = String.valueOf(jsonUtil.getTime(threadCpuLoad.getStartTime()));
                 data[i][1] = threadCpuLoad.getType();
                 data[i][2] = String.valueOf(threadCpuLoad.getUserValue());
                 data[i][3] = String.valueOf(threadCpuLoad.getSystemValue());

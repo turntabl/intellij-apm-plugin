@@ -4,19 +4,18 @@ import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
 import io.turntabl.ui.model.CpuLoad;
+import io.turntabl.utils.JsonUtility;
+
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableModel;
 import java.awt.*;
-import java.util.Date;
 import java.util.List;
 
 public class CpuLoadPanel {
     private JBPanel panel;
     private JTable table;
-    private TableModel myData;
-    private DefaultTableColumnModel columnModel;
+    private static final JsonUtility jsonUtil = new JsonUtility();
 
     public CpuLoadPanel(TableModel tableModel) {
         panel = new JBPanel(new BorderLayout());
@@ -50,7 +49,7 @@ public class CpuLoadPanel {
             for (int i = 0; i < cpuLoadList.size(); i++) {
                 CpuLoad cpuLoad = cpuLoadList.get(i);
 
-                data[i][0] = String.valueOf(new Date(cpuLoad.getStartTime()));
+                data[i][0] = jsonUtil.getTime(cpuLoad.getStartTime());
                 data[i][1] = cpuLoad.getType();
                 data[i][2] = String.valueOf(cpuLoad.getJvmUserValue());
                 data[i][3] = String.valueOf(cpuLoad.getJvmSystemValue());

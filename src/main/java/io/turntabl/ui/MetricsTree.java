@@ -10,6 +10,9 @@ import io.turntabl.ui.java_application.statistics.ThreadAllocationStatisticsPane
 import io.turntabl.ui.java_virtual_machine.GcHeapSummaryPanel;
 import io.turntabl.ui.java_virtual_machine.garbage_collection.*;
 import io.turntabl.ui.model.*;
+import io.turntabl.ui.operating_system.CpuLoadPanel;
+import io.turntabl.ui.operating_system.ThreadCpuLoadPanel;
+import org.jfree.data.xy.XYDatasetTableModel;
 import io.turntabl.ui.operating_system.*;
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -31,6 +34,9 @@ public class MetricsTree {
     private CpuGraph cpuGraph;
     private Map<String, JComponent> componentMap;
     private CpuLoadPanel cpuLoadPanel;
+
+    private ObjectAllocationInNewTLabPanel objectAllocationInNewTLabPanel;
+
     private GcHeapSummaryPanel gcHeapSummaryPanel;
     private GCMinorDurationPanel gcMinorDurationPanel;
     private GCMajorDurationPanel gcMajorDurationPanel;
@@ -42,6 +48,7 @@ public class MetricsTree {
     private JfrSocketReadDurationPanel jfrSocketReadDurationPanel;
     private ThreadAllocationStatisticsPanel threadAllocationStatisticsPanel;
     private SummaryMetaspacePanel summaryMetaspacePanel;
+
 
     public MetricsTree(NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow) {
         this.newRelicJavaProfilerToolWindow = newRelicJavaProfilerToolWindow;
@@ -128,7 +135,7 @@ public class MetricsTree {
 
         // define sub nodes without children for java application
         String[] javaAppSubNodes = {"Object Allocation in new TLAB", "Object Allocation outside TLAB"};
-        ObjectAllocationInNewTLabPanel objectAllocationInNewTLabPanel = new ObjectAllocationInNewTLabPanel(
+        objectAllocationInNewTLabPanel = new ObjectAllocationInNewTLabPanel(
                 new ObjectAllocationInNewTLabPanel.ObjectAllocationInNewTLabTableModel(Arrays.asList(
                         new ObjectAllocationInNewTLab("jfr allocation", "Summary", new HashMap<>(), 16667896L, 50, new HashMap<>())
                 )));
@@ -295,6 +302,11 @@ public class MetricsTree {
         return this.cpuLoadPanel.getTable();
     }
 
+
+    public JTable getObjectAllocationInNewTLabTable() {
+        return this.objectAllocationInNewTLabPanel.getTable();
+    }
+
     public JTable getThreadCpuTable() {
         return this.threadCpuLoadPanel.getTable();
     }
@@ -338,5 +350,4 @@ public class MetricsTree {
     public JTable getSummaryMetaspace() {
         return this.summaryMetaspacePanel.getTable();
     }
-
 }

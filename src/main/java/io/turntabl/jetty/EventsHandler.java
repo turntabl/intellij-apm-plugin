@@ -22,7 +22,12 @@ public class EventsHandler extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String decompressedString = servletUtils.decompress(req);
+
+        toolWindowComponent.updateEventPanelText(decompressedString);
+
+
 //        toolWindowComponent.updateEventPanelText(decompressedString);
+
         resp.setContentType("application/json");
         resp.setStatus(HttpServletResponse.SC_OK);
         resp.getWriter().println("{ \"status\": \"ok\"}");

@@ -4,20 +4,18 @@ import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
 import io.turntabl.ui.model.G1GarbageCollectionDuration;
+import io.turntabl.utils.JsonUtility;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableModel;
 import java.awt.*;
 import java.util.List;
 
 public class G1GarbageCollectionDurationPanel {
-    static JBPanel panel;
-    JTable table;
-
-    TableModel myData;
-    DefaultTableColumnModel columnModel;
+    private static JBPanel panel;
+    private JTable table;
+    private static final JsonUtility jsonUtil = new JsonUtility();
 
     public G1GarbageCollectionDurationPanel(TableModel tableModel) {
         panel = new JBPanel(new BorderLayout());
@@ -54,7 +52,7 @@ public class G1GarbageCollectionDurationPanel {
             data = new String[g1GarbageCollectionDurationList.size()][columnNames.length];
             for (int i = 0; i < g1GarbageCollectionDurationList.size(); i++) {
                 G1GarbageCollectionDuration g1GarbageCollectionDuration = g1GarbageCollectionDurationList.get(i);
-                data[i][0] = String.valueOf(g1GarbageCollectionDuration.getTimestamp());
+                data[i][0] = jsonUtil.getTime(g1GarbageCollectionDuration.getTimestamp());
                 data[i][1] = g1GarbageCollectionDuration.getType();
                 data[i][2] = String.valueOf(g1GarbageCollectionDuration.getValue().get("count") == null ? "" : g1GarbageCollectionDuration.getValue().get("count"));
                 data[i][3] = String.valueOf(g1GarbageCollectionDuration.getValue().get("sum") == null ? "" : g1GarbageCollectionDuration.getValue().get("sum"));
