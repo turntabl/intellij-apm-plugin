@@ -33,30 +33,13 @@ public class ObjectAllocationInNewTLabUtil {
                     try {
                         objectAllocationInNewTLab = mapper.readValue(c.toJSONString(), ObjectAllocationInNewTLab.class);
 
-                        String name = objectAllocationInNewTLab.getName().toLowerCase();
-                        double value = Double.parseDouble(c.get("value").toString());
                     } catch (JsonProcessingException e) {
                         e.printStackTrace();
                     }
                     return objectAllocationInNewTLab;
                 }).collect(Collectors.toList());
-
-        public Map<Long, List<ObjectAllocationInNewTLab>> groupObjectAllocationInNewTLabByTimestamp(List<ObjectAllocationInNewTLab> objectAllocationInNewTLabList) {
-            return objectAllocationInNewTLabList
-                    .stream()
-                    .collect(Collectors.groupingBy(ObjectAllocationInNewTLab::getTimestamp));
-        
+    }
+}
 
 
 
-
-//        public List<ObjectAllocationInNewTLab> getObjectAllocatedConsolidated(List<ObjectAllocationInNewTLab> list) {
-//            Map<Long, List<ObjectAllocationInNewTLab>> objectAllocationMap = groupObjectAllocationInNewTLabByTimestamp(list);
-//
-//            return  objectAllocationMap.entrySet().stream()
-//                    .map(s -> {
-//                        ObjectAllocationInNewTLab objectAllo = s.getValue().get(0);
-//
-//                        return objectAllo;
-//                    }).collect(Collectors.toList());
-//        }

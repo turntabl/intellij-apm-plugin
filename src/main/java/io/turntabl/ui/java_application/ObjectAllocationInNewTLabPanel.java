@@ -87,6 +87,11 @@ public class ObjectAllocationInNewTLabPanel {
             return columnNames[column];
         }
 
+
+
+    }
+    public JTable getTable() {
+        return this.table;
     }
 
 }

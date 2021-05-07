@@ -30,7 +30,7 @@ public class MetricHandler extends HttpServlet {
     private final JsonUtility jsonUtil = new JsonUtility();
     private final CPULoadUtil cpuLoadUtil = new CPULoadUtil(jsonUtil);
     private final ObjectAllocationInNewTLabUtil objectAllocationInNewTLabUtil = new ObjectAllocationInNewTLabUtil(jsonUtil);
-    private List<ObjectAllocationInNewTLab> objectAllocationList = new ArrayList<>();
+    private List<ObjectAllocationInNewTLab> cumulativeObjectAllocationList = new ArrayList<>();
     private List<CpuLoad> cumulativeCpuLoadList = new ArrayList<>();
 
     public MetricHandler() {
@@ -78,10 +78,10 @@ public class MetricHandler extends HttpServlet {
 
         if (jsonArray.isPresent()) {
             List<ObjectAllocationInNewTLab> objectAllocationInNewTLabsList = objectAllocationInNewTLabUtil.getObjectAllocationInNewTLab(jsonArray.get());
+        cumulativeObjectAllocationList.addAll(objectAllocationInNewTLabsList);
 
-
-            toolWindowComponent.getMetricsTree().getObjectAllocationInNewTLabTable().setModel(new ObjectAllocationInNewTLabPanel.ObjectAllocationInNewTLabTableModel());
-            toolWindowComponent.getMetricsTree().updateComponentMap("CPU Load", (new ObjectAllocationInNewTLabPanel(new ObjectAllocationInNewTLabPanel.ObjectAllocationInNewTLabTableModel(cumulativeCpuLoadList))).getObjectAllocationInNewTLabComponent());
+            toolWindowComponent.getMetricsTree().getObjectAllocationInNewTLabTable().setModel(new ObjectAllocationInNewTLabPanel.ObjectAllocationInNewTLabTableModel(cumulativeObjectAllocationList));
+            toolWindowComponent.getMetricsTree().updateComponentMap("Object Allocation in new TLAB", (new ObjectAllocationInNewTLabPanel(new ObjectAllocationInNewTLabPanel.ObjectAllocationInNewTLabTableModel(cumulativeObjectAllocationList))).getObjectAllocationInNewTLabComponent());
 
 
         }

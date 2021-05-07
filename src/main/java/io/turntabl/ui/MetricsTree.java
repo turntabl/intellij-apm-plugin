@@ -38,6 +38,7 @@ public class MetricsTree {
     private final NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow;
     private Map<String, JComponent> componentMap;
     private CpuLoadPanel cpuLoadPanel;
+    private ObjectAllocationInNewTLabPanel objectAllocationInNewTLabPanel;
 
     public MetricsTree(NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow) {
         this.newRelicJavaProfilerToolWindow = newRelicJavaProfilerToolWindow;
@@ -121,7 +122,7 @@ public class MetricsTree {
 
         // define sub nodes without children for java application
         String[] javaAppSubNodes = {"Object Allocation in new TLAB", "Object Allocation outside TLAB"};
-        ObjectAllocationInNewTLabPanel objectAllocationInNewTLabPanel = new ObjectAllocationInNewTLabPanel(
+        objectAllocationInNewTLabPanel = new ObjectAllocationInNewTLabPanel(
                 new ObjectAllocationInNewTLabPanel.ObjectAllocationInNewTLabTableModel(Arrays.asList(
                         new ObjectAllocationInNewTLab("jfr allocation", "Summary", new HashMap<>(), 16667896L, 50, new HashMap<>())
                 )));
@@ -281,7 +282,7 @@ public class MetricsTree {
         return this.cpuLoadPanel.getTable();
     }
 
-    public XYDatasetTableModel getObjectAllocationInNewTLabTable() {
-        return null;
+    public JTable getObjectAllocationInNewTLabTable() {
+        return this.objectAllocationInNewTLabPanel.getTable();
     }
 }
