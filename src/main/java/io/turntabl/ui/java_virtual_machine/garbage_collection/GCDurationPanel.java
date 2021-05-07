@@ -4,20 +4,18 @@ import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
 import io.turntabl.ui.model.GCDuration;
+import io.turntabl.utils.JsonUtility;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableModel;
 import java.awt.*;
 import java.util.List;
 
 public class GCDurationPanel {
-    static JBPanel panel;
-    JTable table;
-
-    TableModel myData;
-    DefaultTableColumnModel columnModel;
+    private static JBPanel panel;
+    private JTable table;
+    private static final JsonUtility jsonUtil = new JsonUtility();
 
     public GCDurationPanel(TableModel tableModel) {
         panel = new JBPanel(new BorderLayout());
@@ -59,7 +57,7 @@ public class GCDurationPanel {
                 GCDuration gcDuration = gcDurationList.get(i);
 
 
-                data[i][0] = String.valueOf(gcDuration.getTimestamp());
+                data[i][0] = jsonUtil.getTime(gcDuration.getTimestamp());
                 data[i][1] = gcDuration.getType();
                 data[i][2] = String.valueOf(gcDuration.getValue().get("count") == null ? "" : gcDuration.getValue().get("count"));
                 data[i][3] = String.valueOf(gcDuration.getValue().get("sum") == null ? "" : gcDuration.getValue().get("sum"));

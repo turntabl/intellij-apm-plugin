@@ -4,20 +4,18 @@ import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
 import io.turntabl.ui.model.JfrSocketReadBytesRead;
+import io.turntabl.utils.JsonUtility;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableModel;
 import java.awt.*;
 import java.util.List;
 
 public class JfrSocketReadBytesReadPanel {
-    JBPanel panel;
-    JTable table;
-
-    TableModel myData;
-    DefaultTableColumnModel columnModel;
+    private JBPanel panel;
+    private JTable table;
+    private static final JsonUtility jsonUtil = new JsonUtility();
 
     public JfrSocketReadBytesReadPanel(TableModel tableModel) {
         panel = new JBPanel(new BorderLayout());
@@ -53,7 +51,7 @@ public class JfrSocketReadBytesReadPanel {
             data = new String[jfrSocketReadBytesReadList.size()][columnNames.length];
             for (int i = 0; i < jfrSocketReadBytesReadList.size(); i++) {
                 JfrSocketReadBytesRead jfrSocketReadBytesRead = jfrSocketReadBytesReadList.get(i);
-                data[i][0] = String.valueOf(jfrSocketReadBytesRead.getStartTime());
+                data[i][0] = jsonUtil.getTime(jfrSocketReadBytesRead.getStartTime());
                 data[i][1] = jfrSocketReadBytesRead.getType();
                 data[i][2] = jfrSocketReadBytesRead.getValue().get("count") == null ? "" : String.valueOf(jfrSocketReadBytesRead.getValue().get("count"));
                 data[i][3] = jfrSocketReadBytesRead.getValue().get("sum") == null ? "" : String.valueOf(jfrSocketReadBytesRead.getValue().get("sum"));

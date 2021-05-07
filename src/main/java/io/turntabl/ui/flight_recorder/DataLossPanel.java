@@ -4,18 +4,18 @@ import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
 import io.turntabl.ui.model.DataLoss;
+import io.turntabl.utils.JsonUtility;
 
 import javax.swing.*;
-import javax.swing.table.*;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
 import java.awt.*;
 import java.util.List;
 
 public class DataLossPanel {
-    JBPanel panel;
-    JTable table;
-
-    TableModel myData;
-    DefaultTableColumnModel columnModel;
+    private JBPanel panel;
+    private JTable table;
+    private static final JsonUtility jsonUtil = new JsonUtility();
 
     public DataLossPanel(TableModel tableModel) {
         panel = new JBPanel(new BorderLayout());
@@ -48,7 +48,7 @@ public class DataLossPanel {
             data = new String[dataLossList.size()][columnNames.length];
             for (int i = 0; i < dataLossList.size(); i++) {
                 DataLoss dataLoss = dataLossList.get(i);
-                data[i][0] = String.valueOf(dataLoss.getStartTime());
+                data[i][0] = jsonUtil.getTime(dataLoss.getStartTime());
                 data[i][1] = String.valueOf(dataLoss.getAmount());
                 data[i][2] = String.valueOf(dataLoss.getTotal());
                 data[i][3] = dataLoss.getAttributes().get("")  == null ? "" : dataLoss.getAttributes().get("");
