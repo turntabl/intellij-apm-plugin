@@ -20,7 +20,7 @@ public class EventsTree {
     private JBPanel treePanel;
     private JTree tree;
     private String rootNodeName = "Events by type";
-    private String[] eventNodes = {"JVM Information", "JFR Method Sample", "Java Monitor Wait", "JFR Compilation"};
+    private String[] eventNodes = {"JVM Information", "JFR Compilation", "JFR Method Sample", "Java Monitor Wait"};
     private final NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow;
     private Map<String, JComponent> componentMap;
     private JVMInfoEventPanel jvmInfoEventPanel;
@@ -40,7 +40,6 @@ public class EventsTree {
         //add events nodes to root node
         for (int i = 0; i < eventNodes.length; i++) {
             rootNode.add(new DefaultMutableTreeNode(eventNodes[i]));
-            componentMap.put(eventNodes[i], jvmInfoEventPanel.getJVMInfoEventComponent());
             if ((i + 1) <= eventsPanel.length) {
                 componentMap.put(eventNodes[i], eventsPanel[i]);
             } else {
