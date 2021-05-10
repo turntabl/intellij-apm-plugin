@@ -3,15 +3,13 @@ package io.turntabl.ui.flight_recorder;
 import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
-import io.turntabl.model.JfrCompilation;
-
+import io.turntabl.model.events.JfrCompilation;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableModel;
 import java.awt.*;
 import java.util.List;
-
 
 public class JfrCompilationPanel {
     JBPanel panel;
@@ -25,7 +23,6 @@ public class JfrCompilationPanel {
         table = new JBTable(tableModel);
 
         table.setRowSelectionAllowed(true);
-
 
         table.getColumnModel().getColumn(0).setPreferredWidth(350);
         table.getColumnModel().getColumn(1).setPreferredWidth(200);

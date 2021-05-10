@@ -3,8 +3,7 @@ package io.turntabl.ui.java_application;
 import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
-import io.turntabl.model.ObjectAllocationInNewTLab;
-
+import io.turntabl.model.metrics.ObjectAllocationInNewTLab;
 import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
@@ -22,7 +21,6 @@ public class ObjectAllocationInNewTLabPanel {
         table = new JBTable(tableModel);
 
         table.setRowSelectionAllowed(true);
-       //
 
         table.getColumnModel().getColumn(0).setPreferredWidth(350);
         table.getColumnModel().getColumn(1).setPreferredWidth(350);

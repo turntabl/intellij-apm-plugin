@@ -3,8 +3,7 @@ package io.turntabl.ui.java_application.statistics;
 import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
-import io.turntabl.model.ThreadAllocationStatistics;
-
+import io.turntabl.model.metrics.ThreadAllocationStatistics;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableColumnModel;
@@ -13,8 +12,8 @@ import java.awt.*;
 import java.util.List;
 
 public class ThreadAllocationStatisticsPanel {
-    JBPanel panel;
-    JTable table;
+    private JBPanel panel;
+    private JTable table;
 
     TableModel myData;
     DefaultTableColumnModel columnModel;
@@ -23,7 +22,7 @@ public class ThreadAllocationStatisticsPanel {
         panel = new JBPanel(new BorderLayout());
         table = new JBTable(tableModel);
 
-//        table.setRowSelectionAllowed(true);
+        table.setRowSelectionAllowed(true);
 
         table.getColumnModel().getColumn(0).setPreferredWidth(350);
         table.getColumnModel().getColumn(1).setPreferredWidth(350);

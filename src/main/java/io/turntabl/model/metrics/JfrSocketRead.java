@@ -1,4 +1,4 @@
-package io.turntabl.model;
+package io.turntabl.model.metrics;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -6,70 +6,70 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashMap;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GarbageCollection {
+public class JfrSocketRead {
     protected String name;
+    @JsonProperty("timestamp")
+    protected Long startTime;
     protected String type;
     protected HashMap<String, Double> value;
-    protected Long timestamp;
     @JsonProperty("interval.ms")
-    protected Long interval;
+    protected int interval;
     protected HashMap<String, String> attributes;
 
-
-    public GarbageCollection() {
-    }
-
-    public GarbageCollection(String name, String type, HashMap<String, Double> value, Long timestamp, Long interval, HashMap<String, String> attributes) {
+    public JfrSocketRead(String name, Long startTime, String type, HashMap<String, Double> value, int interval, HashMap<String, String> attributes) {
         this.name = name;
+        this.startTime = startTime;
         this.type = type;
         this.value = value;
-        this.timestamp = timestamp;
         this.interval = interval;
         this.attributes = attributes;
     }
 
-    public String getName() {
+    public JfrSocketRead() {
+    }
+
+    public String getName(){
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public Long getStartTime() {
+        return startTime;
     }
 
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public HashMap<String, Double> getValue() {
         return value;
+    }
+
+    public int getInterval() {
+        return interval;
+    }
+
+    public HashMap<String, String> getAttributes() {
+        return attributes;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setStartTime(Long startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public void setValue(HashMap<String, Double> value) {
         this.value = value;
     }
 
-    public Long getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Long timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    public Long getInterval() {
-        return interval;
-    }
-
-    public void setInterval(Long interval) {
+    public void setInterval(int interval) {
         this.interval = interval;
-    }
-
-    public HashMap<String, String> getAttributes() {
-        return attributes;
     }
 
     public void setAttributes(HashMap<String, String> attributes) {
@@ -78,11 +78,11 @@ public class GarbageCollection {
 
     @Override
     public String toString() {
-        return "GarbageCollection{" +
+        return "JfrSocketRead{" +
                 "name='" + name + '\'' +
+                ", startTime=" + startTime +
                 ", type='" + type + '\'' +
                 ", value=" + value +
-                ", timestamp=" + timestamp +
                 ", interval=" + interval +
                 ", attributes=" + attributes +
                 '}';

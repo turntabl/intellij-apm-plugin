@@ -4,15 +4,14 @@ import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
 import com.intellij.util.ui.components.BorderLayoutPanel;
+import io.turntabl.model.metrics.*;
 import io.turntabl.ui.flight_recorder.*;
 import io.turntabl.ui.java_application.*;
 import io.turntabl.ui.java_application.statistics.ThreadAllocationStatisticsPanel;
 import io.turntabl.ui.java_virtual_machine.GcHeapSummaryPanel;
 import io.turntabl.ui.java_virtual_machine.garbage_collection.*;
-import io.turntabl.model.*;
 import io.turntabl.ui.operating_system.CpuLoadPanel;
 import io.turntabl.ui.operating_system.ThreadCpuLoadPanel;
-
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
@@ -33,9 +32,7 @@ public class MetricsTree {
     private CpuGraph cpuGraph;
     private Map<String, JComponent> componentMap;
     private CpuLoadPanel cpuLoadPanel;
-
     private ObjectAllocationInNewTLabPanel objectAllocationInNewTLabPanel;
-
     private GcHeapSummaryPanel gcHeapSummaryPanel;
     private GCMinorDurationPanel gcMinorDurationPanel;
     private GCMajorDurationPanel gcMajorDurationPanel;
@@ -155,13 +152,9 @@ public class MetricsTree {
         }
 
         // define GC sub nodes
-        DefaultMutableTreeNode jvmSubNode = new DefaultMutableTreeNode("Garbage Collections");
-        // define sub nodes of socket branch
-        String[] jvmSubNodes = {"G1 GC Duration", "GC Duration", "GC Longest Pause", "GC Major Duration", "GC Minor Duration", "GC Heap Summary"};
+         DefaultMutableTreeNode jvmSubNode = new DefaultMutableTreeNode("Garbage Collection");
 
-//         DefaultMutableTreeNode jvmSubNode = new DefaultMutableTreeNode("Garbage Collection");
-
-//         String[] jvmSubNodes = {"GC Minor Duration", "GC Major Duration", "G1 GC Duration", "GC Duration", "GC Longest Pause", "GC Heap Summary"};
+         String[] jvmSubNodes = {"GC Minor Duration", "GC Major Duration", "G1 GC Duration", "GC Duration", "GC Longest Pause", "GC Heap Summary"};
 
         // defining table info for GC branch sub nodes
         gcMinorDurationPanel = new GCMinorDurationPanel(
@@ -206,22 +199,15 @@ public class MetricsTree {
                 ))
         );
 
-        JBPanel[] gcComponents = {g1GarbageCollectionDurationPanel.getG1GarbageCollectionDurationComponent(),
-                gcDurationPanel.getGCDurationComponent(),
-                gcLongestPausePanel.getGCLongestPauseComponent(),
-                gcMajorDurationPanel.getGCMajorDurationComponent(),
-                gcMinorDurationPanel.getGCMinorDurationComponent(),
-                gcHeapSummaryPanel.getGcHeapSummaryComponent()};
 
         // define components for jvm sub node
-//         JBPanel[] gcComponents = {gcMinorDurationPanel.getGCMinorDurationComponent(),
-//                 gcMajorDurationPanel.getGCMajorDurationComponent(),
-//                 g1GarbageCollectionDurationPanel.getG1GarbageCollectionDurationComponent(),
-//                 gcDurationPanel.getGCDurationComponent(),
-//                 gcLongestPausePanel.getGCLongestPauseComponent(),
-
-//                 gcHeapSummaryPanel.getGcHeapSummaryComponent()
-//         };
+         JBPanel[] gcComponents = {gcMinorDurationPanel.getGCMinorDurationComponent(),
+                 gcMajorDurationPanel.getGCMajorDurationComponent(),
+                 g1GarbageCollectionDurationPanel.getG1GarbageCollectionDurationComponent(),
+                 gcDurationPanel.getGCDurationComponent(),
+                 gcLongestPausePanel.getGCLongestPauseComponent(),
+                 gcHeapSummaryPanel.getGcHeapSummaryComponent()
+         };
 
         for (int i = 0; i < jvmSubNodes.length; i++) {
             jvmSubNode.add(new DefaultMutableTreeNode(jvmSubNodes[i]));

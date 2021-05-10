@@ -3,9 +3,8 @@ package io.turntabl.ui.flight_recorder;
 import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
-import io.turntabl.model.JfrSocketReadBytesRead;
+import io.turntabl.model.metrics.JfrSocketReadBytesRead;
 import io.turntabl.utils.JsonUtility;
-
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
@@ -22,7 +21,6 @@ public class JfrSocketReadBytesReadPanel {
         table = new JBTable(tableModel);
 
         table.setRowSelectionAllowed(true);
-//
 
         table.getColumnModel().getColumn(0).setPreferredWidth(350);
         table.getColumnModel().getColumn(1).setPreferredWidth(350);

@@ -2,7 +2,7 @@ package io.turntabl.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.turntabl.model.CpuLoad;
+import io.turntabl.model.metrics.CpuLoad;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
