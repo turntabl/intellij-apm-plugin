@@ -5,6 +5,9 @@ import io.turntabl.model.metrics.*;
 import io.turntabl.ui.CpuGraph;
 import io.turntabl.ui.NewRelicJavaProfilerToolWindow;
 import io.turntabl.ui.flight_recorder.*;
+import io.turntabl.ui.flight_recorder.JfrSocketReadBytesReadPanel;
+import io.turntabl.ui.flight_recorder.JfrSocketReadDurationPanel;
+import io.turntabl.ui.flight_recorder.SummaryMetaspacePanel;
 import io.turntabl.ui.java_application.ObjectAllocationInNewTLabPanel;
 import io.turntabl.ui.java_application.ObjectAllocationOutsideTLabPanel;
 import io.turntabl.ui.java_application.statistics.ThreadAllocationStatisticsPanel;
@@ -17,7 +20,6 @@ import org.jfree.data.xy.XYDataset;
 import org.json.simple.JSONArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

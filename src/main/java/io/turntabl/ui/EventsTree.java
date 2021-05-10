@@ -1,19 +1,11 @@
 package io.turntabl.ui;
 
-
 import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
 import com.intellij.util.ui.components.BorderLayoutPanel;
-<<<<<<< HEAD
 import io.turntabl.model.events.JVMInfoEvent;
 import io.turntabl.ui.java_virtual_machine.JVMInfoEventPanel;
-
-=======
-import io.turntabl.ui.flight_recorder.*;
-import io.turntabl.ui.java_application.JavaMonitorWaitPanel;
-import io.turntabl.model.*;
->>>>>>> main
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;

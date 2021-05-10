@@ -1,9 +1,8 @@
-
 package io.turntabl.model.metrics;
 
 import java.util.HashMap;
 
-public class ObjectAllocationInNewTLab extends  ObjectAllocation{
+public class ObjectAllocationInNewTLab extends ObjectAllocation {
     public ObjectAllocationInNewTLab() {
     }
 
