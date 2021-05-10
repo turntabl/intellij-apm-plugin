@@ -41,7 +41,7 @@ public class EventsTree {
     private String[] jvmNodes = {"Initial System Property", "JVM Information"};
 
     private String[] osNodes = {"Initial Environment Variable", "OS Information", "System Process"};
-    private final NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow;
+    private  NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow;
     private Map<String, JComponent> componentMap;
 
     public EventsTree(NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow) {
@@ -85,7 +85,7 @@ public class EventsTree {
 
         }
 
-        //add jvmCompilation noode to flight recorder branch node
+        //add jvmCompilation node to flight recorder branch node
         flightRecorderNode.add(new DefaultMutableTreeNode("Jvm Compilation"));
         JfrCompilationPanel jfrCompilation= new JfrCompilationPanel(
                 new JfrCompilationPanel.JfrCompilationTableModel(Arrays.asList(
@@ -116,8 +116,11 @@ public class EventsTree {
         //add Java Monitor wait to Java Applications
         javaApplicationNode.add( new DefaultMutableTreeNode("Java Monitor Wait"));
         JavaMonitorWaitPanel javaMonitorWaitPanel = new JavaMonitorWaitPanel( new JavaMonitorWaitPanel.JavaMonitorWaitTableModel(Arrays.asList(
-                new JavaMonitorWait("4/26/21, 4:08:26PM", "2.954ms", "4/26/21, 4:08:26PM","Finalizer","java.lang.Reference","Reference Handler","0s","false","0x17862862",new HashMap<String, String>())
-        )));
+               new JavaMonitorWait("JfrJavaMonitorWait",
+                       "1619441625082L", "9266",
+                       "{\"type\":\"stacktrace\",\"language\":\"java\",\"version\":1,\"truncated\":false,\"payload\":[{\"desc\":\"java.lang.Object.wait(J)V\",\"line":"-1\",\"bytecodeIndex\":\"0\"},{\"desc\":\"java.lang.ref.ReferenceQueue.remove(J)Ljava/lang/ref/Reference;\",\"line\":\"155\",\"bytecodeIndex\":\"59\"},{\"desc\":\"java.lang.ref.ReferenceQueue.remove()Ljava/lang/ref/Reference;\",\"line\":\"176\",\"bytecodeIndex\":\"2\"},{\"desc\":\"java.lang.ref.Finalizer$FinalizerThread.run()V\",\"line\":\"170\",\"bytecodeIndex\":\"37\"}]}", "JFR", "DESKTOP-8AO41P3/172.21.224.1", "Finalizer", "java.lang.ref.ReferenceQueue$Lock",
+                        "JFR-Uploader", "JFR-Uploader"))
+
         componentMap.put("Java Monitor Wait", javaMonitorWaitPanel.getJavaMonitorWaitComponent());
 
         DefaultMutableTreeNode javaAppSubNode = new DefaultMutableTreeNode("Java Monitor Wait");

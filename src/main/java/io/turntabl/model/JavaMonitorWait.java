@@ -4,48 +4,35 @@ package io.turntabl.model;
 import java.util.HashMap;
 
 public class JavaMonitorWait {
-    private String startTime;
+    private String eventType;
+    private Long timeStamp;
     private String duration;
-    private String endTime;
-    private String eventThread;
-    private String monitorClass;
-    private String notifierThread;
-    private String timeOut;
-    private String timedOut;
-    private String monitorAddress;
-    private HashMap<String, String> attributes;
+    private String stackTrace;
+    private String instrumentationName;
+    private String hostName;
+    private String threadName;
+    private String className;
+    private String collectorName;
+    private String instrumentationProvider;
 
-
-    public JavaMonitorWait(String startTime, String duration, String endTime, String eventThread, String monitorClass, String notifierThread, String timeOut, String timedOut, String monitorAddress, HashMap<String, String> attributes) {
-        this.startTime = startTime;
-        this.duration = duration;
-        this.endTime = endTime;
-        this.eventThread = eventThread;
-        this.monitorClass = monitorClass;
-        this.notifierThread = notifierThread;
-        this.timeOut = timeOut;
-        this.timedOut = timedOut;
-        this.monitorAddress = monitorAddress;
-        this.attributes = attributes;
-    }
 
     public JavaMonitorWait() {
     }
 
-    public HashMap<String, String> getAttributes() {
-        return attributes;
+    public String getEventType() {
+        return eventType;
     }
 
-    public void setAttributes(HashMap<String, String> attributes) {
-        this.attributes = attributes;
+    public void setEventType(String eventType) {
+        this.eventType = eventType;
     }
 
-    public String getStartTime() {
-        return startTime;
+    public Long getTimeStamp() {
+        return timeStamp;
     }
 
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
+    public void setTimeStamp(Long timeStamp) {
+        this.timeStamp = timeStamp;
     }
 
     public String getDuration() {
@@ -56,75 +43,91 @@ public class JavaMonitorWait {
         this.duration = duration;
     }
 
-    public String getEndTime() {
-        return endTime;
+    public String getStackTrace() {
+        return stackTrace;
     }
 
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
+    public void setStackTrace(String stackTrace) {
+        this.stackTrace = stackTrace;
     }
 
-    public String getEventThread() {
-        return eventThread;
+    public String getInstrumentationName() {
+        return instrumentationName;
     }
 
-    public void setEventThread(String eventThread) {
-        this.eventThread = eventThread;
+    public void setInstrumentationName(String instrumentationName) {
+        this.instrumentationName = instrumentationName;
     }
 
-    public String getMonitorClass() {
-        return monitorClass;
+    public String getHostName() {
+        return hostName;
     }
 
-    public void setMonitorClass(String monitorClass) {
-        this.monitorClass = monitorClass;
+    public void setHostName(String hostName) {
+        this.hostName = hostName;
     }
 
-    public String getNotifierThread() {
-        return notifierThread;
+    public String getThreadName() {
+        return threadName;
     }
 
-    public void setNotifierThread(String notifierThread) {
-        this.notifierThread = notifierThread;
+    public void setThreadName(String threadName) {
+        this.threadName = threadName;
     }
 
-    public String getTimeOut() {
-        return timeOut;
+    public String getClassName() {
+        return className;
     }
 
-    public void setTimeOut(String timeOut) {
-        this.timeOut = timeOut;
+    public void setClassName(String className) {
+        this.className = className;
     }
 
-    public String getTimedOut() {
-        return timedOut;
+    public String getCollectorName() {
+        return collectorName;
     }
 
-    public void setTimedOut(String timedOut) {
-        this.timedOut = timedOut;
+    public void setCollectorName(String collectorName) {
+        this.collectorName = collectorName;
     }
 
-    public String getMonitorAddress() {
-        return monitorAddress;
+    public String getInstrumentationProvider() {
+        return instrumentationProvider;
     }
 
-    public void setMonitorAddress(String monitorAddress) {
-        this.monitorAddress = monitorAddress;
+    public void setInstrumentationProvider(String instrumentationProvider) {
+        this.instrumentationProvider = instrumentationProvider;
+    }
+
+    public JavaMonitorWait(String eventType, Long timeStamp, String duration, String stackTrace, String instrumentationName, String hostName, String threadName, String className, String collectorName, String instrumentationProvider) {
+        this.eventType = eventType;
+        this.timeStamp = timeStamp;
+        this.duration = duration;
+        this.stackTrace = stackTrace;
+        this.instrumentationName = instrumentationName;
+        this.hostName = hostName;
+        this.threadName = threadName;
+        this.className = className;
+        this.collectorName = collectorName;
+        this.instrumentationProvider = instrumentationProvider;
+
+
+
     }
 
     @Override
     public String toString() {
         return "JavaMonitorWait{" +
-                "startTime='" + startTime + '\'' +
+                "eventType='" + eventType + '\'' +
+                ", timeStamp=" + timeStamp +
                 ", duration='" + duration + '\'' +
-                ", endTime='" + endTime + '\'' +
-                ", eventThread='" + eventThread + '\'' +
-                ", monitorClass='" + monitorClass + '\'' +
-                ", notifierThread='" + notifierThread + '\'' +
-                ", timeOut='" + timeOut + '\'' +
-                ", timedOut='" + timedOut + '\'' +
-                ", monitorAddress='" + monitorAddress + '\'' +
-                ", attributes=" + attributes +
+                ", stackTrace='" + stackTrace + '\'' +
+                ", instrumentationName='" + instrumentationName + '\'' +
+                ", hostName='" + hostName + '\'' +
+                ", threadName='" + threadName + '\'' +
+                ", className='" + className + '\'' +
+                ", collectorName='" + collectorName + '\'' +
+                ", instrumentationProvider='" + instrumentationProvider + '\'' +
                 '}';
     }
 }
