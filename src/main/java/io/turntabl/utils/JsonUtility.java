@@ -2,9 +2,7 @@ package io.turntabl.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.turntabl.ui.model.CpuLoad;
-import io.turntabl.ui.model.SummaryMetaspace;
-import io.turntabl.ui.model.ThreadAllocationStatistics;
+import io.turntabl.model.SummaryMetaspace;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;

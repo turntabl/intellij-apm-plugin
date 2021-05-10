@@ -2,7 +2,7 @@ package io.turntabl.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.turntabl.ui.model.*;
+import io.turntabl.model.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 

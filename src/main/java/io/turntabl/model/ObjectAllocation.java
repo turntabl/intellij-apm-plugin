@@ -1,25 +1,23 @@
-package io.turntabl.ui.model;
+package io.turntabl.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.HashMap;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GarbageCollection {
+public class ObjectAllocation {
     protected String name;
     protected String type;
     protected HashMap<String, Double> value;
     protected Long timestamp;
-    @JsonProperty("interval.ms")
-    protected Long interval;
+    protected int interval;
     protected HashMap<String, String> attributes;
 
 
-    public GarbageCollection() {
+    public ObjectAllocation() {
     }
 
-    public GarbageCollection(String name, String type, HashMap<String, Double> value, Long timestamp, Long interval, HashMap<String, String> attributes) {
+    public ObjectAllocation(String name, String type, HashMap<String, Double> value, Long timestamp, int interval, HashMap<String, String> attributes) {
         this.name = name;
         this.type = type;
         this.value = value;
@@ -60,11 +58,11 @@ public class GarbageCollection {
         this.timestamp = timestamp;
     }
 
-    public Long getInterval() {
+    public int getInterval() {
         return interval;
     }
 
-    public void setInterval(Long interval) {
+    public void setInterval(int interval) {
         this.interval = interval;
     }
 
@@ -78,7 +76,7 @@ public class GarbageCollection {
 
     @Override
     public String toString() {
-        return "GarbageCollection{" +
+        return "ObjectAllocation{" +
                 "name='" + name + '\'' +
                 ", type='" + type + '\'' +
                 ", value=" + value +

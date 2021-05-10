@@ -3,7 +3,7 @@ package io.turntabl.ui.flight_recorder;
 import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
-import io.turntabl.ui.model.ThreadContextSwitchRate;
+import io.turntabl.model.ThreadContextSwitchRate;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -25,7 +25,7 @@ public class ThreadContextSwitchRatePanel {
             table = new JBTable(tableModel);
 
             table.setRowSelectionAllowed(true);
-            table.setRowSelectionInterval(0, 0);
+
 
             table.getColumnModel().getColumn(0).setPreferredWidth(350);
             table.getColumnModel().getColumn(1).setPreferredWidth(350);

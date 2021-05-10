@@ -1,6 +1,5 @@
-package io.turntabl.ui.model;
+package io.turntabl.model;
 
-import java.sql.Time;
 import java.util.Date;
 
 public class JfrCompilation {

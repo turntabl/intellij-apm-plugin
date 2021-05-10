@@ -7,7 +7,7 @@ import com.intellij.ui.treeStructure.Tree;
 import com.intellij.util.ui.components.BorderLayoutPanel;
 import io.turntabl.ui.flight_recorder.*;
 import io.turntabl.ui.java_application.JavaMonitorWaitPanel;
-import io.turntabl.ui.model.*;
+import io.turntabl.model.*;
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;

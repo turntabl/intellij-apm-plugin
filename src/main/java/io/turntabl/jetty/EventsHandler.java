@@ -3,7 +3,6 @@ package io.turntabl.jetty;
 import io.turntabl.ui.NewRelicJavaProfilerToolWindow;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
