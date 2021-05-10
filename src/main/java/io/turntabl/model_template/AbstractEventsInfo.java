@@ -5,27 +5,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class AbstractEventsInfo {
-    protected String eventType;
-    protected long timestamp;
+    private String eventType;
+    private long timestamp;
     @JsonProperty("instrumentation.name")
-    protected String instrumentationName;
+    private String instrumentationName;
     @JsonProperty("host.hostname")
-    protected String hostName;
+    private String hostName;
     @JsonProperty("collector.name")
-    protected String collectorName;
+    private String collectorName;
     @JsonProperty("instrumentation.provider")
-    protected String instrumentationProvider;
+    private String instrumentationProvider;
 
     public AbstractEventsInfo() {
-    }
-
-    public AbstractEventsInfo(String eventType, long timestamp, String instrumentationName, String hostName, String collectorName, String instrumentationProvider) {
-        this.eventType = eventType;
-        this.timestamp = timestamp;
-        this.instrumentationName = instrumentationName;
-        this.hostName = hostName;
-        this.collectorName = collectorName;
-        this.instrumentationProvider = instrumentationProvider;
     }
 
     public String getEventType() {
