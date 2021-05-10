@@ -1,9 +1,6 @@
 
 package io.turntabl.model.metrics;
 
-
-
-
 import java.util.HashMap;
 
 public class ThreadContextSwitchRate {

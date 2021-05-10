@@ -1,8 +1,5 @@
-<<<<<<< HEAD:src/main/java/io/turntabl/model/metrics/ThreadAllocationStatistics.java
+
 package io.turntabl.model.metrics;
-=======
-package io.turntabl.model;
->>>>>>> main:src/main/java/io/turntabl/model/ThreadAllocationStatistics.java
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

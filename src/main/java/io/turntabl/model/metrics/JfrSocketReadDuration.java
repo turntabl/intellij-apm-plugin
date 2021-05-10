@@ -1,8 +1,4 @@
-<<<<<<< HEAD:src/main/java/io/turntabl/model/metrics/JfrSocketReadDuration.java
 package io.turntabl.model.metrics;
-=======
-package io.turntabl.model;
->>>>>>> main:src/main/java/io/turntabl/model/JfrSocketReadDuration.java
 
 
 import java.util.HashMap;

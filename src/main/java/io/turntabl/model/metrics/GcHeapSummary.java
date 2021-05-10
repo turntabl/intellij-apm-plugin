@@ -1,8 +1,5 @@
-<<<<<<< HEAD:src/main/java/io/turntabl/model/metrics/GcHeapSummary.java
 package io.turntabl.model.metrics;
-=======
-package io.turntabl.model;
->>>>>>> main:src/main/java/io/turntabl/model/GcHeapSummary.java
+
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

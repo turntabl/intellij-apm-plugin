@@ -1,8 +1,4 @@
-<<<<<<< HEAD:src/main/java/io/turntabl/model/metrics/JfrSocketRead.java
 package io.turntabl.model.metrics;
-=======
-package io.turntabl.model;
->>>>>>> main:src/main/java/io/turntabl/model/JfrSocketRead.java
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

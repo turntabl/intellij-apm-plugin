@@ -1,9 +1,5 @@
-<<<<<<< HEAD:src/main/java/io/turntabl/model/metrics/GCLongestPause.java
-package io.turntabl.model.metrics;
-=======
-package io.turntabl.model;
->>>>>>> main:src/main/java/io/turntabl/model/GCLongestPause.java
 
+package io.turntabl.model.metrics;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.HashMap;
