@@ -1,4 +1,4 @@
-package io.turntabl.ui.model;
+package io.turntabl.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

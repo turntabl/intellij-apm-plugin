@@ -2,7 +2,7 @@ package io.turntabl.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.turntabl.ui.model.ThreadCpuLoad;
+import io.turntabl.model.ThreadCpuLoad;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import java.text.DateFormat;

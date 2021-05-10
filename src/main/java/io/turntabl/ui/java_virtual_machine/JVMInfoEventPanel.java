@@ -3,21 +3,21 @@ package io.turntabl.ui.java_virtual_machine;
 import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
-import io.turntabl.model.GcHeapSummary;
+import io.turntabl.model.JVMInfoEvent;
 import io.turntabl.utils.JsonUtility;
-
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 import java.awt.*;
 import java.util.List;
 
-public class GcHeapSummaryPanel {
+public class JVMInfoEventPanel {
+
     private JBPanel panel;
     private JTable table;
     private static final JsonUtility jsonUtil = new JsonUtility();
 
-    public GcHeapSummaryPanel(TableModel tableModel) {
+    public JVMInfoEventPanel(TableModel tableModel) {
         panel = new JBPanel(new BorderLayout());
         table = new JBTable(tableModel);
 
@@ -37,7 +37,7 @@ public class GcHeapSummaryPanel {
         panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER), BorderLayout.CENTER);
     }
 
-    public JBPanel getGcHeapSummaryComponent() {
+    public JBPanel getJVMInfoEventComponent() {
         return panel;
     }
 
@@ -45,31 +45,31 @@ public class GcHeapSummaryPanel {
         return this.table;
     }
 
-    public static class GcHeapSummaryTableModel extends AbstractTableModel {
-        String[] columnNames = {"Start Time", "Type", "Heap Committed Size", "Reserved Size", "Heap Used", "Heap Start", "Reserved End", "Committed End", "When"};
+    public static class JVMInfoEventTableModel extends AbstractTableModel {
+        String[] columnNames = {"Event Type", "Start Time", "JVM Property", "Property Value", "JVM Args", "Instrumentation Name", "Host Name", "Collector Name", "Instrumentation Provider"};
         String[][] data;
-        private java.util.List<GcHeapSummary> gcHeapSummaryList;
+        private java.util.List<JVMInfoEvent> jvmInfoEventList;
 
-        public GcHeapSummaryTableModel(List<GcHeapSummary> gcHeapSummaryList) {
-            this.gcHeapSummaryList = gcHeapSummaryList;
-            data = new String[gcHeapSummaryList.size()][columnNames.length];
-            for (int i = 0; i < gcHeapSummaryList.size(); i++) {
-                GcHeapSummary gcHeapSummary = gcHeapSummaryList.get(i);
-                data[i][0] = jsonUtil.getTime(gcHeapSummary.getStartTime());
-                data[i][1] = gcHeapSummary.getType();
-                data[i][2] = String.valueOf(gcHeapSummary.getHeapCommittedSize());
-                data[i][3] = String.valueOf(gcHeapSummary.getReservedSize());
-                data[i][4] = String.valueOf(gcHeapSummary.getHeapUsed());
-                data[i][5] = String.valueOf(gcHeapSummary.getAttributes().get("heapStart") == null ? "" : gcHeapSummary.getAttributes().get("heapStart"));
-                data[i][6] = String.valueOf(gcHeapSummary.getAttributes().get("reservedEnd") == null ? "" : gcHeapSummary.getAttributes().get("reservedEnd"));
-                data[i][7] = String.valueOf(gcHeapSummary.getAttributes().get("committedEnd") == null ? "" : gcHeapSummary.getAttributes().get("committedEnd"));
-                data[i][8] = gcHeapSummary.getAttributes().get("when") == null ? "" : gcHeapSummary.getAttributes().get("when");
+        public JVMInfoEventTableModel(List<JVMInfoEvent> jvmInfoEventList) {
+            this.jvmInfoEventList = jvmInfoEventList;
+            data = new String[jvmInfoEventList.size()][columnNames.length];
+            for (int i = 0; i < jvmInfoEventList.size(); i++) {
+                JVMInfoEvent jvmInfoEvent = jvmInfoEventList.get(i);
+                data[i][0] = jvmInfoEvent.getEventType();
+                data[i][1] = jsonUtil.getTime(jvmInfoEvent.getTimestamp());
+                data[i][2] = jvmInfoEvent.getJvmProperty();
+                data[i][3] = jvmInfoEvent.getJvmPropertyValue();
+                data[i][4] = jvmInfoEvent.getJvmArguments();
+                data[i][5] = jvmInfoEvent.getInstrumentationName();
+                data[i][6] = jvmInfoEvent.getHostName();
+                data[i][7] = jvmInfoEvent.getCollectorName();
+                data[i][8] = jvmInfoEvent.getInstrumentationProvider();
             }
         }
 
         @Override
         public int getRowCount() {
-            return gcHeapSummaryList.size();
+            return jvmInfoEventList.size();
         }
 
         @Override

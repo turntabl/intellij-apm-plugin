@@ -3,7 +3,7 @@ package io.turntabl.ui.java_virtual_machine.garbage_collection;
 import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
-import io.turntabl.ui.model.G1GarbageCollectionDuration;
+import io.turntabl.model.G1GarbageCollectionDuration;
 import io.turntabl.utils.JsonUtility;
 
 import javax.swing.*;
@@ -22,7 +22,6 @@ public class G1GarbageCollectionDurationPanel {
         table = new JBTable(tableModel);
 
         table.setRowSelectionAllowed(true);
-//        table.setRowSelectionInterval(0, 0);
 
         table.getColumnModel().getColumn(0).setPreferredWidth(350);
         table.getColumnModel().getColumn(1).setPreferredWidth(350);

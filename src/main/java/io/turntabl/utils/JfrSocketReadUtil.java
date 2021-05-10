@@ -2,8 +2,8 @@ package io.turntabl.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.turntabl.ui.model.JfrSocketReadBytesRead;
-import io.turntabl.ui.model.JfrSocketReadDuration;
+import io.turntabl.model.JfrSocketReadBytesRead;
+import io.turntabl.model.JfrSocketReadDuration;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 

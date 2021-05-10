@@ -16,6 +16,7 @@ import com.intellij.util.ui.components.BorderLayoutPanel;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -66,7 +67,7 @@ public class NewRelicJavaProfilerToolWindow implements Disposable {
         eventsRootPanel.add(new JBScrollPane(eventTextArea), BorderLayout.CENTER);
         metricsPanel.add(new JBScrollPane(metricsTextArea), BorderLayout.CENTER);
 
-        eventsSplitter.setFirstComponent(new JBScrollPane(eventsTree.getEventTree(), JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
+        eventsSplitter.setFirstComponent(new JBScrollPane(eventsTree.getEventsTree(), JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
         eventsSplitter.setSecondComponent(new JBScrollPane(eventsPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
 
         metricsSplitter.setFirstComponent(new JBScrollPane(metricsTree.getMetricsTree(), JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
@@ -118,6 +119,10 @@ public class NewRelicJavaProfilerToolWindow implements Disposable {
         return this.metricsTree;
     }
 
+    public EventsTree getEventsTree() {
+        return this.eventsTree;
+    }
+
     public void setMetricsSecondComponent(JComponent component) {
         metricsSplitter.setSecondComponent(component);
     }
@@ -131,16 +136,16 @@ public class NewRelicJavaProfilerToolWindow implements Disposable {
         XYSeries jvmSystemSeries = new XYSeries("JVM System");
         XYSeries machineTotalSeries = new XYSeries("Machine Total");
 
-        jvmUserSeries.add(0.193,23056);
+        jvmUserSeries.add(0.193, 23056);
         jvmUserSeries.add(0.395, 33076);
         jvmUserSeries.add(0.596, 43090);
 
         jvmSystemSeries.add(0.199, 43076);
-        jvmSystemSeries.add(0.301,53016);
+        jvmSystemSeries.add(0.301, 53016);
         jvmSystemSeries.add(0.591, 63030);
 
         machineTotalSeries.add(0.189, 53076);
-        machineTotalSeries.add(0.311,6056);
+        machineTotalSeries.add(0.311, 6056);
         machineTotalSeries.add(0.500, 73093);
 
         XYSeriesCollection dataset = new XYSeriesCollection();

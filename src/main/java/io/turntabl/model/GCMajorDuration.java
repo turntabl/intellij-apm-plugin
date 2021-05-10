@@ -1,18 +1,19 @@
-package io.turntabl.ui.model;
+package io.turntabl.model;
 
 import java.util.HashMap;
 
-public class GCMinorDuration extends GarbageCollection{
-    public GCMinorDuration(String name, String type, HashMap<String, Double> value, Long timestamp, Long interval, HashMap<String, String> attributes) {
+public class GCMajorDuration extends GarbageCollection{
+
+    public GCMajorDuration(String name, String type, HashMap<String, Double> value, Long timestamp, Long interval, HashMap<String, String> attributes) {
         super(name, type, value, timestamp, interval, attributes);
     }
 
-    public GCMinorDuration() {
+    public GCMajorDuration() {
     }
 
     @Override
     public String toString() {
-        return "GCMinorDuration{" +
+        return "GCMajorDuration{" +
                 "name='" + name + '\'' +
                 ", type='" + type + '\'' +
                 ", value=" + value +

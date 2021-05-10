@@ -1,18 +1,20 @@
-package io.turntabl.ui.model;
+package io.turntabl.model;
 
 import java.util.HashMap;
 
-public class ObjectAllocationOutsideTLab extends ObjectAllocation{
-    public ObjectAllocationOutsideTLab() {
+
+public class G1GarbageCollectionDuration extends GarbageCollection{
+
+    public G1GarbageCollectionDuration(String name, String type, HashMap<String, Double> value, Long timestamp, Long interval, HashMap<String, String> attributes) {
+        super(name, type, value, timestamp, interval, attributes);
     }
 
-    public ObjectAllocationOutsideTLab(String name, String type, HashMap<String, Double> value, Long timestamp, int interval, HashMap<String, String> attributes) {
-        super(name, type, value, timestamp, interval, attributes);
+    public G1GarbageCollectionDuration() {
     }
 
     @Override
     public String toString() {
-        return "ObjectAllocationOutsideTLab{" +
+        return "G1GarbageCollectionDuration{" +
                 "name='" + name + '\'' +
                 ", type='" + type + '\'' +
                 ", value=" + value +
@@ -22,4 +24,3 @@ public class ObjectAllocationOutsideTLab extends ObjectAllocation{
                 '}';
     }
 }
-
