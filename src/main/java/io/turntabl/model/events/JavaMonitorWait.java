@@ -1,9 +1,4 @@
-<<<<<<< HEAD:src/main/java/io/turntabl/model/events/JavaMonitorWait.java
 package io.turntabl.model.events;
-=======
-package io.turntabl.model;
->>>>>>> main:src/main/java/io/turntabl/model/JavaMonitorWait.java
-
 
 import java.util.HashMap;
 

@@ -3,13 +3,8 @@ package io.turntabl.ui.flight_recorder;
 import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
-<<<<<<< HEAD
 import io.turntabl.model.metrics.DataLoss;
-=======
-import io.turntabl.model.DataLoss;
->>>>>>> main
 import io.turntabl.utils.JsonUtility;
-
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
@@ -26,16 +21,11 @@ public class DataLossPanel {
         table = new JBTable(tableModel);
 
         table.setRowSelectionAllowed(true);
-<<<<<<< HEAD
-=======
-
->>>>>>> main
 
         table.getColumnModel().getColumn(0).setPreferredWidth(350);
         table.getColumnModel().getColumn(1).setPreferredWidth(200);
         table.getColumnModel().getColumn(2).setPreferredWidth(350);
         table.getColumnModel().getColumn(3).setPreferredWidth(350);
-
 
         panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER), BorderLayout.CENTER);
     }

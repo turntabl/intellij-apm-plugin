@@ -3,20 +3,15 @@ package io.turntabl.ui.java_application;
 import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
-<<<<<<< HEAD
 import io.turntabl.model.events.JavaMonitorWait;
-=======
-import io.turntabl.model.JavaMonitorWait;
->>>>>>> main
-
 import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
 import java.util.List;
 
 public class JavaMonitorWaitPanel {
-    JBPanel panel;
-    JTable table;
+    private JBPanel panel;
+    private JTable table;
 
     TableModel myData;
     DefaultTableColumnModel columnModel;
@@ -25,10 +20,6 @@ public class JavaMonitorWaitPanel {
         panel = new JBPanel(new BorderLayout());
         table = new JBTable(tableModel);
         table.setRowSelectionAllowed(true);
-<<<<<<< HEAD
-=======
-
->>>>>>> main
 
         table.getColumnModel().getColumn(0).setPreferredWidth(200);
         table.getColumnModel().getColumn(1).setPreferredWidth(200);

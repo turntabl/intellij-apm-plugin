@@ -1,12 +1,8 @@
-<<<<<<< HEAD:src/main/java/io/turntabl/model/metrics/JfrSocketReadBytesRead.java
 package io.turntabl.model.metrics;
-=======
-package io.turntabl.model;
->>>>>>> main:src/main/java/io/turntabl/model/JfrSocketReadBytesRead.java
 
 import java.util.HashMap;
 
-public class JfrSocketReadBytesRead extends JfrSocketRead{
+public class JfrSocketReadBytesRead extends JfrSocketRead {
     public JfrSocketReadBytesRead(String name, Long startTime, String type, HashMap<String, Double> value, int interval, HashMap<String, String> attributes) {
         super(name, startTime, type, value, interval, attributes);
     }

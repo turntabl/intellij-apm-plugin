@@ -3,20 +3,15 @@ package io.turntabl.ui.java_application;
 import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
-<<<<<<< HEAD
 import io.turntabl.model.metrics.ObjectAllocationOutsideTLab;
-=======
-import io.turntabl.model.ObjectAllocationOutsideTLab;
->>>>>>> main
-
 import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
 import java.util.List;
 
 public class ObjectAllocationOutsideTLabPanel {
-    JBPanel panel;
-    JTable table;
+    private JBPanel panel;
+    private JTable table;
 
     TableModel myData;
     DefaultTableColumnModel columnModel;
@@ -26,10 +21,6 @@ public class ObjectAllocationOutsideTLabPanel {
         table = new JBTable(tableModel);
 
         table.setRowSelectionAllowed(true);
-<<<<<<< HEAD
-=======
-      //
->>>>>>> main
 
         table.getColumnModel().getColumn(0).setPreferredWidth(350);
         table.getColumnModel().getColumn(1).setPreferredWidth(350);
@@ -66,11 +57,7 @@ public class ObjectAllocationOutsideTLabPanel {
                 data[i][5] = ObjectAllocationOutsideTLab.getValue().get("max") == null ? "" : String.valueOf(ObjectAllocationOutsideTLab.getValue().get("max"));
                 data[i][6] = String.valueOf(ObjectAllocationOutsideTLab.getInterval());
                 data[i][7] = ObjectAllocationOutsideTLab.getAttributes().get("thread.name") == null ? "" : String.valueOf(ObjectAllocationOutsideTLab.getAttributes().get("thread.name"));
-
-
             }
-
-
         }
 
         @Override

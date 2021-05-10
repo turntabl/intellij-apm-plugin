@@ -1,12 +1,8 @@
-<<<<<<< HEAD:src/main/java/io/turntabl/model/metrics/ObjectAllocationOutsideTLab.java
 package io.turntabl.model.metrics;
-=======
-package io.turntabl.model;
->>>>>>> main:src/main/java/io/turntabl/model/ObjectAllocationOutsideTLab.java
 
 import java.util.HashMap;
 
-public class ObjectAllocationOutsideTLab extends ObjectAllocation{
+public class ObjectAllocationOutsideTLab extends ObjectAllocation {
     public ObjectAllocationOutsideTLab() {
     }
 

@@ -3,13 +3,8 @@ package io.turntabl.ui.java_virtual_machine.garbage_collection;
 import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
-<<<<<<< HEAD
 import io.turntabl.model.metrics.GCMinorDuration;
-=======
-import io.turntabl.model.GCMinorDuration;
->>>>>>> main
 import io.turntabl.utils.JsonUtility;
-
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
@@ -26,11 +21,6 @@ public class GCMinorDurationPanel {
         table = new JBTable(tableModel);
 
         table.setRowSelectionAllowed(true);
-<<<<<<< HEAD
-=======
-//
-
->>>>>>> main
 
         table.getColumnModel().getColumn(0).setPreferredWidth(350);
         table.getColumnModel().getColumn(1).setPreferredWidth(350);

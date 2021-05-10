@@ -3,12 +3,7 @@ package io.turntabl.ui.flight_recorder;
 import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
-<<<<<<< HEAD
 import io.turntabl.model.metrics.SummaryMetaspace;
-=======
-import io.turntabl.model.SummaryMetaspace;
->>>>>>> main
-
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
