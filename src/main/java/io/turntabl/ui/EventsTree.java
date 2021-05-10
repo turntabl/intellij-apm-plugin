@@ -5,6 +5,8 @@ import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
 import com.intellij.util.ui.components.BorderLayoutPanel;
 import io.turntabl.model.events.JVMInfoEvent;
+import io.turntabl.model.events.JfrCompilation;
+import io.turntabl.ui.flight_recorder.JfrCompilationPanel;
 import io.turntabl.ui.java_virtual_machine.JVMInfoEventPanel;
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -22,6 +24,7 @@ public class EventsTree {
     private final NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow;
     private Map<String, JComponent> componentMap;
     private JVMInfoEventPanel jvmInfoEventPanel;
+    private JfrCompilationPanel jfrCompilationPanel;
 
     public EventsTree(NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow) {
         this.newRelicJavaProfilerToolWindow = newRelicJavaProfilerToolWindow;
@@ -30,7 +33,9 @@ public class EventsTree {
         DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(rootNodeName);
 
         jvmInfoEventPanel = new JVMInfoEventPanel(new JVMInfoEventPanel.JVMInfoEventTableModel(Arrays.asList(new JVMInfoEvent())));
-        JBPanel[] eventsPanel = {jvmInfoEventPanel.getJVMInfoEventComponent()}; //add other panels here...........
+        jfrCompilationPanel = new JfrCompilationPanel(new JfrCompilationPanel.JfrCompilationTableModel(Arrays.asList(new JfrCompilation())));
+
+        JBPanel[] eventsPanel = {jvmInfoEventPanel.getJVMInfoEventComponent(), jfrCompilationPanel.getJfrCompilationComponent()};//add other panels here...........
 
         //add events nodes to root node
         for (int i = 0; i < eventNodes.length; i++) {
@@ -75,6 +80,10 @@ public class EventsTree {
 
     public JTable getJVMInfoTable() {
         return jvmInfoEventPanel.getTable();
+    }
+
+    public JTable getJFRCompilationTable(){
+        return jfrCompilationPanel.getTable();
     }
 
     public void updateComponentMap(String key, JBPanel panel) {
