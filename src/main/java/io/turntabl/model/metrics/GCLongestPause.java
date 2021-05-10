@@ -1,30 +1,29 @@
+<<<<<<< HEAD:src/main/java/io/turntabl/model/metrics/GCLongestPause.java
+package io.turntabl.model.metrics;
+=======
 package io.turntabl.model;
+>>>>>>> main:src/main/java/io/turntabl/model/GCLongestPause.java
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.HashMap;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GarbageCollection {
-    protected String name;
-    protected String type;
-    protected HashMap<String, Double> value;
-    protected Long timestamp;
-    @JsonProperty("interval.ms")
-    protected Long interval;
-    protected HashMap<String, String> attributes;
+public class GCLongestPause {
+    private String name;
+    private String type;
+    private double value;
+    private Long timestamp;
+    private HashMap<String, String> attributes;
 
-
-    public GarbageCollection() {
+    public GCLongestPause() {
     }
 
-    public GarbageCollection(String name, String type, HashMap<String, Double> value, Long timestamp, Long interval, HashMap<String, String> attributes) {
+    public GCLongestPause(String name, String type, double value, Long timestamp, HashMap<String, String> attributes) {
         this.name = name;
         this.type = type;
         this.value = value;
         this.timestamp = timestamp;
-        this.interval = interval;
         this.attributes = attributes;
     }
 
@@ -44,11 +43,11 @@ public class GarbageCollection {
         this.type = type;
     }
 
-    public HashMap<String, Double> getValue() {
+    public double getValue() {
         return value;
     }
 
-    public void setValue(HashMap<String, Double> value) {
+    public void setValue(double value) {
         this.value = value;
     }
 
@@ -58,14 +57,6 @@ public class GarbageCollection {
 
     public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
-    }
-
-    public Long getInterval() {
-        return interval;
-    }
-
-    public void setInterval(Long interval) {
-        this.interval = interval;
     }
 
     public HashMap<String, String> getAttributes() {
@@ -78,12 +69,11 @@ public class GarbageCollection {
 
     @Override
     public String toString() {
-        return "GarbageCollection{" +
+        return "GCLongestPause{" +
                 "name='" + name + '\'' +
                 ", type='" + type + '\'' +
                 ", value=" + value +
                 ", timestamp=" + timestamp +
-                ", interval=" + interval +
                 ", attributes=" + attributes +
                 '}';
     }

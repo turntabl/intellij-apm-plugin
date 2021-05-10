@@ -3,7 +3,11 @@ package io.turntabl.ui.operating_system;
 import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
+<<<<<<< HEAD
+import io.turntabl.model.metrics.CpuLoad;
+=======
 import io.turntabl.model.CpuLoad;
+>>>>>>> main
 import io.turntabl.utils.JsonUtility;
 
 import javax.swing.*;

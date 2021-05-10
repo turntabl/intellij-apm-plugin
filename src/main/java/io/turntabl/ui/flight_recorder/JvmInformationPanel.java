@@ -3,7 +3,6 @@ package io.turntabl.ui.flight_recorder;
 import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
-import io.turntabl.model.JvmInformation;
 
 import javax.swing.*;
 import javax.swing.table.*;

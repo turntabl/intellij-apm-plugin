@@ -1,8 +1,20 @@
 package io.turntabl.jetty;
 
+import io.turntabl.model.metrics.*;
 import io.turntabl.ui.CpuGraph;
 import io.turntabl.ui.NewRelicJavaProfilerToolWindow;
+import io.turntabl.ui.flight_recorder.JfrSocketReadBytesReadPanel;
+import io.turntabl.ui.flight_recorder.JfrSocketReadDurationPanel;
 import io.turntabl.ui.flight_recorder.SummaryMetaspacePanel;
+<<<<<<< HEAD
+import io.turntabl.ui.java_application.ObjectAllocationInNewTLabPanel;
+import io.turntabl.ui.java_application.ObjectAllocationOutsideTLabPanel;
+import io.turntabl.ui.java_application.statistics.ThreadAllocationStatisticsPanel;
+import io.turntabl.ui.java_virtual_machine.GcHeapSummaryPanel;
+import io.turntabl.ui.java_virtual_machine.garbage_collection.*;
+import io.turntabl.ui.operating_system.CpuLoadPanel;
+import io.turntabl.ui.operating_system.ThreadCpuLoadPanel;
+=======
 import io.turntabl.model.SummaryMetaspace;
 import io.turntabl.utils.SummaryMetaspaceUtil;
 import io.turntabl.ui.java_application.ObjectAllocationInNewTLabPanel;
@@ -19,12 +31,13 @@ import io.turntabl.model.*;
 import io.turntabl.ui.flight_recorder.*;
 import io.turntabl.ui.java_application.statistics.ThreadAllocationStatisticsPanel;
 import io.turntabl.ui.operating_system.*;
+>>>>>>> main
 import io.turntabl.utils.*;
 import org.jfree.data.xy.XYDataset;
 import org.json.simple.JSONArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import javax.servlet.ServletException;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,34 +50,34 @@ import java.util.Optional;
 public class MetricHandler extends HttpServlet {
     private final NewRelicJavaProfilerToolWindow toolWindowComponent;
     private final Logger logger = LoggerFactory.getLogger(MetricHandler.class);
+
     private final ServletUtils servletUtils = new ServletUtils();
     private final JsonUtility jsonUtil = new JsonUtility();
     private final CPULoadUtil cpuLoadUtil = new CPULoadUtil(jsonUtil);
-    private final ObjectAllocationInNewTLabUtil objectAllocationInNewTLabUtil = new ObjectAllocationInNewTLabUtil(jsonUtil);
-    private List<ObjectAllocationInNewTLab> cumulativeObjectAllocationList = new ArrayList<>();
-
-    private final ObjectAllocationOutsideTLabUtil objectAllocationOutsideTLabUtil = new ObjectAllocationOutsideTLabUtil(jsonUtil);
-    private List<ObjectAllocationOutsideTLab> cumulativeObjectAllocationOutsideList = new ArrayList<>();
-
-    private List<CpuLoad> cumulativeCpuLoadList = new ArrayList<>();
     private final GcHeapSummaryUtil gcHeapSummaryUtil = new GcHeapSummaryUtil(jsonUtil);
-    private List<GcHeapSummary> cumulativeGcHeapSummaryList = new ArrayList<>();
     private final GarbageCollectionUtil gcUtil = new GarbageCollectionUtil(jsonUtil);
+    private final ObjectAllocationInNewTLabUtil objectAllocationInNewTLabUtil = new ObjectAllocationInNewTLabUtil(jsonUtil);
+    private final ObjectAllocationOutsideTLabUtil objectAllocationOutsideTLabUtil = new ObjectAllocationOutsideTLabUtil(jsonUtil);
+    private  final ThreadCpuLoadUtil threadCpuLoadUtil = new ThreadCpuLoadUtil(jsonUtil);
+    private final JfrSocketReadUtil jfrSocketReadUtil = new JfrSocketReadUtil(jsonUtil);
+    private final SummaryMetaspaceUtil summaryMetaspaceUtil = new SummaryMetaspaceUtil(jsonUtil);
+    private final ThreadAllocatedStatisticsUtil threadAllocatedStatisticsUtil = new ThreadAllocatedStatisticsUtil(jsonUtil);
+
+    private List<ObjectAllocationInNewTLab> cumulativeObjectAllocationList = new ArrayList<>();
+    private List<ObjectAllocationOutsideTLab> cumulativeObjectAllocationOutsideList = new ArrayList<>();
+    private List<CpuLoad> cumulativeCpuLoadList = new ArrayList<>();
+    private List<GcHeapSummary> cumulativeGcHeapSummaryList = new ArrayList<>();
     private List<GCMinorDuration> cumulativeGcMinorDurationList = new ArrayList<>();
     private List<GCMajorDuration> cumulativeGcMajorDurationList = new ArrayList<>();
     private List<G1GarbageCollectionDuration> cumulativeG1GCDurationList = new ArrayList<>();
     private List<GCDuration> cumulativeGCDurationList = new ArrayList<>();
     private List<GCLongestPause> cumulativeGCLongestPauseList = new ArrayList<>();
-    private  final ThreadCpuLoadUtil threadCpuLoadUtil = new ThreadCpuLoadUtil(jsonUtil);
     private List<ThreadCpuLoad> cumulativeThreadCpuLoadList = new ArrayList<>();
-    private final JfrSocketReadUtil jfrSocketReadUtil = new JfrSocketReadUtil(jsonUtil);
     private List<JfrSocketReadBytesRead> cumulativeBytesReadList = new ArrayList<>();
     private List<JfrSocketReadDuration> cumulativeDurationList = new ArrayList<>();
-    private final ThreadAllocatedStatisticsUtil threadAllocatedStatisticsUtil = new ThreadAllocatedStatisticsUtil(jsonUtil);
     private List<ThreadAllocationStatistics> cumulativeThreadAllocatedStatisticsList = new ArrayList<>();
-
-    private final SummaryMetaspaceUtil summaryMetaspaceUtil = new SummaryMetaspaceUtil(jsonUtil);
     private List<SummaryMetaspace> cumulativeSummaryMetaspaceList = new ArrayList<>();
+
     public MetricHandler() {
         toolWindowComponent = null;
     }
@@ -74,11 +87,10 @@ public class MetricHandler extends HttpServlet {
     }
 
 
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String decompressedString = servletUtils.decompress(req);
 
         updateCpuLoadPanel(decompressedString); //update the cpuload table
-
         updateSummaryMetaspacePanel(decompressedString);
         updateObjectAllocationInNewTLabPanel(decompressedString);
         updateObjectAllocationOutsideTLabPanel(decompressedString);
@@ -87,7 +99,6 @@ public class MetricHandler extends HttpServlet {
         updateThreadLoadPanel(decompressedString); //update the threadCpuLoad table
         updateThreadAllocatedStatisticsPanel(decompressedString); //Update threadAllocatedStatistics table
         updateJfrSocketReadPanels(decompressedString);
-
 
         resp.setContentType("application/json");
         resp.setStatus(HttpServletResponse.SC_OK);
@@ -110,8 +121,6 @@ public class MetricHandler extends HttpServlet {
             XYDataset dataset = cpuLoadUtil.createDataSet(cumulativeCpuLoadList);
             toolWindowComponent.getMetricsTree().updateCpuLoadGraph(new CpuGraph(dataset, "CPU Load Metric", "Start Time", "Values"));
         }
-
-
     }
 
     public void updateThreadLoadPanel(String jsonString) {
@@ -210,7 +219,6 @@ public class MetricHandler extends HttpServlet {
             toolWindowComponent.getMetricsTree().updateComponentMap("GC Heap Summary", (new GcHeapSummaryPanel(tableModel)).getGcHeapSummaryComponent());
         }
     }
-
 
     public void updateSummaryMetaspacePanel(String jsonString) {
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);

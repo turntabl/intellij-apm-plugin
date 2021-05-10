@@ -1,20 +1,23 @@
+<<<<<<< HEAD:src/main/java/io/turntabl/model/metrics/GCMajorDuration.java
+package io.turntabl.model.metrics;
+=======
 package io.turntabl.model;
+>>>>>>> main:src/main/java/io/turntabl/model/GCMajorDuration.java
 
 import java.util.HashMap;
 
+public class GCMajorDuration extends GarbageCollection{
 
-public class G1GarbageCollectionDuration extends GarbageCollection{
-
-    public G1GarbageCollectionDuration(String name, String type, HashMap<String, Double> value, Long timestamp, Long interval, HashMap<String, String> attributes) {
+    public GCMajorDuration(String name, String type, HashMap<String, Double> value, Long timestamp, Long interval, HashMap<String, String> attributes) {
         super(name, type, value, timestamp, interval, attributes);
     }
 
-    public G1GarbageCollectionDuration() {
+    public GCMajorDuration() {
     }
 
     @Override
     public String toString() {
-        return "G1GarbageCollectionDuration{" +
+        return "GCMajorDuration{" +
                 "name='" + name + '\'' +
                 ", type='" + type + '\'' +
                 ", value=" + value +
