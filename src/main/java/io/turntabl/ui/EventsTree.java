@@ -5,8 +5,12 @@ import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
 import com.intellij.util.ui.components.BorderLayoutPanel;
 import io.turntabl.model.events.JVMInfoEvent;
+
 import io.turntabl.model.events.JfrCompilation;
 import io.turntabl.ui.flight_recorder.JfrCompilationPanel;
+import io.turntabl.model.events.JfrMethodSample;
+import io.turntabl.ui.events.JfrMethodSamplePanel;
+
 import io.turntabl.ui.java_virtual_machine.JVMInfoEventPanel;
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -26,6 +30,8 @@ public class EventsTree {
     private JVMInfoEventPanel jvmInfoEventPanel;
     private JfrCompilationPanel jfrCompilationPanel;
 
+    private JfrMethodSamplePanel jfrMethodSamplePanel;
+
     public EventsTree(NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow) {
         this.newRelicJavaProfilerToolWindow = newRelicJavaProfilerToolWindow;
         componentMap = new HashMap<>();
@@ -34,8 +40,8 @@ public class EventsTree {
 
         jvmInfoEventPanel = new JVMInfoEventPanel(new JVMInfoEventPanel.JVMInfoEventTableModel(Arrays.asList(new JVMInfoEvent())));
         jfrCompilationPanel = new JfrCompilationPanel(new JfrCompilationPanel.JfrCompilationTableModel(Arrays.asList(new JfrCompilation())));
-
-        JBPanel[] eventsPanel = {jvmInfoEventPanel.getJVMInfoEventComponent(), jfrCompilationPanel.getJfrCompilationComponent()};//add other panels here...........
+        jfrMethodSamplePanel = new JfrMethodSamplePanel(new JfrMethodSamplePanel.JfrMethodSampleTableModel(Arrays.asList(new JfrMethodSample())));
+        JBPanel[] eventsPanel = {jvmInfoEventPanel.getJVMInfoEventComponent(), jfrCompilationPanel.getJfrCompilationComponent(), jfrMethodSamplePanel.getJfrMethodSampleComponent()};//add other panels here...........
 
         //add events nodes to root node
         for (int i = 0; i < eventNodes.length; i++) {
@@ -68,9 +74,7 @@ public class EventsTree {
                 newRelicJavaProfilerToolWindow.updateEventPanelText(e.getPath().toString());
 
             }
-
         });
-
     }
 
     public JBPanel getEventsTree() {
@@ -87,5 +91,9 @@ public class EventsTree {
 
     public void updateComponentMap(String key, JBPanel panel) {
         this.componentMap.put(key, panel);
+    }
+
+    public JTable getJfrMethodSampleTable(){
+        return jfrMethodSamplePanel.getTable();
     }
 }

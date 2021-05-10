@@ -35,9 +35,6 @@ public abstract class AbstractEventsInfo {
         this.timestamp = timestamp;
     }
 
-
-
-
     public String getInstrumentationName() {
         return instrumentationName;
     }
