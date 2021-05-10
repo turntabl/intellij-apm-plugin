@@ -1,25 +1,31 @@
-package io.turntabl.ui.model;
+<<<<<<< HEAD:src/main/java/io/turntabl/model/metrics/ThreadAllocationStatistics.java
+package io.turntabl.model.metrics;
+=======
+package io.turntabl.model;
+>>>>>>> main:src/main/java/io/turntabl/model/ThreadAllocationStatistics.java
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.HashMap;
+import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GCLongestPause {
+public class ThreadAllocationStatistics {
     private String name;
     private String type;
     private double value;
-    private Long timestamp;
-    private HashMap<String, String> attributes;
+    @JsonProperty("timestamp")
+    private long startTime;
+    private Map<String, String> attributes;
 
-    public GCLongestPause() {
+    public ThreadAllocationStatistics() {
     }
 
-    public GCLongestPause(String name, String type, double value, Long timestamp, HashMap<String, String> attributes) {
+    public ThreadAllocationStatistics(String name, String type, double value, long startTime, Map<String, String> attributes) {
         this.name = name;
         this.type = type;
         this.value = value;
-        this.timestamp = timestamp;
+        this.startTime = startTime;
         this.attributes = attributes;
     }
 
@@ -47,29 +53,30 @@ public class GCLongestPause {
         this.value = value;
     }
 
-    public Long getTimestamp() {
-        return timestamp;
+
+    public long getStartTime() {
+        return startTime;
     }
 
-    public void setTimestamp(Long timestamp) {
-        this.timestamp = timestamp;
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
     }
 
-    public HashMap<String, String> getAttributes() {
+    public Map<String, String> getAttributes() {
         return attributes;
     }
 
-    public void setAttributes(HashMap<String, String> attributes) {
+    public void setAttributes(Map<String, String> attributes) {
         this.attributes = attributes;
     }
 
     @Override
     public String toString() {
-        return "GCLongestPause{" +
+        return "ThreadAllocationStatistics{" +
                 "name='" + name + '\'' +
                 ", type='" + type + '\'' +
                 ", value=" + value +
-                ", timestamp=" + timestamp +
+                ", startTime=" + startTime +
                 ", attributes=" + attributes +
                 '}';
     }

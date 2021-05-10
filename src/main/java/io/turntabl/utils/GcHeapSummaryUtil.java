@@ -2,10 +2,9 @@ package io.turntabl.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.turntabl.ui.model.GcHeapSummary;
+import io.turntabl.model.metrics.GcHeapSummary;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;

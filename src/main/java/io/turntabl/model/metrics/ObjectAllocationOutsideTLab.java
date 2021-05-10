@@ -1,4 +1,8 @@
-package io.turntabl.ui.model;
+<<<<<<< HEAD:src/main/java/io/turntabl/model/metrics/ObjectAllocationOutsideTLab.java
+package io.turntabl.model.metrics;
+=======
+package io.turntabl.model;
+>>>>>>> main:src/main/java/io/turntabl/model/ObjectAllocationOutsideTLab.java
 
 import java.util.HashMap;
 

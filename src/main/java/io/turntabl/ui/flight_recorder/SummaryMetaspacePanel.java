@@ -3,31 +3,28 @@ package io.turntabl.ui.flight_recorder;
 import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
-import io.turntabl.ui.model.SummaryMetaspace;
+<<<<<<< HEAD
+import io.turntabl.model.metrics.SummaryMetaspace;
+=======
+import io.turntabl.model.SummaryMetaspace;
+>>>>>>> main
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableModel;
 import java.awt.*;
-import java.sql.Timestamp;
-import java.util.HashMap;
 import java.util.List;
 
 
 public class SummaryMetaspacePanel {
-    JBPanel panel;
-    JTable table;
-
-    TableModel myData;
-    DefaultTableColumnModel columnModel;
+    private JBPanel panel;
+    private JTable table;
 
     public SummaryMetaspacePanel(TableModel tableModel) {
         panel = new JBPanel(new BorderLayout());
         table = new JBTable(tableModel);
 
         table.setRowSelectionAllowed(true);
-        table.setRowSelectionInterval(0, 0);
 
         table.getColumnModel().getColumn(0).setPreferredWidth(350);
         table.getColumnModel().getColumn(1).setPreferredWidth(350);

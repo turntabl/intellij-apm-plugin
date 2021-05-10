@@ -1,4 +1,7 @@
-package io.turntabl.ui.model;
+
+package io.turntabl.model.metrics;
+
+
 
 
 import java.util.HashMap;

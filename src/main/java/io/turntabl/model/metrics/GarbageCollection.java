@@ -1,23 +1,29 @@
-package io.turntabl.ui.model;
+<<<<<<< HEAD:src/main/java/io/turntabl/model/metrics/GarbageCollection.java
+package io.turntabl.model.metrics;
+=======
+package io.turntabl.model;
+>>>>>>> main:src/main/java/io/turntabl/model/GarbageCollection.java
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.HashMap;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ObjectAllocation {
+public class GarbageCollection {
     protected String name;
     protected String type;
     protected HashMap<String, Double> value;
     protected Long timestamp;
-    protected int interval;
+    @JsonProperty("interval.ms")
+    protected Long interval;
     protected HashMap<String, String> attributes;
 
 
-    public ObjectAllocation() {
+    public GarbageCollection() {
     }
 
-    public ObjectAllocation(String name, String type, HashMap<String, Double> value, Long timestamp, int interval, HashMap<String, String> attributes) {
+    public GarbageCollection(String name, String type, HashMap<String, Double> value, Long timestamp, Long interval, HashMap<String, String> attributes) {
         this.name = name;
         this.type = type;
         this.value = value;
@@ -58,11 +64,11 @@ public class ObjectAllocation {
         this.timestamp = timestamp;
     }
 
-    public int getInterval() {
+    public Long getInterval() {
         return interval;
     }
 
-    public void setInterval(int interval) {
+    public void setInterval(Long interval) {
         this.interval = interval;
     }
 
@@ -76,7 +82,7 @@ public class ObjectAllocation {
 
     @Override
     public String toString() {
-        return "ObjectAllocation{" +
+        return "GarbageCollection{" +
                 "name='" + name + '\'' +
                 ", type='" + type + '\'' +
                 ", value=" + value +

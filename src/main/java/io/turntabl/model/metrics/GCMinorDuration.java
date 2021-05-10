@@ -1,4 +1,8 @@
-package io.turntabl.ui.model;
+<<<<<<< HEAD:src/main/java/io/turntabl/model/metrics/GCMinorDuration.java
+package io.turntabl.model.metrics;
+=======
+package io.turntabl.model;
+>>>>>>> main:src/main/java/io/turntabl/model/GCMinorDuration.java
 
 import java.util.HashMap;
 
