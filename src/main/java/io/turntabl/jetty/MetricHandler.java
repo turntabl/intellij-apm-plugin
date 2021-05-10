@@ -83,7 +83,7 @@ public class MetricHandler extends HttpServlet {
         updateThreadLoadPanel(decompressedString); //update the threadCpuLoad table
         updateThreadAllocatedStatisticsPanel(decompressedString); //Update threadAllocatedStatistics table
         updateJfrSocketReadPanels(decompressedString);
-        //updateThreadAllocatedStatisticsPanel(decompressedString);
+        updateThreadAllocatedStatisticsPanel(decompressedString);
 
         resp.setContentType("application/json");
         resp.setStatus(HttpServletResponse.SC_OK);
@@ -125,9 +125,8 @@ public class MetricHandler extends HttpServlet {
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
         if (jsonArray.isPresent()) {
             List<ThreadContextSwitchRate> threadContextSwitchRateList = threadContextSwitchRateUtil.getThreadContextSwitchRate(jsonArray.get());
-            List<ThreadContextSwitchRate> consolidatedList = threadContextSwitchRateUtil.getThreadContextSwitchRateConsolidated(threadContextSwitchRateList);
 
-            cumulativeThreadContextSwitchRateList.addAll(consolidatedList);
+            cumulativeThreadContextSwitchRateList.addAll(threadContextSwitchRateList);
             toolWindowComponent.getMetricsTree().getThreadCpuTable().setModel(new ThreadContextSwitchRatePanel.ThreadContextSwitchRateTableModel(cumulativeThreadContextSwitchRateList));
             toolWindowComponent.getMetricsTree().updateComponentMap("Thread Context Switch Rate",(new ThreadContextSwitchRatePanel(new ThreadContextSwitchRatePanel.ThreadContextSwitchRateTableModel(cumulativeThreadContextSwitchRateList))).getThreadContextSwitchRateComponent());
 

@@ -33,14 +33,6 @@ public class ThreadContextSwitchRateUtil {
                     try {
                         threadContextSwitchRate = mapper.readValue(c.toJSONString(), ThreadContextSwitchRate.class);
 
-                        String name = threadContextSwitchRate.getName().toLowerCase();
-                        double value = Double.parseDouble(c.get("value").toString());
-                        threadContextSwitchRate.setValue(value);
-//                        if (name.endsWith("user")) {
-//                            threadContextSwitchRate.setUserValue(value);
-//                        } else {
-//                            threadContextSwitchRate.setSystemValue(value);
-//                        }
                     } catch (JsonProcessingException e) {
                         e.printStackTrace();
                     }
@@ -52,28 +44,6 @@ public class ThreadContextSwitchRateUtil {
         return threadContextSwitchRateList
                 .stream()
                 .collect(Collectors.groupingBy(ThreadContextSwitchRate::getTimestamp));
-    }
-
-    public List<ThreadContextSwitchRate> getThreadContextSwitchRateConsolidated(List<ThreadContextSwitchRate> list) {
-        Map<Long, List<ThreadContextSwitchRate>> threadContextSwitchRateMap = groupThreadContextSwitchRateByTimestamp(list);
-
-        return threadContextSwitchRateMap.values().stream()
-                .map(threadContextSwitchRateList -> {
-                    ThreadContextSwitchRate threadContextSwitchRate = threadContextSwitchRateList.get(0);
-                    ThreadContextSwitchRate threadContextSwitchRate2 = threadContextSwitchRateList.get(1);
-
-
-                    threadContextSwitchRate.setValue(threadContextSwitchRate2.getValue());
-
-//                    if (threadContextSwitchRate2.getName().toLowerCase().endsWith("Rate")) {
-//                        threadContextSwitchRate.setValue(threadContextSwitchRate2.getValue());
-//                    } else {
-//                        threadContextSwitchRate.setValue(threadContextSwitchRate2.getValue());
-//                    }
-
-
-                    return threadContextSwitchRate;
-                }).collect(Collectors.toList());
     }
 
     public String formatDate(Long timestamp) {
