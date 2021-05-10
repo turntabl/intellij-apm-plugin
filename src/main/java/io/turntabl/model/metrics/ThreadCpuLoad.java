@@ -1,4 +1,4 @@
-package io.turntabl.model;
+package io.turntabl.model.metrics;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -6,29 +6,28 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashMap;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class JfrSocketRead {
-    protected String name;
+public class ThreadCpuLoad {
+    private String name;
     @JsonProperty("timestamp")
-    protected Long startTime;
-    protected String type;
-    protected HashMap<String, Double> value;
-    @JsonProperty("interval.ms")
-    protected int interval;
-    protected HashMap<String, String> attributes;
+    private Long startTime;
+    private String type;
+    private Double userValue;
+    private Double systemValue;
+    private HashMap<String, String> attributes;
 
-    public JfrSocketRead(String name, Long startTime, String type, HashMap<String, Double> value, int interval, HashMap<String, String> attributes) {
+    public ThreadCpuLoad(String name, Long startTime, String type, Double userValue, Double systemValue, HashMap<String, String> attributes) {
         this.name = name;
         this.startTime = startTime;
         this.type = type;
-        this.value = value;
-        this.interval = interval;
+        this.userValue = userValue;
+        this.systemValue = systemValue;
         this.attributes = attributes;
     }
 
-    public JfrSocketRead() {
+    public ThreadCpuLoad() {
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
@@ -36,16 +35,16 @@ public class JfrSocketRead {
         return startTime;
     }
 
-    public String getType() {
+    public String getType(){
         return type;
     }
 
-    public HashMap<String, Double> getValue() {
-        return value;
+    public Double getUserValue() {
+        return userValue;
     }
 
-    public int getInterval() {
-        return interval;
+    public Double getSystemValue() {
+        return systemValue;
     }
 
     public HashMap<String, String> getAttributes() {
@@ -64,12 +63,12 @@ public class JfrSocketRead {
         this.type = type;
     }
 
-    public void setValue(HashMap<String, Double> value) {
-        this.value = value;
+    public void setUserValue(Double userValue) {
+        this.userValue = userValue;
     }
 
-    public void setInterval(int interval) {
-        this.interval = interval;
+    public void setSystemValue(Double systemValue) {
+        this.systemValue = systemValue;
     }
 
     public void setAttributes(HashMap<String, String> attributes) {
@@ -78,12 +77,12 @@ public class JfrSocketRead {
 
     @Override
     public String toString() {
-        return "JfrSocketRead{" +
+        return "ThreadCpuLoad{" +
                 "name='" + name + '\'' +
                 ", startTime=" + startTime +
                 ", type='" + type + '\'' +
-                ", value=" + value +
-                ", interval=" + interval +
+                ", userValue=" + userValue +
+                ", systemValue=" + systemValue +
                 ", attributes=" + attributes +
                 '}';
     }

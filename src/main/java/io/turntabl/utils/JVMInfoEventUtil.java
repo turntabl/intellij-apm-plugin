@@ -2,7 +2,7 @@ package io.turntabl.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.turntabl.model.JVMInfoEvent;
+import io.turntabl.model.events.JVMInfoEvent;
 
 import java.util.List;
 import java.util.stream.Collectors;

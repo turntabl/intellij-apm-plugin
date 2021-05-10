@@ -9,7 +9,6 @@ public abstract class AbstractEventsInfo {
     private long timestamp;
     @JsonProperty("instrumentation.name")
     private String instrumentationName;
-    private String jvmArguments;
     @JsonProperty("host.hostname")
     private String hostName;
     @JsonProperty("collector.name")
@@ -71,21 +70,12 @@ public abstract class AbstractEventsInfo {
         this.instrumentationProvider = instrumentationProvider;
     }
 
-    public String getJvmArguments() {
-        return jvmArguments;
-    }
-
-    public void setJvmArguments(String jvmArguments) {
-        this.jvmArguments = jvmArguments;
-    }
-
     @Override
     public String toString() {
         return "AbstractEventsInfo{" +
                 "eventType='" + eventType + '\'' +
                 ", timestamp=" + timestamp +
                 ", instrumentationName='" + instrumentationName + '\'' +
-                ", jvmArguments='" + jvmArguments + '\'' +
                 ", hostName='" + hostName + '\'' +
                 ", collectorName='" + collectorName + '\'' +
                 ", instrumentationProvider='" + instrumentationProvider + '\'' +

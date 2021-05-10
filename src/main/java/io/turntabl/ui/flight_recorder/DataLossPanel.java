@@ -3,7 +3,7 @@ package io.turntabl.ui.flight_recorder;
 import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
-import io.turntabl.model.DataLoss;
+import io.turntabl.model.metrics.DataLoss;
 import io.turntabl.utils.JsonUtility;
 
 import javax.swing.*;

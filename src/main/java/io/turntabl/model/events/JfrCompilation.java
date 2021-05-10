@@ -1,4 +1,4 @@
-package io.turntabl.model;
+package io.turntabl.model.events;
 
 import java.util.Date;
 

@@ -3,7 +3,7 @@ package io.turntabl.ui.java_application;
 import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
-import io.turntabl.model.JavaMonitorWait;
+import io.turntabl.model.events.JavaMonitorWait;
 
 import javax.swing.*;
 import javax.swing.table.*;

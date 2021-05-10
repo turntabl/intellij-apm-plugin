@@ -3,7 +3,7 @@ package io.turntabl.ui.java_virtual_machine;
 import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
-import io.turntabl.model.JVMInfoEvent;
+import io.turntabl.model.events.JVMInfoEvent;
 import io.turntabl.utils.JsonUtility;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;

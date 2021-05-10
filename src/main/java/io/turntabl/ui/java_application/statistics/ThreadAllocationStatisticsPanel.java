@@ -3,7 +3,7 @@ package io.turntabl.ui.java_application.statistics;
 import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
-import io.turntabl.model.ThreadAllocationStatistics;
+import io.turntabl.model.metrics.ThreadAllocationStatistics;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;

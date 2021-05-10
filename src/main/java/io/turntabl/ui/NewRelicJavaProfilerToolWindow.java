@@ -76,7 +76,7 @@ public class NewRelicJavaProfilerToolWindow implements Disposable {
         eventsRootPanel.add(eventsSplitter, BorderLayout.CENTER);
         metricsRootPanel.add(metricsSplitter, BorderLayout.CENTER);
 
-        runnerTab = new JBRunnerTabs(project, ActionManager.getInstance(), IdeFocusManager.findInstance(), this);
+        runnerTab = new JBRunnerTabs(project,  this);
 
         JBPanel[] tabPanels = {flameGraphPanel, callTreePanel, methodListPanel, eventsRootPanel, metricsRootPanel};
         String[] tabNames = {"Flame Graph", "CallTree", "Method List", "Events", "Metrics"};
@@ -84,7 +84,7 @@ public class NewRelicJavaProfilerToolWindow implements Disposable {
         for (int i = 0; i < tabPanels.length; ++i) {
             runnerTab.addTab(new TabInfo(tabPanels[i]).setText(tabNames[i]));
         }
-        runnerTab.select(runnerTab.getTabAt(4), true);
+        runnerTab.select(runnerTab.getTabAt(3), true);
         runnerTab.setBorder(new EmptyBorder(0, 2, 0, 0));
 
         mainPanel.add(runnerTab);

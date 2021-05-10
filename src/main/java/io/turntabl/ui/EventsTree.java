@@ -5,11 +5,8 @@ import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
 import com.intellij.util.ui.components.BorderLayoutPanel;
-import io.turntabl.ui.flight_recorder.*;
-import io.turntabl.ui.java_application.JavaMonitorWaitPanel;
-import io.turntabl.model.*;
+import io.turntabl.model.events.JVMInfoEvent;
 import io.turntabl.ui.java_virtual_machine.JVMInfoEventPanel;
-import org.jfree.data.xy.XYDatasetTableModel;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -23,8 +20,7 @@ public class EventsTree {
     private JBPanel treePanel;
     private JTree tree;
     private String rootNodeName = "Events by type";
-    private String jvmNodeName = "Java Virtual Machine";
-    private String[] jvmNodes = {"JVM Information"};
+    private String[] eventNodes = {"JVM Information", "JFR Method Sample", "Java Monitor Wait", "JFR Compilation"};
     private final NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow;
     private Map<String, JComponent> componentMap;
     private JVMInfoEventPanel jvmInfoEventPanel;
@@ -32,16 +28,22 @@ public class EventsTree {
     public EventsTree(NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow) {
         this.newRelicJavaProfilerToolWindow = newRelicJavaProfilerToolWindow;
         componentMap = new HashMap<>();
+
         DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(rootNodeName);
 
-        DefaultMutableTreeNode jvmNode = new DefaultMutableTreeNode(jvmNodeName);
         jvmInfoEventPanel = new JVMInfoEventPanel(new JVMInfoEventPanel.JVMInfoEventTableModel(Arrays.asList(new JVMInfoEvent())));
-        for (int i = 0; i < jvmNodes.length; i++) {
-            jvmNode.add(new DefaultMutableTreeNode(jvmNodes[i]));
-            componentMap.put(jvmNodes[i], jvmInfoEventPanel.getJVMInfoEventComponent());
-        }
+        JBPanel[] eventsPanel = {jvmInfoEventPanel.getJVMInfoEventComponent()}; //add other panels here...........
 
-        rootNode.add(jvmNode);
+        //add events nodes to root node
+        for (int i = 0; i < eventNodes.length; i++) {
+            rootNode.add(new DefaultMutableTreeNode(eventNodes[i]));
+            componentMap.put(eventNodes[i], jvmInfoEventPanel.getJVMInfoEventComponent());
+            if ((i + 1) <= eventsPanel.length) {
+                componentMap.put(eventNodes[i], eventsPanel[i]);
+            } else {
+                componentMap.put(eventNodes[i], new JBPanel());
+            }
+        }
 
         treePanel = new BorderLayoutPanel(0, 0);
 

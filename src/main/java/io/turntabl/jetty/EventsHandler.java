@@ -1,6 +1,6 @@
 package io.turntabl.jetty;
 
-import io.turntabl.model.JVMInfoEvent;
+import io.turntabl.model.events.JVMInfoEvent;
 import io.turntabl.ui.NewRelicJavaProfilerToolWindow;
 import io.turntabl.ui.java_virtual_machine.JVMInfoEventPanel;
 import io.turntabl.ui.operating_system.CpuLoadPanel;

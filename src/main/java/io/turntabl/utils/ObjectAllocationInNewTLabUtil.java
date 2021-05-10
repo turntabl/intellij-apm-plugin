@@ -7,7 +7,7 @@ import org.json.simple.JSONObject;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.List;
-import io.turntabl.model.ObjectAllocationInNewTLab;
+import io.turntabl.model.metrics.ObjectAllocationInNewTLab;
 
 public class ObjectAllocationInNewTLabUtil {
     private final JsonUtility jsonUtils;

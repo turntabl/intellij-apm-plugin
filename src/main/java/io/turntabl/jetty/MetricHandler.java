@@ -1,6 +1,6 @@
 package io.turntabl.jetty;
 
-import io.turntabl.model.*;
+import io.turntabl.model.metrics.*;
 import io.turntabl.ui.CpuGraph;
 import io.turntabl.ui.NewRelicJavaProfilerToolWindow;
 import io.turntabl.ui.flight_recorder.JfrSocketReadBytesReadPanel;
