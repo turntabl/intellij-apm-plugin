@@ -40,7 +40,7 @@ public class ThreadContextSwitchRatePanel {
             return panel;
         }
 
-        public static class ThreadContextSwitchRateTableModel extends AbstractTableModel {
+    public static class ThreadContextSwitchRateTableModel extends AbstractTableModel {
             String[] columnNames = {"Timestamp", "Type", "Value", "Thread OS Name", "Thread Name"};
             String[][] data;
             private java.util.List<ThreadContextSwitchRate> threadContextSwitchRateList;
@@ -78,6 +78,8 @@ public class ThreadContextSwitchRatePanel {
                 return columnNames[column];
             }
         }
-
+    public JTable getTable() {
+        return this.table;
+    }
 
 }

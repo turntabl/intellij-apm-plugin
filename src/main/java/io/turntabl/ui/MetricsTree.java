@@ -48,6 +48,7 @@ public class MetricsTree {
     private JfrSocketReadDurationPanel jfrSocketReadDurationPanel;
     private ThreadAllocationStatisticsPanel threadAllocationStatisticsPanel;
     private SummaryMetaspacePanel summaryMetaspacePanel;
+    private ThreadContextSwitchRatePanel threadContextSwitchRatePanel;
 
 
     public MetricsTree(NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow) {
@@ -350,4 +351,10 @@ public class MetricsTree {
     public JTable getSummaryMetaspace() {
         return this.summaryMetaspacePanel.getTable();
     }
+
+    public JTable getThreadContextSwitchRate(){
+        return this.threadContextSwitchRatePanel.getTable();
+    }
+
+
 }

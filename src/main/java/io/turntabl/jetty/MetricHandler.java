@@ -65,6 +65,8 @@ public class MetricHandler extends HttpServlet {
 
     private final SummaryMetaspaceUtil summaryMetaspaceUtil = new SummaryMetaspaceUtil(jsonUtil);
     private List<SummaryMetaspace> cumulativeSummaryMetaspaceList = new ArrayList<>();
+    private final ThreadContextSwitchRateUtil threadContextSwitchRateUtil = new ThreadContextSwitchRateUtil(jsonUtil);
+    private List<ThreadContextSwitchRate> cumulativeThreadContextSwitchRateList = new ArrayList<>();
     public MetricHandler() {
         toolWindowComponent = null;
     }
@@ -87,6 +89,7 @@ public class MetricHandler extends HttpServlet {
         updateThreadLoadPanel(decompressedString); //update the threadCpuLoad table
         updateThreadAllocatedStatisticsPanel(decompressedString); //Update threadAllocatedStatistics table
         updateJfrSocketReadPanels(decompressedString);
+        //updateThreadAllocatedStatisticsPanel(decompressedString);
 
 
         resp.setContentType("application/json");
@@ -123,6 +126,19 @@ public class MetricHandler extends HttpServlet {
             cumulativeThreadCpuLoadList.addAll(consolidatedList);
             toolWindowComponent.getMetricsTree().getThreadCpuTable().setModel(new ThreadCpuLoadPanel.ThreadCpuLoadTableModel(cumulativeThreadCpuLoadList));
             toolWindowComponent.getMetricsTree().updateComponentMap("Thread CPU Load",(new ThreadCpuLoadPanel(new ThreadCpuLoadPanel.ThreadCpuLoadTableModel(cumulativeThreadCpuLoadList))).getThreadCpuLoadComponent());
+
+        }
+    }
+
+    public void updateThreadContextSwitchRatePanel(String jsonString) {
+        Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
+        if (jsonArray.isPresent()) {
+            List<ThreadContextSwitchRate> threadContextSwitchRateList = threadContextSwitchRateUtil.getThreadContextSwitchRate(jsonArray.get());
+            List<ThreadContextSwitchRate> consolidatedList = threadContextSwitchRateUtil.getThreadContextSwitchRateConsolidated(threadContextSwitchRateList);
+
+            cumulativeThreadContextSwitchRateList.addAll(consolidatedList);
+            toolWindowComponent.getMetricsTree().getThreadCpuTable().setModel(new ThreadContextSwitchRatePanel.ThreadContextSwitchRateTableModel(cumulativeThreadContextSwitchRateList));
+            toolWindowComponent.getMetricsTree().updateComponentMap("Thread Context Switch Rate",(new ThreadContextSwitchRatePanel(new ThreadContextSwitchRatePanel.ThreadContextSwitchRateTableModel(cumulativeThreadContextSwitchRateList))).getThreadContextSwitchRateComponent());
 
         }
     }
