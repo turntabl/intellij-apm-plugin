@@ -10,6 +10,10 @@ import io.turntabl.ui.java_application.*;
 import io.turntabl.ui.java_application.statistics.ThreadAllocationStatisticsPanel;
 import io.turntabl.ui.java_virtual_machine.GcHeapSummaryPanel;
 import io.turntabl.ui.java_virtual_machine.garbage_collection.*;
+<<<<<<< HEAD
+=======
+import io.turntabl.model.*;
+>>>>>>> main
 import io.turntabl.ui.operating_system.CpuLoadPanel;
 import io.turntabl.ui.operating_system.ThreadCpuLoadPanel;
 

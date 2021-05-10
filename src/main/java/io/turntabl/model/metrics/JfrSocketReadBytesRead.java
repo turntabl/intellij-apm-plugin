@@ -1,4 +1,8 @@
+<<<<<<< HEAD:src/main/java/io/turntabl/model/metrics/JfrSocketReadBytesRead.java
 package io.turntabl.model.metrics;
+=======
+package io.turntabl.model;
+>>>>>>> main:src/main/java/io/turntabl/model/JfrSocketReadBytesRead.java
 
 import java.util.HashMap;
 

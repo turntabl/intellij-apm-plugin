@@ -1,4 +1,8 @@
+<<<<<<< HEAD:src/main/java/io/turntabl/model/events/JfrCompilation.java
 package io.turntabl.model.events;
+=======
+package io.turntabl.model;
+>>>>>>> main:src/main/java/io/turntabl/model/JfrCompilation.java
 
 import java.util.Date;
 

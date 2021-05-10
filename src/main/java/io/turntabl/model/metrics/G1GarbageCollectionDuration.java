@@ -1,4 +1,8 @@
+<<<<<<< HEAD:src/main/java/io/turntabl/model/metrics/G1GarbageCollectionDuration.java
 package io.turntabl.model.metrics;
+=======
+package io.turntabl.model;
+>>>>>>> main:src/main/java/io/turntabl/model/G1GarbageCollectionDuration.java
 
 import java.util.HashMap;
 

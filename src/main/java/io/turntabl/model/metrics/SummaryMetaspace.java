@@ -1,4 +1,8 @@
+<<<<<<< HEAD:src/main/java/io/turntabl/model/metrics/SummaryMetaspace.java
 package io.turntabl.model.metrics;
+=======
+package io.turntabl.model;
+>>>>>>> main:src/main/java/io/turntabl/model/SummaryMetaspace.java
 
 import java.util.HashMap;
 

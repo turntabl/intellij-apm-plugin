@@ -6,6 +6,7 @@ import io.turntabl.ui.NewRelicJavaProfilerToolWindow;
 import io.turntabl.ui.flight_recorder.JfrSocketReadBytesReadPanel;
 import io.turntabl.ui.flight_recorder.JfrSocketReadDurationPanel;
 import io.turntabl.ui.flight_recorder.SummaryMetaspacePanel;
+<<<<<<< HEAD
 import io.turntabl.ui.java_application.ObjectAllocationInNewTLabPanel;
 import io.turntabl.ui.java_application.ObjectAllocationOutsideTLabPanel;
 import io.turntabl.ui.java_application.statistics.ThreadAllocationStatisticsPanel;
@@ -13,6 +14,24 @@ import io.turntabl.ui.java_virtual_machine.GcHeapSummaryPanel;
 import io.turntabl.ui.java_virtual_machine.garbage_collection.*;
 import io.turntabl.ui.operating_system.CpuLoadPanel;
 import io.turntabl.ui.operating_system.ThreadCpuLoadPanel;
+=======
+import io.turntabl.model.SummaryMetaspace;
+import io.turntabl.utils.SummaryMetaspaceUtil;
+import io.turntabl.ui.java_application.ObjectAllocationInNewTLabPanel;
+import io.turntabl.ui.java_application.ObjectAllocationOutsideTLabPanel;
+import io.turntabl.model.CpuLoad;
+import io.turntabl.model.ObjectAllocationInNewTLab;
+import io.turntabl.ui.operating_system.CpuLoadPanel;
+import io.turntabl.utils.CPULoadUtil;
+import io.turntabl.utils.JsonUtility;
+import io.turntabl.utils.ObjectAllocationInNewTLabUtil;
+import io.turntabl.ui.java_virtual_machine.GcHeapSummaryPanel;
+import io.turntabl.ui.java_virtual_machine.garbage_collection.*;
+import io.turntabl.model.*;
+import io.turntabl.ui.flight_recorder.*;
+import io.turntabl.ui.java_application.statistics.ThreadAllocationStatisticsPanel;
+import io.turntabl.ui.operating_system.*;
+>>>>>>> main
 import io.turntabl.utils.*;
 import org.jfree.data.xy.XYDataset;
 import org.json.simple.JSONArray;

@@ -1,4 +1,8 @@
+<<<<<<< HEAD:src/main/java/io/turntabl/model/metrics/ThreadContextSwitchRate.java
 package io.turntabl.model.metrics;
+=======
+package io.turntabl.model;
+>>>>>>> main:src/main/java/io/turntabl/model/ThreadContextSwitchRate.java
 
 
 import java.util.HashMap;
