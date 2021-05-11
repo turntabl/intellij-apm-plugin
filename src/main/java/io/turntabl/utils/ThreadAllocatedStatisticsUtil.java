@@ -21,7 +21,7 @@ public class ThreadAllocatedStatisticsUtil {
     public List<ThreadAllocationStatistics> getThreadAllocatedStatistics(JSONArray metricsArray) {
         Stream<JSONObject> threadAllocatedStatisticsMetric = jsonUtils.getStream(metricsArray);
         return threadAllocatedStatisticsMetric
-                .filter(m -> m.get("name").toString().toLowerCase().startsWith("jfr.threadallocatedstatistics"))
+                .filter(m -> m.get("name").toString().toLowerCase().startsWith("jfr.threadallocationstatistics"))
                 .map(c -> {
                     ThreadAllocationStatistics threadAllocationStatistics = null;
                     try {
