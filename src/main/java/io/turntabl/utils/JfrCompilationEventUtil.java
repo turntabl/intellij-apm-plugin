@@ -1,28 +1,29 @@
-package Java.utils;
+package io.turntabl.utils;
 
+import Java.utils.JsonUtility;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.turntabl.model.events.JavaMonitorWait;
-import org.json.simple.JSONArray;
+import io.turntabl.model.events.JVMInfoEvent;
+import io.turntabl.model.events.JfrCompilation;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class JavaMonitorWaitUtil {
+public class JfrCompilationEventUtil {
     private final JsonUtility jsonUtility;
     ObjectMapper mapper = new ObjectMapper();
 
-    public JavaMonitorWaitUtil(JsonUtility jsonUtil) {
+    public JfrCompilationEventUtil(JsonUtility jsonUtil) {
         jsonUtility = jsonUtil;
     }
 
-    public List<JavaMonitorWait> getJavaMonitorWaitList(String jsonString) {
+    public List<JfrCompilation> getJfrCompilationList(String jsonString) {
         return jsonUtility.readEventsJson(jsonString)
-                .filter(s -> s.get("eventType").toString().equalsIgnoreCase("JfrJavaMonitorWait"))
+                .filter(s -> s.get("eventType").toString().equalsIgnoreCase("JfrCompilation"))
                 .map(e -> {
-                    JavaMonitorWait event = null;
+                    JfrCompilation event = null;
                     try {
-                        event = mapper.readValue(e.toJSONString(), JavaMonitorWait.class);
+                        event = mapper.readValue(e.toJSONString(), JfrCompilation.class);
                     } catch (JsonProcessingException ex) {
                         ex.printStackTrace();
                     }

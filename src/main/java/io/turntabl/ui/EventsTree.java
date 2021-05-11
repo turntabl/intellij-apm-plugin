@@ -5,6 +5,11 @@ import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
 import com.intellij.util.ui.components.BorderLayoutPanel;
 import io.turntabl.model.events.JVMInfoEvent;
+import io.turntabl.model.events.JfrCompilation;
+import io.turntabl.ui.flight_recorder.JfrCompilationPanel;
+import io.turntabl.model.events.JfrMethodSample;
+import io.turntabl.ui.events.JfrMethodSamplePanel;
+
 import io.turntabl.ui.java_virtual_machine.JVMInfoEventPanel;
 import io.turntabl.model.events.JavaMonitorWait;
 import io.turntabl.ui.java_virtual_machine.JavaMonitorWaitPanel;
@@ -22,11 +27,18 @@ public class EventsTree {
     private JBPanel treePanel;
     private JTree tree;
     private String rootNodeName = "Events by type";
+
     private String[] eventNodes = {"JVM Information", "Java Monitor Wait", "JFR Method Sample",  "JFR Compilation"};
     private final NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow;
     private Map<String, JComponent> componentMap;
     private JVMInfoEventPanel jvmInfoEventPanel;
     private JavaMonitorWaitPanel javaMonitorWaitPanel;
+
+    private JfrCompilationPanel jfrCompilationPanel;
+
+    private JfrMethodSamplePanel jfrMethodSamplePanel;
+    private Object JBPanel;
+
 
     public EventsTree(NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow) {
         this.newRelicJavaProfilerToolWindow = newRelicJavaProfilerToolWindow;
@@ -35,9 +47,13 @@ public class EventsTree {
         DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(rootNodeName);
 
         jvmInfoEventPanel = new JVMInfoEventPanel(new JVMInfoEventPanel.JVMInfoEventTableModel(Arrays.asList(new JVMInfoEvent())));
+
         javaMonitorWaitPanel = new JavaMonitorWaitPanel(new JavaMonitorWaitPanel.JavaMonitorWaitTableModel(Arrays.asList(new JavaMonitorWait())));
 
-        JBPanel[] eventsPanel = {jvmInfoEventPanel.getJVMInfoEventComponent(), javaMonitorWaitPanel.getJavaMonitorWaitComponent()};//add other panels here...........
+        jfrCompilationPanel = new JfrCompilationPanel(new JfrCompilationPanel.JfrCompilationTableModel(Arrays.asList(new JfrCompilation())));
+        jfrMethodSamplePanel = new JfrMethodSamplePanel(new JfrMethodSamplePanel.JfrMethodSampleTableModel(Arrays.asList(new JfrMethodSample())));
+
+        JBPanel[] eventsPanel = {jvmInfoEventPanel.getJVMInfoEventComponent(), javaMonitorWaitPanel.getJavaMonitorWaitComponent(), jfrCompilationPanel.getJfrCompilationComponent(), jfrMethodSamplePanel.getJfrMethodSampleComponent()};//add other panels here...........
         //add events nodes to root node
         for (int i = 0; i < eventNodes.length; i++) {
             rootNode.add(new DefaultMutableTreeNode(eventNodes[i]));
@@ -82,11 +98,18 @@ public class EventsTree {
         return jvmInfoEventPanel.getTable();
     }
 
+
     public JTable getJavaMonitorWaitTable() {
         return javaMonitorWaitPanel.getTable();
     }
 
+//    public JTable getJFRCompilationTable(){
+//        return jfrCompilationPanel.getTable();
+//    }
+
     public void updateComponentMap(String key, JBPanel panel) {
         this.componentMap.put(key, panel);
+
     }
-}
+
+    }
