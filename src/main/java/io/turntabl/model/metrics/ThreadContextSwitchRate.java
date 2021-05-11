@@ -38,6 +38,23 @@ public class ThreadContextSwitchRate {
         return attributes;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    public void setType(String type) {
+        this.type = type;
+    }
 
+    public void setValue(Double value) {
+        this.value = value;
+    }
+
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public void setAttributes(HashMap<String, String> attributes) {
+        this.attributes = attributes;
+    }
 }
