@@ -5,11 +5,9 @@ import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
 import com.intellij.util.ui.components.BorderLayoutPanel;
 import io.turntabl.model.events.JVMInfoEvent;
+import io.turntabl.model.events.JfrMethodSample;
+import io.turntabl.ui.events.JfrMethodSamplePanel;
 import io.turntabl.ui.java_virtual_machine.JVMInfoEventPanel;
-import io.turntabl.model.events.JavaMonitorWait;
-import io.turntabl.ui.java_virtual_machine.JavaMonitorWaitPanel;
-
-
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
@@ -26,7 +24,7 @@ public class EventsTree {
     private final NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow;
     private Map<String, JComponent> componentMap;
     private JVMInfoEventPanel jvmInfoEventPanel;
-    private JavaMonitorWaitPanel javaMonitorWaitPanel;
+    private JfrMethodSamplePanel jfrMethodSamplePanel;
 
     public EventsTree(NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow) {
         this.newRelicJavaProfilerToolWindow = newRelicJavaProfilerToolWindow;
@@ -35,12 +33,16 @@ public class EventsTree {
         DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(rootNodeName);
 
         jvmInfoEventPanel = new JVMInfoEventPanel(new JVMInfoEventPanel.JVMInfoEventTableModel(Arrays.asList(new JVMInfoEvent())));
-        javaMonitorWaitPanel = new JavaMonitorWaitPanel(new JavaMonitorWaitPanel.JavaMonitorWaitTableModel(Arrays.asList(new JavaMonitorWait())));
+        jfrMethodSamplePanel = new JfrMethodSamplePanel(new JfrMethodSamplePanel.JfrMethodSampleTableModel(Arrays.asList(new JfrMethodSample())));
 
-        JBPanel[] eventsPanel = {jvmInfoEventPanel.getJVMInfoEventComponent(), javaMonitorWaitPanel.getJavaMonitorWaitComponent()};//add other panels here...........
+        JBPanel[] eventsPanel = {jvmInfoEventPanel.getJVMInfoEventComponent(),
+                jfrMethodSamplePanel.getJfrMethodSampleComponent()
+        }; //add other panels here...........
+
         //add events nodes to root node
         for (int i = 0; i < eventNodes.length; i++) {
             rootNode.add(new DefaultMutableTreeNode(eventNodes[i]));
+            componentMap.put(eventNodes[i], jvmInfoEventPanel.getJVMInfoEventComponent());
             if ((i + 1) <= eventsPanel.length) {
                 componentMap.put(eventNodes[i], eventsPanel[i]);
             } else {
@@ -69,9 +71,7 @@ public class EventsTree {
                 newRelicJavaProfilerToolWindow.updateEventPanelText(e.getPath().toString());
 
             }
-
         });
-
     }
 
     public JBPanel getEventsTree() {
@@ -82,11 +82,11 @@ public class EventsTree {
         return jvmInfoEventPanel.getTable();
     }
 
-    public JTable getJavaMonitorWaitTable() {
-        return javaMonitorWaitPanel.getTable();
-    }
-
     public void updateComponentMap(String key, JBPanel panel) {
         this.componentMap.put(key, panel);
+    }
+
+    public JTable getJfrMethodSampleTable(){
+        return jfrMethodSamplePanel.getTable();
     }
 }
