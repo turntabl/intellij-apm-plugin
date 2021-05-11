@@ -26,10 +26,15 @@ dependencies {
     implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.3'
     implementation group: 'org.jfree', name: 'jfreechart', version: '1.5.3'
-
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.1'
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.1")
 
 }
 
+test {
+    useJUnitPlatform()
+    maxHeapSize = '1G'
+}
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
     version '2021.1.1'
