@@ -19,33 +19,43 @@ public class SummaryMetaspaceUtilTest {
     SummaryMetaspaceUtil summaryMetaspaceUtil = new SummaryMetaspaceUtil(jsonUtility);
 String jsonString = "[\n" +
         "    {\n" +
-        "        \"name\": \"jfr.MetaspaceSummary.dataSpace.used\",\n" +
+        "        \"common\": {\n" +
+        "            \"attributes\": {\n" +
+        "                \"instrumentation.name\": \"JFR\",\n" +
+        "                \"host.hostname\": \"DESKTOP-8AO41P3/172.21.224.1\",\n" +
+        "                \"collector.name\": \"JFR-Uploader\",\n" +
+        "                \"instrumentation.provider\": \"JFR-Uploader\"\n" +
+        "            }\n" +
+        "        },\n" +
+        "        \"metrics\": [    {\n" +
+        "        \"name\": \"jfr.MetaspaceSummary.metaspace.committed\",\n" +
         "            \"type\": \"gauge\",\n" +
-        "            \"value\": 1.8565112E7,\n" +
-        "            \"timestamp\": 1619441634271,\n" +
+        "            \"value\": 1.9267584E7,\n" +
+        "            \"timestamp\": 1619441625066,\n" +
         "            \"attributes\": {\n" +
         "        \"when\": \"Before GC\"\n" +
         "    }\n" +
         "    },\n" +
         "    {\n" +
-        "        \"name\": \"jfr.MetaspaceSummary.dataSpace.reserved\",\n" +
+        "        \"name\": \"jfr.MetaspaceSummary.metaspace.used\",\n" +
         "            \"type\": \"gauge\",\n" +
-        "            \"value\": 1.8874368E7,\n" +
-        "            \"timestamp\": 1619441634271,\n" +
+        "            \"value\": 1.8665456E7,\n" +
+        "            \"timestamp\": 1619441625066,\n" +
         "            \"attributes\": {\n" +
         "        \"when\": \"Before GC\"\n" +
         "    }\n" +
         "    },\n" +
         "    {\n" +
-        "        \"name\": \"jfr.MetaspaceSummary.classSpace.committed\",\n" +
+        "        \"name\": \"jfr.MetaspaceSummary.metaspace.reserved\",\n" +
         "            \"type\": \"gauge\",\n" +
-        "            \"value\": 2097152.0,\n" +
-        "            \"timestamp\": 1619441634271,\n" +
+        "            \"value\": 1.092616192E9,\n" +
+        "            \"timestamp\": 1619441625066,\n" +
         "            \"attributes\": {\n" +
         "        \"when\": \"Before GC\"\n" +
         "    }\n" +
-        "    },\n" +
-        "        ]";
+        "    }]\n" +
+        "    }\n" +
+        "]";;
 
     Optional<JSONArray> jsonArray = jsonUtility.readMetricsJson(jsonString);
     @Test
