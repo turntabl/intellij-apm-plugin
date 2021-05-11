@@ -35,12 +35,6 @@ public abstract class AbstractEventsInfo {
         this.timestamp = timestamp;
     }
 
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> 27401c93db93b52d291c0560465ca59d6e44b88a
     public String getInstrumentationName() {
         return instrumentationName;
     }
