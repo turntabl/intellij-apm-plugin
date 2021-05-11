@@ -84,6 +84,7 @@ public class MetricHandler extends HttpServlet {
         updateThreadAllocatedStatisticsPanel(decompressedString); //Update threadAllocatedStatistics table
         updateJfrSocketReadPanels(decompressedString);
         updateThreadAllocatedStatisticsPanel(decompressedString);
+        updateThreadContextSwitchRatePanel(decompressedString); // updating threadContextRate
 
         resp.setContentType("application/json");
         resp.setStatus(HttpServletResponse.SC_OK);

@@ -27,7 +27,7 @@ public class ThreadContextSwitchRateUtil {
     public List<ThreadContextSwitchRate> getThreadContextSwitchRate(JSONArray metricsArray) {
         Stream<JSONObject> threadContextSwitchRateMetric = jsonUtils.getStream(metricsArray);
         return threadContextSwitchRateMetric
-                .filter(m -> m.get("name").toString().toLowerCase().startsWith("jfr.ThreadContextSwitchRate"))
+                .filter(m -> m.get("name").toString().startsWith("jfr.ThreadContextSwitchRate"))
                 .map(c -> {
                     ThreadContextSwitchRate threadContextSwitchRate = null;
                     try {
