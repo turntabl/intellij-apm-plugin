@@ -4,7 +4,7 @@ import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
 import io.turntabl.model.events.JavaMonitorWait;
-import io.turntabl.utils.JsonUtility;
+import Java.utils.JsonUtility;
 
 import javax.swing.*;
 import javax.swing.table.*;

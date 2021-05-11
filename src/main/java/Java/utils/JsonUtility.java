@@ -1,4 +1,4 @@
-package io.turntabl.utils;
+package Java.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.simple.JSONArray;

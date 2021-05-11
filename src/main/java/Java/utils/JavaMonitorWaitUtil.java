@@ -1,8 +1,9 @@
-package io.turntabl.utils;
+package Java.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.turntabl.model.events.JavaMonitorWait;
+import org.json.simple.JSONArray;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,7 +16,7 @@ public class JavaMonitorWaitUtil {
         jsonUtility = jsonUtil;
     }
 
-    public List<JavaMonitorWait> getJavaMonitorWaitList(String jsonString) {
+    public List<JavaMonitorWait> getJavaMonitorWaitList(JSONArray jsonString) {
         return jsonUtility.readEventsJson(jsonString)
                 .filter(s -> s.get("eventType").toString().equalsIgnoreCase("JfrJavaMonitorWait"))
                 .map(e -> {

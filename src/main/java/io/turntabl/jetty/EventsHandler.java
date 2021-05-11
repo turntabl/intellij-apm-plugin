@@ -5,10 +5,9 @@ import io.turntabl.model.events.JavaMonitorWait;
 import io.turntabl.ui.NewRelicJavaProfilerToolWindow;
 import io.turntabl.ui.java_virtual_machine.JVMInfoEventPanel;;
 import io.turntabl.ui.java_virtual_machine.JavaMonitorWaitPanel;
-import io.turntabl.ui.operating_system.CpuLoadPanel;
-import io.turntabl.utils.JVMInfoEventUtil;
-import io.turntabl.utils.JavaMonitorWaitUtil;
-import io.turntabl.utils.JsonUtility;
+import Java.utils.JVMInfoEventUtil;
+import Java.utils.JavaMonitorWaitUtil;
+import Java.utils.JsonUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

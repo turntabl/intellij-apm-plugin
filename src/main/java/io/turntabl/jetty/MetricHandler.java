@@ -1,7 +1,6 @@
 package io.turntabl.jetty;
 
 import io.turntabl.model.metrics.*;
-import io.turntabl.model.events.*;
 import io.turntabl.ui.CpuGraph;
 import io.turntabl.ui.NewRelicJavaProfilerToolWindow;
 import io.turntabl.ui.flight_recorder.JfrSocketReadBytesReadPanel;
@@ -14,7 +13,7 @@ import io.turntabl.ui.java_virtual_machine.GcHeapSummaryPanel;
 import io.turntabl.ui.java_virtual_machine.garbage_collection.*;
 import io.turntabl.ui.operating_system.CpuLoadPanel;
 import io.turntabl.ui.operating_system.ThreadCpuLoadPanel;
-import io.turntabl.utils.*;
+import Java.utils.*;
 import org.jfree.data.xy.XYDataset;
 import org.json.simple.JSONArray;
 import org.slf4j.Logger;
