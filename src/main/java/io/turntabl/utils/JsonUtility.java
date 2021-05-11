@@ -5,6 +5,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,7 +27,6 @@ public class JsonUtility {
             JSONObject jsonObject = (JSONObject) parsedObject.get(0);
             metricJSONArray = (JSONArray) jsonObject.get("metrics");
 
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -39,7 +39,7 @@ public class JsonUtility {
     public Stream<JSONObject> readEventsJson(String jsonString) {
         JSONArray eventsArray = null;
         try {
-             eventsArray = (JSONArray) jsonParser.parse(jsonString);
+            eventsArray = (JSONArray) jsonParser.parse(jsonString);
         } catch (ParseException e) {
             e.printStackTrace();
         }
