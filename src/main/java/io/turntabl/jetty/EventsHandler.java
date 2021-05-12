@@ -53,7 +53,7 @@ public class EventsHandler extends HttpServlet {
 
         updateJavaMonitorWaitPanel(decompressedString);
         updateJFRCompilationPanel(decompressedString);
-        //updateJfrMethodSamplePanel(decompressedString);
+       // updateJfrMethodSamplePanel(decompressedString);
 
         resp.setContentType("application/json");
         resp.setStatus(HttpServletResponse.SC_OK);

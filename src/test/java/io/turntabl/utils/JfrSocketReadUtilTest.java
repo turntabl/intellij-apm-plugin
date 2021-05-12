@@ -1,5 +1,7 @@
 package io.turntabl.utils;
 
+import Java.utils.JfrSocketReadUtil;
+import Java.utils.JsonUtility;
 import io.turntabl.model.metrics.JfrSocketReadBytesRead;
 import io.turntabl.model.metrics.JfrSocketReadDuration;
 import org.json.simple.JSONArray;

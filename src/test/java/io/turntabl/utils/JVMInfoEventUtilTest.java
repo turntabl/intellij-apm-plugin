@@ -1,5 +1,7 @@
 package io.turntabl.utils;
 
+import Java.utils.JVMInfoEventUtil;
+import Java.utils.JsonUtility;
 import io.turntabl.model.events.JVMInfoEvent;
 import org.jetbrains.io.JsonUtil;
 import org.junit.jupiter.api.BeforeEach;

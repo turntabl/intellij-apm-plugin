@@ -3,7 +3,6 @@ package Java.utils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.turntabl.model.events.JavaMonitorWait;
-import org.json.simple.JSONArray;
 
 import java.util.List;
 import java.util.stream.Collectors;

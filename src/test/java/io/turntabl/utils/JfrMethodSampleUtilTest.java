@@ -1,5 +1,7 @@
 package io.turntabl.utils;
 
+import Java.utils.JfrMethodSampleUtil;
+import Java.utils.JsonUtility;
 import io.turntabl.model.events.JfrMethodSample;
 import org.junit.jupiter.api.Test;
 
