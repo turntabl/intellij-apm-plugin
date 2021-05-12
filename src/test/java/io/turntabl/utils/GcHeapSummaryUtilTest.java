@@ -1,7 +1,5 @@
 package io.turntabl.utils;
 
-import Java.utils.GcHeapSummaryUtil;
-import Java.utils.JsonUtility;
 import io.turntabl.model.metrics.GcHeapSummary;
 import org.json.simple.JSONArray;
 import org.junit.jupiter.api.Test;

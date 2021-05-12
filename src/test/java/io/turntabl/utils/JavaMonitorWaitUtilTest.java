@@ -1,8 +1,5 @@
 package io.turntabl.utils;
 
-import Java.utils.JavaMonitorWaitUtil;
-import Java.utils.JsonUtility;
-import io.turntabl.model.events.JVMInfoEvent;
 import io.turntabl.model.events.JavaMonitorWait;
 import junit.framework.TestCase;
 import org.junit.jupiter.api.BeforeAll;
@@ -10,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class JavaMonitorWaitUtilTest extends TestCase {

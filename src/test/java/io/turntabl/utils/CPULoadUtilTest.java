@@ -1,7 +1,5 @@
 package io.turntabl.utils;
 
-import Java.utils.CPULoadUtil;
-import Java.utils.JsonUtility;
 import io.turntabl.model.metrics.CpuLoad;
 import org.json.simple.JSONArray;
 import org.junit.jupiter.api.AfterEach;

@@ -1,7 +1,5 @@
 package io.turntabl.utils;
 
-import Java.utils.JsonUtility;
-import Java.utils.ObjectAllocationInNewTLabUtil;
 import io.turntabl.model.metrics.ObjectAllocationInNewTLab;
 import org.json.simple.JSONArray;
 import org.junit.jupiter.api.BeforeAll;

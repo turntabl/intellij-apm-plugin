@@ -1,9 +1,9 @@
 package io.turntabl.jetty;
 
 
-import Java.utils.JVMInfoEventUtil;
-import Java.utils.JavaMonitorWaitUtil;
-import Java.utils.JsonUtility;
+import io.turntabl.utils.JVMInfoEventUtil;
+import io.turntabl.utils.JavaMonitorWaitUtil;
+import io.turntabl.utils.JsonUtility;
 import io.turntabl.model.events.JVMInfoEvent;
 import io.turntabl.model.events.JavaMonitorWait;
 import io.turntabl.model.events.JfrCompilation;

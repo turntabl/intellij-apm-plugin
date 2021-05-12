@@ -1,7 +1,5 @@
 package io.turntabl.utils;
 
-import Java.utils.JsonUtility;
-import Java.utils.ThreadCpuLoadUtil;
 import io.turntabl.model.metrics.ThreadCpuLoad;
 import org.json.simple.JSONArray;
 import org.junit.jupiter.api.Test;

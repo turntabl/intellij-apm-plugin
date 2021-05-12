@@ -1,15 +1,12 @@
-package Java.utils;
+package io.turntabl.utils;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.turntabl.model.events.JfrMethodSample;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class JfrMethodSampleUtil {
     private final JsonUtility jsonUtils;

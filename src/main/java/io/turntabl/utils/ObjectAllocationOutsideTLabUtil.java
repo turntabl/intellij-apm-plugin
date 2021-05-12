@@ -1,4 +1,4 @@
-package Java.utils;
+package io.turntabl.utils;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
