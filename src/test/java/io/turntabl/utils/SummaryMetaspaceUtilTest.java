@@ -98,7 +98,7 @@ class SummaryMetaspaceUtilTest {
     void getSummaryMetaspaceConsolidated() {
         List<SummaryMetaspace> summaryMetaspaceList = summaryMetaspaceUtil.getSummaryMetaspaceMetric(jsonArray.get());
         List<SummaryMetaspace> consolidatedList = summaryMetaspaceUtil.getSummaryMetaspaceConsolidated(summaryMetaspaceList);
-        assertEquals(3,consolidatedList.size());
+        assertEquals(1,consolidatedList.size());
     }
 }
 
