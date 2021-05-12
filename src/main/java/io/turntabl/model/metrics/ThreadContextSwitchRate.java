@@ -9,6 +9,8 @@ public class ThreadContextSwitchRate {
     private Long timestamp;
     private HashMap<String, String> attributes;
 
+    public ThreadContextSwitchRate() {
+    }
 
     public ThreadContextSwitchRate(String name, String type, Double value, Long timestamp, HashMap<String, String> attributes) {
         this.name = name;

@@ -1,13 +1,18 @@
 package io.turntabl.model.metrics;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.HashMap;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SummaryMetaspace {
     private String name;
     private String type;
     private Double committedValue;
     private Double usedValue;
     private Double reservedValue;
+    @JsonProperty("timestamp")
     private Long timestamp;
     private HashMap<String, String> attributes;
 
