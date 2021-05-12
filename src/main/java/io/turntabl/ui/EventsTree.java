@@ -5,13 +5,22 @@ import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
 import com.intellij.util.ui.components.BorderLayoutPanel;
 import io.turntabl.model.events.JVMInfoEvent;
+
+
+import io.turntabl.model.events.JavaMonitorWait;
+
 import io.turntabl.model.events.JfrCompilation;
 import io.turntabl.ui.flight_recorder.JfrCompilationPanel;
 import io.turntabl.model.events.JfrMethodSample;
 import io.turntabl.ui.events.JfrMethodSamplePanel;
 
 import io.turntabl.ui.java_virtual_machine.JVMInfoEventPanel;
+
 import io.turntabl.model.events.JavaMonitorWait;
+import io.turntabl.ui.java_virtual_machine.JavaMonitorWaitPanel;
+
+
+
 import io.turntabl.ui.java_virtual_machine.JavaMonitorWaitPanel;
 
 
@@ -33,7 +42,6 @@ public class EventsTree {
     private Map<String, JComponent> componentMap;
     private JVMInfoEventPanel jvmInfoEventPanel;
     private JavaMonitorWaitPanel javaMonitorWaitPanel;
-
     private JfrCompilationPanel jfrCompilationPanel;
 
     private JfrMethodSamplePanel jfrMethodSamplePanel;
@@ -47,9 +55,7 @@ public class EventsTree {
         DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(rootNodeName);
 
         jvmInfoEventPanel = new JVMInfoEventPanel(new JVMInfoEventPanel.JVMInfoEventTableModel(Arrays.asList(new JVMInfoEvent())));
-
         javaMonitorWaitPanel = new JavaMonitorWaitPanel(new JavaMonitorWaitPanel.JavaMonitorWaitTableModel(Arrays.asList(new JavaMonitorWait())));
-
         jfrCompilationPanel = new JfrCompilationPanel(new JfrCompilationPanel.JfrCompilationTableModel(Arrays.asList(new JfrCompilation())));
         jfrMethodSamplePanel = new JfrMethodSamplePanel(new JfrMethodSamplePanel.JfrMethodSampleTableModel(Arrays.asList(new JfrMethodSample())));
 
@@ -97,15 +103,13 @@ public class EventsTree {
     public JTable getJVMInfoTable() {
         return jvmInfoEventPanel.getTable();
     }
+    public JTable getJavaMonitorWaitTable(){return javaMonitorWaitPanel.getTable();}
 
 
-    public JTable getJavaMonitorWaitTable() {
-        return javaMonitorWaitPanel.getTable();
+
+    public JTable getJFRCompilationTable(){
+        return jfrCompilationPanel.getTable();
     }
-
-//    public JTable getJFRCompilationTable(){
-//        return jfrCompilationPanel.getTable();
-//    }
 
     public void updateComponentMap(String key, JBPanel panel) {
         this.componentMap.put(key, panel);

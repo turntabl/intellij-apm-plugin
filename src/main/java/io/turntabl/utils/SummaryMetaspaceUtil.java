@@ -23,7 +23,7 @@ public class SummaryMetaspaceUtil {
     public List<SummaryMetaspace> getSummaryMetaspaceMetric(JSONArray metricsArray) {
         Stream<JSONObject> summaryMetaspaceMetric = jsonUtils.getStream(metricsArray);
         return summaryMetaspaceMetric
-                .filter(m -> m.get("name").toString().toLowerCase().startsWith("jfr.MetaspaceSummary"))
+                .filter(m -> m.get("name").toString().startsWith("jfr.MetaspaceSummary"))
                 .map(c -> {
                     SummaryMetaspace summaryMetaspace = null;
                     try {

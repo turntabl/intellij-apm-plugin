@@ -12,7 +12,13 @@ import io.turntabl.ui.NewRelicJavaProfilerToolWindow;
 import io.turntabl.ui.flight_recorder.JfrCompilationPanel;
 import io.turntabl.ui.java_virtual_machine.JVMInfoEventPanel;
 import io.turntabl.ui.java_virtual_machine.JavaMonitorWaitPanel;
+
 import io.turntabl.utils.JfrCompilationEventUtil;
+
+import io.turntabl.utils.*;
+import io.turntabl.model.events.JfrMethodSample;
+import io.turntabl.ui.events.JfrMethodSamplePanel;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,8 +29,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-;
-;
 
 public class EventsHandler extends HttpServlet {
     private NewRelicJavaProfilerToolWindow toolWindowComponent;
@@ -38,7 +42,6 @@ public class EventsHandler extends HttpServlet {
 
     private final JfrCompilationEventUtil jfrCompilationEventUtil = new JfrCompilationEventUtil(jsonUtil);
     private List<JfrCompilation> cumulativeJfrCompilationEvents = new ArrayList<>();
-   // private final JfrMethodSampleUtil jfrMethodSampleUtil = new JfrMethodSampleUtil(jsonUtil);
     private List<JfrMethodSample> cumulativeJfrMethodSampleList = new ArrayList<>();
 
 
@@ -50,7 +53,6 @@ public class EventsHandler extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String decompressedString = servletUtils.decompress(req);
         updateJVMInfoPanel(decompressedString);
-
         updateJavaMonitorWaitPanel(decompressedString);
         updateJFRCompilationPanel(decompressedString);
        // updateJfrMethodSamplePanel(decompressedString);
@@ -78,4 +80,5 @@ public class EventsHandler extends HttpServlet {
         toolWindowComponent.getEventsTree().getJVMInfoTable().setModel(new JfrCompilationPanel.JfrCompilationTableModel(cumulativeJfrCompilationEvents));
         toolWindowComponent.getEventsTree().updateComponentMap("JFR Compilation", (new JfrCompilationPanel(new JfrCompilationPanel.JfrCompilationTableModel(cumulativeJfrCompilationEvents))).getJfrCompilationComponent());
     }
+
 }

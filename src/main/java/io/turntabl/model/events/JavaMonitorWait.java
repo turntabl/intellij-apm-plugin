@@ -1,26 +1,27 @@
 package io.turntabl.model.events;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.turntabl.model_template.AbstractEventsInfo;
-
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class JavaMonitorWait extends AbstractEventsInfo {
-    private String duration;
+    private int duration;
     private String stackTrace;
+    @JsonProperty("thread.name")
     private String threadName;
+    @JsonProperty("class")
     private String className;
 
-
-
     public JavaMonitorWait() {
+        super();
     }
 
-    public String getDuration() {
+    public int getDuration() {
         return duration;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(int duration) {
         this.duration = duration;
     }
 
@@ -46,20 +47,12 @@ public class JavaMonitorWait extends AbstractEventsInfo {
 
     public void setClassName(String className) {
         this.className = className;
-    }
-
-    public JavaMonitorWait(String duration, String stackTrace, String threadName, String className) {
-        this.duration = duration;
-        this.stackTrace = stackTrace;
-        this.threadName = threadName;
-        this.className = className;
-
-    }
+    };
 
     @Override
     public String toString() {
         return "JavaMonitorWait{" +
-                ", duration='" + duration + '\'' +
+                "duration=" + duration +
                 ", stackTrace='" + stackTrace + '\'' +
                 ", threadName='" + threadName + '\'' +
                 ", className='" + className + '\'' +

@@ -40,17 +40,6 @@ public class ThreadContextSwitchRateUtil {
                 }).collect(Collectors.toList());
     }
 
-    public Map<Long, List<ThreadContextSwitchRate>> groupThreadContextSwitchRateByTimestamp(List<ThreadContextSwitchRate> threadContextSwitchRateList) {
-        return threadContextSwitchRateList
-                .stream()
-                .collect(Collectors.groupingBy(ThreadContextSwitchRate::getTimestamp));
-    }
-
-    public String formatDate(Long timestamp) {
-        Date date = new Date(timestamp);
-        DateFormat formatter = new SimpleDateFormat("ss");
-        return formatter.format(date);
-    }
 
 
 

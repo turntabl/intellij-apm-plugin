@@ -52,7 +52,7 @@ public class JavaMonitorWaitPanel {
                 JavaMonitorWait javaMonitorWait = javaMonitorWaitList.get(i);
                 data[i][0] = javaMonitorWait.getEventType();
                 data[i][1] = jsonUtil.getTime(javaMonitorWait.getTimestamp());
-                data[i][2] = javaMonitorWait.getDuration();
+                data[i][2] = String.valueOf(javaMonitorWait.getDuration());
                 data[i][3] = javaMonitorWait.getStackTrace();
                 data[i][4] = javaMonitorWait.getInstrumentationName();
                 data[i][5] = javaMonitorWait.getHostName();
