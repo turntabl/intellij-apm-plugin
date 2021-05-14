@@ -1,16 +1,15 @@
 package io.turntabl.jetty;
 
 import io.turntabl.model.events.JVMInfoEvent;
+import io.turntabl.model.events.JavaMonitorWait;
 import io.turntabl.model.events.JfrCompilation;
 import io.turntabl.ui.NewRelicJavaProfilerToolWindow;
 import io.turntabl.ui.flight_recorder.JfrCompilationPanel;
 import io.turntabl.ui.java_virtual_machine.JVMInfoEventPanel;
-import io.turntabl.utils.JVMInfoEventUtil;
-import io.turntabl.utils.JfrCompilationEventUtil;
+import io.turntabl.ui.java_virtual_machine.JavaMonitorWaitPanel;
+import io.turntabl.utils.*;
 import io.turntabl.model.events.JfrMethodSample;
 import io.turntabl.ui.events.JfrMethodSamplePanel;
-import io.turntabl.utils.JfrMethodSampleUtil;
-import io.turntabl.utils.JsonUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import javax.servlet.http.HttpServlet;
@@ -32,6 +31,8 @@ public class EventsHandler extends HttpServlet {
     private List<JfrCompilation> cumulativeJfrCompilationEvents = new ArrayList<>();
     private final JfrMethodSampleUtil jfrMethodSampleUtil = new JfrMethodSampleUtil(jsonUtil);
     private List<JfrMethodSample> cumulativeJfrMethodSampleList = new ArrayList<>();
+    private final JavaMonitorWaitUtil javaMonitorWaitUtil = new JavaMonitorWaitUtil(jsonUtil);
+    private List<JavaMonitorWait> cumulativeJavaMonitorWait = new ArrayList<>();
 
     public EventsHandler(NewRelicJavaProfilerToolWindow toolWindowComponent) {
         this.toolWindowComponent = toolWindowComponent;
@@ -41,6 +42,7 @@ public class EventsHandler extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String decompressedString = servletUtils.decompress(req);
         updateJVMInfoPanel(decompressedString);
+        updateJavaMonitorWaitPanel(decompressedString);
         updateJFRCompilationPanel(decompressedString);
         updateJfrMethodSamplePanel(decompressedString);
         resp.setContentType("application/json");
@@ -68,4 +70,12 @@ public class EventsHandler extends HttpServlet {
         toolWindowComponent.getEventsTree().getJVMInfoTable().setModel(new JfrCompilationPanel.JfrCompilationTableModel(cumulativeJfrCompilationEvents));
         toolWindowComponent.getEventsTree().updateComponentMap("JFR Compilation", (new JfrCompilationPanel(new JfrCompilationPanel.JfrCompilationTableModel(cumulativeJfrCompilationEvents))).getJfrCompilationComponent());
     }
+
+    private void updateJavaMonitorWaitPanel(String jsonString) {
+        cumulativeJavaMonitorWait.addAll(javaMonitorWaitUtil.getJavaMonitorWaitList(jsonString));
+        toolWindowComponent.getEventsTree().getJavaMonitorWaitTable().setModel(new JavaMonitorWaitPanel.JavaMonitorWaitTableModel(cumulativeJavaMonitorWait));
+        toolWindowComponent.getEventsTree().updateComponentMap("Java Monitor Wait",
+                (new JavaMonitorWaitPanel(new JavaMonitorWaitPanel.JavaMonitorWaitTableModel(cumulativeJavaMonitorWait))).getJavaMonitorWaitComponent());
+    }
+
 }
