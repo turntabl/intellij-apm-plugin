@@ -30,8 +30,6 @@ public class JavaMonitorWaitPanel {
         table.getColumnModel().getColumn(6).setPreferredWidth(200);
         table.getColumnModel().getColumn(7).setPreferredWidth(200);
         table.getColumnModel().getColumn(8).setPreferredWidth(200);
-        table.getColumnModel().getColumn(9).setPreferredWidth(200);
-
 
         panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER), BorderLayout.CENTER);
     }
@@ -41,7 +39,7 @@ public class JavaMonitorWaitPanel {
     }
 
     public static class JavaMonitorWaitTableModel extends AbstractTableModel {
-        String[] columnNames = {"Event Type", "TimeStamp", "Duration", "Stack Trace", "Instrumentation Name", "Host Name", "Thread Name", "Class", "Collector Name", "Instrumentation Provider"};
+        String[] columnNames = {"TimeStamp", "Duration", "Stack Trace", "Instrumentation Name", "Host Name", "Thread Name", "Class", "Collector Name", "Instrumentation Provider"};
         String[][] data;
         private List<JavaMonitorWait> javaMonitorWaitList;
 
@@ -50,21 +48,17 @@ public class JavaMonitorWaitPanel {
             data = new String[javaMonitorWaitList.size()][columnNames.length];
             for (int i = 0; i < javaMonitorWaitList.size(); i++) {
                 JavaMonitorWait javaMonitorWait = javaMonitorWaitList.get(i);
-                data[i][0] = javaMonitorWait.getEventType();
-                data[i][1] = jsonUtil.getTime(javaMonitorWait.getTimestamp());
-                data[i][2] = String.valueOf(javaMonitorWait.getDuration());
-                data[i][3] = javaMonitorWait.getStackTrace();
-                data[i][4] = javaMonitorWait.getInstrumentationName();
-                data[i][5] = javaMonitorWait.getHostName();
-                data[i][6] = javaMonitorWait.getThreadName();
-                data[i][7] = javaMonitorWait.getClassName();
-                data[i][8] = javaMonitorWait.getCollectorName();
-                data[i][9] = javaMonitorWait.getInstrumentationProvider();
+                data[i][0] = jsonUtil.getTime(javaMonitorWait.getTimestamp());
+                data[i][1] = String.valueOf(javaMonitorWait.getDuration());
+                data[i][2] = javaMonitorWait.getStackTrace();
+                data[i][3] = javaMonitorWait.getInstrumentationName();
+                data[i][4] = javaMonitorWait.getHostName();
+                data[i][5] = javaMonitorWait.getThreadName();
+                data[i][6] = javaMonitorWait.getClassName();
+                data[i][7] = javaMonitorWait.getCollectorName();
+                data[i][8] = javaMonitorWait.getInstrumentationProvider();
             }
-
         }
-
-        ;
 
         @Override
         public int getRowCount() {

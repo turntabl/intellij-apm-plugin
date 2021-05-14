@@ -46,7 +46,7 @@ public class EventsTree {
         javaMonitorWaitPanel = new JavaMonitorWaitPanel(new JavaMonitorWaitPanel.JavaMonitorWaitTableModel(Arrays.asList(new JavaMonitorWait())));
         jfrCompilationPanel = new JfrCompilationPanel(new JfrCompilationPanel.JfrCompilationTableModel(Arrays.asList(new JfrCompilation())));
         jfrMethodSamplePanel = new JfrMethodSamplePanel(new JfrMethodSamplePanel.JfrMethodSampleTableModel(Arrays.asList(new JfrMethodSample())));
-        JBPanel[] eventsPanel = {jvmInfoEventPanel.getJVMInfoEventComponent(), jfrCompilationPanel.getJfrCompilationComponent(), jfrMethodSamplePanel.getJfrMethodSampleComponent()};//add other panels here...........
+        JBPanel[] eventsPanel = {jvmInfoEventPanel.getJVMInfoEventComponent(), jfrCompilationPanel.getJfrCompilationComponent(), jfrMethodSamplePanel.getJfrMethodSampleComponent(), javaMonitorWaitPanel.getJavaMonitorWaitComponent()};//add other panels here...........
 
         //add events nodes to root node
         for (int i = 0; i < eventNodes.length; i++) {

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.turntabl.model_template.AbstractEventsInfo;
 
-import java.util.HashMap;
+
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class JavaMonitorWait extends AbstractEventsInfo {
