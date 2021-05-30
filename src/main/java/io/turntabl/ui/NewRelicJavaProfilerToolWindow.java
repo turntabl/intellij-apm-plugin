@@ -46,8 +46,6 @@ public class NewRelicJavaProfilerToolWindow implements Disposable {
         metricsPanel = new BorderLayoutPanel(0, 0);
         cpuLoadGraphPanel = new BorderLayoutPanel(0, 0);
 
-        flameGraphPanel.add(cpuGraph.getChart(), BorderLayout.CENTER);
-
         eventTextArea = new JBTextArea();
         eventTextArea.setLineWrap(true);
 
@@ -76,7 +74,7 @@ public class NewRelicJavaProfilerToolWindow implements Disposable {
         eventsRootPanel.add(eventsSplitter, BorderLayout.CENTER);
         metricsRootPanel.add(metricsSplitter, BorderLayout.CENTER);
 
-        runnerTab = new JBRunnerTabs(project,  this);
+        runnerTab = new JBRunnerTabs(project, this);
 
         JBPanel[] tabPanels = {flameGraphPanel, callTreePanel, methodListPanel, eventsRootPanel, metricsRootPanel};
         String[] tabNames = {"Flame Graph", "CallTree", "Method List", "Events", "Metrics"};

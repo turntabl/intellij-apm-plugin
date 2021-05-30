@@ -75,7 +75,6 @@ public class ThreadAllocatedStatisticsUtilTest {
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
         List<ThreadAllocationStatistics> threadAllocationStatisticsList = threadAllocatedStatisticsUtil.getThreadAllocatedStatistics(jsonArray.get());
 
-        System.out.println(threadAllocationStatisticsList);
         assertEquals(1,threadAllocationStatisticsList.size());
     }
 }

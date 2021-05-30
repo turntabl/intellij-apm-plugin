@@ -34,7 +34,6 @@ public class JsonUtility {
 
     }
 
-
     @SuppressWarnings("unchecked")
     public Stream<JSONObject> readEventsJson(String jsonString) {
         JSONArray eventsArray = null;
@@ -44,6 +43,16 @@ public class JsonUtility {
             e.printStackTrace();
         }
         return getStream(eventsArray);
+    }
+
+    public JSONArray getStackPayload(String jsonString) {
+        JSONObject payload = null;
+        try {
+            payload = (JSONObject) jsonParser.parse(jsonString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return (JSONArray) payload.get("payload");
     }
 
 

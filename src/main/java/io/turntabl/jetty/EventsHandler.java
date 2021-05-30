@@ -1,28 +1,24 @@
 package io.turntabl.jetty;
 
-import io.turntabl.model.events.JVMInfoEvent;
-import io.turntabl.model.events.JavaMonitorWait;
-import io.turntabl.model.events.JfrCompilation;
+import io.turntabl.model.events.*;
 import io.turntabl.ui.NewRelicJavaProfilerToolWindow;
 import io.turntabl.ui.flight_recorder.JfrCompilationPanel;
 import io.turntabl.ui.java_virtual_machine.JVMInfoEventPanel;
 import io.turntabl.ui.java_virtual_machine.JavaMonitorWaitPanel;
 import io.turntabl.utils.*;
-import io.turntabl.model.events.JfrMethodSample;
 import io.turntabl.ui.events.JfrMethodSamplePanel;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.swing.table.TableModel;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EventsHandler extends HttpServlet {
     private NewRelicJavaProfilerToolWindow toolWindowComponent;
-    private final Logger logger = LoggerFactory.getLogger(MetricHandler.class);
     private final ServletUtils servletUtils = new ServletUtils();
     private final JsonUtility jsonUtil = new JsonUtility();
     private final JVMInfoEventUtil jvmInfoEventUtil = new JVMInfoEventUtil(jsonUtil);
@@ -33,6 +29,7 @@ public class EventsHandler extends HttpServlet {
     private List<JfrMethodSample> cumulativeJfrMethodSampleList = new ArrayList<>();
     private final JavaMonitorWaitUtil javaMonitorWaitUtil = new JavaMonitorWaitUtil(jsonUtil);
     private List<JavaMonitorWait> cumulativeJavaMonitorWait = new ArrayList<>();
+    private Map<String, List<EventStackTrace>> stackTraceMap = new HashMap<>();
 
     public EventsHandler(NewRelicJavaProfilerToolWindow toolWindowComponent) {
         this.toolWindowComponent = toolWindowComponent;
@@ -56,8 +53,25 @@ public class EventsHandler extends HttpServlet {
         toolWindowComponent.getEventsTree().updateComponentMap("JVM Information", (new JVMInfoEventPanel(new JVMInfoEventPanel.JVMInfoEventTableModel(cumulativeJVMInfoEvents))).getJVMInfoEventComponent());
     }
 
-    private void updateJfrMethodSamplePanel(String jsonString){
+    private void updateJfrMethodSamplePanel(String jsonString) {
         cumulativeJfrMethodSampleList.addAll(jfrMethodSampleUtil.getJfrMethodSample(jsonString));
+
+        cumulativeJfrMethodSampleList.forEach(s -> {
+            List<EventStackTrace> stackTraceList = jfrMethodSampleUtil.getStackTrace(s.getStackTrace());
+            if (stackTraceMap.size() > 0 && stackTraceMap.get(s.getThreadName()) != null) {
+                stackTraceMap.get(s.getThreadName()).addAll(stackTraceList);
+            } else {
+                stackTraceMap.put(s.getThreadName(), stackTraceList);
+            }
+        });
+
+        try {
+            jfrMethodSampleUtil.writeEventStackToFile(stackTraceMap);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        jfrMethodSampleUtil.createFlameGraph();
+        System.out.println("created flame graph..............");
 
         TableModel tableModel = new JfrMethodSamplePanel.JfrMethodSampleTableModel(cumulativeJfrMethodSampleList);
 

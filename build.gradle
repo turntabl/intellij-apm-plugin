@@ -7,12 +7,17 @@ group 'io.turntabl'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
-
+ext {
+    jxBrowserVersion = '7.15' // The version of JxBrowser used in the examples.
+}
 repositories {
     jcenter()
+    maven { url = 'https://europe-maven.pkg.dev/jxbrowser/releases' }
 }
 
 dependencies {
+    compile "com.teamdev.jxbrowser:jxbrowser-cross-platform:${jxBrowserVersion}"
+    compile "com.teamdev.jxbrowser:jxbrowser-swing:${jxBrowserVersion}"
     implementation 'org.jetbrains:annotations:20.1.0'
     implementation 'org.jetbrains:annotations:20.1.0'
     implementation 'org.jetbrains:annotations:20.1.0'
@@ -28,6 +33,7 @@ dependencies {
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.3'
     implementation group: 'org.jfree', name: 'jfreechart', version: '1.5.3'
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.1'
+
 }
 
 test {

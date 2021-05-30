@@ -49,7 +49,6 @@ class ThreadCpuLoadUtilTest {
     void getThreadCpuLoad() {
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
         List<ThreadCpuLoad> threadCpuLoadList = threadCpuLoadUtil.getThreadCpuLoad(jsonArray.get());
-        System.out.println(threadCpuLoadList);
 
         assertEquals(2,threadCpuLoadList.size());
     }
@@ -60,7 +59,6 @@ class ThreadCpuLoadUtilTest {
         List<ThreadCpuLoad> threadCpuLoadList = threadCpuLoadUtil.getThreadCpuLoad(jsonArray.get());
         List<ThreadCpuLoad> consolidatedList = threadCpuLoadUtil.getThreadCpuLoadConsolidated(threadCpuLoadList);
 
-        System.out.println(consolidatedList);
         assertEquals(1,consolidatedList.size());
     }
 }

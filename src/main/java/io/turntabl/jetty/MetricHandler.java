@@ -158,7 +158,6 @@ public class MetricHandler extends HttpServlet {
     private void updateThreadAllocatedStatisticsPanel(String jsonString){
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
         List<ThreadAllocationStatistics> threadAllocationStatisticsList = threadAllocatedStatisticsUtil.getThreadAllocatedStatistics(jsonArray.get());
-        System.out.println(threadAllocationStatisticsList);
         cumulativeThreadAllocatedStatisticsList.addAll(threadAllocationStatisticsList);
         toolWindowComponent.getMetricsTree().getThreadAllocatedStatisticsTable().setModel(new ThreadAllocationStatisticsPanel.ThreadAllocationStatisticsTableModel(cumulativeThreadAllocatedStatisticsList));
         toolWindowComponent.getMetricsTree().updateComponentMap("Thread Allocated Statistics",(new ThreadAllocationStatisticsPanel(new ThreadAllocationStatisticsPanel.ThreadAllocationStatisticsTableModel(cumulativeThreadAllocatedStatisticsList))).getThreadAllocationStatisticsComponent());
