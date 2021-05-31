@@ -8,12 +8,12 @@ import io.turntabl.model.events.JVMInfoEvent;
 
 import io.turntabl.model.events.JavaMonitorWait;
 import io.turntabl.model.events.JfrCompilation;
-import io.turntabl.ui.flight_recorder.JfrCompilationPanel;
+import io.turntabl.ui.events.JfrCompilationPanel;
 import io.turntabl.model.events.JfrMethodSample;
 import io.turntabl.ui.events.JfrMethodSamplePanel;
 
-import io.turntabl.ui.java_virtual_machine.JVMInfoEventPanel;
-import io.turntabl.ui.java_virtual_machine.JavaMonitorWaitPanel;
+import io.turntabl.ui.events.JVMInfoEventPanel;
+import io.turntabl.ui.events.JavaMonitorWaitPanel;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;

@@ -1,4 +1,4 @@
-package io.turntabl.ui.flight_recorder;
+package io.turntabl.ui.events;
 
 import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;

@@ -2,9 +2,9 @@ package io.turntabl.jetty;
 
 import io.turntabl.model.events.*;
 import io.turntabl.ui.NewRelicJavaProfilerToolWindow;
-import io.turntabl.ui.flight_recorder.JfrCompilationPanel;
-import io.turntabl.ui.java_virtual_machine.JVMInfoEventPanel;
-import io.turntabl.ui.java_virtual_machine.JavaMonitorWaitPanel;
+import io.turntabl.ui.events.JfrCompilationPanel;
+import io.turntabl.ui.events.JVMInfoEventPanel;
+import io.turntabl.ui.events.JavaMonitorWaitPanel;
 import io.turntabl.utils.*;
 import io.turntabl.ui.events.JfrMethodSamplePanel;
 import javax.servlet.http.HttpServlet;
@@ -30,6 +30,7 @@ public class EventsHandler extends HttpServlet {
     private final JavaMonitorWaitUtil javaMonitorWaitUtil = new JavaMonitorWaitUtil(jsonUtil);
     private List<JavaMonitorWait> cumulativeJavaMonitorWait = new ArrayList<>();
     private Map<String, List<EventStackTrace>> stackTraceMap = new HashMap<>();
+    private List<CollapsedEventSample> collapsedEventSampleList = new ArrayList<>();
 
     public EventsHandler(NewRelicJavaProfilerToolWindow toolWindowComponent) {
         this.toolWindowComponent = toolWindowComponent;
@@ -58,19 +59,24 @@ public class EventsHandler extends HttpServlet {
 
         cumulativeJfrMethodSampleList.forEach(s -> {
             List<EventStackTrace> stackTraceList = jfrMethodSampleUtil.getStackTrace(s.getStackTrace());
-            if (stackTraceMap.size() > 0 && stackTraceMap.get(s.getThreadName()) != null) {
-                stackTraceMap.get(s.getThreadName()).addAll(stackTraceList);
-            } else {
-                stackTraceMap.put(s.getThreadName(), stackTraceList);
-            }
+
+            CollapsedEventSample collapsedEventSample = new CollapsedEventSample(s.getThreadName(), stackTraceList);
+            collapsedEventSampleList.add(collapsedEventSample);
+
+//            if (stackTraceMap.size() > 0 && stackTraceMap.get(s.getThreadName()) != null) {
+//                stackTraceMap.get(s.getThreadName()).addAll(stackTraceList);
+//            } else {
+//                stackTraceMap.put(s.getThreadName(), stackTraceList);
+//            }
         });
 
         try {
-            jfrMethodSampleUtil.writeEventStackToFile(stackTraceMap);
+            jfrMethodSampleUtil.writeEventStackToFile(collapsedEventSampleList);
         } catch (IOException e) {
             e.printStackTrace();
         }
         jfrMethodSampleUtil.createFlameGraph();
+        jfrMethodSampleUtil.createFlameGraphWithoutThreadNames();
         System.out.println("created flame graph..............");
 
         TableModel tableModel = new JfrMethodSamplePanel.JfrMethodSampleTableModel(cumulativeJfrMethodSampleList);
