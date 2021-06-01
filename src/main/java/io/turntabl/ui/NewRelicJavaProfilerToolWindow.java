@@ -18,25 +18,28 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 
 public class NewRelicJavaProfilerToolWindow implements Disposable {
     private CpuGraph cpuGraph;
-    private JBPanel mainPanel, flameGraphPanel, cpuLoadGraphPanel,
+    private JBPanel mainPanel, flameGraphRootPanel, cpuLoadGraphPanel,
             callTreePanel, methodListPanel, eventsPanel,
-            metricsPanel, metricsRootPanel, eventsRootPanel;
+            metricsPanel, metricsRootPanel, eventsRootPanel, flameGraphPanel;
     private JBRunnerTabs runnerTab;
-    private JTextArea eventTextArea, metricsTextArea;
+    private JTextArea eventTextArea, metricsTextArea, flameGraphTextArea;
+    private FlameGraphTree flameGraphTree;
     private EventsTree eventsTree;
     private MetricsTree metricsTree;
-    private JBSplitter eventsSplitter, metricsSplitter;
+    private JBSplitter eventsSplitter, metricsSplitter, flameGraphSplitter;
 
     public NewRelicJavaProfilerToolWindow(ToolWindow toolWindow, Project project) {
         mainPanel = new BorderLayoutPanel(0, 0);
         cpuGraph = new CpuGraph(createDataSet(), "CPU Load Metrics", "StartTime", "Values");
 
+        flameGraphRootPanel = new BorderLayoutPanel(0, 0);
         flameGraphPanel = new BorderLayoutPanel(0, 0);
         callTreePanel = new BorderLayoutPanel(0, 0);
         methodListPanel = new BorderLayoutPanel(0, 0);
@@ -45,38 +48,48 @@ public class NewRelicJavaProfilerToolWindow implements Disposable {
         metricsRootPanel = new BorderLayoutPanel(0, 0);
         metricsPanel = new BorderLayoutPanel(0, 0);
         cpuLoadGraphPanel = new BorderLayoutPanel(0, 0);
-
+        
+        flameGraphTextArea = new JBTextArea();
+        flameGraphTextArea.setLineWrap(true);
+        
         eventTextArea = new JBTextArea();
         eventTextArea.setLineWrap(true);
 
         metricsTextArea = new JBTextArea();
         metricsTextArea.setLineWrap(true);
 
+        flameGraphTextArea.setBackground(flameGraphPanel.getBackground());
         eventTextArea.setBackground(eventsPanel.getBackground());
-        metricsTextArea.setBackground(eventsPanel.getBackground());
+        metricsTextArea.setBackground(metricsPanel.getBackground());
 
-        //events view
+        flameGraphSplitter = new OnePixelSplitter(false, 0.12f);
         eventsSplitter = new OnePixelSplitter(false, 0.12f);
         metricsSplitter = new OnePixelSplitter(false, 0.12f);
 
+        flameGraphTree = new FlameGraphTree(this);
         eventsTree = new EventsTree(this);
         metricsTree = new MetricsTree(this);
 
+        flameGraphRootPanel.add(new JBScrollPane(flameGraphTextArea), BorderLayout.CENTER);
         eventsRootPanel.add(new JBScrollPane(eventTextArea), BorderLayout.CENTER);
         metricsPanel.add(new JBScrollPane(metricsTextArea), BorderLayout.CENTER);
 
+        flameGraphSplitter.setFirstComponent(new JBScrollPane(flameGraphTree.getFlameGraphTree(), JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
+        flameGraphSplitter.setSecondComponent(new JBScrollPane(flameGraphPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
+        
         eventsSplitter.setFirstComponent(new JBScrollPane(eventsTree.getEventsTree(), JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
         eventsSplitter.setSecondComponent(new JBScrollPane(eventsPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
 
         metricsSplitter.setFirstComponent(new JBScrollPane(metricsTree.getMetricsTree(), JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
         metricsSplitter.setSecondComponent(new JBScrollPane(metricsPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
 
+        flameGraphRootPanel.add(flameGraphSplitter, BorderLayout.CENTER);
         eventsRootPanel.add(eventsSplitter, BorderLayout.CENTER);
         metricsRootPanel.add(metricsSplitter, BorderLayout.CENTER);
 
         runnerTab = new JBRunnerTabs(project, this);
 
-        JBPanel[] tabPanels = {flameGraphPanel, callTreePanel, methodListPanel, eventsRootPanel, metricsRootPanel};
+        JBPanel[] tabPanels = {flameGraphRootPanel, callTreePanel, methodListPanel, eventsRootPanel, metricsRootPanel};
         String[] tabNames = {"Flame Graph", "CallTree", "Method List", "Events", "Metrics"};
 
         for (int i = 0; i < tabPanels.length; ++i) {
@@ -89,8 +102,20 @@ public class NewRelicJavaProfilerToolWindow implements Disposable {
 
     }
 
+    public void updateFlameGraphPanelText(String text) {
+        flameGraphTextArea.append(text);
+    }
+
     public void updateEventPanelText(String text) {
         eventTextArea.append(text);
+    }
+
+    public void updateMetricsPanelText(String text) {
+        metricsTextArea.append(text);
+    }
+
+    public void clearFlameGraphPanelText() {
+        flameGraphTextArea.setText("");
     }
 
     public void clearEventPanelText() {
@@ -101,16 +126,20 @@ public class NewRelicJavaProfilerToolWindow implements Disposable {
         metricsTextArea.setText("");
     }
 
-    public void updateMetricsPanelText(String text) {
-        metricsTextArea.append(text);
-    }
-
-    public JComponent getContent() {
-        return mainPanel;
+    public void setFlameGraphSecondComponent(JComponent component) {
+        flameGraphSplitter.setSecondComponent(component);
     }
 
     public void setEventSecondComponent(JComponent component) {
         eventsSplitter.setSecondComponent(component);
+    }
+
+    public void setMetricsSecondComponent(JComponent component) {
+        metricsSplitter.setSecondComponent(component);
+    }
+
+    public FlameGraphTree getFlameGraphTree() {
+        return this.flameGraphTree;
     }
 
     public MetricsTree getMetricsTree() {
@@ -121,9 +150,10 @@ public class NewRelicJavaProfilerToolWindow implements Disposable {
         return this.eventsTree;
     }
 
-    public void setMetricsSecondComponent(JComponent component) {
-        metricsSplitter.setSecondComponent(component);
+    public JComponent getContent() {
+        return mainPanel;
     }
+
 
     @Override
     public void dispose() {
