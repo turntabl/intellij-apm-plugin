@@ -36,7 +36,7 @@ public class FlameGraphTree {
         flameGraphWithoutThreadNamesPanel = new FlameGraphWithoutThreadNamesPanel();
 
 
-        JBPanel[] flameGraphPanels = {flameGraphPanel.getComponent(), flameGraphWithoutThreadNamesPanel.getComponent()};
+        JComponent[] flameGraphPanels = {flameGraphPanel.getComponent(), flameGraphWithoutThreadNamesPanel.getComponent()};
 
         for (int i = 0; i < viewNodes.length; i++) {
             rootNode.add(new DefaultMutableTreeNode(viewNodes[i]));

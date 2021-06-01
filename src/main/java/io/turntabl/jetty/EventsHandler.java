@@ -29,7 +29,7 @@ public class EventsHandler extends HttpServlet {
     private List<JfrMethodSample> cumulativeJfrMethodSampleList = new ArrayList<>();
     private final JavaMonitorWaitUtil javaMonitorWaitUtil = new JavaMonitorWaitUtil(jsonUtil);
     private List<JavaMonitorWait> cumulativeJavaMonitorWait = new ArrayList<>();
-    private Map<String, List<EventStackTrace>> stackTraceMap = new HashMap<>();
+//    private Map<String, List<EventStackTrace>> stackTraceMap = new HashMap<>();
     private List<CollapsedEventSample> collapsedEventSampleList = new ArrayList<>();
 
     public EventsHandler(NewRelicJavaProfilerToolWindow toolWindowComponent) {
