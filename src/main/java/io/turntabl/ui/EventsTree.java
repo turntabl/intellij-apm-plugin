@@ -33,7 +33,6 @@ public class EventsTree {
     private JVMInfoEventPanel jvmInfoEventPanel;
     private JavaMonitorWaitPanel javaMonitorWaitPanel;
     private JfrCompilationPanel jfrCompilationPanel;
-
     private JfrMethodSamplePanel jfrMethodSamplePanel;
 
     public EventsTree(NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow) {
