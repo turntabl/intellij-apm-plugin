@@ -12,6 +12,7 @@ import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.components.JBTextArea;
 import com.intellij.ui.tabs.TabInfo;
+import com.intellij.util.SVGLoader;
 import com.intellij.util.ui.components.BorderLayoutPanel;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;

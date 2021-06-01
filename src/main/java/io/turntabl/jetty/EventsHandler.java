@@ -77,7 +77,7 @@ public class EventsHandler extends HttpServlet {
         }
         jfrMethodSampleUtil.createFlameGraph();
         jfrMethodSampleUtil.createFlameGraphWithoutThreadNames();
-        System.out.println("created flame graph..............");
+        System.out.println("created flame graphs..............");
 
         TableModel tableModel = new JfrMethodSamplePanel.JfrMethodSampleTableModel(cumulativeJfrMethodSampleList);
 
