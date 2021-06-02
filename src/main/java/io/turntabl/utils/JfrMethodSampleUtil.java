@@ -92,10 +92,8 @@ public class JfrMethodSampleUtil {
                 listSize.set(eventStackTraces.size());
                 count.set(0);
 
-                Collections.reverse(eventStackTraces);
-
-                eventStackTraces.forEach(t -> {
-                    String desc = t.getDesc();
+                for (int i = eventStackTraces.size() - 1; i > -1; i--){
+                    String desc = eventStackTraces.get(i).getDesc();
                     int index = desc.indexOf("(");
 
                     if (count.get() == listSize.get() - 1){
@@ -104,7 +102,7 @@ public class JfrMethodSampleUtil {
                         writeToFile(writer, desc.substring(0, index) + ";");
                     }
                     count.getAndIncrement();
-                });
+                }
                 writeToFile(writer, " 1");
             });
         } catch (IOException e) {
@@ -135,10 +133,8 @@ public class JfrMethodSampleUtil {
                 listSize.set(eventStackTraces.size());
                 count.set(0);
 
-//                Collections.reverse(eventStackTraces);
-
-                eventStackTraces.forEach(t -> {
-                    String desc = t.getDesc();
+                for (int i = eventStackTraces.size() - 1; i > -1; i--){
+                    String desc = eventStackTraces.get(i).getDesc();
                     int index = desc.indexOf("(");
 
                     if (count.get() == listSize.get() - 1){
@@ -147,7 +143,7 @@ public class JfrMethodSampleUtil {
                         writeToFile(writer, desc.substring(0, index) + ";");
                     }
                     count.getAndIncrement();
-                });
+                }
                 writeToFile(writer, " 1");
             });
         } catch (IOException e) {

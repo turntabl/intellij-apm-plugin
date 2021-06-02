@@ -70,7 +70,7 @@ public class FlameGraphTree {
         return this.treePanel;
     }
 
-    public void updateComponentMap(String key, JBPanel panel) {
+    public void updateComponentMap(String key, JComponent panel) {
         this.componentMap.put(key, panel);
     }
 }

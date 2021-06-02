@@ -5,6 +5,8 @@ import io.turntabl.ui.NewRelicJavaProfilerToolWindow;
 import io.turntabl.ui.events.JfrCompilationPanel;
 import io.turntabl.ui.events.JVMInfoEventPanel;
 import io.turntabl.ui.events.JavaMonitorWaitPanel;
+import io.turntabl.ui.flame_graph.FlameGraphPanel;
+import io.turntabl.ui.flame_graph.FlameGraphWithoutThreadNamesPanel;
 import io.turntabl.utils.*;
 import io.turntabl.ui.events.JfrMethodSamplePanel;
 import javax.servlet.http.HttpServlet;
@@ -63,11 +65,6 @@ public class EventsHandler extends HttpServlet {
             CollapsedEventSample collapsedEventSample = new CollapsedEventSample(s.getThreadName(), stackTraceList);
             collapsedEventSampleList.add(collapsedEventSample);
 
-//            if (stackTraceMap.size() > 0 && stackTraceMap.get(s.getThreadName()) != null) {
-//                stackTraceMap.get(s.getThreadName()).addAll(stackTraceList);
-//            } else {
-//                stackTraceMap.put(s.getThreadName(), stackTraceList);
-//            }
         });
 
         try {
@@ -78,6 +75,9 @@ public class EventsHandler extends HttpServlet {
         jfrMethodSampleUtil.createFlameGraph();
         jfrMethodSampleUtil.createFlameGraphWithoutThreadNames();
         System.out.println("created flame graphs..............");
+
+        toolWindowComponent.getFlameGraphTree().updateComponentMap("With Thread Names", (new FlameGraphPanel()).getComponent());
+        toolWindowComponent.getFlameGraphTree().updateComponentMap("Without Thread Names", (new FlameGraphWithoutThreadNamesPanel()).getComponent());
 
         TableModel tableModel = new JfrMethodSamplePanel.JfrMethodSampleTableModel(cumulativeJfrMethodSampleList);
 
