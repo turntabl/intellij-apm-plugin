@@ -1,5 +1,6 @@
 package io.turntabl.utils;
 
+import io.turntabl.model.events.JfrMethodSample;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.junit.jupiter.api.AfterEach;
@@ -7,6 +8,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -16,11 +18,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class JsonUtilityTest {
     private static JsonUtility jsonUtility;
     static String metricsJson, eventsJson;
+    static JfrMethodSampleUtil jfrMethodSampleUtil;
 
     @BeforeAll
     public static void setupAll() {
         System.out.println("Setup started.............");
         jsonUtility = new JsonUtility();
+        jfrMethodSampleUtil = new JfrMethodSampleUtil(jsonUtility);
         metricsJson = "[\n" +
                 "    {\n" +
                 "        \"common\": {\n" +
@@ -99,10 +103,20 @@ class JsonUtilityTest {
     }
 
     @Test
+    void getStackPayload() {
+        List<JfrMethodSample> jfrMethodSampleList = jfrMethodSampleUtil.getJfrMethodSample(eventsJson);
+        JSONArray stackTrace = jsonUtility.getStackPayload(jfrMethodSampleList.get(0).getStackTrace());
+        assertFalse(stackTrace.isEmpty(), "Stack trace array empty");
+        assertEquals(19, stackTrace.size(), "Size does not match");
+    }
+
+    @Test
     void getStream() {
     }
 
     @Test
     void getTime() {
     }
+
+
 }

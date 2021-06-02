@@ -1,6 +1,8 @@
 package io.turntabl.utils;
 
+import io.turntabl.model.events.EventStackTrace;
 import io.turntabl.model.events.JfrMethodSample;
+import org.json.simple.JSONArray;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -49,5 +51,14 @@ class JfrMethodSampleUtilTest {
     void canGetJfrMethodSample() {
         List<JfrMethodSample> extractedList  = jfrMethodSampleUtil.getJfrMethodSample(jsonString);
         assertEquals(2, extractedList.size());
+    }
+
+    @Test
+    void canGetStackTrace(){
+        List<JfrMethodSample> extractedList  = jfrMethodSampleUtil.getJfrMethodSample(jsonString);
+        List<EventStackTrace> stackTraceList1 = jfrMethodSampleUtil.getStackTrace(extractedList.get(0).getStackTrace());
+        List<EventStackTrace> stackTraceList2 = jfrMethodSampleUtil.getStackTrace(extractedList.get(1).getStackTrace());
+        assertEquals(25, stackTraceList1.size());
+        assertEquals(19, stackTraceList2.size());
     }
 }
