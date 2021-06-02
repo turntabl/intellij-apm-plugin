@@ -9,9 +9,7 @@ import io.turntabl.model.events.JfrMethodSample;
 import org.json.simple.JSONArray;
 
 import java.io.*;
-import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class JfrMethodSampleUtil {
@@ -68,8 +66,6 @@ public class JfrMethodSampleUtil {
     }
 
     public void writeEventStackToFile(List<CollapsedEventSample> collapsedEventSampleList) throws IOException {
-        AtomicInteger listSize = new AtomicInteger();
-        AtomicInteger count = new AtomicInteger();
 
         File file = new File("C:/flamegraph/stackTraces.txt");
         if (!file.exists()) {
@@ -89,19 +85,15 @@ public class JfrMethodSampleUtil {
 
                 writeToFile(writer, threadName + ";");
 
-                listSize.set(eventStackTraces.size());
-                count.set(0);
-
                 for (int i = eventStackTraces.size() - 1; i > -1; i--){
                     String desc = eventStackTraces.get(i).getDesc();
                     int index = desc.indexOf("(");
 
-                    if (count.get() == listSize.get() - 1){
+                    if (i == 0){
                         writeToFile(writer, desc.substring(0, index));
                     } else {
                         writeToFile(writer, desc.substring(0, index) + ";");
                     }
-                    count.getAndIncrement();
                 }
                 writeToFile(writer, " 1");
             });
@@ -112,8 +104,6 @@ public class JfrMethodSampleUtil {
     }
 
     public void writeEventStackToFileWithoutThreadNames(List<CollapsedEventSample> collapsedEventSampleList) throws IOException {
-        AtomicInteger listSize = new AtomicInteger();
-        AtomicInteger count = new AtomicInteger();
 
         File file = new File("C:/flamegraph/stackTracesNoThreadName.txt");
         if (!file.exists()) {
@@ -130,19 +120,15 @@ public class JfrMethodSampleUtil {
                     writeToFile(writer, "\n");
                 }
 
-                listSize.set(eventStackTraces.size());
-                count.set(0);
-
                 for (int i = eventStackTraces.size() - 1; i > -1; i--){
                     String desc = eventStackTraces.get(i).getDesc();
                     int index = desc.indexOf("(");
 
-                    if (count.get() == listSize.get() - 1){
+                    if (i == 0){
                         writeToFile(writer, desc.substring(0, index));
                     } else {
                         writeToFile(writer, desc.substring(0, index) + ";");
                     }
-                    count.getAndIncrement();
                 }
                 writeToFile(writer, " 1");
             });
