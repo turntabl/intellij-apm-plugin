@@ -124,7 +124,7 @@ jobs:
           CHANGELOG="${CHANGELOG//'%'/'%25'}"
           CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
           CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
-          ARTIFACT="${C:\Users\justice.essuman\IdeaProjects\intellij-apm-plugin\out\artifacts\Profiler_jar\Profiler.jar}.zip"
+          ARTIFACT="${NAME}-${VERSION}.zip"
 
           echo "::set-output name=version::$VERSION"
           echo "::set-output name=name::$NAME"
