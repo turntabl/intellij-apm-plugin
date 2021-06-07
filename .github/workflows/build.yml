@@ -92,7 +92,6 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v2
         with:
-          distribution: zulu
           java-version: 11
 
       # Check out current repository
@@ -125,7 +124,7 @@ jobs:
           CHANGELOG="${CHANGELOG//'%'/'%25'}"
           CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
           CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
-          ARTIFACT="${NAME}-${VERSION}.zip"
+          ARTIFACT="${C:\Users\justice.essuman\IdeaProjects\intellij-apm-plugin\out\artifacts\Profiler_jar\Profiler.jar}.zip"
 
           echo "::set-output name=version::$VERSION"
           echo "::set-output name=name::$NAME"
