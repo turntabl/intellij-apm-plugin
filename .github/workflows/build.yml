@@ -85,7 +85,7 @@ jobs:
       name: Profiler
       version: ${{ steps.properties.outputs.version }}
       changelog: ${{ steps.properties.outputs.changelog }}
-      artifact: plugin-artifact
+      artifact: profiler-1.0-SNAPSHOT.zip
     steps:
 
       # Setup Java 11 environment for the next steps
