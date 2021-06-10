@@ -82,10 +82,10 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     outputs:
-      name: ${{ steps.properties.outputs.name }}
+      name: Profiler
       version: ${{ steps.properties.outputs.version }}
       changelog: ${{ steps.properties.outputs.changelog }}
-      artifact: ${{ steps.properties.outputs.artifact }}
+      artifact: plugin-artifact
     steps:
 
       # Setup Java 11 environment for the next steps
