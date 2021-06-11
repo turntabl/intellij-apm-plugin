@@ -3,9 +3,16 @@ package io.turntabl.jetty;
 
 import io.turntabl.ui.NewRelicJavaProfilerToolWindow;
 
+import org.apache.tools.ant.Project;
+import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.ContextHandler;
+import org.eclipse.jetty.server.handler.HandlerList;
+import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+
+import java.nio.file.Paths;
 
 
 public class JettyServer implements Runnable {
@@ -21,7 +28,26 @@ public class JettyServer implements Runnable {
         ServletHandler handler = new ServletHandler();
         handler.addServletWithMapping(new ServletHolder(new EventsHandler(toolWindowComponent)), "/events");
         handler.addServletWithMapping(new ServletHolder(new MetricHandler(toolWindowComponent)), "/metrics");
-        server.setHandler(handler);
+
+        ResourceHandler resourceHandler = new ResourceHandler();
+        resourceHandler.setDirectoriesListed(true);
+        resourceHandler.setWelcomeFiles(new String[]{"flame_graph.html"});
+        resourceHandler.setResourceBase("C:/Users/zaneta.asare/Documents/Java/intellij-apm-plugin/src/main/resources");
+
+        ResourceHandler resourceHandler2 = new ResourceHandler();
+        resourceHandler2.setDirectoriesListed(true);
+        resourceHandler2.setWelcomeFiles(new String[]{"flame_graph_no_thread_names.html"});
+        resourceHandler2.setResourceBase("C:/Users/zaneta.asare/Documents/Java/intellij-apm-plugin/src/main/resources");
+
+        ContextHandler contextHandler1 = new ContextHandler("/flame-graph");
+        contextHandler1.setHandler(resourceHandler);
+
+        ContextHandler contextHandler2 = new ContextHandler("/flame-graph-no-thread-names");
+        contextHandler2.setHandler(resourceHandler2);
+
+        HandlerList handlers = new HandlerList();
+        handlers.setHandlers(new Handler[] { contextHandler1, contextHandler2, handler });
+        server.setHandler(handlers);
 
         try {
             server.start();
