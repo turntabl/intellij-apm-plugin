@@ -41,6 +41,11 @@ test {
     useJUnitPlatform()
 }
 
+publishPlugin {
+    token = System.getenv("ORG_GRADLE_PROJECT_intellijPublishToken")
+}
+
+
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
     version '2021.1.1'
