@@ -127,6 +127,10 @@ jobs:
           echo "::set-output name=name::$NAME"
           echo "::set-output name=artifact::$ARTIFACT"
 
+      #Grannt execute permissions for gradelew
+      - name: Grant execute permissions for gradelew
+        run: chmod +x gradlew
+
       # Build artifact using buildPlugin Gradle task
       - name: Build Plugin
         run: ./gradlew buildPlugin
@@ -190,8 +194,8 @@ jobs:
           key: ${{ runner.os }}-plugin-verifier-${{ steps.properties.outputs.ideVersions }}
 
       # Run IntelliJ Plugin Verifier action using GitHub Action
-#      - name: Verify Plugin
-#        run: ./gradlew runPluginVerifier -Pplugin.verifier.home.dir=${{ steps.properties.outputs.pluginVerifierHomeDir }}
+      - name: Verify Plugin
+        run: ./gradlew runPluginVerifier -Pplugin.verifier.home.dir=${{ steps.properties.outputs.pluginVerifierHomeDir }}
 
   # Prepare a draft release for GitHub Releases page for the manual verification
   # If accepted and published, release workflow would be triggered
