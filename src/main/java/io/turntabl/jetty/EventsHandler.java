@@ -5,6 +5,7 @@ import io.turntabl.ui.NewRelicJavaProfilerToolWindow;
 import io.turntabl.ui.events.JfrCompilationPanel;
 import io.turntabl.ui.events.JVMInfoEventPanel;
 import io.turntabl.ui.events.JavaMonitorWaitPanel;
+import io.turntabl.utils.flame_graph_util.Convert;
 import io.turntabl.ui.flame_graph.FlameGraphPanel;
 import io.turntabl.ui.flame_graph.FlameGraphWithoutThreadNamesPanel;
 import io.turntabl.utils.*;
@@ -54,7 +55,7 @@ public class EventsHandler extends HttpServlet {
         toolWindowComponent.getEventsTree().updateComponentMap("JVM Information", (new JVMInfoEventPanel(new JVMInfoEventPanel.JVMInfoEventTableModel(cumulativeJVMInfoEvents))).getJVMInfoEventComponent());
     }
 
-    private void updateJfrMethodSamplePanel(String jsonString) {
+    private void updateJfrMethodSamplePanel(String jsonString) throws IOException {
         cumulativeJfrMethodSampleList.addAll(jfrMethodSampleUtil.getJfrMethodSample(jsonString));
 
         cumulativeJfrMethodSampleList.forEach(s -> {
@@ -70,8 +71,9 @@ public class EventsHandler extends HttpServlet {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        jfrMethodSampleUtil.createFlameGraph();
-        jfrMethodSampleUtil.createFlameGraphWithoutThreadNames();
+        Convert.convert();
+//        jfrMethodSampleUtil.createFlameGraph();
+//        jfrMethodSampleUtil.createFlameGraphWithoutThreadNames();
         System.out.println("created flame graphs..............");
 
         toolWindowComponent.getFlameGraphTree().updateComponentMap("With Thread Names", (new FlameGraphPanel()).getComponent());
