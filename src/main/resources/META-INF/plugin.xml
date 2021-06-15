@@ -2,15 +2,16 @@
     <id>io.turntabl.profiler</id>
     <name>JFR Profiler</name>
     <vendor email="enock.boadi-ansah@turntabl.io" url="http://www.turntabl.io">Turntabl</vendor>
-
+    <version>1.0.0</version>
     <description><![CDATA[
         Java application profiler plugin for intellij
     ]]></description>
 
+
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->
     <depends>com.intellij.modules.platform</depends>
-
+    <idea-version since-build="193" until-build="193.*"/>
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
         <toolWindow id="NewRelic Java Profiler" secondary="false" anchor="bottom" factoryClass="io.turntabl.NewRelicJavaProfiler"
