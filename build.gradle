@@ -13,11 +13,10 @@ ext {
 repositories {
     jcenter()
     maven { url = 'https://europe-maven.pkg.dev/jxbrowser/releases' }
+    maven { url "https://jitpack.io" }
 }
 
 dependencies {
-    compile "com.teamdev.jxbrowser:jxbrowser-cross-platform:${jxBrowserVersion}"
-    compile "com.teamdev.jxbrowser:jxbrowser-swing:${jxBrowserVersion}"
     implementation 'org.jetbrains:annotations:20.1.0'
     implementation 'org.jetbrains:annotations:20.1.0'
     implementation 'org.jetbrains:annotations:20.1.0'
@@ -34,12 +33,16 @@ dependencies {
     implementation group: 'org.jfree', name: 'jfreechart', version: '1.5.3'
     implementation group: 'org.apache.xmlgraphics', name: 'batik-swing', version: '1.7'
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.1'
-
 }
 
 test {
     useJUnitPlatform()
 }
+
+publishPlugin {
+    token = System.getenv("ORG_GRADLE_PROJECT_intellijPublishToken")
+}
+
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
@@ -51,4 +54,3 @@ patchPluginXml {
     Test changeNotes
     """
 }
-
