@@ -50,6 +50,9 @@ intellij {
 }
 patchPluginXml {
     changeNotes """
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>"""
+   <h1>0.1.0</h1>
+    <ul>
+      <li>initial draft testing</li>
+      <li>initial release</li>
+    </ul>"""
 }
