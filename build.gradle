@@ -39,6 +39,10 @@ test {
     useJUnitPlatform()
 }
 
+runPluginVerifier {
+    ideVersions(properties("pluginVerifierIdeVersions"))
+}
+
 publishPlugin {
     token = System.getenv("ORG_GRADLE_PROJECT_intellijPublishToken")
 }
