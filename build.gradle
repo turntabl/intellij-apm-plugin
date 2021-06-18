@@ -49,6 +49,7 @@ intellij {
     version '2021.1.1'
 }
 patchPluginXml {
+    changeNotes """
    <h1>0.1.0</h1>
     <ul>
       <li>initial draft testing</li>
