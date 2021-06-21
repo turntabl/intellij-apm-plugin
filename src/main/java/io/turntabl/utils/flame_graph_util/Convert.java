@@ -5,19 +5,14 @@ import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.client.HttpContentResponse;
 import org.eclipse.jetty.client.util.StringContentProvider;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 public class Convert {
-    public static void convert() throws IOException {
-//        File file = new File("C:/flamegraph/stackTraces.txt");
-        File file = new File("/home/zaneta-work/flamegraph/stackTraces.txt");
-//        File file1 = new File("C:/flamegraph/stackTracesNoThreadName.txt");
-        File file1 = new File("/home/zaneta-work/flamegraph/stackTracesNoThreadName.txt");
+    public static void convert(List<String> threadStack, List<String> nonThreadStack) throws IOException {
 
-        Profile profile = Folded.parseFolded(file);
-        Profile profile1 = Folded.parseFolded(file1);
+        Profile profile = Folded.parseFolded(threadStack);
+        Profile profile1 = Folded.parseFolded(nonThreadStack);
 
         String jsonString = profile.getRootNode().MarshalIndentJSON();
         String jsonString1 = profile1.getRootNode().MarshalIndentJSON();

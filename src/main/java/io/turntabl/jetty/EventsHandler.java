@@ -65,12 +65,10 @@ public class EventsHandler extends HttpServlet {
 
         });
 
-//        try {
-//            jfrMethodSampleUtil.writeEventStackToFile(collapsedEventSampleList);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-        Convert.convert();
+        List<String> threadStack = jfrMethodSampleUtil.writeEventStackToList(collapsedEventSampleList);
+        List<String> nonThreadStack = jfrMethodSampleUtil.writeEventStackToListWithoutThreadNames(collapsedEventSampleList);
+
+        Convert.convert(threadStack, nonThreadStack);
         System.out.println("created flame graphs..............");
 
         toolWindowComponent.getFlameGraphTree().updateComponentMap("With Thread Names", (new FlameGraphPanel()).getComponent());

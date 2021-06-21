@@ -9,6 +9,7 @@ import io.turntabl.model.events.JfrMethodSample;
 import org.json.simple.JSONArray;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,88 +54,55 @@ public class JfrMethodSampleUtil {
         return traceList;
     }
 
-    public void writeToFile(BufferedWriter writer, String text) {
-        try {
-            if (text.trim().equals("\n")) {
-                writer.newLine();
-            } else {
-                writer.write(text);
+
+    public List<String> writeEventStackToList(List<CollapsedEventSample> collapsedEventSampleList) {
+        List<String> stack = new ArrayList<>();
+
+        collapsedEventSampleList.forEach(s -> {
+            String line = "";
+
+            String threadName = s.getThreadName();
+            List<EventStackTrace> eventStackTraces = s.getStackTraceList();
+
+            line += threadName + ";";
+
+            for (int i = eventStackTraces.size() - 1; i > -1; i--){
+                String desc = eventStackTraces.get(i).getDesc();
+                int index = desc.indexOf("(");
+
+                if (i == 0){
+                    line += desc.substring(0, index);
+                } else {
+                    line += desc.substring(0, index) + ";";
+                }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            line += " 1";
+            stack.add(line);
+        });
+        return stack;
     }
 
-    public void writeEventStackToFile(List<CollapsedEventSample> collapsedEventSampleList) throws IOException {
+    public List<String> writeEventStackToListWithoutThreadNames(List<CollapsedEventSample> collapsedEventSampleList) {
+        List<String> stack = new ArrayList<>();
 
-        File file = new File("C:/flamegraph/stackTraces.txt");
-        if (!file.exists()) {
-            file.createNewFile();
-        }
+        collapsedEventSampleList.forEach(s -> {
+            String line = "";
 
-        try (
-                BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-        ) {
-            collapsedEventSampleList.forEach(s -> {
-                String threadName = s.getThreadName();
-                List<EventStackTrace> eventStackTraces = s.getStackTraceList();
+            List<EventStackTrace> eventStackTraces = s.getStackTraceList();
 
-                if (file.length() > 0) {
-                    writeToFile(writer, "\n");
+            for (int i = eventStackTraces.size() - 1; i > -1; i--){
+                String desc = eventStackTraces.get(i).getDesc();
+                int index = desc.indexOf("(");
+
+                if (i == 0){
+                    line += desc.substring(0, index);
+                } else {
+                    line += desc.substring(0, index) + ";";
                 }
-
-                writeToFile(writer, threadName + ";");
-
-                for (int i = eventStackTraces.size() - 1; i > -1; i--){
-                    String desc = eventStackTraces.get(i).getDesc();
-                    int index = desc.indexOf("(");
-
-                    if (i == 0){
-                        writeToFile(writer, desc.substring(0, index));
-                    } else {
-                        writeToFile(writer, desc.substring(0, index) + ";");
-                    }
-                }
-                writeToFile(writer, " 1");
-            });
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        writeEventStackToFileWithoutThreadNames(collapsedEventSampleList);
+            }
+            line += " 1";
+            stack.add(line);
+        });
+        return stack;
     }
-
-    public void writeEventStackToFileWithoutThreadNames(List<CollapsedEventSample> collapsedEventSampleList) throws IOException {
-
-        File file = new File("C:/flamegraph/stackTracesNoThreadName.txt");
-        if (!file.exists()) {
-            file.createNewFile();
-        }
-
-        try (
-                BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-        ) {
-            collapsedEventSampleList.forEach(s -> {
-                List<EventStackTrace> eventStackTraces = s.getStackTraceList();
-
-                if (file.length() > 0) {
-                    writeToFile(writer, "\n");
-                }
-
-                for (int i = eventStackTraces.size() - 1; i > -1; i--){
-                    String desc = eventStackTraces.get(i).getDesc();
-                    int index = desc.indexOf("(");
-
-                    if (i == 0){
-                        writeToFile(writer, desc.substring(0, index));
-                    } else {
-                        writeToFile(writer, desc.substring(0, index) + ";");
-                    }
-                }
-                writeToFile(writer, " 1");
-            });
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 }

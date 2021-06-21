@@ -10,7 +10,7 @@
         <script type="text/javascript">
         var chart = flamegraph()
           .width(960);
-      
+
         d3.json("http://localhost:8787/fg/without-thread-names", function(error, data) {
           if (error) return console.warn(error);
           d3.select("#chart")
