@@ -1,14 +1,20 @@
 package io.turntabl.utils.flame_graph_util;
 
 
+import org.eclipse.jetty.client.HttpClient;
+import org.eclipse.jetty.client.HttpContentResponse;
+import org.eclipse.jetty.client.util.StringContentProvider;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class Convert {
     public static void convert() throws IOException {
-        File file = new File("C:/flamegraph/stackTraces.txt");
-        File file1 = new File("C:/flamegraph/stackTracesNoThreadName.txt");
+//        File file = new File("C:/flamegraph/stackTraces.txt");
+        File file = new File("/home/zaneta-work/flamegraph/stackTraces.txt");
+//        File file1 = new File("C:/flamegraph/stackTracesNoThreadName.txt");
+        File file1 = new File("/home/zaneta-work/flamegraph/stackTracesNoThreadName.txt");
 
         Profile profile = Folded.parseFolded(file);
         Profile profile1 = Folded.parseFolded(file1);
@@ -16,25 +22,21 @@ public class Convert {
         String jsonString = profile.getRootNode().MarshalIndentJSON();
         String jsonString1 = profile1.getRootNode().MarshalIndentJSON();
 
-        File jsonFile = new File("C:/flamegraph/stackTraces.json");
-        if (!jsonFile.exists()) {
-            jsonFile.createNewFile();
-        }
+        try {
+            HttpClient client = new HttpClient();
+            client.start();
 
-        File jsonFile1 = new File("C:/flamegraph/stackTracesNoThreadName.json");
-        if (!jsonFile1.exists()) {
-            jsonFile1.createNewFile();
-        }
+            HttpContentResponse response = (HttpContentResponse) client
+                    .POST("http://localhost:8787/fg/with-thread-names")
+                    .content(new StringContentProvider(jsonString))
+                    .send();
 
-        try{
-            FileWriter fileWriter = new FileWriter("C:/flamegraph/stackTraces.json");
-            fileWriter.write(jsonString);
-            fileWriter.close();
+            HttpContentResponse response1 = (HttpContentResponse) client
+                    .POST("http://localhost:8787/fg/without-thread-names")
+                    .content(new StringContentProvider(jsonString1))
+                    .send();
 
-            FileWriter fileWriter1 = new FileWriter("C:/flamegraph/stackTracesNoThreadName.json");
-            fileWriter1.write(jsonString1);
-            fileWriter1.close();
-        } catch (IOException e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

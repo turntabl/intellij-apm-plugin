@@ -30,7 +30,6 @@ public class EventsHandler extends HttpServlet {
     private List<JfrMethodSample> cumulativeJfrMethodSampleList = new ArrayList<>();
     private final JavaMonitorWaitUtil javaMonitorWaitUtil = new JavaMonitorWaitUtil(jsonUtil);
     private List<JavaMonitorWait> cumulativeJavaMonitorWait = new ArrayList<>();
-//    private Map<String, List<EventStackTrace>> stackTraceMap = new HashMap<>();
     private List<CollapsedEventSample> collapsedEventSampleList = new ArrayList<>();
 
     public EventsHandler(NewRelicJavaProfilerToolWindow toolWindowComponent) {
@@ -66,14 +65,12 @@ public class EventsHandler extends HttpServlet {
 
         });
 
-        try {
-            jfrMethodSampleUtil.writeEventStackToFile(collapsedEventSampleList);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            jfrMethodSampleUtil.writeEventStackToFile(collapsedEventSampleList);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         Convert.convert();
-//        jfrMethodSampleUtil.createFlameGraph();
-//        jfrMethodSampleUtil.createFlameGraphWithoutThreadNames();
         System.out.println("created flame graphs..............");
 
         toolWindowComponent.getFlameGraphTree().updateComponentMap("With Thread Names", (new FlameGraphPanel()).getComponent());
