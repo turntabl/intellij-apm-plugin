@@ -49,7 +49,7 @@ intellij {
 }
 
 runPluginVerifier {
-    ideVersions = "pluginVerifierIdeVersions"
+    ideVersions = '2021.1.1'
 }
 patchPluginXml {
     changeNotes """
