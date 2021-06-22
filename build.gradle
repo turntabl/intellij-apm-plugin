@@ -1,27 +1,34 @@
 
 plugins {
-    id = 'java'
-    id = 'org.jetbrains.intellij version 0.7.2'
+    id 'java'
+    id 'org.jetbrains.intellij' version '0.7.2'
 }
 
-//group 'io.turntabl'
-//version '1.0-SNAPSHOT'
-group = 'pluginGroup'
-pluginVersion = 'pluginVersion'
+group 'io.turntabl'
+version '1.0-SNAPSHOT'
 
+sourceCompatibility = 1.8
 ext {
     jxBrowserVersion = '7.15' // The version of JxBrowser used in the examples.
 }
 repositories {
-    mavenCentral()
-
+    jcenter()
+    maven { url = 'https://europe-maven.pkg.dev/jxbrowser/releases' }
+    maven { url "https://jitpack.io" }
 }
 
 dependencies {
     implementation 'org.jetbrains:annotations:20.1.0'
+    implementation 'org.jetbrains:annotations:20.1.0'
+    implementation 'org.jetbrains:annotations:20.1.0'
+    implementation 'org.jetbrains:annotations:20.1.0'
+    implementation 'org.jetbrains:annotations:20.1.0'
+    implementation 'org.jetbrains:annotations:20.1.0'
+    implementation 'org.jetbrains:annotations:20.1.0'
     implementation 'org.junit.jupiter:junit-jupiter:5.7.0'
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+
     implementation group: 'org.eclipse.jetty', name: 'jetty-server', version: '9.4.39.v20210325'
+    implementation group: 'org.eclipse.jetty', name: 'jetty-servlet', version: '9.4.39.v20210325'
     implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.3'
     implementation group: 'org.jfree', name: 'jfreechart', version: '1.5.3'
@@ -29,55 +36,26 @@ dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.1'
 }
 
-// Configure gradle-intellij-plugin plugin.
-// Read more: https://github.com/JetBrains/gradle-intellij-plugin
-intellij {
-    pluginName = 'pluginName'
-    pluginVersion = 'platformVersion'
-    type = 'platformType'
-    downloadSources = true
-    updateSinceUntilBuild=true
-
-//    // Plugin Dependencies. Uses `platformPlugins` property from the gradle.properties file.
-    platformPlugins = ''
-}
-
-// Configure gradle-changelog-plugin plugin.
-// Read more: https://github.com/JetBrains/gradle-changelog-plugin
-
 test {
     useJUnitPlatform()
 }
 
 
-task(({
-    // Set the compatibility versions to 1.8
-    withType<JavaCompile>(({
-        sourceCompatibility = '1.8'
-        targetCompatibility = '1.8'
-    } as Class<JavaCompile>))
 
-    patchPluginXml {
-        version = 'pluginVersion'
-        sinceBuild = 'pluginSinceBuild'
-        untilBuild = 'pluginUntilBuild'
+publishPlugin {
+    token = System.getenv("ORG_GRADLE_PROJECT_intellijPublishToken")
+}
 
-        // Extract the <!-- Plugin description --> section from README.md and provide for the plugin's manifest
-        pluginDescription = 'Profile'
 
-        // Get the latest available change notes from the changelog file
-        changeNotes.set(provider { changelog.getLatest().toHTML() })
-    }
-    runPluginVerifier {
-        ideVersions= '2020.2.4 , 2020.3.4 , 2021.1.1'
-    }
-
-    publishPlugin {
-        dependsOn('patchChangelog')
-        token = System.getenv('ORG_GRADLE_PROJECT_intellijPublishToken')
-        // pluginVersion is based on the SemVer (https://semver.org) and supports pre-release labels, like 2.1.7-alpha.3
-        // Specify pre-release label to publish the plugin in a custom Release Channel automatically. Read more:
-        // https://plugins.jetbrains.com/docs/intellij/deployment.html#specifying-a-release-channel
-//        channels("2020.2.4".split('-').getOrElse(1) { "default" }.split('.').first())
-    }
-} as String))
+// See https://github.com/JetBrains/gradle-intellij-plugin/
+intellij {
+    version '2021.1.1'
+}
+patchPluginXml {
+    changeNotes """
+   <h1>0.1.0</h1>
+    <ul>
+      <li>initial draft testing</li>
+      <li>initial release</li>
+    </ul>"""
+}
