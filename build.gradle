@@ -7,6 +7,7 @@ plugins {
 group 'io.turntabl'
 version '1.0-SNAPSHOT'
 
+targetCompatibility = 1.8
 sourceCompatibility = 1.8
 ext {
     jxBrowserVersion = '7.15' // The version of JxBrowser used in the examples.
@@ -19,16 +20,8 @@ repositories {
 
 dependencies {
     implementation 'org.jetbrains:annotations:20.1.0'
-    implementation 'org.jetbrains:annotations:20.1.0'
-    implementation 'org.jetbrains:annotations:20.1.0'
-    implementation 'org.jetbrains:annotations:20.1.0'
-    implementation 'org.jetbrains:annotations:20.1.0'
-    implementation 'org.jetbrains:annotations:20.1.0'
-    implementation 'org.jetbrains:annotations:20.1.0'
     implementation 'org.junit.jupiter:junit-jupiter:5.7.0'
-
     implementation group: 'org.eclipse.jetty', name: 'jetty-server', version: '9.4.39.v20210325'
-    implementation group: 'org.eclipse.jetty', name: 'jetty-servlet', version: '9.4.39.v20210325'
     implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.3'
     implementation group: 'org.jfree', name: 'jfreechart', version: '1.5.3'
@@ -50,6 +43,10 @@ publishPlugin {
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
     version '2021.1.1'
+}
+
+runPluginVerifier {
+    ideVersions = "pluginVerifierIdeVersions"
 }
 patchPluginXml {
     changeNotes """
