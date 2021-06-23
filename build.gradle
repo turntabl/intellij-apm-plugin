@@ -28,9 +28,15 @@ dependencies {
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.3'
     implementation group: 'org.jfree', name: 'jfreechart', version: '1.5.3'
     implementation group: 'org.apache.xmlgraphics', name: 'batik-swing', version: '1.7'
-    testImplementation "org.junit.vintage:junit-vintage-engine:5.7.2"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.7.2"
+//    testImplementation "org.junit.vintage:junit-vintage-engine:5.7.2"
+//    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.7.2"
 }
+
+configurations {
+    all*.exclude group: 'org.junit.jupiter:junit-jupiter:5.7.0'
+
+}
+
 
 test {
     useJUnitPlatform()
