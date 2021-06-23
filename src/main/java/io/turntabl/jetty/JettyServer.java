@@ -38,7 +38,7 @@ public class JettyServer implements Runnable {
 
         WebAppContext webAppContext = new WebAppContext();
         try {
-            webAppContext.setResourceBase(String.valueOf(Resource.newResource(new URL(JettyServer.class.getResource("/webapp/WEB-INF/flame_graph.html"), "."))));
+            webAppContext.setResourceBase(String.valueOf(Resource.newResource(new URL(JettyServer.class.getResource("/webapp/html/flame_graph.html"), "."))));
             webAppContext.setClassLoader(JettyServer.class.getClassLoader());
             webAppContext.setContextPath("/flame-graph");
             webAppContext.setWelcomeFiles(new String[]{"flame_graph.html"});
@@ -48,7 +48,7 @@ public class JettyServer implements Runnable {
 
         WebAppContext webAppContext2 = new WebAppContext();
         try {
-            webAppContext2.setResourceBase(String.valueOf(Resource.newResource(new URL(JettyServer.class.getResource("/webapp/WEB-INF/flame_graph_no_thread_names.html"), "."))));
+            webAppContext2.setResourceBase(String.valueOf(Resource.newResource(new URL(JettyServer.class.getResource("/webapp/html/flame_graph_no_thread_names.html"), "."))));
             webAppContext2.setClassLoader(JettyServer.class.getClassLoader());
             webAppContext2.setContextPath("/flame-graph-no-thread-names");
             webAppContext2.setWelcomeFiles(new String[]{"flame_graph_no_thread_names.html"});
