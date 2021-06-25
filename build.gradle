@@ -12,15 +12,19 @@ sourceCompatibility = 1.8
 ext {
     jxBrowserVersion = '7.15' // The version of JxBrowser used in the examples.
 }
+
 repositories {
-    jcenter()
-    maven { url = 'https://europe-maven.pkg.dev/jxbrowser/releases' }
-    maven { url "https://jitpack.io" }
-}
+        maven { url = 'https://europe-maven.pkg.dev/jxbrowser/releases' }
+        maven { url "https://jitpack.io" }
+        gradlePluginPortal()
+    }
+
+
+
 
 dependencies {
     implementation 'org.jetbrains:annotations:20.1.0'
-    implementation 'org.junit.jupiter:junit-jupiter:5.7.0'
+    runtimeOnly 'org.junit.jupiter:junit-jupiter:5.7.0'
     implementation group: 'org.eclipse.jetty', name: 'jetty-server', version: '9.4.39.v20210325'
     implementation group: 'org.eclipse.jetty', name: 'jetty-servlet', version: '9.4.39.v20210325'
     implementation group: 'org.eclipse.jetty', name: 'jetty-client', version: '9.4.39.v20210325'
@@ -28,8 +32,8 @@ dependencies {
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.3'
     implementation group: 'org.jfree', name: 'jfreechart', version: '1.5.3'
     implementation group: 'org.apache.xmlgraphics', name: 'batik-swing', version: '1.7'
-//    testImplementation "org.junit.vintage:junit-vintage-engine:5.7.2"
-//    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.7.2"
+    testImplementation 'org.junit.vintage:junit-vintage-engine:5.7.2'
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.7.2"
 }
 
 configurations {
