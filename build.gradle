@@ -17,9 +17,6 @@ repositories {
         maven { url = 'https://europe-maven.pkg.dev/jxbrowser/releases' }
         maven { url "https://jitpack.io" }
         gradlePluginPortal()
-        flatDir {
-            dirs 'C:\\flamegraph\\jfr-daemon-1.2.0-SNAPSHOT.jar'
-        }
     }
 
 
