@@ -15,6 +15,7 @@ import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.IconLoader;
 import com.intellij.psi.PsiClass;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiJavaFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -23,7 +24,7 @@ import java.util.HashMap;
 
 public class RunWithJavaProfilerAction extends AnAction {
     private HashMap<String, String> environmentVariables = new HashMap<>();
-    private String vmOptions = "-javaagent:./lib/jfr-daemon-1.2.0-SNAPSHOT.jar -jar ./lib/test-plugin.jar";
+    private String vmOptions;
 
     public RunWithJavaProfilerAction() {
         super(IconLoader.getIcon("/icons/play_icon.png"));
@@ -33,14 +34,17 @@ public class RunWithJavaProfilerAction extends AnAction {
     public void actionPerformed(@NotNull AnActionEvent e) {
         Project currentProject = e.getProject();
 
+
         @Nullable
         Module module = ModuleUtil.findModuleForFile(currentProject.getProjectFile(), currentProject);
 
         environmentVariables.put("METRICS_INGEST_URI", "http://localhost:8787/metrics");
         environmentVariables.put("EVENTS_INGEST_URI", "http://localhost:8787/events");
-        environmentVariables.put("INSIGHTS_INSERT_KEY", "12345");
+        environmentVariables.put("INSIGHTS_INSERT_KEY", "");
+        vmOptions = "-javaagent:./lib/jfr-daemon-1.2.0-SNAPSHOT.jar -jar ./lib/" + currentProject.getName() + ".jar";
 
         PsiJavaFile psiJavaFile = (PsiJavaFile)e.getData(CommonDataKeys.PSI_FILE);
+        assert psiJavaFile != null;
         PsiClass psiClass = psiJavaFile.getClasses()[0];
 
         // run settings
