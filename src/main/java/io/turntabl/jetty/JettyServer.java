@@ -11,6 +11,14 @@ import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.eclipse.jetty.util.resource.Resource;
+import org.eclipse.jetty.webapp.WebAppContext;
+
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
+import java.nio.file.Paths;
 
 import java.nio.file.Paths;
 
@@ -30,35 +38,37 @@ public class JettyServer implements Runnable {
         handler.addServletWithMapping(new ServletHolder(new MetricHandler(toolWindowComponent)), "/metrics");
         handler.addServletWithMapping(new ServletHolder(new FlameGraphHandler()), "/fg/*");
 
-        ResourceHandler resourceHandler = new ResourceHandler();
-        resourceHandler.setDirectoriesListed(true);
-        resourceHandler.setWelcomeFiles(new String[]{"flame_graph.html"});
-//        resourceHandler.setResourceBase("C:/Users/zaneta.asare/Documents/Java/intellij-apm-plugin/src/main/resources");
-        resourceHandler.setResourceBase("/home/zaneta-work/Documents/Java/intellij-apm-plugin/src/main/resources");
+        WebAppContext webAppContext = new WebAppContext();
+        try {
+            webAppContext.setResourceBase(String.valueOf(Resource.newResource(new URL(JettyServer.class.getResource("/webapp/html/flame_graph.html"), "."))));
+            webAppContext.setClassLoader(JettyServer.class.getClassLoader());
+            webAppContext.setContextPath("/flame-graph");
+            webAppContext.setWelcomeFiles(new String[]{"flame_graph.html"});
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
 
-        ResourceHandler resourceHandler2 = new ResourceHandler();
-        resourceHandler2.setDirectoriesListed(true);
-        resourceHandler2.setWelcomeFiles(new String[]{"flame_graph_no_thread_names.html"});
-//        resourceHandler2.setResourceBase("C:/Users/zaneta.asare/Documents/Java/intellij-apm-plugin/src/main/resources");
-        resourceHandler2.setResourceBase("/home/zaneta-work/Documents/Java/intellij-apm-plugin/src/main/resources");
-
-        ContextHandler contextHandler1 = new ContextHandler("/flame-graph");
-        contextHandler1.setHandler(resourceHandler);
-
-        ContextHandler contextHandler2 = new ContextHandler("/flame-graph-no-thread-names");
-        contextHandler2.setHandler(resourceHandler2);
+        WebAppContext webAppContext2 = new WebAppContext();
+        try {
+            webAppContext2.setResourceBase(String.valueOf(Resource.newResource(new URL(JettyServer.class.getResource("/webapp/html/flame_graph_no_thread_names.html"), "."))));
+            webAppContext2.setClassLoader(JettyServer.class.getClassLoader());
+            webAppContext2.setContextPath("/flame-graph-no-thread-names");
+            webAppContext2.setWelcomeFiles(new String[]{"flame_graph_no_thread_names.html"});
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
 
         HandlerList handlers = new HandlerList();
-        handlers.setHandlers(new Handler[] { contextHandler1, contextHandler2, handler });
+        handlers.setHandlers(new Handler[] { webAppContext, webAppContext2, handler });
         server.setHandler(handlers);
 
         try {
+            Thread.currentThread().setContextClassLoader(JettyServer.class.getClassLoader());
             server.start();
             System.out.println("Jetty Server started on port 8787");
             server.join();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 }
