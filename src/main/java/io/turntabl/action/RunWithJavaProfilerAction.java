@@ -34,7 +34,6 @@ public class RunWithJavaProfilerAction extends AnAction {
     public void actionPerformed(@NotNull AnActionEvent e) {
         Project currentProject = e.getProject();
 
-
         @Nullable
         Module module = ModuleUtil.findModuleForFile(currentProject.getProjectFile(), currentProject);
 
@@ -44,7 +43,6 @@ public class RunWithJavaProfilerAction extends AnAction {
         vmOptions = "-javaagent:./lib/jfr-daemon-1.2.0-SNAPSHOT.jar -jar ./lib/" + currentProject.getName() + ".jar";
 
         PsiJavaFile psiJavaFile = (PsiJavaFile)e.getData(CommonDataKeys.PSI_FILE);
-        assert psiJavaFile != null;
         PsiClass psiClass = psiJavaFile.getClasses()[0];
 
         // run settings
