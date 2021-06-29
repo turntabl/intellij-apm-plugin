@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugins>
+    <name>JFR Profiler</name>
+    <description>Java  Metrics and EVent Profiling  and Visualization Tool using Flamegraphs</description>
+    <version>1.0.0</version>
+
+    <plugin id="io.turntabl.profiler" url="https://github.com/turntabl/intellij-apm-plugin/suites/3011316115/artifacts/68158681" version="major.minor.update">
+        <idea-version since-build="193" until-build="193.*"/>
+    </plugin>
+</plugins>

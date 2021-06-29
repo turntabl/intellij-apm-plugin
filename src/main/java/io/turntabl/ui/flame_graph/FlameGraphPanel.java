@@ -15,6 +15,7 @@ public class FlameGraphPanel {
 
     public FlameGraphPanel() {
         panel = new JBPanel(new BorderLayout());
+
         panel.add(new JBCefBrowser("http://localhost:8787/flame-graph/").getComponent(), BorderLayout.CENTER);
         panel.setVisible(true);
     }
