@@ -1,80 +1,186 @@
 package io.turntabl.ui;
 
+import com.intellij.execution.ui.layout.impl.JBRunnerTabs;
+import com.intellij.openapi.Disposable;
+import com.intellij.openapi.actionSystem.ActionManager;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.wm.IdeFocusManager;
 import com.intellij.openapi.wm.ToolWindow;
+import com.intellij.ui.JBSplitter;
+import com.intellij.ui.OnePixelSplitter;
+import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
-import com.intellij.ui.components.JBTabbedPane;
 import com.intellij.ui.components.JBTextArea;
+import com.intellij.ui.tabs.TabInfo;
+import com.intellij.util.ui.components.BorderLayoutPanel;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-public class NewRelicJavaProfilerToolWindow {
 
-    private JLabel label, flameGraphLabel, callTreeLabel, methodListLabel;
-    private JPanel mainPanel, flameGraphPanel,
+public class NewRelicJavaProfilerToolWindow implements Disposable {
+    private CpuGraph cpuGraph;
+    private JBPanel mainPanel, flameGraphRootPanel, cpuLoadGraphPanel,
             callTreePanel, methodListPanel, eventsPanel,
-            metricPanel;
-    private JTabbedPane tabbedPane;
-    private JTextArea eventTextArea, metricTextArea;
-    private JScrollPane eventScrollPane, metricScrollPane;
+            metricsPanel, metricsRootPanel, eventsRootPanel, flameGraphPanel;
+    private JBRunnerTabs runnerTab;
+    private JTextArea eventTextArea, metricsTextArea, flameGraphTextArea;
+    private FlameGraphTree flameGraphTree;
+    private EventsTree eventsTree;
+    private MetricsTree metricsTree;
+    private JBSplitter eventsSplitter, metricsSplitter, flameGraphSplitter;
 
-    public NewRelicJavaProfilerToolWindow(ToolWindow toolWindow) {
-        label = new JLabel("NewRelic Profiler");
+    public NewRelicJavaProfilerToolWindow(ToolWindow toolWindow, Project project) {
+        mainPanel = new BorderLayoutPanel(0, 0);
+        cpuGraph = new CpuGraph(createDataSet(), "CPU Load Metrics", "StartTime", "Values");
 
-        mainPanel = new JPanel(new GridLayout(1, 1));
-
-        flameGraphPanel = new JPanel();
-        callTreePanel = new JPanel();
-        methodListPanel = new JPanel();
-        eventsPanel = new JPanel(new BorderLayout());
-        metricPanel = new JPanel(new BorderLayout());
-
+        flameGraphRootPanel = new BorderLayoutPanel(0, 0);
+        flameGraphPanel = new BorderLayoutPanel(0, 0);
+        callTreePanel = new BorderLayoutPanel(0, 0);
+        methodListPanel = new BorderLayoutPanel(0, 0);
+        eventsPanel = new BorderLayoutPanel(0, 0);
+        eventsRootPanel = new BorderLayoutPanel(0, 0);
+        metricsRootPanel = new BorderLayoutPanel(0, 0);
+        metricsPanel = new BorderLayoutPanel(0, 0);
+        cpuLoadGraphPanel = new BorderLayoutPanel(0, 0);
+        
+        flameGraphTextArea = new JBTextArea();
+        flameGraphTextArea.setLineWrap(true);
+        
         eventTextArea = new JBTextArea();
         eventTextArea.setLineWrap(true);
 
-        metricTextArea = new JBTextArea();
-        metricTextArea.setLineWrap(true);
+        metricsTextArea = new JBTextArea();
+        metricsTextArea.setLineWrap(true);
 
-        eventScrollPane = new JBScrollPane(eventTextArea);
-        metricScrollPane = new JBScrollPane(metricTextArea);
-
-        flameGraphLabel = new JLabel("Flame Graph is displayed here!!!!!!!!!!!");
-        callTreeLabel = new JLabel("Call Tree is displayed here!!!!!!!!!!!");
-        methodListLabel = new JLabel("Method List is displayed here!!!!!!!!!!!");
-
-        flameGraphPanel.add(flameGraphLabel);
-        callTreePanel.add(callTreeLabel);
-        methodListPanel.add(methodListLabel);
-
+        flameGraphTextArea.setBackground(flameGraphPanel.getBackground());
         eventTextArea.setBackground(eventsPanel.getBackground());
-        metricTextArea.setBackground(eventsPanel.getBackground());
+        metricsTextArea.setBackground(metricsPanel.getBackground());
 
-        eventsPanel.add(eventScrollPane, BorderLayout.CENTER);
-        metricPanel.add(metricScrollPane, BorderLayout.CENTER);
+        flameGraphSplitter = new OnePixelSplitter(false, 0.12f);
+        eventsSplitter = new OnePixelSplitter(false, 0.12f);
+        metricsSplitter = new OnePixelSplitter(false, 0.12f);
 
-        tabbedPane = new JBTabbedPane();
+        flameGraphTree = new FlameGraphTree(this);
+        eventsTree = new EventsTree(this);
+        metricsTree = new MetricsTree(this);
 
-        tabbedPane.add("Flame Graph", flameGraphPanel);
-        tabbedPane.add("Call Tree", callTreePanel);
-        tabbedPane.add("Method List", methodListPanel);
-        tabbedPane.add("Events", eventsPanel);
-        tabbedPane.add("Metrics", metricPanel);
-        tabbedPane.setSelectedIndex(3);
+        flameGraphRootPanel.add(new JBScrollPane(flameGraphTextArea), BorderLayout.CENTER);
+        eventsRootPanel.add(new JBScrollPane(eventTextArea), BorderLayout.CENTER);
+        metricsPanel.add(new JBScrollPane(metricsTextArea), BorderLayout.CENTER);
 
-        mainPanel.add(tabbedPane);
+        flameGraphSplitter.setFirstComponent(new JBScrollPane(flameGraphTree.getFlameGraphTree(), JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
+        flameGraphSplitter.setSecondComponent(new JBScrollPane(flameGraphPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
+        
+        eventsSplitter.setFirstComponent(new JBScrollPane(eventsTree.getEventsTree(), JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
+        eventsSplitter.setSecondComponent(new JBScrollPane(eventsPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
 
+        metricsSplitter.setFirstComponent(new JBScrollPane(metricsTree.getMetricsTree(), JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
+        metricsSplitter.setSecondComponent(new JBScrollPane(metricsPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
+
+        flameGraphRootPanel.add(flameGraphSplitter, BorderLayout.CENTER);
+        eventsRootPanel.add(eventsSplitter, BorderLayout.CENTER);
+        metricsRootPanel.add(metricsSplitter, BorderLayout.CENTER);
+
+        runnerTab = new JBRunnerTabs(project, this);
+
+        JBPanel[] tabPanels = {flameGraphRootPanel, callTreePanel, methodListPanel, eventsRootPanel, metricsRootPanel};
+        String[] tabNames = {"Flame Graph", "CallTree", "Method List", "Events", "Metrics"};
+
+        for (int i = 0; i < tabPanels.length; ++i) {
+            runnerTab.addTab(new TabInfo(tabPanels[i]).setText(tabNames[i]));
+        }
+        runnerTab.select(runnerTab.getTabAt(3), true);
+        runnerTab.setBorder(new EmptyBorder(0, 2, 0, 0));
+
+        mainPanel.add(runnerTab);
+
+    }
+
+    public void updateFlameGraphPanelText(String text) {
+        flameGraphTextArea.append(text);
     }
 
     public void updateEventPanelText(String text) {
         eventTextArea.append(text);
     }
 
-    public void updateMetricPanelText(String text) {
-        metricTextArea.append(text);
+    public void updateMetricsPanelText(String text) {
+        metricsTextArea.append(text);
+    }
+
+    public void clearFlameGraphPanelText() {
+        flameGraphTextArea.setText("");
+    }
+
+    public void clearEventPanelText() {
+        eventTextArea.setText("");
+    }
+
+    public void clearMetricsPanelText() {
+        metricsTextArea.setText("");
+    }
+
+    public void setFlameGraphSecondComponent(JComponent component) {
+        flameGraphSplitter.setSecondComponent(component);
+    }
+
+    public void setEventSecondComponent(JComponent component) {
+        eventsSplitter.setSecondComponent(component);
+    }
+
+    public void setMetricsSecondComponent(JComponent component) {
+        metricsSplitter.setSecondComponent(component);
+    }
+
+    public FlameGraphTree getFlameGraphTree() {
+        return this.flameGraphTree;
+    }
+
+    public MetricsTree getMetricsTree() {
+        return this.metricsTree;
+    }
+
+    public EventsTree getEventsTree() {
+        return this.eventsTree;
     }
 
     public JComponent getContent() {
         return mainPanel;
     }
 
+
+    @Override
+    public void dispose() {
+    }
+
+    public XYDataset createDataSet() {
+        XYSeries jvmUserSeries = new XYSeries("JVM User");
+        XYSeries jvmSystemSeries = new XYSeries("JVM System");
+        XYSeries machineTotalSeries = new XYSeries("Machine Total");
+
+        jvmUserSeries.add(0.193, 23056);
+        jvmUserSeries.add(0.395, 33076);
+        jvmUserSeries.add(0.596, 43090);
+
+        jvmSystemSeries.add(0.199, 43076);
+        jvmSystemSeries.add(0.301, 53016);
+        jvmSystemSeries.add(0.591, 63030);
+
+        machineTotalSeries.add(0.189, 53076);
+        machineTotalSeries.add(0.311, 6056);
+        machineTotalSeries.add(0.500, 73093);
+
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        dataset.addSeries(jvmUserSeries);
+        dataset.addSeries(jvmSystemSeries);
+        dataset.addSeries(machineTotalSeries);
+
+        return dataset;
+    }
 }

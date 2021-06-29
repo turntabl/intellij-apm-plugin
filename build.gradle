@@ -7,24 +7,46 @@ group 'io.turntabl'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
-
+ext {
+    jxBrowserVersion = '7.15' // The version of JxBrowser used in the examples.
+}
 repositories {
-    mavenCentral()
+    jcenter()
+    maven { url = 'https://europe-maven.pkg.dev/jxbrowser/releases' }
 }
 
 dependencies {
+    compile "com.teamdev.jxbrowser:jxbrowser-cross-platform:${jxBrowserVersion}"
+    compile "com.teamdev.jxbrowser:jxbrowser-swing:${jxBrowserVersion}"
+    implementation 'org.jetbrains:annotations:20.1.0'
+    implementation 'org.jetbrains:annotations:20.1.0'
+    implementation 'org.jetbrains:annotations:20.1.0'
+    implementation 'org.jetbrains:annotations:20.1.0'
+    implementation 'org.jetbrains:annotations:20.1.0'
+    implementation 'org.jetbrains:annotations:20.1.0'
+    implementation 'org.jetbrains:annotations:20.1.0'
+    implementation 'org.junit.jupiter:junit-jupiter:5.7.0'
     testCompile group: 'junit', name: 'junit', version: '4.12'
     implementation group: 'org.eclipse.jetty', name: 'jetty-server', version: '9.4.39.v20210325'
     implementation group: 'org.eclipse.jetty', name: 'jetty-servlet', version: '9.4.39.v20210325'
+    implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.3'
+    implementation group: 'org.jfree', name: 'jfreechart', version: '1.5.3'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.1'
+
+}
+
+test {
+    useJUnitPlatform()
 }
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
     version '2021.1.1'
-    plugins = ['com.intellij.java']
 }
 patchPluginXml {
     changeNotes """
       Add change notes here.<br>
       <em>most HTML tags may be used</em>"""
 }
+

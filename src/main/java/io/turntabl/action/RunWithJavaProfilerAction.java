@@ -64,3 +64,4 @@ public class RunWithJavaProfilerAction extends AnAction {
         ProgramRunnerUtil.executeConfiguration(runnerAndConfigurationSettings, runExecutor);
     }
 }
+
