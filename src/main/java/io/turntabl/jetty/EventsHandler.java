@@ -2,9 +2,12 @@ package io.turntabl.jetty;
 
 import io.turntabl.model.events.*;
 import io.turntabl.ui.NewRelicJavaProfilerToolWindow;
-import io.turntabl.ui.flight_recorder.JfrCompilationPanel;
-import io.turntabl.ui.java_virtual_machine.JVMInfoEventPanel;
-import io.turntabl.ui.java_virtual_machine.JavaMonitorWaitPanel;
+import io.turntabl.ui.events.JfrCompilationPanel;
+import io.turntabl.ui.events.JVMInfoEventPanel;
+import io.turntabl.ui.events.JavaMonitorWaitPanel;
+import io.turntabl.utils.flame_graph_util.Convert;
+import io.turntabl.ui.flame_graph.FlameGraphPanel;
+import io.turntabl.ui.flame_graph.FlameGraphWithoutThreadNamesPanel;
 import io.turntabl.utils.*;
 import io.turntabl.ui.events.JfrMethodSamplePanel;
 import javax.servlet.http.HttpServlet;
@@ -13,9 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.swing.table.TableModel;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class EventsHandler extends HttpServlet {
     private NewRelicJavaProfilerToolWindow toolWindowComponent;
@@ -29,7 +30,7 @@ public class EventsHandler extends HttpServlet {
     private List<JfrMethodSample> cumulativeJfrMethodSampleList = new ArrayList<>();
     private final JavaMonitorWaitUtil javaMonitorWaitUtil = new JavaMonitorWaitUtil(jsonUtil);
     private List<JavaMonitorWait> cumulativeJavaMonitorWait = new ArrayList<>();
-    private Map<String, List<EventStackTrace>> stackTraceMap = new HashMap<>();
+    private List<CollapsedEventSample> collapsedEventSampleList = new ArrayList<>();
 
     public EventsHandler(NewRelicJavaProfilerToolWindow toolWindowComponent) {
         this.toolWindowComponent = toolWindowComponent;
@@ -53,25 +54,25 @@ public class EventsHandler extends HttpServlet {
         toolWindowComponent.getEventsTree().updateComponentMap("JVM Information", (new JVMInfoEventPanel(new JVMInfoEventPanel.JVMInfoEventTableModel(cumulativeJVMInfoEvents))).getJVMInfoEventComponent());
     }
 
-    private void updateJfrMethodSamplePanel(String jsonString) {
+    private void updateJfrMethodSamplePanel(String jsonString) throws IOException {
         cumulativeJfrMethodSampleList.addAll(jfrMethodSampleUtil.getJfrMethodSample(jsonString));
 
         cumulativeJfrMethodSampleList.forEach(s -> {
             List<EventStackTrace> stackTraceList = jfrMethodSampleUtil.getStackTrace(s.getStackTrace());
-            if (stackTraceMap.size() > 0 && stackTraceMap.get(s.getThreadName()) != null) {
-                stackTraceMap.get(s.getThreadName()).addAll(stackTraceList);
-            } else {
-                stackTraceMap.put(s.getThreadName(), stackTraceList);
-            }
+
+            CollapsedEventSample collapsedEventSample = new CollapsedEventSample(s.getThreadName(), stackTraceList);
+            collapsedEventSampleList.add(collapsedEventSample);
+
         });
 
-        try {
-            jfrMethodSampleUtil.writeEventStackToFile(stackTraceMap);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        jfrMethodSampleUtil.createFlameGraph();
-        System.out.println("created flame graph..............");
+        List<String> threadStack = jfrMethodSampleUtil.writeEventStackToList(collapsedEventSampleList);
+        List<String> nonThreadStack = jfrMethodSampleUtil.writeEventStackToListWithoutThreadNames(collapsedEventSampleList);
+
+        Convert.convert(threadStack, nonThreadStack);
+        System.out.println("created flame graphs..............");
+
+        toolWindowComponent.getFlameGraphTree().updateComponentMap("With Thread Names", (new FlameGraphPanel()).getComponent());
+        toolWindowComponent.getFlameGraphTree().updateComponentMap("Without Thread Names", (new FlameGraphWithoutThreadNamesPanel()).getComponent());
 
         TableModel tableModel = new JfrMethodSamplePanel.JfrMethodSampleTableModel(cumulativeJfrMethodSampleList);
 

@@ -1,8 +1,13 @@
 package io.turntabl.utils;
 
+import io.turntabl.model.events.CollapsedEventSample;
+import io.turntabl.model.events.EventStackTrace;
 import io.turntabl.model.events.JfrMethodSample;
+import org.json.simple.JSONArray;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -49,5 +54,44 @@ class JfrMethodSampleUtilTest {
     void canGetJfrMethodSample() {
         List<JfrMethodSample> extractedList  = jfrMethodSampleUtil.getJfrMethodSample(jsonString);
         assertEquals(2, extractedList.size());
+    }
+
+    @Test
+    void canGetStackTrace(){
+        List<JfrMethodSample> extractedList  = jfrMethodSampleUtil.getJfrMethodSample(jsonString);
+        List<EventStackTrace> stackTraceList1 = jfrMethodSampleUtil.getStackTrace(extractedList.get(0).getStackTrace());
+        List<EventStackTrace> stackTraceList2 = jfrMethodSampleUtil.getStackTrace(extractedList.get(1).getStackTrace());
+        assertEquals(25, stackTraceList1.size());
+        assertEquals(19, stackTraceList2.size());
+    }
+
+    @Test
+    void canWriteToStackList(){
+        List<JfrMethodSample> extractedList  = jfrMethodSampleUtil.getJfrMethodSample(jsonString);
+        List<EventStackTrace> stackTraceList = jfrMethodSampleUtil.getStackTrace(extractedList.get(0).getStackTrace());
+        List<EventStackTrace> stackTraceList2 = jfrMethodSampleUtil.getStackTrace(extractedList.get(1).getStackTrace());
+
+        CollapsedEventSample collapsedEventSample = new CollapsedEventSample(extractedList.get(0).getThreadName(), stackTraceList);
+        CollapsedEventSample collapsedEventSample2 = new CollapsedEventSample(extractedList.get(1).getThreadName(), stackTraceList2);
+
+        List<CollapsedEventSample> collapsedEventSamples = new ArrayList<>(Arrays.asList(collapsedEventSample, collapsedEventSample2));
+        List<String> stack = jfrMethodSampleUtil.writeEventStackToList(collapsedEventSamples);
+        System.out.println(stack);
+        assertEquals(2, stack.size());
+    }
+
+    @Test
+    void canWriteToStackListWithoutThreadNames(){
+        List<JfrMethodSample> extractedList  = jfrMethodSampleUtil.getJfrMethodSample(jsonString);
+        List<EventStackTrace> stackTraceList = jfrMethodSampleUtil.getStackTrace(extractedList.get(0).getStackTrace());
+        List<EventStackTrace> stackTraceList2 = jfrMethodSampleUtil.getStackTrace(extractedList.get(1).getStackTrace());
+
+        CollapsedEventSample collapsedEventSample = new CollapsedEventSample(extractedList.get(0).getThreadName(), stackTraceList);
+        CollapsedEventSample collapsedEventSample2 = new CollapsedEventSample(extractedList.get(1).getThreadName(), stackTraceList2);
+
+        List<CollapsedEventSample> collapsedEventSamples = new ArrayList<>(Arrays.asList(collapsedEventSample, collapsedEventSample2));
+        List<String> stack = jfrMethodSampleUtil.writeEventStackToListWithoutThreadNames(collapsedEventSamples);
+        System.out.println(stack);
+        assertEquals(2, stack.size());
     }
 }

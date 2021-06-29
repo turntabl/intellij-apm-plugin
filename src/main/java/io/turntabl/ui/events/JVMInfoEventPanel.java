@@ -1,4 +1,4 @@
-package io.turntabl.ui.java_virtual_machine;
+package io.turntabl.ui.events;
 
 import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
