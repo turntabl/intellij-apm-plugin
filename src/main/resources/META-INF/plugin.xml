@@ -13,7 +13,7 @@
     <depends>com.intellij.modules.platform</depends>
     <idea-version since-build="193" until-build="193.*"/>
 
-    <!-- <depends>com.intellij.modules.java</depends> -->
+    <depends>com.intellij.modules.java</depends>
 
 
     <extensions defaultExtensionNs="com.intellij">
