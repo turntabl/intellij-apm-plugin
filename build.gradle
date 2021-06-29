@@ -39,6 +39,18 @@ configurations {
 }
 
 
+
+manifest {
+    attributes(
+            "Agent-Class": "./libs/jfr-daemon-1.2.0-SNAPSHOT.jar/com/newrelic/jfr/daemon/agent/AgentMain.java",
+            "Premain-Class": "./libs/jfr-daemon-1.2.0-SNAPSHOT.jar/com/newrelic/jfr/daemon/agent/AgentMain.java",
+//                "Main-Class": "com.newrelic.jfr.daemon.app.JFRDaemon",
+            "Implementation-Version": version
+    )
+}
+
+
+
 test {
     useJUnitPlatform()
 }
