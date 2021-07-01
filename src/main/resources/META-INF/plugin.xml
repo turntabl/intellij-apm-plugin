@@ -24,8 +24,8 @@
 
     <actions>
         <!-- Add your actions here -->
-<!--        <action id="io.turntabl.action.RunWithJavaProfilerAction" class="io.turntabl.action.RunWithJavaProfilerAction" text="Run With NewRelic Profiler">-->
-<!--            <add-to-group group-id="RunMenu" anchor="first"/>-->
-<!--        </action>-->
+        <action id="io.turntabl.action.RunWithJavaProfilerAction" class="io.turntabl.action.RunWithJavaProfilerAction" text="Run With NewRelic Profiler">
+            <add-to-group group-id="RunMenu" anchor="first"/>
+        </action>
     </actions>
 </idea-plugin>
