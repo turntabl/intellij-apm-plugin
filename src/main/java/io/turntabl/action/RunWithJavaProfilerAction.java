@@ -15,7 +15,6 @@ import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.IconLoader;
 import com.intellij.psi.PsiClass;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiJavaFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -33,6 +32,21 @@ public class RunWithJavaProfilerAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
         Project currentProject = e.getProject();
+        String jarFolderName = currentProject.getName();
+        jarFolderName = jarFolderName.replace("-", "_");
+        jarFolderName = jarFolderName.replace(".", "_");
+
+
+        String projectJarPath = "./out/artifacts/" + jarFolderName + "_jar/" + currentProject.getName() + ".jar";
+        // versions 2020.1 and above
+        // windows
+        String jfrJarPath = System.getenv("APPDATA") + "\\JetBrains\\IdeaIC2021.1\\plugins\\profiler\\lib\\jfr-daemon-1.2.0-SNAPSHOT.jar";
+
+        //macOs
+        // ~/Library/Application Support/JetBrains/IntelliJIdea2021.1/plugins/profiler...
+
+        //linux
+        // ~/.local/share/JetBrains/IntelliJIdea2021.1/profiler...
 
         @Nullable
         Module module = ModuleUtil.findModuleForFile(currentProject.getProjectFile(), currentProject);
@@ -40,7 +54,8 @@ public class RunWithJavaProfilerAction extends AnAction {
         environmentVariables.put("METRICS_INGEST_URI", "http://localhost:8787/metrics");
         environmentVariables.put("EVENTS_INGEST_URI", "http://localhost:8787/events");
         environmentVariables.put("INSIGHTS_INSERT_KEY", "");
-        vmOptions = "-javaagent:./lib/jfr-daemon-1.2.0-SNAPSHOT.jar -jar ./lib/" + currentProject.getName() + ".jar";
+        vmOptions = "-javaagent:" + jfrJarPath + " -jar " + projectJarPath;
+        System.out.println(vmOptions);
 
         PsiJavaFile psiJavaFile = (PsiJavaFile)e.getData(CommonDataKeys.PSI_FILE);
         PsiClass psiClass = psiJavaFile.getClasses()[0];
