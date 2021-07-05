@@ -64,7 +64,7 @@ publishPlugin {
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version '2021.1.1'
+    version '2020.2'
     plugins = ['com.intellij.java']
 }
 
@@ -74,6 +74,8 @@ runPluginVerifier {
 }
 
 patchPluginXml {
+    sinceBuild '163'
+    untilBuild '213'
     changeNotes """
    <h1>0.1.0</h1>
     <ul>
