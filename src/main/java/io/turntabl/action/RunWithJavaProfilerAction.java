@@ -32,18 +32,22 @@ public class RunWithJavaProfilerAction extends AnAction {
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
-        System.out.println("1: " + ApplicationInfo.getInstance().getApiVersion());
-        System.out.println("2: " + ApplicationInfo.getInstance().getFullVersion());
-        System.out.println("3: " + ApplicationInfo.getInstance().getPatchVersion());
-        System.out.println("4: " + ApplicationInfo.getInstance().getVersionName());
-        System.out.println("5: " + ApplicationInfo.getInstance().getMajorVersion());
-        System.out.println("6: " + ApplicationInfo.getInstance().getMinorVersion());
-        System.out.println("7: " + ApplicationInfo.getInstance().getMicroVersion());
-
         Project currentProject = e.getProject();
         String jarFolderName = currentProject.getName();
         jarFolderName = jarFolderName.replace("-", "_");
         jarFolderName = jarFolderName.replace(".", "_");
+
+        String ideaVersion = "";
+
+        String ideaType = ApplicationInfo.getInstance().getApiVersion();
+        if (ideaType.startsWith("IC")){
+            ideaVersion += "IdeaIC";
+        } else {
+            ideaVersion += "IntelliJIdea";
+        }
+
+        String versionNumber = ApplicationInfo.getInstance().getFullVersion();
+        ideaVersion += versionNumber.substring(0, 6);
 
 
         String projectJarPath = "./out/artifacts/" + jarFolderName + "_jar/" + currentProject.getName() + ".jar";
@@ -52,11 +56,11 @@ public class RunWithJavaProfilerAction extends AnAction {
         String os = System.getProperty("os.name").toLowerCase();
 
         if (os.contains("win")) {
-            jfrJarPath = System.getenv("APPDATA") + "\\JetBrains\\IdeaIC2021.1\\plugins\\profiler\\lib\\jfr-daemon-1.2.0-SNAPSHOT.jar";
+            jfrJarPath = System.getenv("APPDATA") + "\\JetBrains\\" + ideaVersion + "\\plugins\\profiler\\lib\\jfr-daemon-1.2.0-SNAPSHOT.jar";
         } else if (os.contains("mac")) {
-            jfrJarPath = "~/Library/Application Support/JetBrains/IntelliJIdea2021.1/plugins/profiler/lib/jfr-daemon-1.2.0-SNAPSHOT.jar";
+            jfrJarPath = "~/Library/Application Support/JetBrains/" + ideaVersion + "/plugins/profiler/lib/jfr-daemon-1.2.0-SNAPSHOT.jar";
         } else {
-            jfrJarPath = "~/.local/share/JetBrains/IntelliJIdea2021.1/profiler/lib/jfr-daemon-1.2.0-SNAPSHOT.jar";
+            jfrJarPath = "~/.local/share/JetBrains/" + ideaVersion + "/profiler/lib/jfr-daemon-1.2.0-SNAPSHOT.jar";
         }
 
         @Nullable
