@@ -15,7 +15,6 @@ import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.IconLoader;
 import com.intellij.psi.PsiClass;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiJavaFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -27,7 +26,7 @@ public class RunWithJavaProfilerAction extends AnAction {
     private String vmOptions;
 
     public RunWithJavaProfilerAction() {
-        super(IconLoader.getIcon("/icons/play_icon.png"));
+        super(IconLoader.findIcon("/icons/play_icon.png"));
     }
 
     @Override
