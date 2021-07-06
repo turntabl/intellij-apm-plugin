@@ -18,6 +18,7 @@ import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiJavaFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import com.intellij.openapi.application.ApplicationInfo;
 
 import java.util.HashMap;
 
@@ -32,6 +33,35 @@ public class RunWithJavaProfilerAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
         Project currentProject = e.getProject();
+        String jarFolderName = currentProject.getName();
+        jarFolderName = jarFolderName.replace("-", "_");
+        jarFolderName = jarFolderName.replace(".", "_");
+
+        String ideaVersion = "";
+
+        String ideaType = ApplicationInfo.getInstance().getApiVersion();
+        if (ideaType.startsWith("IC")){
+            ideaVersion += "IdeaIC";
+        } else {
+            ideaVersion += "IntelliJIdea";
+        }
+
+        String versionNumber = ApplicationInfo.getInstance().getFullVersion();
+        ideaVersion += versionNumber.substring(0, 6);
+
+
+        String projectJarPath = "./out/artifacts/" + jarFolderName + "_jar/" + currentProject.getName() + ".jar";
+
+        String jfrJarPath;
+        String os = System.getProperty("os.name").toLowerCase();
+
+        if (os.contains("win")) {
+            jfrJarPath = System.getenv("APPDATA") + "\\JetBrains\\" + ideaVersion + "\\plugins\\profiler\\lib\\jfr-daemon-1.2.0-SNAPSHOT.jar";
+        } else if (os.contains("mac")) {
+            jfrJarPath = "~/Library/Application Support/JetBrains/" + ideaVersion + "/plugins/profiler/lib/jfr-daemon-1.2.0-SNAPSHOT.jar";
+        } else {
+            jfrJarPath = "~/.local/share/JetBrains/" + ideaVersion + "/profiler/lib/jfr-daemon-1.2.0-SNAPSHOT.jar";
+        }
 
         @Nullable
         Module module = ModuleUtil.findModuleForFile(currentProject.getProjectFile(), currentProject);
@@ -39,7 +69,8 @@ public class RunWithJavaProfilerAction extends AnAction {
         environmentVariables.put("METRICS_INGEST_URI", "http://localhost:8787/metrics");
         environmentVariables.put("EVENTS_INGEST_URI", "http://localhost:8787/events");
         environmentVariables.put("INSIGHTS_INSERT_KEY", "");
-        vmOptions = "-javaagent:./lib/jfr-daemon-1.2.0-SNAPSHOT.jar -jar ./lib/" + currentProject.getName() + ".jar";
+        vmOptions = "-javaagent:" + jfrJarPath + " -jar " + projectJarPath;
+        System.out.println(vmOptions);
 
         PsiJavaFile psiJavaFile = (PsiJavaFile)e.getData(CommonDataKeys.PSI_FILE);
         PsiClass psiClass = psiJavaFile.getClasses()[0];
