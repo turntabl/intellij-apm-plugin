@@ -18,6 +18,7 @@ import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiJavaFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import com.intellij.openapi.application.ApplicationInfo;
 
 import java.util.HashMap;
 
@@ -31,6 +32,14 @@ public class RunWithJavaProfilerAction extends AnAction {
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
+        System.out.println("1: " + ApplicationInfo.getInstance().getApiVersion());
+        System.out.println("2: " + ApplicationInfo.getInstance().getFullVersion());
+        System.out.println("3: " + ApplicationInfo.getInstance().getPatchVersion());
+        System.out.println("4: " + ApplicationInfo.getInstance().getVersionName());
+        System.out.println("5: " + ApplicationInfo.getInstance().getMajorVersion());
+        System.out.println("6: " + ApplicationInfo.getInstance().getMinorVersion());
+        System.out.println("7: " + ApplicationInfo.getInstance().getMicroVersion());
+
         Project currentProject = e.getProject();
         String jarFolderName = currentProject.getName();
         jarFolderName = jarFolderName.replace("-", "_");
@@ -38,15 +47,17 @@ public class RunWithJavaProfilerAction extends AnAction {
 
 
         String projectJarPath = "./out/artifacts/" + jarFolderName + "_jar/" + currentProject.getName() + ".jar";
-        // versions 2020.1 and above
-        // windows
-        String jfrJarPath = System.getenv("APPDATA") + "\\JetBrains\\IdeaIC2021.1\\plugins\\profiler\\lib\\jfr-daemon-1.2.0-SNAPSHOT.jar";
 
-        //macOs
-        // ~/Library/Application Support/JetBrains/IntelliJIdea2021.1/plugins/profiler...
+        String jfrJarPath;
+        String os = System.getProperty("os.name").toLowerCase();
 
-        //linux
-        // ~/.local/share/JetBrains/IntelliJIdea2021.1/profiler...
+        if (os.contains("win")) {
+            jfrJarPath = System.getenv("APPDATA") + "\\JetBrains\\IdeaIC2021.1\\plugins\\profiler\\lib\\jfr-daemon-1.2.0-SNAPSHOT.jar";
+        } else if (os.contains("mac")) {
+            jfrJarPath = "~/Library/Application Support/JetBrains/IntelliJIdea2021.1/plugins/profiler/lib/jfr-daemon-1.2.0-SNAPSHOT.jar";
+        } else {
+            jfrJarPath = "~/.local/share/JetBrains/IntelliJIdea2021.1/profiler/lib/jfr-daemon-1.2.0-SNAPSHOT.jar";
+        }
 
         @Nullable
         Module module = ModuleUtil.findModuleForFile(currentProject.getProjectFile(), currentProject);
