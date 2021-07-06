@@ -77,7 +77,7 @@ patchPluginXml {
     changeNotes """
    <h1>0.1.0</h1>
     <ul>
-      <li>initial draft testing</li>
+      <li>initial draft testing and install from disk</li>
       <li>initial release</li>
     </ul>"""
 }
