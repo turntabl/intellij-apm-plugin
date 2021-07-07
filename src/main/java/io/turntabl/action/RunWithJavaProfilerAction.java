@@ -27,7 +27,7 @@ public class RunWithJavaProfilerAction extends AnAction {
     private String vmOptions;
 
     public RunWithJavaProfilerAction() {
-        super(IconLoader.getIcon("/icons/play_icon.png"));
+        super(IconLoader.findIcon("/icons/play_icon.png"));
     }
 
     @Override
@@ -48,8 +48,7 @@ public class RunWithJavaProfilerAction extends AnAction {
 
         String versionNumber = ApplicationInfo.getInstance().getFullVersion();
         ideaVersion += versionNumber.substring(0, 6);
-
-
+        
         String projectJarPath = "./out/artifacts/" + jarFolderName + "_jar/" + currentProject.getName() + ".jar";
 
         String jfrJarPath;
