@@ -57,9 +57,9 @@ public class RunWithJavaProfilerAction extends AnAction {
         if (os.contains("win")) {
             jfrJarPath = System.getenv("APPDATA") + "\\JetBrains\\" + ideaVersion + "\\plugins\\profiler\\lib\\jfr-daemon-1.2.0-SNAPSHOT.jar";
         } else if (os.contains("mac")) {
-            jfrJarPath = "~/Library/Application Support/JetBrains/" + ideaVersion + "/plugins/profiler/lib/jfr-daemon-1.2.0-SNAPSHOT.jar";
+            jfrJarPath = System.getProperty("user.home") + "/Library/Application Support/JetBrains/" + ideaVersion + "/plugins/profiler/lib/jfr-daemon-1.2.0-SNAPSHOT.jar";
         } else {
-            jfrJarPath = "~/.local/share/JetBrains/" + ideaVersion + "/profiler/lib/jfr-daemon-1.2.0-SNAPSHOT.jar";
+            jfrJarPath = System.getProperty("user.home") + "/.local/share/JetBrains/" + ideaVersion + "/profiler/lib/jfr-daemon-1.2.0-SNAPSHOT.jar";
         }
 
         @Nullable
