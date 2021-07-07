@@ -71,6 +71,7 @@ intellij {
 
 runPluginVerifier  {
     ideVersions = ['2021.1.*']
+
 }
 
 patchPluginXml {
