@@ -74,6 +74,7 @@ runPluginVerifier  {
 }
 
 patchPluginXml {
+    sinceBuild("193.*")
     changeNotes """
    <h1>0.1.0</h1>
     <ul>
