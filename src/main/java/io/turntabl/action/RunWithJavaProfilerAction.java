@@ -49,7 +49,6 @@ public class RunWithJavaProfilerAction extends AnAction {
         String versionNumber = ApplicationInfo.getInstance().getFullVersion();
         ideaVersion += versionNumber.substring(0, 6);
 
-
         String projectJarPath = "./out/artifacts/" + jarFolderName + "_jar/" + currentProject.getName() + ".jar";
 
         String jfrJarPath;
