@@ -64,7 +64,7 @@ publishPlugin {
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version '2021.1.1'
+    version '1.0-SNAPSHOT'
     plugins = ['com.intellij.java']
 }
 
