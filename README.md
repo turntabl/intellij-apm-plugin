@@ -88,7 +88,9 @@ To keep everything working, do not remove
 
  ## Screenshot of how to build the artifact
 ![plugin](Images/artifact1.png)
+
 ![plugin](Images/artifact2.png)
+
 ![plugin](Images/artifact3.png)
  
 ## follow step 5 through to step 7 above
@@ -103,7 +105,7 @@ To keep everything working, do not remove
    - Do not tamper with the Vm options and Environment variables.
    - Before you run your application with profiler, open the tool window at the status bar to activate our web server.
 
-- Steps to follow
+## Steps to follow
   - Run the project default main first before you run with the profiler.
   - To Run with profiler: Goto <kbd>Run</kbd> > <kbd>Run with NewRelic Profiler</kbd>
   - Caution: Ensure you stop NewRelic profiler from running when you are done profiling your application
