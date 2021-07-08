@@ -16,6 +16,7 @@ import java.util.List;
 public class JfrCompilationPanel {
     private JBPanel panel;
     private JTable table;
+    private static final JsonUtility jsonUtil = new JsonUtility();
 
     public JfrCompilationPanel(TableModel tableModel) {
         panel = new JBPanel(new BorderLayout());
@@ -31,7 +32,6 @@ public class JfrCompilationPanel {
         table.getColumnModel().getColumn(6).setPreferredWidth(350);
         table.getColumnModel().getColumn(7).setPreferredWidth(350);
         table.getColumnModel().getColumn(8).setPreferredWidth(350);
-        table.getColumnModel().getColumn(9).setPreferredWidth(350);
 
         panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER),  BorderLayout.CENTER);
     }
@@ -41,7 +41,7 @@ public class JfrCompilationPanel {
     }
 
     public static class JfrCompilationTableModel extends AbstractTableModel {
-        String[] columnNames = {"Event Type", "TimeStamp",
+        String[] columnNames = {"TimeStamp",
                 "Duration", "Instrumentation Name", "Host Name", "Thread Name","Collector Name",
                 "Desc", "Succeeded", "Instrumentation Provider"};
 
@@ -53,16 +53,15 @@ public class JfrCompilationPanel {
             data = new String[jfrCompilationList.size()][columnNames.length];
             for (int i = 0; i < jfrCompilationList.size(); i++) {
                 JfrCompilation jfrCompilation = jfrCompilationList.get(i);
-                data[i][0] = jfrCompilation.getEventType();
-                data[i][1] = String.valueOf(jfrCompilation.getTimestamp());
-                data[i][2] = String.valueOf(jfrCompilation.getDuration());
-                data[i][3] = jfrCompilation.getInstrumentationName();
-                data[i][4] = jfrCompilation.getHostName();
-                data[i][5] = jfrCompilation.getThreadName();
-                data[i][6] = jfrCompilation.getCollectorName();
-                data[i][7] = jfrCompilation.getDesc();
-                data[i][8] = String.valueOf(jfrCompilation.getSucceeded());
-                data[i][9] = jfrCompilation.getInstrumentationProvider();
+                data[i][0] = jsonUtil.getTime(jfrCompilation.getTimestamp());
+                data[i][1] = String.valueOf(jfrCompilation.getDuration());
+                data[i][2] = jfrCompilation.getInstrumentationName();
+                data[i][3] = jfrCompilation.getHostName();
+                data[i][4] = jfrCompilation.getThreadName();
+                data[i][5] = jfrCompilation.getCollectorName();
+                data[i][6] = jfrCompilation.getDesc();
+                data[i][7] = String.valueOf(jfrCompilation.getSucceeded());
+                data[i][8] = jfrCompilation.getInstrumentationProvider();
 
             }
         }

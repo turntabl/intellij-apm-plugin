@@ -4,6 +4,8 @@ import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
 import io.turntabl.model.metrics.ObjectAllocationOutsideTLab;
+import io.turntabl.utils.JsonUtility;
+
 import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
@@ -12,6 +14,7 @@ import java.util.List;
 public class ObjectAllocationOutsideTLabPanel {
     private JBPanel panel;
     private JTable table;
+    private static final JsonUtility jsonUtil = new JsonUtility();
 
     TableModel myData;
     DefaultTableColumnModel columnModel;
@@ -49,7 +52,7 @@ public class ObjectAllocationOutsideTLabPanel {
             data = new String[ObjectAllocationOutsideTLabList.size()][columnNames.length];
             for (int i = 0; i < ObjectAllocationOutsideTLabList.size(); i++) {
                 ObjectAllocationOutsideTLab ObjectAllocationOutsideTLab = ObjectAllocationOutsideTLabList.get(i);
-                data[i][0] = String.valueOf(ObjectAllocationOutsideTLab.getTimestamp());
+                data[i][0] = jsonUtil.getTime(ObjectAllocationOutsideTLab.getTimestamp());
                 data[i][1] = ObjectAllocationOutsideTLab.getType();
                 data[i][2] = String.valueOf(ObjectAllocationOutsideTLab.getValue().get("count") == null ? "" : ObjectAllocationOutsideTLab.getValue().get("count"));
                 data[i][3] = ObjectAllocationOutsideTLab.getValue().get("sum") == null ? "" : String.valueOf(ObjectAllocationOutsideTLab.getValue().get("sum"));

@@ -31,7 +31,6 @@ public class JVMInfoEventPanel {
         table.getColumnModel().getColumn(5).setPreferredWidth(350);
         table.getColumnModel().getColumn(6).setPreferredWidth(350);
         table.getColumnModel().getColumn(7).setPreferredWidth(350);
-        table.getColumnModel().getColumn(8).setPreferredWidth(350);
 
 
         panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER), BorderLayout.CENTER);
@@ -46,7 +45,7 @@ public class JVMInfoEventPanel {
     }
 
     public static class JVMInfoEventTableModel extends AbstractTableModel {
-        String[] columnNames = {"Event Type", "Start Time", "JVM Property", "Property Value", "JVM Args", "Instrumentation Name", "Host Name", "Collector Name", "Instrumentation Provider"};
+        String[] columnNames = {"Start Time", "JVM Property", "Property Value", "JVM Args", "Instrumentation Name", "Host Name", "Collector Name", "Instrumentation Provider"};
         String[][] data;
         private java.util.List<JVMInfoEvent> jvmInfoEventList;
 
@@ -55,15 +54,14 @@ public class JVMInfoEventPanel {
             data = new String[jvmInfoEventList.size()][columnNames.length];
             for (int i = 0; i < jvmInfoEventList.size(); i++) {
                 JVMInfoEvent jvmInfoEvent = jvmInfoEventList.get(i);
-                data[i][0] = jvmInfoEvent.getEventType();
-                data[i][1] = jsonUtil.getTime(jvmInfoEvent.getTimestamp());
-                data[i][2] = jvmInfoEvent.getJvmProperty();
-                data[i][3] = jvmInfoEvent.getJvmPropertyValue();
-                data[i][4] = jvmInfoEvent.getJvmArguments();
-                data[i][5] = jvmInfoEvent.getInstrumentationName();
-                data[i][6] = jvmInfoEvent.getHostName();
-                data[i][7] = jvmInfoEvent.getCollectorName();
-                data[i][8] = jvmInfoEvent.getInstrumentationProvider();
+                data[i][0] = jsonUtil.getTime(jvmInfoEvent.getTimestamp());
+                data[i][1] = jvmInfoEvent.getJvmProperty();
+                data[i][2] = jvmInfoEvent.getJvmPropertyValue();
+                data[i][3] = jvmInfoEvent.getJvmArguments();
+                data[i][4] = jvmInfoEvent.getInstrumentationName();
+                data[i][5] = jvmInfoEvent.getHostName();
+                data[i][6] = jvmInfoEvent.getCollectorName();
+                data[i][7] = jvmInfoEvent.getInstrumentationProvider();
             }
         }
 

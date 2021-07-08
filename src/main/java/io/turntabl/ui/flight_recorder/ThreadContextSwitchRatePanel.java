@@ -4,20 +4,20 @@ import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
 import io.turntabl.model.metrics.ThreadContextSwitchRate;
+import io.turntabl.utils.JsonUtility;
+
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableModel;
 import java.awt.*;
 import java.util.List;
 
 public class ThreadContextSwitchRatePanel {
 
-        JBPanel panel;
-        JTable table;
+    private JBPanel panel;
+    private JTable table;
+    private static final JsonUtility jsonUtil = new JsonUtility();
 
-        TableModel myData;
-        DefaultTableColumnModel columnModel;
 
         public ThreadContextSwitchRatePanel(TableModel tableModel) {
             panel = new JBPanel(new BorderLayout());
@@ -48,7 +48,7 @@ public class ThreadContextSwitchRatePanel {
                 data = new String[threadContextSwitchRateList.size()][columnNames.length];
                 for (int i = 0; i < threadContextSwitchRateList.size(); i++) {
                     ThreadContextSwitchRate threadContextSwitchRate = threadContextSwitchRateList.get(i);
-                    data[i][0] = threadContextSwitchRate.getTimestamp().toString();
+                    data[i][0] = jsonUtil.getTime(threadContextSwitchRate.getTimestamp());
                     data[i][1] = threadContextSwitchRate.getType();
                     data[i][2] = threadContextSwitchRate.getValue().toString();
                     data[i][3] = String.valueOf(threadContextSwitchRate.getAttributes().get("thread.osName") == null ? "" : threadContextSwitchRate.getAttributes().get("thread.osName"));

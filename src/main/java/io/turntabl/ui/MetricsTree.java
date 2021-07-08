@@ -64,14 +64,14 @@ public class MetricsTree {
         // defining table info for socket branch sub nodes
         jfrSocketReadBytesReadPanel = new JfrSocketReadBytesReadPanel(
                 new JfrSocketReadBytesReadPanel.JfrSocketReadBytesReadTableModel(Arrays.asList(
-                        new JfrSocketReadBytesRead("jfr.SocketRead.bytesRead", 1619441645442L, "summary", new HashMap<>(), 46, new HashMap<>())
+                        new JfrSocketReadBytesRead("jfr.SocketRead.bytesRead", 0L, null, new HashMap<>(), 0, new HashMap<>())
                 ))
         );
 
         // defining table info for socket branch sub nodes
         jfrSocketReadDurationPanel = new JfrSocketReadDurationPanel(
                 new JfrSocketReadDurationPanel.JfrSocketReadDurationTableModel(Arrays.asList(
-                        new JfrSocketReadDuration("jfr.SocketRead.duration", 1619441645442L, "summary", new HashMap<>(), 50, new HashMap<>())
+                        new JfrSocketReadDuration("jfr.SocketRead.duration", 0L, null, new HashMap<>(), 0, new HashMap<>())
                 ))
         );
 
@@ -87,14 +87,14 @@ public class MetricsTree {
 
         // flight recorder sub nodes without children
         String[] flightRecorderNodes = {"Thread Context Switch Rate", "Summary Metaspace"};
-        ThreadContextSwitchRatePanel threadContextSwitchRatePanel = new ThreadContextSwitchRatePanel(
+        threadContextSwitchRatePanel = new ThreadContextSwitchRatePanel(
                 new ThreadContextSwitchRatePanel.ThreadContextSwitchRateTableModel(Arrays.asList(
-                        new ThreadContextSwitchRate("jfr.ThreadCPULoad.user", "gauge", 0.004792887717485428, 41233434L, new HashMap<>())
+                        new ThreadContextSwitchRate("jfr.ThreadCPULoad.user", null, 0.0, 0L, new HashMap<>())
                 )));
 
-        SummaryMetaspacePanel summaryMetaspacePanel = new SummaryMetaspacePanel(
+        summaryMetaspacePanel = new SummaryMetaspacePanel(
                 new SummaryMetaspacePanel.SummaryMetaspaceTableModel(Arrays.asList(
-                        new SummaryMetaspace("jfr.MetaspaceSummary.dataSpace.committed", "type", 0.209283, 0.209283, 0.209283, 28364347L, new HashMap<>())
+                        new SummaryMetaspace("jfr.MetaspaceSummary.dataSpace.committed", null, 0.0, 0.0, 0.0, 0L, new HashMap<>())
                 )));
 
         // define components for flight recorder sub nodes without children
@@ -117,7 +117,7 @@ public class MetricsTree {
         // define table for statistics sub node
         threadAllocationStatisticsPanel = new ThreadAllocationStatisticsPanel(
                 new ThreadAllocationStatisticsPanel.ThreadAllocationStatisticsTableModel(Arrays.asList(
-                        new ThreadAllocationStatistics("2021-06-01 11:08:12:20", "18.4 MiB", 70.52, 5376373L, new HashMap<String, String>())
+                        new ThreadAllocationStatistics("jfr.ThreadAllocationStatistics.allocated", null, 0, 0L, new HashMap<>())
 
                 )));
 
@@ -134,12 +134,12 @@ public class MetricsTree {
         String[] javaAppSubNodes = {"Object Allocation in new TLAB", "Object Allocation outside TLAB"};
         objectAllocationInNewTLabPanel = new ObjectAllocationInNewTLabPanel(
                 new ObjectAllocationInNewTLabPanel.ObjectAllocationInNewTLabTableModel(Arrays.asList(
-                        new ObjectAllocationInNewTLab("jfr allocation", "Summary", new HashMap<>(), 16667896L, 50, new HashMap<>())
+                        new ObjectAllocationInNewTLab("jfr.ObjectAllocationInNewTLAB.allocation", null, new HashMap<>(), 0L, 0, new HashMap<>())
                 )));
 
         ObjectAllocationOutsideTLabPanel objectAllocationOutsideTLabPanel = new ObjectAllocationOutsideTLabPanel(
                 new ObjectAllocationOutsideTLabPanel.ObjectAllocationOutsideTLabTableModel(Arrays.asList(
-                        new ObjectAllocationOutsideTLab("jfr allocation", "Summary", new HashMap<>(), 16667896L, 51, new HashMap<>())
+                        new ObjectAllocationOutsideTLab("jfr.ObjectAllocationOutsideTLAB.allocation", null, new HashMap<>(), 0L, 0, new HashMap<>())
                 )));
 
         // define components for java application sub nodes without children
@@ -160,35 +160,35 @@ public class MetricsTree {
         // defining table info for GC branch sub nodes
         gcMinorDurationPanel = new GCMinorDurationPanel(
                 new GCMinorDurationPanel.GCMinorDurationTableModel(Arrays.asList(
-                        new GCMinorDuration("jfr.GarbageCollection.MinorDuration", "summary", new HashMap<String, Double>(), 1619441613596L, -1619441613596L, new HashMap<String, String>())
+                        new GCMinorDuration("jfr.GarbageCollection.MinorDuration", null, new HashMap<>(), 0L, 0L, new HashMap<>())
                 ))
         );
 
         // defining table info for GC branch sub nodes
         gcMajorDurationPanel = new GCMajorDurationPanel(
                 new GCMajorDurationPanel.GCMajorDurationTableModel(Arrays.asList(
-                        new GCMajorDuration("jfr.GarbageCollection.MajorDuration", "summary", new HashMap<String, Double>(), 1619441613596L, -1619441613596L, new HashMap<String, String>())
+                        new GCMajorDuration("jfr.GarbageCollection.MajorDuration", null, new HashMap<>(), 0L, 0L, new HashMap<>())
                 ))
         );
 
         // defining table info for GC branch sub nodes
         g1GarbageCollectionDurationPanel = new G1GarbageCollectionDurationPanel(
                 new G1GarbageCollectionDurationPanel.G1GarbageCollectionDurationTableModel(Arrays.asList(
-                        new G1GarbageCollectionDuration("jfr.G1GarbageCollection.duration", "summary", new HashMap<String, Double>(), 1619441613596L, -1619441613596L, new HashMap<String, String>())
+                        new G1GarbageCollectionDuration("jfr.G1GarbageCollection.duration", null, new HashMap<>(), 0L, 0L, new HashMap<>())
                 ))
         );
 
         // defining table info for GC branch sub nodes
         gcDurationPanel = new GCDurationPanel(
                 new GCDurationPanel.GCDurationTableModel(Arrays.asList(
-                        new GCDuration("jfr.GarbageCollection.duration", "summary", new HashMap<String, Double>(), 1619441613596L, -1619441613596L, new HashMap<String, String>())
+                        new GCDuration("jfr.GarbageCollection.duration", null, new HashMap<>(), 0L, 0L, new HashMap<>())
                 ))
         );
 
         // defining table info for GC branch sub nodes
         gcLongestPausePanel = new GCLongestPausePanel(
                 new GCLongestPausePanel.GCLongestPauseTableModel(Arrays.asList(
-                        new GCLongestPause("jfr.GarbageCollection.longestPause", "summary", 123455.67, 1619441613596L, new HashMap<String, String>())
+                        new GCLongestPause("jfr.GarbageCollection.longestPause", null, 0.0, 0L, new HashMap<>())
                 ))
         );
 
@@ -196,7 +196,7 @@ public class MetricsTree {
         // defining table info for GC branch sub nodes
         gcHeapSummaryPanel = new GcHeapSummaryPanel(
                 new GcHeapSummaryPanel.GcHeapSummaryTableModel(Arrays.asList(
-                        new GcHeapSummary("jfr.GCHeapSummary.heapCommittedSize", 1619441634271L, "gauge", 2.65289728E8, 3.204448256E9, 1.39961312E8, new HashMap<>())
+                        new GcHeapSummary("jfr.GCHeapSummary", 0L, null, 0.0, 0.0, 0.0, new HashMap<>())
                 ))
         );
 
@@ -221,13 +221,13 @@ public class MetricsTree {
         String[] osNodes = {"Thread CPU Load", "CPU Load", "CPU Load Graph"};
         threadCpuLoadPanel = new ThreadCpuLoadPanel(
                 new ThreadCpuLoadPanel.ThreadCpuLoadTableModel(Arrays.asList(
-                        new ThreadCpuLoad("jfr.ThreadCPULoad.user", 1619441626468L, "gauge", 0.04082856327295303, 0.0010207140585407615, new HashMap<>())
+                        new ThreadCpuLoad("jfr.ThreadCPULoad", 0L, null, 0.0, 0.0, new HashMap<>())
                 ))
         );
 
         cpuLoadPanel = new CpuLoadPanel(
                 new CpuLoadPanel.CpuLoadTableModel(Arrays.asList(
-                        new CpuLoad("jfr.CPULoad", 1619441627925L, "gauge", 0.25646382570266724, 0.031001122668385506, 0.3926701843738556, new HashMap<>())
+                        new CpuLoad("jfr.CPULoad", 0L, null, 0.0, 0.0, 0.0, new HashMap<>())
                 ))
         );
 
@@ -333,11 +333,11 @@ public class MetricsTree {
         return this.gcHeapSummaryPanel.getTable();
     }
 
-    public JTable getSummaryMetaspace() {
+    public JTable getSummaryMetaspaceTable() {
         return this.summaryMetaspacePanel.getTable();
     }
 
-    public JTable getThreadContextSwitchRate(){
+    public JTable getThreadContextSwitchRateTable(){
         return this.threadContextSwitchRatePanel.getTable();
     }
 
