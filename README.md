@@ -58,13 +58,16 @@ To keep everything working, do not remove
   
   ## The Images of how to Install from Disk
   ![plugin](Images/plugin1.png)
+  
   ![plugin](Images/plugin2.png)
+  
   ![plugin](Images/plugin3.png)
+  
   ![plugin](Images/plugin.png)
 
 ### Required IntelliJ Configuration
- -Build Your Own Artifact
- -Run with profiler
+ .Build Your Own Artifact.
+ .Run with profiler.
 
 ## How to Build Your Own Artifact
 
