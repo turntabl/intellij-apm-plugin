@@ -18,25 +18,25 @@ To keep everything working, do not remove
 <!-- Plugin description end -->
 
 ## Features
-#### Metrics
+### Metrics
       - Flight Recoder
       - Java Application
       - Java Virtual Machine
       - Operating System
-#### Events
+### Events
       - JVM Information
       - JFR Compilation
       - JFR Method Sample
       - Java Monitor wait
       
-#### Flame Graph
+### Flame Graph
       - A flame graph of methods with and without their thread names.
       - CPULoad Graph
 
 
 
-### Installation
-  ## Procedure To install Plugin from Disk
+## Installation
+  ### Procedure To install Plugin from Disk
 [comment]: <> (  <kbd>Install Plugin</kbd>)
 [comment]: <> (- Using IDE built-in plugin system:)
 [comment]: <> (<kbd>File from the Toolbar or Menu Bar</kbd> > <kbd>Settings/Plugins</kbd> )
@@ -65,9 +65,9 @@ To keep everything working, do not remove
   
   ![plugin](Images/plugin.png)
 
-### Required IntelliJ Configuration
- # Build Your Own Artifact.
- # Run with profiler.
+## Required IntelliJ Configuration
+ ### Build Your Own Artifact.
+ ### Run with profiler.
 
 ## How to Build Your Own Artifact
 
@@ -92,12 +92,12 @@ To keep everything working, do not remove
 ![plugin](Images/artifact3.png)
  -follow step 5 through to step 7 above
  
-# Notice
+## Notice
  -Ensure that the name of your jar and its directory or folder have the same name as the name of your project
 
 ## To Run with profiler
 
- # Notice
+ ## Notice
   - Ensure to set your main class
    - Do not tamper with the Vm options and Environment variables.
    - Before you run your application with profiler, open the tool window at the status bar to activate our web server.
@@ -109,8 +109,11 @@ To keep everything working, do not remove
  
   ## Images of How to Run your application with Profiler
 ![plugin](Images/result1.png)
+
 ![plugin](Images/result2.png)
+
 ![plugin](Images/result3.png)
+
 ![plugin](Images/result4.png)
 
 
@@ -150,7 +153,7 @@ To keep everything working, do not remove
 
 [comment]: <> (  - For cases where a null pointer exception is thrown, kindly run the project default main again before running with profiler.)
 
-### Tools Used
+## Tools Used
 -Libraries Used
   -D3 Library click on the link to read more about it[d3-flame-graph](https://github.com/spiermar/d3-flame-graph)
   - Burn Library click on the provided link for more details about it [burn-library](https://github.com/spiermar/burn)
