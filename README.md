@@ -37,16 +37,12 @@ To keep everything working, do not remove
 
 ### Installation
   ## Procedure To install Plugin from Disk
-    -Steps
-      -First Go to the Menu bar select<kbd>File from the Menu Bar</kbd> > <kbd>Settings/Plugins</kbd> > 
-      -Click on the settings Icon<kbd>select from the pop up menu</kbd> > <kbd>Install Plugin from Disk</kbd> 
-      - You will see a Preveiw of the Plugin
-      - Click on Apply and Okay which verifies it been applied.
-  ## The Images of how to Install from Disk
-  ![plugin](Images/plugin.png)
-  
-    
+[comment]: <> (- Using IDE built-in plugin system:)
+[comment]: <> (<kbd>File from the Menu Bar</kbd> > <kbd>Settings/Plugins</kbd> )
 
+[comment]: <> (  <kbd>select from the pop up menu</kbd> > <kbd>Install Plugin from Disk</kbd>)
+
+[comment]: <> (  <kbd>Install Plugin</kbd>)
 [comment]: <> (- Using IDE built-in plugin system:)
 
 [comment]: <> (  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "intellij-plugin"</kbd> >)
@@ -56,7 +52,17 @@ To keep everything working, do not remove
 - Manually:
 
   Download the [latest release](https://github.com/turntabl/intellij-apm-plugin/releases/latest) and install it manually using
-  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from disk...</kbd>
+    -Steps
+      -First Go to the Menu bar select<kbd>File from the Menu Bar</kbd> > <kbd>Settings/Plugins </kbd> 
+      -Click on the settings Icon<kbd>select from the pop up menu</kbd> > <kbd>Install Plugin from Disk</kbd> 
+      - You will see a Preview of the Plugin
+      - Click on Apply and Okay which verifies it been applied.
+  ## The Images of how to Install from Disk
+  ![plugin](Images/plugin.png)
+  
+    
+
+
 ## Usage
 
 ### Required IntelliJ Configuration
