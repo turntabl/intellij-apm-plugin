@@ -44,8 +44,7 @@ To keep everything working, do not remove
       - Click on Apply and Okay which verifies it been applied.
   ## The Images of how to Install from Disk
   ![plugin](Images/plugin.png)
-   <img src="Images/plugin.png" width="" height=""/>
-    ![](Images/plugin.png)
+  
     
 
 [comment]: <> (- Using IDE built-in plugin system:)
