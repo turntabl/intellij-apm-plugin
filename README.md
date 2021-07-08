@@ -66,7 +66,7 @@ To keep everything working, do not remove
       - You will see a Preview of the Plugin
       - Click on Apply and Okay which verifies it been applied.
   
-  ## The Images of how to Install from Disk
+  ## Installing Plugin from Disk
   ![plugin](Images/plugin1.png)
   
   ![plugin](Images/plugin3.png)
