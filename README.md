@@ -111,11 +111,13 @@ To keep everything working, do not remove
   - Caution: Ensure you stop NewRelic profiler from running when you are done profiling your application
  
   ## Images of How to Run your application with Profiler
+### Setting your main class in the first image below
+![plugin](Images/result3.png)
+
+
 ![plugin](Images/result1.png)
 
 ![plugin](Images/result2.png)
-
-![plugin](Images/result3.png)
 
 ![plugin](Images/result4.png)
 
