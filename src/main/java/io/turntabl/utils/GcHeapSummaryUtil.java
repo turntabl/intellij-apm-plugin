@@ -50,7 +50,7 @@ public class GcHeapSummaryUtil {
     public Map<Long, List<GcHeapSummary>> groupGcHeapSummaryByTimestamp(List<GcHeapSummary> gcHeapSummaryList) {
         return gcHeapSummaryList
                 .stream()
-                .collect(Collectors.groupingBy(GcHeapSummary::getStartTime));
+                .collect(Collectors.groupingBy(GcHeapSummary::getTimestamp));
     }
 
     public List<GcHeapSummary> getGcHeapSummaryConsolidated(List<GcHeapSummary> list) {

@@ -104,7 +104,7 @@ public class MetricHandler extends HttpServlet {
             toolWindowComponent.getMetricsTree().updateComponentMap("CPU Load", (new CpuLoadPanel(new CpuLoadPanel.CpuLoadTableModel(cumulativeCpuLoadList))).getCpuLoadComponent());
 
             XYDataset dataset = cpuLoadUtil.createDataSet(cumulativeCpuLoadList);
-            toolWindowComponent.getMetricsTree().updateCpuLoadGraph(new CpuGraph(dataset, "CPU Load Metric", "Start Time", "Values"));
+            toolWindowComponent.getMetricsTree().updateCpuLoadGraph(new CpuGraph(dataset, "CPU Load Metric", "Timestamp", "Values"));
         }
     }
 

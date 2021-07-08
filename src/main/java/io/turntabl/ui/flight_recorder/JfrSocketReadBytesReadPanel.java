@@ -40,7 +40,7 @@ public class JfrSocketReadBytesReadPanel {
     }
 
     public static class JfrSocketReadBytesReadTableModel extends AbstractTableModel {
-        String[] columnNames = {"Start Time", "Type", "Count", "Sum", "Min", "Max", "Interval ms", "Thread OS Name", "Thread Name"};
+        String[] columnNames = {"Timestamp", "Type", "Count", "Sum", "Min", "Max", "Interval ms", "Thread OS Name", "Thread Name"};
         String[][] data;
         private java.util.List<JfrSocketReadBytesRead> jfrSocketReadBytesReadList;
 
@@ -49,7 +49,7 @@ public class JfrSocketReadBytesReadPanel {
             data = new String[jfrSocketReadBytesReadList.size()][columnNames.length];
             for (int i = 0; i < jfrSocketReadBytesReadList.size(); i++) {
                 JfrSocketReadBytesRead jfrSocketReadBytesRead = jfrSocketReadBytesReadList.get(i);
-                data[i][0] = jsonUtil.getTime(jfrSocketReadBytesRead.getStartTime());
+                data[i][0] = jsonUtil.getTime(jfrSocketReadBytesRead.getTimestamp());
                 data[i][1] = jfrSocketReadBytesRead.getType();
                 data[i][2] = jfrSocketReadBytesRead.getValue().get("count") == null ? "" : String.valueOf(jfrSocketReadBytesRead.getValue().get("count"));
                 data[i][3] = jfrSocketReadBytesRead.getValue().get("sum") == null ? "" : String.valueOf(jfrSocketReadBytesRead.getValue().get("sum"));

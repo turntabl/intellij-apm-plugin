@@ -38,7 +38,7 @@ public class NewRelicJavaProfilerToolWindow implements Disposable {
 
     public NewRelicJavaProfilerToolWindow(ToolWindow toolWindow, Project project) {
         mainPanel = new BorderLayoutPanel(0, 0);
-        cpuGraph = new CpuGraph(createDataSet(), "CPU Load Metrics", "StartTime", "Values");
+        cpuGraph = new CpuGraph(createDataSet(), "CPU Load Metrics", "Timestamp", "Values");
 
         flameGraphRootPanel = new BorderLayoutPanel(0, 0);
         flameGraphPanel = new BorderLayoutPanel(0, 0);

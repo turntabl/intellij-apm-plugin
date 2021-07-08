@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.HashMap;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ObjectAllocation {
+public abstract class ObjectAllocation {
     protected String name;
     protected String type;
     protected HashMap<String, Double> value;

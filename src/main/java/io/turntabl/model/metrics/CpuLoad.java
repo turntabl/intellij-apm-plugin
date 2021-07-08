@@ -3,12 +3,11 @@ package io.turntabl.model.metrics;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashMap;
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CpuLoad {
     private String name;
     @JsonProperty("timestamp")
-    private Long startTime;
+    private Long timestamp;
     private String type;
     private double jvmUserValue;
     private double jvmSystemValue;
@@ -18,9 +17,9 @@ public class CpuLoad {
     public CpuLoad() {
     }
 
-    public CpuLoad(String name, Long startTime, String type, Double jvmUserValue, Double jvmSystemValue, Double machineTotalValue, HashMap<String, String> attributes) {
+    public CpuLoad(String name, Long timestamp, String type, Double jvmUserValue, Double jvmSystemValue, Double machineTotalValue, HashMap<String, String> attributes) {
         this.name = name;
-        this.startTime = startTime;
+        this.timestamp = timestamp;
         this.type = type;
         this.jvmUserValue = jvmUserValue;
         this.jvmSystemValue = jvmSystemValue;
@@ -36,8 +35,8 @@ public class CpuLoad {
         this.name = name;
     }
 
-    public Long getStartTime() {
-        return startTime;
+    public Long getTimestamp() {
+        return timestamp;
     }
 
     public String getType() {
@@ -60,8 +59,8 @@ public class CpuLoad {
         return attributes;
     }
 
-    public void setStartTime(Long startTime) {
-        this.startTime = startTime;
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
     }
 
     public void setType(String type) {
@@ -87,7 +86,7 @@ public class CpuLoad {
     @Override
     public String toString() {
         return "CpuLoad{" +
-                "startTime=" + startTime +
+                "timestamp=" + timestamp +
                 ", type='" + type + '\'' +
                 ", jvmUserValue=" + jvmUserValue +
                 ", jvmSystemValue=" + jvmSystemValue +
