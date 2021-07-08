@@ -10,10 +10,10 @@
 ## Plugin Description
 This Java Application Performance Monitoring Plugin for Intellij that tracks every detail of the JVM (CPU, thread, memory, garbage collection, etc) and also monitors
 applications live in production environments.
-This Plugin was built using 
-
-This specific section is a source for the [plugin.xml](/src/main/resources/META-INF/plugin.xml) file which will be extracted by the [Gradle](/build.gradle) during the build process.
-
+The Plugin was build using gradle [Intellij Platform SDk](https://plugins.jetbrains.com/docs/intellij/welcome.html) and with the help of the intellij platform-plugin template click on this link for more explanation[intellij-platform-plugin-template](https://github.com/JetBrains/intellij-platform-plugin-template)  
+In addition, this plugin uses Jrf Daemon to do the profiling which generate flame-graph. 
+A flame graph visualizes a collection of stack traces (aka call stacks), shown as an adjacency diagram with an inverted icicle layout. Flame graphs are commonly used to visualize CPU profiler output, where stack traces are collected using sampling. Click on the link for further explanations  [newrelic-jfr-core](https://github.com/newrelic/newrelic-jfr-core)
+The plugin configuration file is a plugin.xml file located in the src/main/resources/META-INF directory [plugin.xml](/src/main/resources/META-INF/plugin.xml). It provides general information about the plugin, its dependencies and extensions.
 To keep everything working, do not remove 
 <!-- ... --> sections.
 <!-- Plugin description end -->
