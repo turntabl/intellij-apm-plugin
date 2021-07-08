@@ -52,11 +52,13 @@ To keep everything working, do not remove
 - Manually:
 
   Download the [latest release](https://github.com/turntabl/intellij-apm-plugin/releases/latest) and install it manually using
-    -Steps
+ 
+  - Steps
       -First Go to the Menu bar select<kbd>File from the Menu Bar</kbd> > <kbd>Settings/Plugins </kbd> 
       -Click on the settings Icon<kbd>select from the pop up menu</kbd> > <kbd>Install Plugin from Disk</kbd> 
       - You will see a Preview of the Plugin
       - Click on Apply and Okay which verifies it been applied.
+  
   ## The Images of how to Install from Disk
   ![plugin](Images/plugin.png)
   
