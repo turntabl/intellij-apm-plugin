@@ -57,9 +57,9 @@ public class RunWithJavaProfilerAction extends AnAction {
         if (os.contains("win")) {
             jfrJarPath = System.getenv("APPDATA") + "\\JetBrains\\" + ideaVersion + "\\plugins\\profiler\\lib\\jfr-daemon-1.2.0-SNAPSHOT.jar";
         } else if (os.contains("mac")) {
-            jfrJarPath = "~/Library/Application Support/JetBrains/" + ideaVersion + "/plugins/profiler/lib/jfr-daemon-1.2.0-SNAPSHOT.jar";
+            jfrJarPath = System.getProperty("user.home") + "/Library/Application Support/JetBrains/" + ideaVersion + "/plugins/profiler/lib/jfr-daemon-1.2.0-SNAPSHOT.jar";
         } else {
-            jfrJarPath = "~/.local/share/JetBrains/" + ideaVersion + "/profiler/lib/jfr-daemon-1.2.0-SNAPSHOT.jar";
+            jfrJarPath = System.getProperty("user.home") + "/.local/share/JetBrains/" + ideaVersion + "/profiler/lib/jfr-daemon-1.2.0-SNAPSHOT.jar";
         }
 
         @Nullable
@@ -69,10 +69,9 @@ public class RunWithJavaProfilerAction extends AnAction {
         environmentVariables.put("EVENTS_INGEST_URI", "http://localhost:8787/events");
         environmentVariables.put("INSIGHTS_INSERT_KEY", "");
         vmOptions = "-javaagent:" + jfrJarPath + " -jar " + projectJarPath;
-        System.out.println(vmOptions);
 
-        PsiJavaFile psiJavaFile = (PsiJavaFile)e.getData(CommonDataKeys.PSI_FILE);
-        PsiClass psiClass = psiJavaFile.getClasses()[0];
+//        PsiJavaFile psiJavaFile = (PsiJavaFile)e.getData(CommonDataKeys.PSI_FILE);
+//        PsiClass psiClass = psiJavaFile.getClasses()[0];
 
         // run settings
         RunManager runManager = RunManager.getInstance(currentProject);
@@ -86,7 +85,7 @@ public class RunWithJavaProfilerAction extends AnAction {
         applicationConfiguration.setVMParameters(vmOptions);
         applicationConfiguration.setModule(module);
         applicationConfiguration.setWorkingDirectory(currentProject.getBasePath());
-        applicationConfiguration.setMainClass(psiClass);
+//        applicationConfiguration.setMainClass(psiClass);
 
         // run automatically on click
         Executor runExecutor = new DefaultRunExecutor();
