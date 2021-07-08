@@ -90,7 +90,8 @@ To keep everything working, do not remove
 ![plugin](Images/artifact1.png)
 ![plugin](Images/artifact2.png)
 ![plugin](Images/artifact3.png)
- -follow step 5 through to step 7 above
+ 
+## follow step 5 through to step 7 above
  
 ## Notice
  -Ensure that the name of your jar and its directory or folder have the same name as the name of your project
