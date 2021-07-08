@@ -28,6 +28,7 @@ public class JfrCompilationPanel {
         table.getColumnModel().getColumn(1).setPreferredWidth(350);
         table.getColumnModel().getColumn(2).setPreferredWidth(350);
         table.getColumnModel().getColumn(3).setPreferredWidth(350);
+        table.getColumnModel().getColumn(4).setPreferredWidth(350);
         table.getColumnModel().getColumn(5).setPreferredWidth(350);
         table.getColumnModel().getColumn(6).setPreferredWidth(350);
         table.getColumnModel().getColumn(7).setPreferredWidth(350);

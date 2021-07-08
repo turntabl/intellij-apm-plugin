@@ -160,28 +160,28 @@ public class MetricsTree {
         // defining table info for GC branch sub nodes
         gcMinorDurationPanel = new GCMinorDurationPanel(
                 new GCMinorDurationPanel.GCMinorDurationTableModel(Arrays.asList(
-                        new GCMinorDuration("jfr.GarbageCollection.MinorDuration", null, new HashMap<>(), 0L, 0L, new HashMap<>())
+                        new GCMinorDuration("jfr.GarbageCollection.MinorDuration", null, new HashMap<>(), 0L, 0, new HashMap<>())
                 ))
         );
 
         // defining table info for GC branch sub nodes
         gcMajorDurationPanel = new GCMajorDurationPanel(
                 new GCMajorDurationPanel.GCMajorDurationTableModel(Arrays.asList(
-                        new GCMajorDuration("jfr.GarbageCollection.MajorDuration", null, new HashMap<>(), 0L, 0L, new HashMap<>())
+                        new GCMajorDuration("jfr.GarbageCollection.MajorDuration", null, new HashMap<>(), 0L, 0, new HashMap<>())
                 ))
         );
 
         // defining table info for GC branch sub nodes
         g1GarbageCollectionDurationPanel = new G1GarbageCollectionDurationPanel(
                 new G1GarbageCollectionDurationPanel.G1GarbageCollectionDurationTableModel(Arrays.asList(
-                        new G1GarbageCollectionDuration("jfr.G1GarbageCollection.duration", null, new HashMap<>(), 0L, 0L, new HashMap<>())
+                        new G1GarbageCollectionDuration("jfr.G1GarbageCollection.duration", null, new HashMap<>(), 0L, 0, new HashMap<>())
                 ))
         );
 
         // defining table info for GC branch sub nodes
         gcDurationPanel = new GCDurationPanel(
                 new GCDurationPanel.GCDurationTableModel(Arrays.asList(
-                        new GCDuration("jfr.GarbageCollection.duration", null, new HashMap<>(), 0L, 0L, new HashMap<>())
+                        new GCDuration("jfr.GarbageCollection.duration", null, new HashMap<>(), 0L, 0, new HashMap<>())
                 ))
         );
 

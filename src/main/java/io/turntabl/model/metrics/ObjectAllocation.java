@@ -1,6 +1,7 @@
 package io.turntabl.model.metrics;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.HashMap;
 
@@ -10,6 +11,7 @@ public abstract class ObjectAllocation {
     protected String type;
     protected HashMap<String, Double> value;
     protected Long timestamp;
+    @JsonProperty("interval.ms")
     protected int interval;
     protected HashMap<String, String> attributes;
 
