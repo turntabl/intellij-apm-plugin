@@ -27,7 +27,7 @@ import java.awt.*;
 public class NewRelicJavaProfilerToolWindow implements Disposable {
     private CpuGraph cpuGraph;
     private JBPanel mainPanel, flameGraphRootPanel, cpuLoadGraphPanel,
-            callTreePanel, methodListPanel, eventsPanel,
+            eventsPanel,
             metricsPanel, metricsRootPanel, eventsRootPanel, flameGraphPanel;
     private JBRunnerTabs runnerTab;
     private JTextArea eventTextArea, metricsTextArea, flameGraphTextArea;
@@ -42,8 +42,6 @@ public class NewRelicJavaProfilerToolWindow implements Disposable {
 
         flameGraphRootPanel = new BorderLayoutPanel(0, 0);
         flameGraphPanel = new BorderLayoutPanel(0, 0);
-        callTreePanel = new BorderLayoutPanel(0, 0);
-        methodListPanel = new BorderLayoutPanel(0, 0);
         eventsPanel = new BorderLayoutPanel(0, 0);
         eventsRootPanel = new BorderLayoutPanel(0, 0);
         metricsRootPanel = new BorderLayoutPanel(0, 0);
@@ -90,13 +88,13 @@ public class NewRelicJavaProfilerToolWindow implements Disposable {
 
         runnerTab = new JBRunnerTabs(project, this);
 
-        JBPanel[] tabPanels = {flameGraphRootPanel, callTreePanel, methodListPanel, eventsRootPanel, metricsRootPanel};
-        String[] tabNames = {"Flame Graph", "CallTree", "Method List", "Events", "Metrics"};
+        JBPanel[] tabPanels = {flameGraphRootPanel, eventsRootPanel, metricsRootPanel};
+        String[] tabNames = {"Flame Graph", "Events", "Metrics"};
 
         for (int i = 0; i < tabPanels.length; ++i) {
             runnerTab.addTab(new TabInfo(tabPanels[i]).setText(tabNames[i]));
         }
-        runnerTab.select(runnerTab.getTabAt(3), true);
+        runnerTab.select(runnerTab.getTabAt(0), true);
         runnerTab.setBorder(new EmptyBorder(0, 2, 0, 0));
 
         mainPanel.add(runnerTab);

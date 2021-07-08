@@ -4,17 +4,18 @@ import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
 import io.turntabl.model.metrics.ObjectAllocationInNewTLab;
+import io.turntabl.utils.JsonUtility;
+
 import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
 import java.util.List;
 
 public class ObjectAllocationInNewTLabPanel {
-    JBPanel panel;
-    JTable table;
+    private JBPanel panel;
+    private JTable table;
+    private static final JsonUtility jsonUtil = new JsonUtility();
 
-    TableModel myData;
-    DefaultTableColumnModel columnModel;
 
     public ObjectAllocationInNewTLabPanel(TableModel tableModel) {
         panel = new JBPanel(new BorderLayout());
@@ -49,7 +50,7 @@ public class ObjectAllocationInNewTLabPanel {
             data = new String[ObjectAllocationInNewTLabList.size()][columnNames.length];
             for (int i = 0; i < ObjectAllocationInNewTLabList.size(); i++) {
                 ObjectAllocationInNewTLab ObjectAllocationInNewTLab = ObjectAllocationInNewTLabList.get(i);
-                data[i][0] = String.valueOf(ObjectAllocationInNewTLab.getTimestamp());
+                data[i][0] = jsonUtil.getTime(ObjectAllocationInNewTLab.getTimestamp());
                 data[i][1] = ObjectAllocationInNewTLab.getType();
                 data[i][2] = String.valueOf(ObjectAllocationInNewTLab.getValue().get("count") == null ? "" : ObjectAllocationInNewTLab.getValue().get("count"));
                 data[i][3] = ObjectAllocationInNewTLab.getValue().get("sum") == null ? "" : String.valueOf(ObjectAllocationInNewTLab.getValue().get("sum"));
@@ -57,8 +58,6 @@ public class ObjectAllocationInNewTLabPanel {
                 data[i][5] = ObjectAllocationInNewTLab.getValue().get("max") == null ? "" : String.valueOf(ObjectAllocationInNewTLab.getValue().get("max"));
                 data[i][6] = String.valueOf(ObjectAllocationInNewTLab.getInterval());
                 data[i][7] = ObjectAllocationInNewTLab.getAttributes().get("thread.name") == null ? "" : String.valueOf(ObjectAllocationInNewTLab.getAttributes().get("thread.name"));
-
-
             }
 
 
