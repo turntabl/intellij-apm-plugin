@@ -108,7 +108,8 @@ To keep everything working, do not remove
 ## Steps to follow
   - Run the project default main first before you run with the profiler.
   - To Run with profiler: Goto <kbd>Run</kbd> > <kbd>Run with NewRelic Profiler</kbd>
-  - Caution: Ensure you stop NewRelic profiler from running when you are done profiling your application
+  - Subsequently, the Run with newRelic Profiler tool appears on the Run button.
+  ### Caution: Ensure you stop NewRelic profiler from running when you are done profiling your application in order to avoid getting full heap error or warnings.
  
   ## Images of How to Run your application with Profiler
 ### Setting your main class in the first image below
