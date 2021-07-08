@@ -23,7 +23,7 @@ Click on the link for further explanations  [newrelic-jfr-core](https://github.c
 The plugin configuration file is a plugin.xml file located in the src/main/resources/META-INF directory [plugin.xml](/src/main/resources/META-INF/plugin.xml). 
 It provides general information about the plugin, its dependencies and extensions.
 
-To keep everything working, do not remove 
+<!To keep everything working, do not remove 
 <!-- ... --> sections.
 <!-- Plugin description end -->
 
@@ -169,7 +169,7 @@ To keep everything working, do not remove
 
 ## Tools Used
 -Libraries Used
-  -D3 Library click on the link to read more about it[d3-flame-graph](https://github.com/spiermar/d3-flame-graph)
+  -D3 Library click on the link to read more about it [d3-flame-graph](https://github.com/spiermar/d3-flame-graph)
   - Burn Library click on the provided link for more details about it [burn-library](https://github.com/spiermar/burn)
     -The Burn Library was in GoLang but was converted to Java for the purpose of this plugin.
-  -Jfree Chat library is use for one the Metrics Graph in this Plugin[Jfree-chat](https://www.jfree.org/jfreechart/)
+  -Jfree Chat library is use for one the Metrics Graph in this Plugin [Jfree-chat](https://www.jfree.org/jfreechart/)
