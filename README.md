@@ -66,8 +66,8 @@ To keep everything working, do not remove
   ![plugin](Images/plugin.png)
 
 ### Required IntelliJ Configuration
- .Build Your Own Artifact.
- .Run with profiler.
+ # Build Your Own Artifact.
+ # Run with profiler.
 
 ## How to Build Your Own Artifact
 
