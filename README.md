@@ -17,8 +17,34 @@ To keep everything working, do not remove
 <!-- ... --> sections.
 <!-- Plugin description end -->
 
+## Features
+#### Metrics
+      - Flight Recoder
+      - Java Application
+      - Java Virtual Machine
+      - Operating System
+#### Events
+      - JVM Information
+      - JFR Compilation
+      - JFR Method Sample
+      - Java Monitor wait
+      
+#### Flame Graph
+      - A flame graph of methods with and without their thread names.
+      - CPULoad Graph
 
-## Installation
+
+
+### Installation
+  ## Procedure To install Plugin from Disk
+    -Steps
+      -First Go to the Menu bar select<kbd>File from the Menu Bar</kbd> > <kbd>Settings/Plugins</kbd> > 
+      -Click on the settings Icon<kbd>select from the pop up menu</kbd> > <kbd>Install Plugin from Disk</kbd> 
+      - You will see a Preveiw of the Plugin
+      - Click on Apply and Okay which verifies it been applied.
+  ## The Images of how to Install from Disk
+    -![](images/plugin.png)
+    
 
 [comment]: <> (- Using IDE built-in plugin system:)
 
@@ -72,23 +98,10 @@ To keep everything working, do not remove
 [comment]: <> (  - Run the project default main first before you run with the plugin.)
 
 [comment]: <> (  - For cases where a null pointer exception is thrown, kindly run the project default main again before running with profiler.)
-  
 
-
-
-## Features
-  #### Metrics 
-      - Flight Recoder
-      - Java Application
-      - Java Virtual Machine
-      - Operating System
-  #### Events
-      - JVM Information
-      - JFR Compilation
-      - JFR Method Sample
-      - Java Monitor wait
-  #### Charts
-      - CPULoad Graph
-  #### Flame Graph
-      - A flame graph of methods with and without their thread names.
-
+### Tools Used
+-Libraries Used
+  -D3 Library click on the link to read more about it[d3-flame-graph](https://github.com/spiermar/d3-flame-graph)
+  - Burn Library click on the provided link for more details about it [burn-library](https://github.com/spiermar/burn)
+    -The Burn Library was in GoLang but was converted to Java for the purpose of this plugin.
+  -Jfree Chat library is use for one the Metrics Graph in this Plugin[Jfree-chat](https://www.jfree.org/jfreechart/)
