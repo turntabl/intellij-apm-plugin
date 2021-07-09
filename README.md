@@ -24,7 +24,7 @@ This Plugin uses NewRelic JFR Daemon to gain insight into the JVM and its operat
 such as analysis from the ThreadLocal Allocation Buffer (TLAB) that can pinpoint which threads are allocating which object types. 
 This can often be used in connection with garbage collection analysis to reveal not only what is being thrown away, but also where it is coming from.
 
- #### It include the following metrics: 
+ #### It includes the following metrics: 
       - Flight Recorder
       - Java Application
       - Java Virtual Machine
