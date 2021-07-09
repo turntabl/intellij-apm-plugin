@@ -19,7 +19,6 @@ In addition, this plugin uses the [NewRelic JFR Daemon](https://github.com/newre
 
 ## Features
 ### Metrics
-<<<<<<< HEAD
 With the New Relic's real-time profiling for Java using Java Flight Recorder (JFR) metrics, you can run steadily, always-on profiling of your Java code in production environments.
 This Plugin uses NewRelic JFR Daemon gain insight into the JVM and its operations,
 such as analysis from the ThreadLocal Allocation Buffer (TLAB) that can pinpoint which threads are allocating which object types. 
