@@ -19,7 +19,6 @@ In addition, this plugin uses the [NewRelic JFR Daemon](https://github.com/newre
 
 ## Features
 ### Metrics
-<<<<<<< HEAD
 With the New Relic's real-time profiling for Java using Java Flight Recorder (JFR) metrics, you can run steadily, always-on profiling of your Java code in production environments.
 This Plugin uses NewRelic JFR Daemon gain insight into the JVM and its operations,
 such as analysis from the ThreadLocal Allocation Buffer (TLAB) that can pinpoint which threads are allocating which object types. 
@@ -97,7 +96,7 @@ Click on the link for more details[New Relic Docs ](https://docs.newrelic.com/do
   - Before you run your application with profiler, open the New Relic Java Profiler tool window to activate its local web server.
 #### Steps to follow
   - To Run with profiler: Goto <kbd>Run</kbd> > <kbd>Run with NewRelic Profiler</kbd>
-  - A pop will appear which will require that you set your main class as depicted in the image below.
+  - A pop-up will appear which will require that you set your main class as depicted in the image below.
     
     ![plugin](images/result3.png)
   - Click on Run
@@ -109,7 +108,7 @@ Click on the link for more details[New Relic Docs ](https://docs.newrelic.com/do
       - Do not tamper with the Vm options and Environment variables unless you know what you are doing.
       - Ensure you stop NewRelic profiler from running when you are done profiling your application in order to avoid getting full heap error or warnings.
 
-## Tools Used
+## Other Tools Used
   - Spiermar's [D3.js Flame Graph Library](https://github.com/spiermar/d3-flame-graph) was used to develop the flame graph 
   - Spiermar's [Burn Library](https://github.com/spiermar/burn) was used to help convert the profiled data into the required format needed for the flame graph. The Burn Library is originally in GoLang and aspects of it was converted to Java for the purpose of this plugin.
   - [Jfree Chat library](https://www.jfree.org/jfreechart/) for the CPU Load graph 
