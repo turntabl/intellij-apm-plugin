@@ -23,6 +23,7 @@ With the New Relic's real-time profiling for Java using Java Flight Recorder (JF
 This Plugin uses NewRelic JFR Daemon gain insight into the JVM and its operations, 
 such as analysis from the ThreadLocal Allocation Buffer (TLAB) that can pinpoint which threads are allocating which object types. 
 This can often be used in connection with garbage collection analysis to reveal not only what is being thrown away, but also where it is coming from.
+Click on the link for more details[New Relic Docs ](https://docs.newrelic.com/docs/agents/java-agent/features/real-time-profiling-java-using-jfr-metrics/)
 
  #### -And which include the following metrics: 
       - Flight Recorder
