@@ -12,14 +12,14 @@ public abstract class GarbageCollection {
     protected HashMap<String, Double> value;
     protected Long timestamp;
     @JsonProperty("interval.ms")
-    protected int interval;
+    protected Long interval;
     protected HashMap<String, String> attributes;
 
 
     public GarbageCollection() {
     }
 
-    public GarbageCollection(String name, String type, HashMap<String, Double> value, Long timestamp, int interval, HashMap<String, String> attributes) {
+    public GarbageCollection(String name, String type, HashMap<String, Double> value, Long timestamp, Long interval, HashMap<String, String> attributes) {
         this.name = name;
         this.type = type;
         this.value = value;
@@ -60,11 +60,11 @@ public abstract class GarbageCollection {
         this.timestamp = timestamp;
     }
 
-    public int getInterval() {
+    public Long getInterval() {
         return interval;
     }
 
-    public void setInterval(int interval) {
+    public void setInterval(Long interval) {
         this.interval = interval;
     }
 

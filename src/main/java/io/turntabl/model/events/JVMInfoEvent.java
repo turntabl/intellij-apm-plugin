@@ -9,7 +9,7 @@ public class JVMInfoEvent extends AbstractEventsInfo {
     private String jvmPropertyValue;
     private String jvmVersion;
     private String jvmArguments;
-    private String jvmStartTime;
+    private long jvmStartTime;
 
 
     public JVMInfoEvent() {
@@ -48,11 +48,11 @@ public class JVMInfoEvent extends AbstractEventsInfo {
         this.jvmArguments = jvmArguments;
     }
 
-    public String getJvmStartTime() {
+    public long getJvmStartTime() {
         return jvmStartTime;
     }
 
-    public void setJvmStartTime(String jvmStartTime) {
+    public void setJvmStartTime(long jvmStartTime) {
         this.jvmStartTime = jvmStartTime;
     }
 

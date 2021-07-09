@@ -61,9 +61,9 @@ public class NewRelicJavaProfilerToolWindow implements Disposable {
         eventTextArea.setBackground(eventsPanel.getBackground());
         metricsTextArea.setBackground(metricsPanel.getBackground());
 
-        flameGraphSplitter = new OnePixelSplitter(false, 0.12f);
-        eventsSplitter = new OnePixelSplitter(false, 0.12f);
-        metricsSplitter = new OnePixelSplitter(false, 0.12f);
+        flameGraphSplitter = new OnePixelSplitter(false, 0.17f);
+        eventsSplitter = new OnePixelSplitter(false, 0.17f);
+        metricsSplitter = new OnePixelSplitter(false, 0.19f);
 
         flameGraphTree = new FlameGraphTree(this);
         eventsTree = new EventsTree(this);

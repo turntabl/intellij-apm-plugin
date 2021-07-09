@@ -61,7 +61,7 @@ public class JVMInfoEventPanel {
                 data[i][2] = jvmInfoEvent.getJvmPropertyValue();
                 data[i][3] = jvmInfoEvent.getJvmVersion();
                 data[i][4] = jvmInfoEvent.getJvmArguments();
-                data[i][5] = jvmInfoEvent.getJvmStartTime();
+                data[i][5] = jsonUtil.getTime(jvmInfoEvent.getJvmStartTime()).equals("00:00:00") ? "" : jsonUtil.getTime(jvmInfoEvent.getJvmStartTime());
                 data[i][6] = jvmInfoEvent.getInstrumentationName();
                 data[i][7] = jvmInfoEvent.getHostName();
                 data[i][8] = jvmInfoEvent.getCollectorName();

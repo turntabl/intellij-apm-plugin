@@ -50,7 +50,6 @@ public class EventsHandler extends HttpServlet {
 
     private void updateJVMInfoPanel(String jsonString) {
         cumulativeJVMInfoEvents.addAll(jvmInfoEventUtil.getJVMInfoList(jsonString));
-        toolWindowComponent.getEventsTree().getJVMInfoTable().setModel(new JVMInfoEventPanel.JVMInfoEventTableModel(cumulativeJVMInfoEvents));
         toolWindowComponent.getEventsTree().updateComponentMap("JVM Information", (new JVMInfoEventPanel(new JVMInfoEventPanel.JVMInfoEventTableModel(cumulativeJVMInfoEvents))).getJVMInfoEventComponent());
     }
 
@@ -76,19 +75,16 @@ public class EventsHandler extends HttpServlet {
 
         TableModel tableModel = new JfrMethodSamplePanel.JfrMethodSampleTableModel(cumulativeJfrMethodSampleList);
 
-        toolWindowComponent.getEventsTree().getJfrMethodSampleTable().setModel(tableModel);
         toolWindowComponent.getEventsTree().updateComponentMap("JFR Method Sample", (new JfrMethodSamplePanel(tableModel)).getJfrMethodSampleComponent());
     }
 
     private void updateJFRCompilationPanel(String jsonString) {
         cumulativeJfrCompilationEvents.addAll(jfrCompilationEventUtil.getJfrCompilationList(jsonString));
-        toolWindowComponent.getEventsTree().getJVMInfoTable().setModel(new JfrCompilationPanel.JfrCompilationTableModel(cumulativeJfrCompilationEvents));
         toolWindowComponent.getEventsTree().updateComponentMap("JFR Compilation", (new JfrCompilationPanel(new JfrCompilationPanel.JfrCompilationTableModel(cumulativeJfrCompilationEvents))).getJfrCompilationComponent());
     }
 
     private void updateJavaMonitorWaitPanel(String jsonString) {
         cumulativeJavaMonitorWait.addAll(javaMonitorWaitUtil.getJavaMonitorWaitList(jsonString));
-        toolWindowComponent.getEventsTree().getJavaMonitorWaitTable().setModel(new JavaMonitorWaitPanel.JavaMonitorWaitTableModel(cumulativeJavaMonitorWait));
         toolWindowComponent.getEventsTree().updateComponentMap("Java Monitor Wait",
                 (new JavaMonitorWaitPanel(new JavaMonitorWaitPanel.JavaMonitorWaitTableModel(cumulativeJavaMonitorWait))).getJavaMonitorWaitComponent());
     }
