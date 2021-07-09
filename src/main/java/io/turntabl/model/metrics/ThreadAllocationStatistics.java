@@ -10,17 +10,17 @@ public class ThreadAllocationStatistics {
     private String type;
     private double value;
     @JsonProperty("timestamp")
-    private long startTime;
+    private long timestamp;
     private Map<String, String> attributes;
 
     public ThreadAllocationStatistics() {
     }
 
-    public ThreadAllocationStatistics(String name, String type, double value, long startTime, Map<String, String> attributes) {
+    public ThreadAllocationStatistics(String name, String type, double value, long timestamp, Map<String, String> attributes) {
         this.name = name;
         this.type = type;
         this.value = value;
-        this.startTime = startTime;
+        this.timestamp = timestamp;
         this.attributes = attributes;
     }
 
@@ -49,12 +49,12 @@ public class ThreadAllocationStatistics {
     }
 
 
-    public long getStartTime() {
-        return startTime;
+    public long getTimestamp() {
+        return timestamp;
     }
 
-    public void setStartTime(long startTime) {
-        this.startTime = startTime;
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 
     public Map<String, String> getAttributes() {
@@ -71,7 +71,7 @@ public class ThreadAllocationStatistics {
                 "name='" + name + '\'' +
                 ", type='" + type + '\'' +
                 ", value=" + value +
-                ", startTime=" + startTime +
+                ", timestamp=" + timestamp +
                 ", attributes=" + attributes +
                 '}';
     }

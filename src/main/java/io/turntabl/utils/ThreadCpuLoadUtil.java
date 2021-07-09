@@ -48,7 +48,7 @@ public class ThreadCpuLoadUtil {
     public Map<Long, List<ThreadCpuLoad>> groupThreadCpuLoadByTimestamp(List<ThreadCpuLoad> threadCpuLoadList) {
         return threadCpuLoadList
                 .stream()
-                .collect(Collectors.groupingBy(ThreadCpuLoad::getStartTime));
+                .collect(Collectors.groupingBy(ThreadCpuLoad::getTimestamp));
     }
 
     public List<ThreadCpuLoad> getThreadCpuLoadConsolidated(List<ThreadCpuLoad> list) {

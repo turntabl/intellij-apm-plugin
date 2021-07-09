@@ -40,7 +40,7 @@ public class JfrSocketReadDurationPanel {
     }
 
     public static class JfrSocketReadDurationTableModel extends AbstractTableModel {
-        String[] columnNames = {"Start Time", "Type", "Count", "Sum", "Min", "Max", "Interval ms", "Thread OS Name", "Thread Name"};
+        String[] columnNames = {"Timestamp", "Type", "Count", "Sum", "Min", "Max", "Interval ms", "Thread OS Name", "Thread Name"};
         String[][] data;
         private java.util.List<JfrSocketReadDuration> jfrSocketReadDurationList;
 
@@ -49,7 +49,7 @@ public class JfrSocketReadDurationPanel {
             data = new String[jfrSocketReadDurationList.size()][columnNames.length];
             for (int i = 0; i < jfrSocketReadDurationList.size(); i++) {
                 JfrSocketReadDuration jfrSocketReadDuration = jfrSocketReadDurationList.get(i);
-                data[i][0] = jsonUtil.getTime(jfrSocketReadDuration.getStartTime());
+                data[i][0] = jsonUtil.getTime(jfrSocketReadDuration.getTimestamp());
                 data[i][1] = jfrSocketReadDuration.getType();
                 data[i][2] = jfrSocketReadDuration.getValue().get("count") == null ? "" : String.valueOf(jfrSocketReadDuration.getValue().get("count"));
                 data[i][3] = jfrSocketReadDuration.getValue().get("sum") == null ? "" : String.valueOf(jfrSocketReadDuration.getValue().get("sum"));

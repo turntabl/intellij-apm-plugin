@@ -22,7 +22,6 @@ public class ServletUtils {
             while ((tmp = in.readLine()) != null) {
                 sb.append(tmp);
             }
-            logger.info(sb.toString());
             return sb.toString();
         } catch (IOException iox) {
             logger.error("IOException: ", iox);

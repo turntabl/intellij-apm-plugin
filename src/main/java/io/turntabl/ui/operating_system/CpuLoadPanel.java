@@ -22,8 +22,8 @@ public class CpuLoadPanel {
 
         table.setRowSelectionAllowed(true);
 
-        table.getColumnModel().getColumn(0).setPreferredWidth(550);
-        table.getColumnModel().getColumn(1).setPreferredWidth(150);
+        table.getColumnModel().getColumn(0).setPreferredWidth(350);
+        table.getColumnModel().getColumn(1).setPreferredWidth(350);
         table.getColumnModel().getColumn(2).setPreferredWidth(350);
         table.getColumnModel().getColumn(3).setPreferredWidth(350);
         table.getColumnModel().getColumn(4).setPreferredWidth(350);
@@ -38,7 +38,7 @@ public class CpuLoadPanel {
     }
 
     public static class CpuLoadTableModel extends AbstractTableModel {
-        String[] columnNames = {"Start Time", "Type", "JVM User", "JVM System", "Machine Total", "Thread OS Name", "Thread Name"};
+        String[] columnNames = {"Timestamp", "Type", "JVM User", "JVM System", "Machine Total", "Thread OS Name", "Thread Name"};
         String[][] data;
         private java.util.List<CpuLoad> cpuLoadList;
 
@@ -48,7 +48,7 @@ public class CpuLoadPanel {
             for (int i = 0; i < cpuLoadList.size(); i++) {
                 CpuLoad cpuLoad = cpuLoadList.get(i);
 
-                data[i][0] = jsonUtil.getTime(cpuLoad.getStartTime());
+                data[i][0] = jsonUtil.getTime(cpuLoad.getTimestamp());
                 data[i][1] = cpuLoad.getType();
                 data[i][2] = String.valueOf(cpuLoad.getJvmUserValue());
                 data[i][3] = String.valueOf(cpuLoad.getJvmSystemValue());
