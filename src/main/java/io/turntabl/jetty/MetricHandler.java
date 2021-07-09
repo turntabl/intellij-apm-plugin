@@ -115,7 +115,6 @@ public class MetricHandler extends HttpServlet {
 
             cumulativeThreadCpuLoadList.addAll(consolidatedList);
             toolWindowComponent.getMetricsTree().updateComponentMap("Thread CPU Load",(new ThreadCpuLoadPanel(new ThreadCpuLoadPanel.ThreadCpuLoadTableModel(cumulativeThreadCpuLoadList))).getThreadCpuLoadComponent());
-
         }
     }
 
@@ -126,7 +125,6 @@ public class MetricHandler extends HttpServlet {
 
             cumulativeThreadContextSwitchRateList.addAll(threadContextSwitchRateList);
             toolWindowComponent.getMetricsTree().updateComponentMap("Thread Context Switch Rate",(new ThreadContextSwitchRatePanel(new ThreadContextSwitchRatePanel.ThreadContextSwitchRateTableModel(cumulativeThreadContextSwitchRateList))).getThreadContextSwitchRateComponent());
-
         }
     }
 
@@ -220,7 +218,7 @@ public class MetricHandler extends HttpServlet {
 
         if (jsonArray.isPresent()) {
             List<ObjectAllocationInNewTLab> objectAllocationInNewTLabsList = objectAllocationInNewTLabUtil.getObjectAllocationInNewTLab(jsonArray.get());
-        cumulativeObjectAllocationList.addAll(objectAllocationInNewTLabsList);
+            cumulativeObjectAllocationList.addAll(objectAllocationInNewTLabsList);
 
             toolWindowComponent.getMetricsTree().updateComponentMap("Object Allocation in new TLAB", (new ObjectAllocationInNewTLabPanel(new ObjectAllocationInNewTLabPanel.ObjectAllocationInNewTLabTableModel(cumulativeObjectAllocationList))).getObjectAllocationInNewTLabComponent());
         }

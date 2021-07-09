@@ -48,6 +48,7 @@ public class ThreadAllocationStatisticsPanel {
             data = new String[threadAllocationStatisticsList.size()][columnNames.length];
             for (int i = 0; i < threadAllocationStatisticsList.size(); i++) {
                 ThreadAllocationStatistics threadAllocationStatistics = threadAllocationStatisticsList.get(i);
+
                 data[i][0] = jsonUtil.getTime(threadAllocationStatistics.getTimestamp());
                 data[i][1] = String.valueOf(threadAllocationStatistics.getValue());
                 data[i][2] = threadAllocationStatistics.getAttributes().get("thread.osName") == null ? "" : threadAllocationStatistics.getAttributes().get("thread.osName");

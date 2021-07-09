@@ -284,5 +284,4 @@ public class MetricsTree {
         this.cpuGraph = cpuGraph;
         componentMap.put("CPU Load Graph", cpuGraph.getChart());
     }
-
 }

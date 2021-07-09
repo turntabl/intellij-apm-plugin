@@ -47,7 +47,9 @@ public class JVMInfoEventPanel {
     }
 
     public static class JVMInfoEventTableModel extends AbstractTableModel {
+
         String[] columnNames = {"Timestamp", "JVM Property", "Property Value", "JVM Version", "JVM Args", "JVM Start Time", "Instrumentation Name", "Host Name", "Collector Name", "Instrumentation Provider"};
+
         String[][] data;
         private java.util.List<JVMInfoEvent> jvmInfoEventList;
 

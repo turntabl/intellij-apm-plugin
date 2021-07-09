@@ -42,6 +42,7 @@ public class JfrCompilationPanel {
     }
 
     public static class JfrCompilationTableModel extends AbstractTableModel {
+
         String[] columnNames = {"Timestamp",
                 "Duration", "Instrumentation Name", "Host Name", "Thread Name","Collector Name",
                 "Desc", "Succeeded", "Instrumentation Provider"};
