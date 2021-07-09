@@ -1,14 +1,15 @@
 package io.turntabl.model.events;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.turntabl.model_template.AbstractEventsInfo;
 
 import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class JfrCompilation extends AbstractEventsInfo {
-
     private Integer duration;
+    @JsonProperty("thread.name")
     private String threadName;
     private String desc;
     private Boolean succeeded;

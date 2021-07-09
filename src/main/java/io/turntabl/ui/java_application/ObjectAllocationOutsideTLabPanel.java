@@ -43,7 +43,7 @@ public class ObjectAllocationOutsideTLabPanel {
     }
 
     public static class ObjectAllocationOutsideTLabTableModel extends AbstractTableModel {
-        String[] columnNames = {"Start Time", "Type", "Count", "Sum", "Min", "Max", "Interval ms", "Thread Name"};
+        String[] columnNames = {"Timestamp", "Type", "Count", "Sum", "Min", "Max", "Interval ms", "Thread Name"};
         String[][] data;
         private List<ObjectAllocationOutsideTLab> ObjectAllocationOutsideTLabList;
 

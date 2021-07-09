@@ -37,7 +37,7 @@ public class ThreadCpuLoadPanel {
     }
 
     public static class ThreadCpuLoadTableModel extends AbstractTableModel {
-        String[] columnNames = {"Start Time", "Type", "User", "System", "Thread OS Name", "Thread Name"};
+        String[] columnNames = {"Timestamp", "Type", "User", "System", "Thread OS Name", "Thread Name"};
         String[][] data;
         private java.util.List<ThreadCpuLoad> threadCpuLoadList;
 
@@ -46,7 +46,7 @@ public class ThreadCpuLoadPanel {
             data = new String[threadCpuLoadList.size()][columnNames.length];
             for (int i = 0; i < threadCpuLoadList.size(); i++) {
                 ThreadCpuLoad threadCpuLoad = threadCpuLoadList.get(i);
-                data[i][0] = String.valueOf(jsonUtil.getTime(threadCpuLoad.getStartTime()));
+                data[i][0] = String.valueOf(jsonUtil.getTime(threadCpuLoad.getTimestamp()));
                 data[i][1] = threadCpuLoad.getType();
                 data[i][2] = String.valueOf(threadCpuLoad.getUserValue());
                 data[i][3] = String.valueOf(threadCpuLoad.getSystemValue());

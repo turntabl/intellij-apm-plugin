@@ -3,8 +3,8 @@ package io.turntabl.model.metrics;
 import java.util.HashMap;
 
 public class JfrSocketReadDuration extends JfrSocketRead {
-    public JfrSocketReadDuration(String name, Long startTime, String type, HashMap<String, Double> value, int interval, HashMap<String, String> attributes) {
-        super(name, startTime, type, value, interval, attributes);
+    public JfrSocketReadDuration(String name, Long timestamp, String type, HashMap<String, Double> value, int interval, HashMap<String, String> attributes) {
+        super(name, timestamp, type, value, interval, attributes);
     }
 
     public JfrSocketReadDuration() {
@@ -14,7 +14,7 @@ public class JfrSocketReadDuration extends JfrSocketRead {
     public String toString() {
         return "JfrSocketReadDuration{" +
                 "name='" + name + '\'' +
-                ", startTime=" + startTime +
+                ", timestamp=" + timestamp +
                 ", type='" + type + '\'' +
                 ", value=" + value +
                 ", interval=" + interval +

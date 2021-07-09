@@ -39,7 +39,7 @@ public class JavaMonitorWaitPanel {
     }
 
     public static class JavaMonitorWaitTableModel extends AbstractTableModel {
-        String[] columnNames = {"TimeStamp", "Duration", "Stack Trace", "Instrumentation Name", "Host Name", "Thread Name", "Class", "Collector Name", "Instrumentation Provider"};
+        String[] columnNames = {"Timestamp", "Duration", "Stack Trace", "Instrumentation Name", "Host Name", "Thread Name", "Class", "Collector Name", "Instrumentation Provider"};
         String[][] data;
         private List<JavaMonitorWait> javaMonitorWaitList;
 

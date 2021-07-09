@@ -9,15 +9,15 @@ import java.util.HashMap;
 public class ThreadCpuLoad {
     private String name;
     @JsonProperty("timestamp")
-    private Long startTime;
+    private Long timestamp;
     private String type;
     private Double userValue;
     private Double systemValue;
     private HashMap<String, String> attributes;
 
-    public ThreadCpuLoad(String name, Long startTime, String type, Double userValue, Double systemValue, HashMap<String, String> attributes) {
+    public ThreadCpuLoad(String name, Long timestamp, String type, Double userValue, Double systemValue, HashMap<String, String> attributes) {
         this.name = name;
-        this.startTime = startTime;
+        this.timestamp = timestamp;
         this.type = type;
         this.userValue = userValue;
         this.systemValue = systemValue;
@@ -31,8 +31,8 @@ public class ThreadCpuLoad {
         return name;
     }
 
-    public Long getStartTime() {
-        return startTime;
+    public Long getTimestamp() {
+        return timestamp;
     }
 
     public String getType(){
@@ -55,8 +55,8 @@ public class ThreadCpuLoad {
         this.name = name;
     }
 
-    public void setStartTime(Long startTime) {
-        this.startTime = startTime;
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
     }
 
     public void setType(String type) {
@@ -79,7 +79,7 @@ public class ThreadCpuLoad {
     public String toString() {
         return "ThreadCpuLoad{" +
                 "name='" + name + '\'' +
-                ", startTime=" + startTime +
+                ", timestamp=" + timestamp +
                 ", type='" + type + '\'' +
                 ", userValue=" + userValue +
                 ", systemValue=" + systemValue +

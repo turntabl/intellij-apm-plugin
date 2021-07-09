@@ -100,11 +100,10 @@ public class MetricHandler extends HttpServlet {
 
             cumulativeCpuLoadList.addAll(consolidatedList);
 
-//            toolWindowComponent.getMetricsTree().getCpuLoadTable().setModel(new CpuLoadPanel.CpuLoadTableModel(cumulativeCpuLoadList));
             toolWindowComponent.getMetricsTree().updateComponentMap("CPU Load", (new CpuLoadPanel(new CpuLoadPanel.CpuLoadTableModel(cumulativeCpuLoadList))).getCpuLoadComponent());
 
             XYDataset dataset = cpuLoadUtil.createDataSet(cumulativeCpuLoadList);
-            toolWindowComponent.getMetricsTree().updateCpuLoadGraph(new CpuGraph(dataset, "CPU Load Metric", "Start Time", "Values"));
+            toolWindowComponent.getMetricsTree().updateCpuLoadGraph(new CpuGraph(dataset, "CPU Load Metric", "Timestamp", "Values"));
         }
     }
 
@@ -115,9 +114,7 @@ public class MetricHandler extends HttpServlet {
             List<ThreadCpuLoad> consolidatedList = threadCpuLoadUtil.getThreadCpuLoadConsolidated(threadCpuLoadList);
 
             cumulativeThreadCpuLoadList.addAll(consolidatedList);
-//            toolWindowComponent.getMetricsTree().getThreadCpuTable().setModel(new ThreadCpuLoadPanel.ThreadCpuLoadTableModel(cumulativeThreadCpuLoadList));
             toolWindowComponent.getMetricsTree().updateComponentMap("Thread CPU Load",(new ThreadCpuLoadPanel(new ThreadCpuLoadPanel.ThreadCpuLoadTableModel(cumulativeThreadCpuLoadList))).getThreadCpuLoadComponent());
-
         }
     }
 
@@ -127,9 +124,7 @@ public class MetricHandler extends HttpServlet {
             List<ThreadContextSwitchRate> threadContextSwitchRateList = threadContextSwitchRateUtil.getThreadContextSwitchRate(jsonArray.get());
 
             cumulativeThreadContextSwitchRateList.addAll(threadContextSwitchRateList);
-//            toolWindowComponent.getMetricsTree().getThreadContextSwitchRateTable().setModel(new ThreadContextSwitchRatePanel.ThreadContextSwitchRateTableModel(cumulativeThreadContextSwitchRateList));
             toolWindowComponent.getMetricsTree().updateComponentMap("Thread Context Switch Rate",(new ThreadContextSwitchRatePanel(new ThreadContextSwitchRatePanel.ThreadContextSwitchRateTableModel(cumulativeThreadContextSwitchRateList))).getThreadContextSwitchRateComponent());
-
         }
     }
 
@@ -146,9 +141,6 @@ public class MetricHandler extends HttpServlet {
             TableModel bytesReadTableModel = new JfrSocketReadBytesReadPanel.JfrSocketReadBytesReadTableModel(cumulativeBytesReadList);
             TableModel durationTableModel = new JfrSocketReadDurationPanel.JfrSocketReadDurationTableModel(cumulativeDurationList);
 
-//            toolWindowComponent.getMetricsTree().getJfrSocketReadBytesReadTable().setModel(bytesReadTableModel);
-//            toolWindowComponent.getMetricsTree().getJfrSocketReadDurationTable().setModel(durationTableModel);
-
             toolWindowComponent.getMetricsTree().updateComponentMap("Bytes Read", new JfrSocketReadBytesReadPanel(bytesReadTableModel).getJfrSocketReadBytesReadComponent());
             toolWindowComponent.getMetricsTree().updateComponentMap("Duration", new JfrSocketReadDurationPanel(durationTableModel).getJfrSocketReadDurationComponent());
         }
@@ -158,7 +150,6 @@ public class MetricHandler extends HttpServlet {
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
         List<ThreadAllocationStatistics> threadAllocationStatisticsList = threadAllocatedStatisticsUtil.getThreadAllocatedStatistics(jsonArray.get());
         cumulativeThreadAllocatedStatisticsList.addAll(threadAllocationStatisticsList);
-//        toolWindowComponent.getMetricsTree().getThreadAllocatedStatisticsTable().setModel(new ThreadAllocationStatisticsPanel.ThreadAllocationStatisticsTableModel(cumulativeThreadAllocatedStatisticsList));
         toolWindowComponent.getMetricsTree().updateComponentMap("Thread Allocated Statistics",(new ThreadAllocationStatisticsPanel(new ThreadAllocationStatisticsPanel.ThreadAllocationStatisticsTableModel(cumulativeThreadAllocatedStatisticsList))).getThreadAllocationStatisticsComponent());
 
     }
@@ -185,12 +176,6 @@ public class MetricHandler extends HttpServlet {
             TableModel gcDurationTableModel = new GCDurationPanel.GCDurationTableModel(cumulativeGCDurationList);
             TableModel gcLongestPauseTableModel = new GCLongestPausePanel.GCLongestPauseTableModel(cumulativeGCLongestPauseList);
 
-//            toolWindowComponent.getMetricsTree().getGCMinorDurationTable().setModel(gcMinorTableModel);
-//            toolWindowComponent.getMetricsTree().getGCMajorDurationTable().setModel(gcMajorTableModel);
-//            toolWindowComponent.getMetricsTree().getG1GCDurationTable().setModel(g1GCTableModel);
-//            toolWindowComponent.getMetricsTree().getGCDurationTable().setModel(gcDurationTableModel);
-//            toolWindowComponent.getMetricsTree().getGCLongestPauseTable().setModel(gcLongestPauseTableModel);
-
             toolWindowComponent.getMetricsTree().updateComponentMap("GC Minor Duration", (new GCMinorDurationPanel(gcMinorTableModel)).getGCMinorDurationComponent());
             toolWindowComponent.getMetricsTree().updateComponentMap("GC Major Duration", (new GCMajorDurationPanel(gcMajorTableModel)).getGCMajorDurationComponent());
             toolWindowComponent.getMetricsTree().updateComponentMap("G1 GC Duration", (new G1GarbageCollectionDurationPanel(g1GCTableModel)).getG1GarbageCollectionDurationComponent());
@@ -211,7 +196,6 @@ public class MetricHandler extends HttpServlet {
 
             TableModel tableModel = new GcHeapSummaryPanel.GcHeapSummaryTableModel(cumulativeGcHeapSummaryList);
 
-//            toolWindowComponent.getMetricsTree().getGcHeapSummaryTable().setModel(tableModel);
             toolWindowComponent.getMetricsTree().updateComponentMap("GC Heap Summary", (new GcHeapSummaryPanel(tableModel)).getGcHeapSummaryComponent());
         }
     }
@@ -225,7 +209,6 @@ public class MetricHandler extends HttpServlet {
 
             cumulativeSummaryMetaspaceList.addAll(consolidatedList);
 
-//            toolWindowComponent.getMetricsTree().getSummaryMetaspaceTable().setModel(new SummaryMetaspacePanel.SummaryMetaspaceTableModel(cumulativeSummaryMetaspaceList));
             toolWindowComponent.getMetricsTree().updateComponentMap("Summary Metaspace", (new SummaryMetaspacePanel(new SummaryMetaspacePanel.SummaryMetaspaceTableModel(cumulativeSummaryMetaspaceList))).getSummaryMetaspaceComponent());
         }
     }
@@ -235,9 +218,8 @@ public class MetricHandler extends HttpServlet {
 
         if (jsonArray.isPresent()) {
             List<ObjectAllocationInNewTLab> objectAllocationInNewTLabsList = objectAllocationInNewTLabUtil.getObjectAllocationInNewTLab(jsonArray.get());
-        cumulativeObjectAllocationList.addAll(objectAllocationInNewTLabsList);
+            cumulativeObjectAllocationList.addAll(objectAllocationInNewTLabsList);
 
-//            toolWindowComponent.getMetricsTree().getObjectAllocationInNewTLabTable().setModel(new ObjectAllocationInNewTLabPanel.ObjectAllocationInNewTLabTableModel(cumulativeObjectAllocationList));
             toolWindowComponent.getMetricsTree().updateComponentMap("Object Allocation in new TLAB", (new ObjectAllocationInNewTLabPanel(new ObjectAllocationInNewTLabPanel.ObjectAllocationInNewTLabTableModel(cumulativeObjectAllocationList))).getObjectAllocationInNewTLabComponent());
         }
     }
@@ -249,7 +231,6 @@ public class MetricHandler extends HttpServlet {
             List<ObjectAllocationOutsideTLab> objectAllocationOutsideTLabsList = objectAllocationOutsideTLabUtil.getObjectAllocationOutsideTLab(jsonArray.get());
             cumulativeObjectAllocationOutsideList.addAll(objectAllocationOutsideTLabsList);
 
-//            toolWindowComponent.getMetricsTree().getObjectAllocationInNewTLabTable().setModel(new ObjectAllocationOutsideTLabPanel.ObjectAllocationOutsideTLabTableModel(cumulativeObjectAllocationOutsideList));
             toolWindowComponent.getMetricsTree().updateComponentMap("Object Allocation outside TLAB", (new ObjectAllocationOutsideTLabPanel(new ObjectAllocationOutsideTLabPanel.ObjectAllocationOutsideTLabTableModel(cumulativeObjectAllocationOutsideList))).getObjectAllocationOutsideTLabComponent());
         }
     }

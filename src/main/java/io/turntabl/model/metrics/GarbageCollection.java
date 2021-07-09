@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashMap;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GarbageCollection {
+public abstract class GarbageCollection {
     protected String name;
     protected String type;
     protected HashMap<String, Double> value;
