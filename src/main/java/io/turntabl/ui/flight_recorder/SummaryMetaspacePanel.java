@@ -4,6 +4,8 @@ import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
 import io.turntabl.model.metrics.SummaryMetaspace;
+import io.turntabl.utils.JsonUtility;
+
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
@@ -14,6 +16,7 @@ import java.util.List;
 public class SummaryMetaspacePanel {
     private JBPanel panel;
     private JTable table;
+    private static final JsonUtility jsonUtil = new JsonUtility();
 
     public SummaryMetaspacePanel(TableModel tableModel) {
         panel = new JBPanel(new BorderLayout());
@@ -46,7 +49,7 @@ public class SummaryMetaspacePanel {
             data = new String[summaryMetaspaceList.size()][columnNames.length];
             for (int i = 0; i < summaryMetaspaceList.size(); i++) {
                 SummaryMetaspace summaryMetaspace = summaryMetaspaceList.get(i);
-                data[i][0] = summaryMetaspace.getTimestamp().toString();
+                data[i][0] = jsonUtil.getTime(summaryMetaspace.getTimestamp());
                 data[i][1] = summaryMetaspace.getType();
                 data[i][2] = summaryMetaspace.getCommittedValue().toString();
                 data[i][3] = summaryMetaspace.getUsedValue().toString();

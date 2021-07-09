@@ -54,7 +54,7 @@ public class CPULoadUtil {
     public Map<Long, List<CpuLoad>> groupCpuLoadByTimestamp(List<CpuLoad> cpuLoadList) {
         return cpuLoadList
                 .stream()
-                .collect(Collectors.groupingBy(CpuLoad::getStartTime));
+                .collect(Collectors.groupingBy(CpuLoad::getTimestamp));
     }
 
     public List<CpuLoad> getCPULoadConsolidated(List<CpuLoad> list) {
@@ -98,14 +98,14 @@ public class CPULoadUtil {
         XYSeries machineTotalSeries = new XYSeries("Machine Total");
 
         for (int i = 0; i < cpuLoadList.size(); i++) {
-            int startTime = Integer.parseInt(formatDate(cpuLoadList.get(i).getStartTime()));
+            int timestamp = Integer.parseInt(formatDate(cpuLoadList.get(i).getTimestamp()));
 
             if (cpuLoadList.get(i).getName().toLowerCase().endsWith("jvmuser")) {
-                jvmUserSeries.add(startTime, cpuLoadList.get(i).getJvmUserValue());
+                jvmUserSeries.add(timestamp, cpuLoadList.get(i).getJvmUserValue());
             } else if (cpuLoadList.get(i).getName().toLowerCase().endsWith("jvmsystem")) {
-                jvmSystemSeries.add(startTime, cpuLoadList.get(i).getJvmSystemValue());
+                jvmSystemSeries.add(timestamp, cpuLoadList.get(i).getJvmSystemValue());
             } else {
-                machineTotalSeries.add(startTime, cpuLoadList.get(i).getMachineTotalValue());
+                machineTotalSeries.add(timestamp, cpuLoadList.get(i).getMachineTotalValue());
             }
         }
 

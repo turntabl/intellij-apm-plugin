@@ -45,7 +45,7 @@ public class GcHeapSummaryPanel {
     }
 
     public static class GcHeapSummaryTableModel extends AbstractTableModel {
-        String[] columnNames = {"Start Time", "Type", "Heap Committed Size", "Reserved Size", "Heap Used", "Heap Start", "Reserved End", "Committed End", "When"};
+        String[] columnNames = {"Timestamp", "Type", "Heap Committed Size", "Reserved Size", "Heap Used", "Heap Start", "Reserved End", "Committed End", "When"};
         String[][] data;
         private java.util.List<GcHeapSummary> gcHeapSummaryList;
 
@@ -54,7 +54,7 @@ public class GcHeapSummaryPanel {
             data = new String[gcHeapSummaryList.size()][columnNames.length];
             for (int i = 0; i < gcHeapSummaryList.size(); i++) {
                 GcHeapSummary gcHeapSummary = gcHeapSummaryList.get(i);
-                data[i][0] = jsonUtil.getTime(gcHeapSummary.getStartTime());
+                data[i][0] = jsonUtil.getTime(gcHeapSummary.getTimestamp());
                 data[i][1] = gcHeapSummary.getType();
                 data[i][2] = String.valueOf(gcHeapSummary.getHeapCommittedSize());
                 data[i][3] = String.valueOf(gcHeapSummary.getReservedSize());
