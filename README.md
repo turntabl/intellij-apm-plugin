@@ -35,6 +35,8 @@ Click on the link for more details[New Relic Docs ](https://docs.newrelic.com/do
 ### Events
 The JFR daemon serves as a transporter for JFR events and allows you to control
 the ability of the New Relic One platform for visualizing your JVM's behavior.
+Click on the link for more details[New Relic Docs ](https://docs.newrelic.com/docs/agents/java-agent/features/real-time-profiling-java-using-jfr-metrics/)
+
 
  #### It includes the following events:
       - JVM Information
