@@ -95,7 +95,7 @@ the ability of the New Relic One platform for visualizing your JVM's behavior.
   - Before you run your application with profiler, open the New Relic Java Profiler tool window to activate its local web server.
 #### Steps to follow
   - To Run with profiler: Goto <kbd>Run</kbd> > <kbd>Run with NewRelic Profiler</kbd>
-  - A pop will appear which will require that you set your main class as depicted in the image below.
+  - A pop-up will appear which will require that you set your main class as depicted in the image below.
     
     ![plugin](images/result3.png)
   - Click on Run
