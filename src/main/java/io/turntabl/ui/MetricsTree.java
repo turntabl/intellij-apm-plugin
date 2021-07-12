@@ -219,7 +219,7 @@ public class MetricsTree {
         jvmNode.add(jvmSubNode);
 
         // define sub nodes for os
-        String[] osNodes = {"Thread CPU Load", "CPU Load", "CPU Load Graph"};
+        String[] osNodes = {"Thread CPU Load", "CPU Load"};
         threadCpuLoadPanel = new ThreadCpuLoadPanel(
                 new ThreadCpuLoadPanel.ThreadCpuLoadTableModel(Arrays.asList(
                         new ThreadCpuLoad("jfr.ThreadCPULoad", 0L, null, 0.0, 0.0, new HashMap<>())
@@ -234,7 +234,7 @@ public class MetricsTree {
 
         // define components for os
         JBPanel[] osComponents = {threadCpuLoadPanel.getThreadCpuLoadComponent(),
-                cpuLoadPanel.getCpuLoadComponent(), new JBPanel()};
+                cpuLoadPanel.getCpuLoadComponent()};
 
         for (int i = 0; i < osNodes.length; i++) {
             osNode.add(new DefaultMutableTreeNode(osNodes[i]));
@@ -278,10 +278,5 @@ public class MetricsTree {
     public void updateComponentMap(String key, JComponent component) {
         componentMap.put(key, component);
         newRelicJavaProfilerToolWindow.setMetricsSecondComponent(component);
-    }
-
-    public void updateCpuLoadGraph(CpuGraph cpuGraph) {
-        this.cpuGraph = cpuGraph;
-        componentMap.put("CPU Load Graph", cpuGraph.getChart());
     }
 }
