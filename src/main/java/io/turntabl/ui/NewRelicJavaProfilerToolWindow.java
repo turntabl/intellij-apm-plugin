@@ -26,15 +26,16 @@ import java.awt.*;
 
 public class NewRelicJavaProfilerToolWindow implements Disposable {
     private CpuGraph cpuGraph;
-    private JBPanel mainPanel, flameGraphRootPanel, cpuLoadGraphPanel,
+    private JBPanel mainPanel, flameGraphRootPanel, metricsGraphRootPanel, metricsGraphPanel,
             eventsPanel,
             metricsPanel, metricsRootPanel, eventsRootPanel, flameGraphPanel;
     private JBRunnerTabs runnerTab;
-    private JTextArea eventTextArea, metricsTextArea, flameGraphTextArea;
+    private JTextArea eventTextArea, metricsTextArea, flameGraphTextArea, metricsGraphTextArea;
     private FlameGraphTree flameGraphTree;
     private EventsTree eventsTree;
     private MetricsTree metricsTree;
-    private JBSplitter eventsSplitter, metricsSplitter, flameGraphSplitter;
+    private MetricsGraphTree metricsGraphTree;
+    private JBSplitter eventsSplitter, metricsSplitter, flameGraphSplitter, metricsGraphSplitter;
 
     public NewRelicJavaProfilerToolWindow(ToolWindow toolWindow, Project project) {
         mainPanel = new BorderLayoutPanel(0, 0);
@@ -46,8 +47,9 @@ public class NewRelicJavaProfilerToolWindow implements Disposable {
         eventsRootPanel = new BorderLayoutPanel(0, 0);
         metricsRootPanel = new BorderLayoutPanel(0, 0);
         metricsPanel = new BorderLayoutPanel(0, 0);
-        cpuLoadGraphPanel = new BorderLayoutPanel(0, 0);
-        
+        metricsGraphRootPanel = new BorderLayoutPanel(0, 0);
+        metricsGraphPanel = new BorderLayoutPanel(0, 0);
+
         flameGraphTextArea = new JBTextArea();
         flameGraphTextArea.setLineWrap(true);
         
@@ -57,21 +59,29 @@ public class NewRelicJavaProfilerToolWindow implements Disposable {
         metricsTextArea = new JBTextArea();
         metricsTextArea.setLineWrap(true);
 
+        metricsGraphTextArea = new JBTextArea();
+        metricsGraphTextArea.setLineWrap(true);
+
         flameGraphTextArea.setBackground(flameGraphPanel.getBackground());
         eventTextArea.setBackground(eventsPanel.getBackground());
         metricsTextArea.setBackground(metricsPanel.getBackground());
+        metricsGraphTextArea.setBackground(metricsGraphPanel.getBackground());
 
         flameGraphSplitter = new OnePixelSplitter(false, 0.17f);
         eventsSplitter = new OnePixelSplitter(false, 0.17f);
         metricsSplitter = new OnePixelSplitter(false, 0.19f);
+        metricsGraphSplitter = new OnePixelSplitter(false, 0.17f);
 
         flameGraphTree = new FlameGraphTree(this);
         eventsTree = new EventsTree(this);
         metricsTree = new MetricsTree(this);
+        metricsGraphTree = new MetricsGraphTree(this);
 
         flameGraphRootPanel.add(new JBScrollPane(flameGraphTextArea), BorderLayout.CENTER);
         eventsRootPanel.add(new JBScrollPane(eventTextArea), BorderLayout.CENTER);
-        metricsPanel.add(new JBScrollPane(metricsTextArea), BorderLayout.CENTER);
+        metricsRootPanel.add(new JBScrollPane(metricsTextArea), BorderLayout.CENTER);
+        metricsGraphRootPanel.add(new JBScrollPane(metricsGraphTextArea), BorderLayout.CENTER);
+
 
         flameGraphSplitter.setFirstComponent(new JBScrollPane(flameGraphTree.getFlameGraphTree(), JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
         flameGraphSplitter.setSecondComponent(new JBScrollPane(flameGraphPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
@@ -82,14 +92,18 @@ public class NewRelicJavaProfilerToolWindow implements Disposable {
         metricsSplitter.setFirstComponent(new JBScrollPane(metricsTree.getMetricsTree(), JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
         metricsSplitter.setSecondComponent(new JBScrollPane(metricsPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
 
+        metricsGraphSplitter.setFirstComponent(new JBScrollPane(metricsGraphTree.getMetricsGraphTree(), JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
+        metricsGraphSplitter.setSecondComponent(new JBScrollPane(metricsGraphPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
+
         flameGraphRootPanel.add(flameGraphSplitter, BorderLayout.CENTER);
         eventsRootPanel.add(eventsSplitter, BorderLayout.CENTER);
         metricsRootPanel.add(metricsSplitter, BorderLayout.CENTER);
+        metricsGraphRootPanel.add(metricsGraphSplitter, BorderLayout.CENTER);
 
         runnerTab = new JBRunnerTabs(project, this);
 
-        JBPanel[] tabPanels = {flameGraphRootPanel, eventsRootPanel, metricsRootPanel};
-        String[] tabNames = {"Flame Graph", "Events", "Metrics"};
+        JBPanel[] tabPanels = {flameGraphRootPanel, metricsGraphRootPanel, eventsRootPanel, metricsRootPanel};
+        String[] tabNames = {"Flame Graph", "Metrics Graphs", "Events", "Metrics"};
 
         for (int i = 0; i < tabPanels.length; ++i) {
             runnerTab.addTab(new TabInfo(tabPanels[i]).setText(tabNames[i]));
@@ -113,6 +127,10 @@ public class NewRelicJavaProfilerToolWindow implements Disposable {
         metricsTextArea.append(text);
     }
 
+    public void updateMetricsGraphPanelText(String text) {
+        metricsGraphTextArea.append(text);
+    }
+
     public void clearFlameGraphPanelText() {
         flameGraphTextArea.setText("");
     }
@@ -123,6 +141,10 @@ public class NewRelicJavaProfilerToolWindow implements Disposable {
 
     public void clearMetricsPanelText() {
         metricsTextArea.setText("");
+    }
+
+    public void clearMetricsGraphPanelText() {
+        metricsGraphTextArea.setText("");
     }
 
     public void setFlameGraphSecondComponent(JComponent component) {
@@ -137,6 +159,10 @@ public class NewRelicJavaProfilerToolWindow implements Disposable {
         metricsSplitter.setSecondComponent(component);
     }
 
+    public void setMetricsGraphSecondComponent(JComponent component) {
+        metricsGraphSplitter.setSecondComponent(component);
+    }
+
     public FlameGraphTree getFlameGraphTree() {
         return this.flameGraphTree;
     }
@@ -147,6 +173,10 @@ public class NewRelicJavaProfilerToolWindow implements Disposable {
 
     public EventsTree getEventsTree() {
         return this.eventsTree;
+    }
+
+    public MetricsGraphTree getMetricsGraphTree() {
+        return this.metricsGraphTree;
     }
 
     public JComponent getContent() {
