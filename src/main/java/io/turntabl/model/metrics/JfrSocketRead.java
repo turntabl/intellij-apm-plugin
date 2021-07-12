@@ -6,19 +6,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashMap;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class JfrSocketRead {
+public abstract class JfrSocketRead {
     protected String name;
     @JsonProperty("timestamp")
-    protected Long startTime;
+    protected Long timestamp;
     protected String type;
     protected HashMap<String, Double> value;
     @JsonProperty("interval.ms")
     protected int interval;
     protected HashMap<String, String> attributes;
 
-    public JfrSocketRead(String name, Long startTime, String type, HashMap<String, Double> value, int interval, HashMap<String, String> attributes) {
+    public JfrSocketRead(String name, Long timestamp, String type, HashMap<String, Double> value, int interval, HashMap<String, String> attributes) {
         this.name = name;
-        this.startTime = startTime;
+        this.timestamp = timestamp;
         this.type = type;
         this.value = value;
         this.interval = interval;
@@ -32,8 +32,8 @@ public class JfrSocketRead {
         return name;
     }
 
-    public Long getStartTime() {
-        return startTime;
+    public Long getTimestamp() {
+        return timestamp;
     }
 
     public String getType() {
@@ -56,8 +56,8 @@ public class JfrSocketRead {
         this.name = name;
     }
 
-    public void setStartTime(Long startTime) {
-        this.startTime = startTime;
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
     }
 
     public void setType(String type) {
@@ -80,7 +80,7 @@ public class JfrSocketRead {
     public String toString() {
         return "JfrSocketRead{" +
                 "name='" + name + '\'' +
-                ", startTime=" + startTime +
+                ", timestamp=" + timestamp +
                 ", type='" + type + '\'' +
                 ", value=" + value +
                 ", interval=" + interval +

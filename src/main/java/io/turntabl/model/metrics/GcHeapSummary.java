@@ -8,16 +8,16 @@ import java.util.HashMap;
 public class GcHeapSummary {
     private String name;
     @JsonProperty("timestamp")
-    private Long startTime;
+    private Long timestamp;
     private String type;
     private Double heapCommittedSize;
     private Double reservedSize;
     private Double heapUsed;
     private HashMap<String, String> attributes;
 
-    public GcHeapSummary(String name, Long startTime, String type, Double heapCommittedSize, Double reservedSize, Double heapUsed, HashMap<String, String> attributes) {
+    public GcHeapSummary(String name, Long timestamp, String type, Double heapCommittedSize, Double reservedSize, Double heapUsed, HashMap<String, String> attributes) {
         this.name = name;
-        this.startTime = startTime;
+        this.timestamp = timestamp;
         this.type = type;
         this.heapCommittedSize = heapCommittedSize;
         this.reservedSize = reservedSize;
@@ -32,8 +32,8 @@ public class GcHeapSummary {
         return name;
     }
 
-    public Long getStartTime() {
-        return startTime;
+    public Long getTimestamp() {
+        return timestamp;
     }
 
     public Double getHeapCommittedSize() {
@@ -60,8 +60,8 @@ public class GcHeapSummary {
         this.name = name;
     }
 
-    public void setStartTime(Long startTime) {
-        this.startTime = startTime;
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
     }
 
     public void setType(String type) {
@@ -88,7 +88,7 @@ public class GcHeapSummary {
     public String toString() {
         return "GcHeapSummary{" +
                 "name='" + name + '\'' +
-                ", startTime=" + startTime +
+                ", timestamp=" + timestamp +
                 ", type='" + type + '\'' +
                 ", heapCommittedSize=" + heapCommittedSize +
                 ", reservedSize=" + reservedSize +

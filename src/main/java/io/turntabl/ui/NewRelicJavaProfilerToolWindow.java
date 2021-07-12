@@ -38,7 +38,7 @@ public class NewRelicJavaProfilerToolWindow implements Disposable {
 
     public NewRelicJavaProfilerToolWindow(ToolWindow toolWindow, Project project) {
         mainPanel = new BorderLayoutPanel(0, 0);
-        cpuGraph = new CpuGraph(createDataSet(), "CPU Load Metrics", "StartTime", "Values");
+        cpuGraph = new CpuGraph(createDataSet(), "CPU Load Metrics", "Timestamp", "Values");
 
         flameGraphRootPanel = new BorderLayoutPanel(0, 0);
         flameGraphPanel = new BorderLayoutPanel(0, 0);
@@ -61,9 +61,9 @@ public class NewRelicJavaProfilerToolWindow implements Disposable {
         eventTextArea.setBackground(eventsPanel.getBackground());
         metricsTextArea.setBackground(metricsPanel.getBackground());
 
-        flameGraphSplitter = new OnePixelSplitter(false, 0.12f);
-        eventsSplitter = new OnePixelSplitter(false, 0.12f);
-        metricsSplitter = new OnePixelSplitter(false, 0.12f);
+        flameGraphSplitter = new OnePixelSplitter(false, 0.17f);
+        eventsSplitter = new OnePixelSplitter(false, 0.17f);
+        metricsSplitter = new OnePixelSplitter(false, 0.19f);
 
         flameGraphTree = new FlameGraphTree(this);
         eventsTree = new EventsTree(this);

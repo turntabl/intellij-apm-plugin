@@ -33,6 +33,7 @@ public class MetricsTree {
     private Map<String, JComponent> componentMap;
     private CpuLoadPanel cpuLoadPanel;
     private ObjectAllocationInNewTLabPanel objectAllocationInNewTLabPanel;
+    private ObjectAllocationOutsideTLabPanel objectAllocationOutsideTLabPanel;
     private GcHeapSummaryPanel gcHeapSummaryPanel;
     private GCMinorDurationPanel gcMinorDurationPanel;
     private GCMajorDurationPanel gcMajorDurationPanel;
@@ -137,7 +138,7 @@ public class MetricsTree {
                         new ObjectAllocationInNewTLab("jfr.ObjectAllocationInNewTLAB.allocation", null, new HashMap<>(), 0L, 0, new HashMap<>())
                 )));
 
-        ObjectAllocationOutsideTLabPanel objectAllocationOutsideTLabPanel = new ObjectAllocationOutsideTLabPanel(
+        objectAllocationOutsideTLabPanel = new ObjectAllocationOutsideTLabPanel(
                 new ObjectAllocationOutsideTLabPanel.ObjectAllocationOutsideTLabTableModel(Arrays.asList(
                         new ObjectAllocationOutsideTLab("jfr.ObjectAllocationOutsideTLAB.allocation", null, new HashMap<>(), 0L, 0, new HashMap<>())
                 )));
@@ -283,63 +284,4 @@ public class MetricsTree {
         this.cpuGraph = cpuGraph;
         componentMap.put("CPU Load Graph", cpuGraph.getChart());
     }
-
-    public JTable getCpuLoadTable() {
-        return this.cpuLoadPanel.getTable();
-    }
-
-
-    public JTable getObjectAllocationInNewTLabTable() {
-        return this.objectAllocationInNewTLabPanel.getTable();
-    }
-
-    public JTable getThreadCpuTable() {
-        return this.threadCpuLoadPanel.getTable();
-    }
-
-    public JTable getJfrSocketReadBytesReadTable() {
-        return this.jfrSocketReadBytesReadPanel.getTable();
-    }
-
-    public JTable getJfrSocketReadDurationTable() {
-        return this.jfrSocketReadDurationPanel.getTable();
-    }
-
-    public JTable getThreadAllocatedStatisticsTable() {
-        return this.threadAllocationStatisticsPanel.getTable();
-    }
-
-    public JTable getGCMinorDurationTable() {
-        return this.gcMinorDurationPanel.getTable();
-    }
-
-    public JTable getGCMajorDurationTable() {
-        return this.gcMajorDurationPanel.getTable();
-    }
-
-    public JTable getG1GCDurationTable() {
-        return this.g1GarbageCollectionDurationPanel.getTable();
-    }
-
-    public JTable getGCDurationTable() {
-        return this.gcDurationPanel.getTable();
-    }
-
-    public JTable getGCLongestPauseTable() {
-        return this.gcLongestPausePanel.getTable();
-    }
-
-    public JTable getGcHeapSummaryTable() {
-        return this.gcHeapSummaryPanel.getTable();
-    }
-
-    public JTable getSummaryMetaspaceTable() {
-        return this.summaryMetaspacePanel.getTable();
-    }
-
-    public JTable getThreadContextSwitchRateTable(){
-        return this.threadContextSwitchRatePanel.getTable();
-    }
-
-
 }

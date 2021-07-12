@@ -41,7 +41,7 @@ public class ObjectAllocationInNewTLabPanel {
     }
 
     public static class ObjectAllocationInNewTLabTableModel extends AbstractTableModel {
-        String[] columnNames = {"Start Time", "Type", "Count", "Sum", "Min", "Max", "Interval ms", "Thread Name"};
+        String[] columnNames = {"Timestamp", "Type", "Count", "Sum", "Min", "Max", "Interval ms", "Thread Name"};
         String[][] data;
         private List<ObjectAllocationInNewTLab> ObjectAllocationInNewTLabList;
 

@@ -25,9 +25,10 @@ public class JfrCompilationPanel {
         table.setRowSelectionAllowed(true);
 
         table.getColumnModel().getColumn(0).setPreferredWidth(350);
-        table.getColumnModel().getColumn(1).setPreferredWidth(200);
+        table.getColumnModel().getColumn(1).setPreferredWidth(350);
         table.getColumnModel().getColumn(2).setPreferredWidth(350);
         table.getColumnModel().getColumn(3).setPreferredWidth(350);
+        table.getColumnModel().getColumn(4).setPreferredWidth(350);
         table.getColumnModel().getColumn(5).setPreferredWidth(350);
         table.getColumnModel().getColumn(6).setPreferredWidth(350);
         table.getColumnModel().getColumn(7).setPreferredWidth(350);
@@ -41,7 +42,8 @@ public class JfrCompilationPanel {
     }
 
     public static class JfrCompilationTableModel extends AbstractTableModel {
-        String[] columnNames = {"TimeStamp",
+
+        String[] columnNames = {"Timestamp",
                 "Duration", "Instrumentation Name", "Host Name", "Thread Name","Collector Name",
                 "Desc", "Succeeded", "Instrumentation Provider"};
 

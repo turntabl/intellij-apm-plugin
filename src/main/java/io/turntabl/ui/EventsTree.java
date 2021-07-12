@@ -45,7 +45,7 @@ public class EventsTree {
         javaMonitorWaitPanel = new JavaMonitorWaitPanel(new JavaMonitorWaitPanel.JavaMonitorWaitTableModel(Arrays.asList(new JavaMonitorWait())));
         jfrCompilationPanel = new JfrCompilationPanel(new JfrCompilationPanel.JfrCompilationTableModel(Arrays.asList(new JfrCompilation())));
         jfrMethodSamplePanel = new JfrMethodSamplePanel(new JfrMethodSamplePanel.JfrMethodSampleTableModel(Arrays.asList(new JfrMethodSample())));
-        JBPanel[] eventsPanel = {jvmInfoEventPanel.getJVMInfoEventComponent(), jfrCompilationPanel.getJfrCompilationComponent(), jfrMethodSamplePanel.getJfrMethodSampleComponent(), javaMonitorWaitPanel.getJavaMonitorWaitComponent()};//add other panels here...........
+        JBPanel[] eventsPanel = {jvmInfoEventPanel.getJVMInfoEventComponent(), jfrCompilationPanel.getJfrCompilationComponent(), jfrMethodSamplePanel.getJfrMethodSampleComponent(), javaMonitorWaitPanel.getJavaMonitorWaitComponent()};
 
         //add events nodes to root node
         for (int i = 0; i < eventNodes.length; i++) {
@@ -85,20 +85,7 @@ public class EventsTree {
         return this.treePanel;
     }
 
-    public JTable getJVMInfoTable() {
-        return jvmInfoEventPanel.getTable();
-    }
-    public JTable getJavaMonitorWaitTable(){return javaMonitorWaitPanel.getTable();}
-
-    public JTable getJFRCompilationTable(){
-        return jfrCompilationPanel.getTable();
-    }
-
     public void updateComponentMap(String key, JBPanel panel) {
         this.componentMap.put(key, panel);
-    }
-
-    public JTable getJfrMethodSampleTable(){
-        return jfrMethodSamplePanel.getTable();
     }
 }

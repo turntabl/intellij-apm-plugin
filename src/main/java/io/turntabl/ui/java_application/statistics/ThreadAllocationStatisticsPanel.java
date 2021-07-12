@@ -39,7 +39,7 @@ public class ThreadAllocationStatisticsPanel {
 
     public static class ThreadAllocationStatisticsTableModel extends AbstractTableModel {
 
-        String[] columnNames = {"Start Time", "Value", "Thread OS Name", "Thread Name"};
+        String[] columnNames = {"Timestamp", "Value", "Thread OS Name", "Thread Name"};
         String[][] data;
         private List<ThreadAllocationStatistics> threadAllocationStatisticsList;
 
@@ -48,7 +48,8 @@ public class ThreadAllocationStatisticsPanel {
             data = new String[threadAllocationStatisticsList.size()][columnNames.length];
             for (int i = 0; i < threadAllocationStatisticsList.size(); i++) {
                 ThreadAllocationStatistics threadAllocationStatistics = threadAllocationStatisticsList.get(i);
-                data[i][0] = jsonUtil.getTime(threadAllocationStatistics.getStartTime());
+
+                data[i][0] = jsonUtil.getTime(threadAllocationStatistics.getTimestamp());
                 data[i][1] = String.valueOf(threadAllocationStatistics.getValue());
                 data[i][2] = threadAllocationStatistics.getAttributes().get("thread.osName") == null ? "" : threadAllocationStatistics.getAttributes().get("thread.osName");
                 data[i][3] = threadAllocationStatistics.getAttributes().get("thread.name") == null ? "" : threadAllocationStatistics.getAttributes().get("thread.name");
