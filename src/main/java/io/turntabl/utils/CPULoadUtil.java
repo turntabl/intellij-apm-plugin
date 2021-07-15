@@ -3,14 +3,8 @@ package io.turntabl.utils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.turntabl.model.metrics.CpuLoad;
-import org.jfree.data.xy.XYDataset;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -84,36 +78,5 @@ public class CPULoadUtil {
 
                     return cpu;
                 }).collect(Collectors.toList());
-    }
-
-    public String formatDate(Long timestamp) {
-        Date date = new Date(timestamp);
-        DateFormat formatter = new SimpleDateFormat("ss");
-        return formatter.format(date);
-    }
-
-    public XYDataset createDataSet(List<CpuLoad> cpuLoadList) {
-        XYSeries jvmUserSeries = new XYSeries("JVM User");
-        XYSeries jvmSystemSeries = new XYSeries("JVM System");
-        XYSeries machineTotalSeries = new XYSeries("Machine Total");
-
-        for (int i = 0; i < cpuLoadList.size(); i++) {
-            int timestamp = Integer.parseInt(formatDate(cpuLoadList.get(i).getTimestamp()));
-
-            if (cpuLoadList.get(i).getName().toLowerCase().endsWith("jvmuser")) {
-                jvmUserSeries.add(timestamp, cpuLoadList.get(i).getJvmUserValue());
-            } else if (cpuLoadList.get(i).getName().toLowerCase().endsWith("jvmsystem")) {
-                jvmSystemSeries.add(timestamp, cpuLoadList.get(i).getJvmSystemValue());
-            } else {
-                machineTotalSeries.add(timestamp, cpuLoadList.get(i).getMachineTotalValue());
-            }
-        }
-
-        XYSeriesCollection dataset = new XYSeriesCollection();
-        dataset.addSeries(jvmUserSeries);
-        dataset.addSeries(jvmSystemSeries);
-        dataset.addSeries(machineTotalSeries);
-
-        return dataset;
     }
 }

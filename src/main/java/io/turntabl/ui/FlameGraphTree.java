@@ -69,9 +69,5 @@ public class FlameGraphTree {
     public JBPanel getFlameGraphTree() {
         return this.treePanel;
     }
-
-    public void updateComponentMap(String key, JComponent panel) {
-        this.componentMap.put(key, panel);
-    }
 }
 
