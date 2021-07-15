@@ -1,6 +1,8 @@
 package io.turntabl.utils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -9,6 +11,7 @@ import org.json.simple.parser.ParseException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.Spliterators;
 import java.util.stream.Stream;
@@ -66,6 +69,13 @@ public class JsonUtility {
         Date date = new Date(timestamp);
         DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
         return formatter.format(date);
+    }
+
+    public String convertToJSONString(List<?> cumulativeList) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+        return mapper.writeValueAsString(cumulativeList);
     }
 
 }

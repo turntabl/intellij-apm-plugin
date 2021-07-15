@@ -1,5 +1,6 @@
 package io.turntabl.jetty;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import io.turntabl.model.metrics.*;
 
 import io.turntabl.ui.CpuGraph;
@@ -16,8 +17,12 @@ import io.turntabl.ui.java_virtual_machine.garbage_collection.*;
 import io.turntabl.ui.operating_system.CpuLoadPanel;
 import io.turntabl.ui.operating_system.ThreadCpuLoadPanel;
 import io.turntabl.utils.*;
+import org.eclipse.jetty.client.HttpClient;
+import org.eclipse.jetty.client.HttpContentResponse;
+import org.eclipse.jetty.client.util.StringContentProvider;
 import org.jfree.data.xy.XYDataset;
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import javax.servlet.http.HttpServlet;
@@ -91,7 +96,7 @@ public class MetricHandler extends HttpServlet {
     }
 
 
-    public void updateCpuLoadPanel(String jsonString) {
+    public void updateCpuLoadPanel(String jsonString) throws JsonProcessingException {
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
 
         if (jsonArray.isPresent()) {
@@ -99,6 +104,9 @@ public class MetricHandler extends HttpServlet {
             List<CpuLoad> consolidatedList = cpuLoadUtil.getCPULoadConsolidated(cpuLoadList);
 
             cumulativeCpuLoadList.addAll(consolidatedList);
+
+            String cumulativeJsonString = jsonUtil.convertToJSONString(cumulativeCpuLoadList);
+            postObject("cpu-load", cumulativeJsonString);
 
             toolWindowComponent.getMetricsTree().updateComponentMap("CPU Load", (new CpuLoadPanel(new CpuLoadPanel.CpuLoadTableModel(cumulativeCpuLoadList))).getCpuLoadComponent());
 
@@ -232,6 +240,21 @@ public class MetricHandler extends HttpServlet {
             cumulativeObjectAllocationOutsideList.addAll(objectAllocationOutsideTLabsList);
 
             toolWindowComponent.getMetricsTree().updateComponentMap("Object Allocation outside TLAB", (new ObjectAllocationOutsideTLabPanel(new ObjectAllocationOutsideTLabPanel.ObjectAllocationOutsideTLabTableModel(cumulativeObjectAllocationOutsideList))).getObjectAllocationOutsideTLabComponent());
+        }
+    }
+
+    private void postObject(String urlEnd, String jsonString) {
+        try {
+            HttpClient client = new HttpClient();
+            client.start();
+
+            HttpContentResponse response = (HttpContentResponse) client
+                    .POST("http://localhost:8787/mg/" + urlEnd)
+                    .content(new StringContentProvider(jsonString))
+                    .send();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

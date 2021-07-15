@@ -37,6 +37,7 @@ public class JettyServer implements Runnable {
         handler.addServletWithMapping(new ServletHolder(new EventsHandler(toolWindowComponent)), "/events");
         handler.addServletWithMapping(new ServletHolder(new MetricHandler(toolWindowComponent)), "/metrics");
         handler.addServletWithMapping(new ServletHolder(new FlameGraphHandler()), "/fg/*");
+        handler.addServletWithMapping(new ServletHolder(new MetricGraphHandler()), "/mg/*");
 
         WebAppContext webAppContext = new WebAppContext();
         try {
