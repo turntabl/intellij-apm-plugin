@@ -37,49 +37,11 @@
     </div>
 </center>
 <script>
-    var data = [{
-        "timestamp":1619441634964, 
-        "type":"gauge", 
-        "jvmUserValue":0.10448416322469711,
-        "jvmSystemValue":0.0217414027824997902,
-        "machineTotalValue":0.57614521086215973,
-        "attributes":{}
-    },
-    {
-        "timestamp":1619442634964, 
-        "type":"gauge", 
-        "jvmUserValue":0.20448416322469711,
-        "jvmSystemValue":0.017414027824997902,
-        "machineTotalValue":0.47614521086215973,
-        "attributes":{}
-    },
-    {
-        "timestamp":1619443634964, 
-        "type":"gauge", 
-        "jvmUserValue":0.30448416322469711,
-        "jvmSystemValue":0.047414027824997902,
-        "machineTotalValue":0.37614521086215973,
-        "attributes":{}
-    },
-    {
-        "timestamp":1619444634964, 
-        "type":"gauge", 
-        "jvmUserValue":0.40448416322469711,
-        "jvmSystemValue":0.07414027824997902,
-        "machineTotalValue":0.27614521086215973,
-        "attributes":{}
-    },
-    {
-        "timestamp":1619445634964, 
-        "type":"gauge", 
-        "jvmUserValue":0.50448416322469711,
-        "jvmSystemValue":0.037414027824997902,
-        "machineTotalValue":0.17614521086215973,
-        "attributes":{}
-    }];
-
-
     function chart(data) {
+        data.sort((a, b) => {
+            return a.timestamp - b.timestamp;
+        });
+
         data.forEach(function(d) {
             var date = new Date(d.timestamp);
             d.timestamp = date;
@@ -115,6 +77,29 @@
 		.x(d => x(d.timestamp))
 		.y(d => y(d.machineTotalValue));
 
+        var xGrid = g => g
+            .selectAll('line')
+            .data(x.ticks())
+            .join('line')
+            .attr('x1', d => x(d))
+            .attr('x2', d => x(d))
+            .attr('y1', margin.top)
+            .attr('y2', height - margin.bottom)
+            .style("stroke-width", 0.2)
+            .style("stroke", "black");
+
+        var yGrid = g => g
+            .attr('class', 'grid-lines')
+            .selectAll('line')
+            .data(y.ticks())
+            .join('line')
+            .attr('x1', margin.left)
+            .attr('x2', width - margin.right)
+            .attr('y1', d => y(d))
+            .attr('y2', d => y(d))
+            .style("stroke-width", 0.2)
+            .style("stroke", "black");
+
         svg.append("g")
             .attr("class","x-axis")
             .attr("transform", "translate(0," + (height - margin.bottom) + ")")
@@ -131,6 +116,12 @@
             .append("text")
             .attr("text-anchor", "end")
             .text("Values");
+
+        svg.append("g")
+            .call(xGrid);
+
+        svg.append("g")
+            .call(yGrid);
 
         svg.append('path')
             .attr('d', line(data))
@@ -153,11 +144,10 @@
 
     const url = "http://localhost:8787/mg/cpu-load";
     axios.get(url)
-    .then(data=>{
-        newData = JSON.parse(data);
-        chart(newData);
+    .then(d=>{
+        console.log("The data: ", d);
+        console.log("Only the array: ", d.data);
+        chart(d.data);
     })
-    .catch(err=>consolo.log(err));
-
-    // chart(data);
+    .catch(err=>console.log(err));
 </script>

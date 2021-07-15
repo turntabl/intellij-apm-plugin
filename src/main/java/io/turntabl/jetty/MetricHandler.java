@@ -3,7 +3,6 @@ package io.turntabl.jetty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.turntabl.model.metrics.*;
 
-import io.turntabl.ui.CpuGraph;
 import io.turntabl.ui.NewRelicJavaProfilerToolWindow;
 import io.turntabl.ui.flight_recorder.*;
 import io.turntabl.ui.flight_recorder.JfrSocketReadBytesReadPanel;
@@ -20,9 +19,7 @@ import io.turntabl.utils.*;
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.client.HttpContentResponse;
 import org.eclipse.jetty.client.util.StringContentProvider;
-import org.jfree.data.xy.XYDataset;
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import javax.servlet.http.HttpServlet;
@@ -109,9 +106,6 @@ public class MetricHandler extends HttpServlet {
             postObject("cpu-load", cumulativeJsonString);
 
             toolWindowComponent.getMetricsTree().updateComponentMap("CPU Load", (new CpuLoadPanel(new CpuLoadPanel.CpuLoadTableModel(cumulativeCpuLoadList))).getCpuLoadComponent());
-
-            XYDataset dataset = cpuLoadUtil.createDataSet(cumulativeCpuLoadList);
-            toolWindowComponent.getMetricsGraphTree().updateComponentMap("CPU Load Graph", (new CpuGraph(dataset, "CPU Load Metric", "Timestamp", "Values")).getChart());
         }
     }
 
