@@ -46,7 +46,7 @@ the ability of the New Relic One platform for visualizing your JVM's behavior.
 ![plugin](images/flamegraph1.png)
 
 #### CPU Load Metric
-![plugin](images/cpuLoadGraph.png)
+![plugin](images/cpuLoad.png)
 
 
 ## Installation
