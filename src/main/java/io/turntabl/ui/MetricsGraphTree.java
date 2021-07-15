@@ -58,14 +58,9 @@ public class MetricsGraphTree {
                 newRelicJavaProfilerToolWindow.updateMetricsGraphPanelText(e.getPath().toString());
             }
         });
-
     }
 
     public Component getMetricsGraphTree() {
         return this.treePanel;
-    }
-
-    public void updateComponentMap(String key, JComponent panel) {
-        this.componentMap.put(key, panel);
     }
 }

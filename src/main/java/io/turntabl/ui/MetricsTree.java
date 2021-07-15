@@ -29,7 +29,6 @@ public class MetricsTree {
     private String javaAppNodeName = "Java Application";
     private String jvmNodeName = "Java Virtual Machine";
     private String osNodeName = "Operating System";
-    private CpuGraph cpuGraph;
     private Map<String, JComponent> componentMap;
     private CpuLoadPanel cpuLoadPanel;
     private ObjectAllocationInNewTLabPanel objectAllocationInNewTLabPanel;

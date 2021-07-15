@@ -2,9 +2,7 @@ package io.turntabl.ui;
 
 import com.intellij.execution.ui.layout.impl.JBRunnerTabs;
 import com.intellij.openapi.Disposable;
-import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.wm.IdeFocusManager;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.ui.JBSplitter;
 import com.intellij.ui.OnePixelSplitter;
@@ -12,20 +10,13 @@ import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.components.JBTextArea;
 import com.intellij.ui.tabs.TabInfo;
-import com.intellij.util.SVGLoader;
 import com.intellij.util.ui.components.BorderLayoutPanel;
-import org.jfree.data.xy.XYDataset;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
-
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 
 public class NewRelicJavaProfilerToolWindow implements Disposable {
-    private CpuGraph cpuGraph;
     private JBPanel mainPanel, flameGraphRootPanel, metricsGraphRootPanel, metricsGraphPanel,
             eventsPanel,
             metricsPanel, metricsRootPanel, eventsRootPanel, flameGraphPanel;
@@ -39,8 +30,6 @@ public class NewRelicJavaProfilerToolWindow implements Disposable {
 
     public NewRelicJavaProfilerToolWindow(ToolWindow toolWindow, Project project) {
         mainPanel = new BorderLayoutPanel(0, 0);
-        cpuGraph = new CpuGraph(createDataSet(), "CPU Load Metrics", "Timestamp", "Values");
-
         flameGraphRootPanel = new BorderLayoutPanel(0, 0);
         flameGraphPanel = new BorderLayoutPanel(0, 0);
         eventsPanel = new BorderLayoutPanel(0, 0);
@@ -163,10 +152,6 @@ public class NewRelicJavaProfilerToolWindow implements Disposable {
         metricsGraphSplitter.setSecondComponent(component);
     }
 
-    public FlameGraphTree getFlameGraphTree() {
-        return this.flameGraphTree;
-    }
-
     public MetricsTree getMetricsTree() {
         return this.metricsTree;
     }
@@ -175,41 +160,11 @@ public class NewRelicJavaProfilerToolWindow implements Disposable {
         return this.eventsTree;
     }
 
-    public MetricsGraphTree getMetricsGraphTree() {
-        return this.metricsGraphTree;
-    }
-
     public JComponent getContent() {
         return mainPanel;
     }
 
-
     @Override
     public void dispose() {
-    }
-
-    public XYDataset createDataSet() {
-        XYSeries jvmUserSeries = new XYSeries("JVM User");
-        XYSeries jvmSystemSeries = new XYSeries("JVM System");
-        XYSeries machineTotalSeries = new XYSeries("Machine Total");
-
-        jvmUserSeries.add(0.193, 23056);
-        jvmUserSeries.add(0.395, 33076);
-        jvmUserSeries.add(0.596, 43090);
-
-        jvmSystemSeries.add(0.199, 43076);
-        jvmSystemSeries.add(0.301, 53016);
-        jvmSystemSeries.add(0.591, 63030);
-
-        machineTotalSeries.add(0.189, 53076);
-        machineTotalSeries.add(0.311, 6056);
-        machineTotalSeries.add(0.500, 73093);
-
-        XYSeriesCollection dataset = new XYSeriesCollection();
-        dataset.addSeries(jvmUserSeries);
-        dataset.addSeries(jvmSystemSeries);
-        dataset.addSeries(machineTotalSeries);
-
-        return dataset;
     }
 }

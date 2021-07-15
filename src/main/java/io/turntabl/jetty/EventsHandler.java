@@ -68,10 +68,6 @@ public class EventsHandler extends HttpServlet {
         List<String> nonThreadStack = jfrMethodSampleUtil.writeEventStackToListWithoutThreadNames(collapsedEventSampleList);
 
         Convert.convert(threadStack, nonThreadStack);
-        System.out.println("created flame graphs..............");
-
-        toolWindowComponent.getFlameGraphTree().updateComponentMap("With Thread Names", (new FlameGraphPanel()).getComponent());
-        toolWindowComponent.getFlameGraphTree().updateComponentMap("Without Thread Names", (new FlameGraphWithoutThreadNamesPanel()).getComponent());
 
         TableModel tableModel = new JfrMethodSamplePanel.JfrMethodSampleTableModel(cumulativeJfrMethodSampleList);
 
