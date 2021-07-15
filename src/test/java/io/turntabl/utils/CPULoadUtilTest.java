@@ -81,7 +81,6 @@ class CPULoadUtilTest {
     void getCPULoadConsolidated() {
         JSONArray arr = jsonUtility.readMetricsJson(metricsJson).get();
         List<CpuLoad> cpuLoadList = cpuLoadUtil.getCPULoadConsolidated(cpuLoadUtil.getCPULoad(arr));
-        System.out.println(cpuLoadList);
         assertEquals(1, cpuLoadList.size());
     }
 }
