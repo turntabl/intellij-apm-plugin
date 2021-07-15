@@ -68,6 +68,9 @@ the ability of the New Relic One platform for visualizing your JVM's behavior.
 
   ![plugin](images/newRelicProfiler.png)
 
+  ### Supported IntelliJ Version
+  - This plugin currently supports the intelliJ versions 2020.1.* up to the current version.
+
 ## Required IntelliJ Setup
  ### Building Your Own Artifact.
 - Steps To Follow
@@ -116,5 +119,4 @@ the ability of the New Relic One platform for visualizing your JVM's behavior.
   - Spiermar's [D3.js Flame Graph Library](https://github.com/spiermar/d3-flame-graph) was used to develop the flame graph 
   - Spiermar's [Burn Library](https://github.com/spiermar/burn) was used to help convert the profiled data into the required format needed for the flame graph. The Burn Library is originally in GoLang and aspects of it was converted to Java for the purpose of this plugin.
   - [Jfree Chat library](https://www.jfree.org/jfreechart/) for the CPU Load graph 
-
 
