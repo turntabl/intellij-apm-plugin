@@ -12,7 +12,7 @@ public class CpuLoadGraphPanel {
 
     public CpuLoadGraphPanel() {
         panel = new JBPanel(new BorderLayout());
-        panel.add(new JBCefBrowser("http://localhost:8787/cpu-load/").getComponent(), BorderLayout.CENTER);
+        panel.add(new JBCefBrowser("http://localhost:8787/cpu-load-file/").getComponent(), BorderLayout.CENTER);
         panel.setVisible(true);
     }
 

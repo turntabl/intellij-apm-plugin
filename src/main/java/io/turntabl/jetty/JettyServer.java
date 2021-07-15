@@ -63,7 +63,7 @@ public class JettyServer implements Runnable {
         try {
             webAppContext3.setResourceBase(String.valueOf(Resource.newResource(new URL(JettyServer.class.getResource("/webapp/html/cpu_load.html"), "."))));
             webAppContext3.setClassLoader(JettyServer.class.getClassLoader());
-            webAppContext3.setContextPath("/cpu-load");
+            webAppContext3.setContextPath("/cpu-load-file");
             webAppContext3.setWelcomeFiles(new String[]{"cpu_load.html"});
         } catch (MalformedURLException e) {
             e.printStackTrace();
