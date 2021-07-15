@@ -5,6 +5,7 @@ import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
 import com.intellij.util.ui.components.BorderLayoutPanel;
 import io.turntabl.ui.metric_graph.CpuLoadGraphPanel;
+import io.turntabl.ui.metric_graph.ThreadContextSwitchratePanel;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -17,10 +18,11 @@ public class MetricsGraphTree {
     private JBPanel treePanel;
     private JTree tree;
     private String rootNodeName = "Graphs by metric";
-    private String[] viewNodes = {"CPU Load Graph"};
+    private String[] viewNodes = {"CPU Load Graph", "Thread ContextSwitch Rate Graph"};
     private final NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow;
     private Map<String, JComponent> componentMap;
     private CpuLoadGraphPanel cpuGraphPanel;
+    private ThreadContextSwitchratePanel threadContextSwitchratePanel;
 
     public MetricsGraphTree(NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow) {
         this.newRelicJavaProfilerToolWindow = newRelicJavaProfilerToolWindow;
@@ -29,8 +31,8 @@ public class MetricsGraphTree {
         DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(rootNodeName);
 
         cpuGraphPanel = new CpuLoadGraphPanel();
-
-        JComponent[] metricGraphPanels = {cpuGraphPanel.getComponent()};
+        threadContextSwitchratePanel = new ThreadContextSwitchratePanel();
+        JComponent[] metricGraphPanels = {cpuGraphPanel.getComponent(), threadContextSwitchratePanel.getComponent()};
 
         for (int i = 0; i < viewNodes.length; i++) {
             rootNode.add(new DefaultMutableTreeNode(viewNodes[i]));

@@ -120,12 +120,16 @@ public class MetricHandler extends HttpServlet {
         }
     }
 
-    public void updateThreadContextSwitchRatePanel(String jsonString) {
+    public void updateThreadContextSwitchRatePanel(String jsonString)  throws JsonProcessingException  {
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
         if (jsonArray.isPresent()) {
             List<ThreadContextSwitchRate> threadContextSwitchRateList = threadContextSwitchRateUtil.getThreadContextSwitchRate(jsonArray.get());
 
             cumulativeThreadContextSwitchRateList.addAll(threadContextSwitchRateList);
+
+            String cumulativeJsonString = jsonUtil.convertToJSONString(cumulativeThreadContextSwitchRateList);
+            postObject("thread-contextswitch-rate", cumulativeJsonString);
+
             toolWindowComponent.getMetricsTree().updateComponentMap("Thread Context Switch Rate",(new ThreadContextSwitchRatePanel(new ThreadContextSwitchRatePanel.ThreadContextSwitchRateTableModel(cumulativeThreadContextSwitchRateList))).getThreadContextSwitchRateComponent());
         }
     }

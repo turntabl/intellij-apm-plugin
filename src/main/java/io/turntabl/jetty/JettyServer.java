@@ -69,8 +69,18 @@ public class JettyServer implements Runnable {
             e.printStackTrace();
         }
 
+        WebAppContext webAppContext4 = new WebAppContext();
+        try {
+            webAppContext4.setResourceBase(String.valueOf(Resource.newResource(new URL(JettyServer.class.getResource("/webapp/html/thread_contextswitch_rate.html"), "."))));
+            webAppContext4.setClassLoader(JettyServer.class.getClassLoader());
+            webAppContext4.setContextPath("/thread-contextswitch-rate-file");
+            webAppContext4.setWelcomeFiles(new String[]{"thread_contextswitch_rate.html"});
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
         HandlerList handlers = new HandlerList();
-        handlers.setHandlers(new Handler[] { webAppContext, webAppContext2, webAppContext3, handler });
+        handlers.setHandlers(new Handler[] { webAppContext, webAppContext2, webAppContext3, webAppContext4, handler });
         server.setHandler(handlers);
 
         try {

@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 public class MetricGraphHandler extends HttpServlet {
     private String cpuLoadString;
+    private String threadContextSwitchRateString;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -17,7 +18,11 @@ public class MetricGraphHandler extends HttpServlet {
         if (url.endsWith("cpu-load")) {
             resp.getWriter().println(cpuLoadString);
             resp.setStatus(HttpServletResponse.SC_OK);
-        } else {
+        } else if (url.endsWith("thread-contextswitch-rate")){
+            resp.getWriter().println(threadContextSwitchRateString);
+            resp.setStatus(HttpServletResponse.SC_OK);
+        }
+        else {
             resp.getWriter().println("Request Not Found");
             resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
@@ -29,6 +34,8 @@ public class MetricGraphHandler extends HttpServlet {
 
         if (url.endsWith("cpu-load")) {
             cpuLoadString = req.getReader().lines().collect(Collectors.joining());
+        } else if (url.endsWith("thread-contextswitch-rate")){
+            threadContextSwitchRateString = req.getReader().lines().collect(Collectors.joining());
         }
 
         resp.setStatus(HttpServletResponse.SC_OK);
