@@ -3,24 +3,16 @@ package io.turntabl.jetty;
 
 import io.turntabl.ui.NewRelicJavaProfilerToolWindow;
 
-import org.apache.tools.ant.Project;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.handler.ContextHandler;
 import org.eclipse.jetty.server.handler.HandlerList;
-import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.util.resource.Resource;
 import org.eclipse.jetty.webapp.WebAppContext;
 
-import java.io.File;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
-import java.nio.file.Paths;
-
-import java.nio.file.Paths;
 
 
 public class JettyServer implements Runnable {
@@ -69,8 +61,28 @@ public class JettyServer implements Runnable {
             e.printStackTrace();
         }
 
+        WebAppContext webAppContext5 = new WebAppContext();
+        try {
+            webAppContext5.setResourceBase(String.valueOf(Resource.newResource(new URL(JettyServer.class.getResource("/webapp/html/heap_summary_before_gc.html"), "."))));
+            webAppContext5.setClassLoader(JettyServer.class.getClassLoader());
+            webAppContext5.setContextPath("/heap-summary-before-gc-file");
+            webAppContext5.setWelcomeFiles(new String[]{"heap_summary_before_gc.html"});
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        WebAppContext webAppContext6 = new WebAppContext();
+        try {
+            webAppContext6.setResourceBase(String.valueOf(Resource.newResource(new URL(JettyServer.class.getResource("/webapp/html/heap_summary_after_gc.html"), "."))));
+            webAppContext6.setClassLoader(JettyServer.class.getClassLoader());
+            webAppContext6.setContextPath("/heap-summary-after-gc-file");
+            webAppContext6.setWelcomeFiles(new String[]{"heap_summary_after_gc.html"});
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
         HandlerList handlers = new HandlerList();
-        handlers.setHandlers(new Handler[] { webAppContext, webAppContext2, webAppContext3, handler });
+        handlers.setHandlers(new Handler[] { webAppContext, webAppContext2, webAppContext3, webAppContext5, webAppContext6, handler });
         server.setHandler(handlers);
 
         try {
