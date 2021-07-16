@@ -59,6 +59,42 @@ class GcHeapSummaryUtilTest {
             "                    \"committedEnd\": 31356616704,\n" +
             "                    \"when\": \"Before GC\"\n" +
             "                }\n" +
+            "            },\n" +
+                        "{\n" +
+            "                \"name\": \"jfr.GCHeapSummary.heapCommittedSize\",\n" +
+            "                \"type\": \"gauge\",\n" +
+            "                \"value\": 2.65289728E8,\n" +
+            "                \"timestamp\": 1619441634400,\n" +
+            "                \"attributes\": {\n" +
+            "                    \"heapStart\": 31155290112,\n" +
+            "                    \"reservedEnd\": 34359738368,\n" +
+            "                    \"committedEnd\": 31420579840,\n" +
+            "                    \"when\": \"After GC\"\n" +
+            "                }\n" +
+            "            },\n" +
+            "            {\n" +
+            "                \"name\": \"jfr.GCHeapSummary.reservedSize\",\n" +
+            "                \"type\": \"gauge\",\n" +
+            "                \"value\": 3.204448256E9,\n" +
+            "                \"timestamp\": 1619441634400,\n" +
+            "                \"attributes\": {\n" +
+            "                    \"heapStart\": 31155290112,\n" +
+            "                    \"reservedEnd\": 34359738368,\n" +
+            "                    \"committedEnd\": 31420579840,\n" +
+            "                    \"when\": \"After GC\"\n" +
+            "                }\n" +
+            "            },\n" +
+            "            {\n" +
+            "                \"name\": \"jfr.GCHeapSummary.heapUsed\",\n" +
+            "                \"type\": \"gauge\",\n" +
+            "                \"value\": 1.6407856E8,\n" +
+            "                \"timestamp\": 1619441634400,\n" +
+            "                \"attributes\": {\n" +
+            "                    \"heapStart\": 31155290112,\n" +
+            "                    \"reservedEnd\": 34359738368,\n" +
+            "                    \"committedEnd\": 31420579840,\n" +
+            "                    \"when\": \"After GC\"\n" +
+            "                }\n" +
             "            }" +
             "]\n" +
             "    }\n" +
@@ -68,7 +104,7 @@ class GcHeapSummaryUtilTest {
     void canGetGcHeapSummaryList(){
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
         List<GcHeapSummary> extractedList = gcHeapSummaryUtil.getGcHeapSummary(jsonArray.get());
-        assertEquals(3, extractedList.size());
+        assertEquals(6, extractedList.size());
     }
 
     @Test
@@ -76,7 +112,24 @@ class GcHeapSummaryUtilTest {
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
         List<GcHeapSummary> extractedList = gcHeapSummaryUtil.getGcHeapSummary(jsonArray.get());
         List<GcHeapSummary> consolidatedList = gcHeapSummaryUtil.getGcHeapSummaryConsolidated(extractedList);
-        assertEquals(1, consolidatedList.size());
+        assertEquals(2, consolidatedList.size());
     }
 
+    @Test
+    void canGetGcHeapSummaryBeforeGC(){
+        Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
+        List<GcHeapSummary> extractedList = gcHeapSummaryUtil.getGcHeapSummary(jsonArray.get());
+        List<GcHeapSummary> consolidatedList = gcHeapSummaryUtil.getGcHeapSummaryConsolidated(extractedList);
+        List<GcHeapSummary> beforeGCList = gcHeapSummaryUtil.getHeapBeforeGC(consolidatedList);
+        assertEquals(1, beforeGCList.size());
+    }
+
+    @Test
+    void canGetGcHeapSummaryAfterGC(){
+        Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
+        List<GcHeapSummary> extractedList = gcHeapSummaryUtil.getGcHeapSummary(jsonArray.get());
+        List<GcHeapSummary> consolidatedList = gcHeapSummaryUtil.getGcHeapSummaryConsolidated(extractedList);
+        List<GcHeapSummary> afterGCList = gcHeapSummaryUtil.getHeapAfterGC(consolidatedList);
+        assertEquals(1, afterGCList.size());
+    }
 }

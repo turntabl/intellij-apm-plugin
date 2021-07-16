@@ -34,9 +34,11 @@ public class JettyServer implements Runnable {
         WebAppContext webAppContext1 = createWebAppContext("flame_graph.html", "/flame-graph");
         WebAppContext webAppContext2 = createWebAppContext("flame_graph_no_thread_names.html", "/flame-graph-no-thread-names");
         WebAppContext webAppContext3 = createWebAppContext("cpu_load.html", "/cpu-load-file");
+        WebAppContext webAppContext5 = createWebAppContext("heap_summary_before_gc.html", "/heap-summary-before-gc-file");
+        WebAppContext webAppContext6 = createWebAppContext("heap_summary_after_gc.html", "/heap-summary-after-gc-file");
 
         HandlerList handlers = new HandlerList();
-        handlers.setHandlers(new Handler[]{webAppContext1, webAppContext2, webAppContext3, handler});
+        handlers.setHandlers(new Handler[] { webAppContext1, webAppContext2, webAppContext3, webAppContext5, webAppContext6, handler });
         server.setHandler(handlers);
 
         try {

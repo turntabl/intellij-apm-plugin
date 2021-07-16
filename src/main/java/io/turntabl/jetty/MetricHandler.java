@@ -51,6 +51,8 @@ public class MetricHandler extends HttpServlet {
     private List<ObjectAllocationOutsideTLab> cumulativeObjectAllocationOutsideList = new ArrayList<>();
     private List<CpuLoad> cumulativeCpuLoadList = new ArrayList<>();
     private List<GcHeapSummary> cumulativeGcHeapSummaryList = new ArrayList<>();
+    private List<GcHeapSummary> cumulativeHeapSummaryBeforeGCList = new ArrayList<>();
+    private List<GcHeapSummary> cumulativeHeapSummaryAfterGCList = new ArrayList<>();
     private List<GCMinorDuration> cumulativeGcMinorDurationList = new ArrayList<>();
     private List<GCMajorDuration> cumulativeGcMajorDurationList = new ArrayList<>();
     private List<G1GarbageCollectionDuration> cumulativeG1GCDurationList = new ArrayList<>();
@@ -187,14 +189,24 @@ public class MetricHandler extends HttpServlet {
         }
     }
 
-    public void updateGcHeapSummaryPanel(String jsonString){
+    public void updateGcHeapSummaryPanel(String jsonString) throws JsonProcessingException {
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
 
         if (jsonArray.isPresent()){
             List<GcHeapSummary> gcHeapSummaryList = gcHeapSummaryUtil.getGcHeapSummary(jsonArray.get());
             List<GcHeapSummary> consolidatedList = gcHeapSummaryUtil.getGcHeapSummaryConsolidated(gcHeapSummaryList);
-
             cumulativeGcHeapSummaryList.addAll(consolidatedList);
+
+            List<GcHeapSummary> beforeGCList = gcHeapSummaryUtil.getHeapBeforeGC(consolidatedList);
+            List<GcHeapSummary> afterGCList = gcHeapSummaryUtil.getHeapAfterGC(consolidatedList);
+            cumulativeHeapSummaryBeforeGCList.addAll(beforeGCList);
+            cumulativeHeapSummaryAfterGCList.addAll(afterGCList);
+
+            String heapSummaryBeforeGC = jsonUtil.convertToJSONString(cumulativeHeapSummaryBeforeGCList);
+            postObject("heap-summary-before-gc", heapSummaryBeforeGC);
+
+            String heapSummaryAfterGC = jsonUtil.convertToJSONString(cumulativeHeapSummaryAfterGCList);
+            postObject("heap-summary-after-gc", heapSummaryAfterGC);
 
             TableModel tableModel = new GcHeapSummaryPanel.GcHeapSummaryTableModel(cumulativeGcHeapSummaryList);
 

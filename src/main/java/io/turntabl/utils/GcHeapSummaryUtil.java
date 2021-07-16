@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.turntabl.model.metrics.GcHeapSummary;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -80,5 +82,17 @@ public class GcHeapSummaryUtil {
 
                     return gc1;
                 }).collect(Collectors.toList());
+    }
+
+    public List<GcHeapSummary> getHeapBeforeGC(List<GcHeapSummary> consolidatedList) {
+        return consolidatedList.stream()
+                .filter(g -> g.getAttributes().get("when").equals("Before GC"))
+                .collect(Collectors.toList());
+    }
+
+    public List<GcHeapSummary> getHeapAfterGC(List<GcHeapSummary> consolidatedList) {
+        return consolidatedList.stream()
+                .filter(g -> g.getAttributes().get("when").equals("After GC"))
+                .collect(Collectors.toList());
     }
 }

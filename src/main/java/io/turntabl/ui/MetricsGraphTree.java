@@ -5,6 +5,8 @@ import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
 import com.intellij.util.ui.components.BorderLayoutPanel;
 import io.turntabl.ui.metric_graph.CpuLoadGraphPanel;
+import io.turntabl.ui.metric_graph.HeapSummaryAfterGCPanel;
+import io.turntabl.ui.metric_graph.HeapSummaryBeforeGCPanel;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -21,6 +23,8 @@ public class MetricsGraphTree {
     private final NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow;
     private Map<String, JComponent> componentMap;
     private CpuLoadGraphPanel cpuGraphPanel;
+    private HeapSummaryBeforeGCPanel heapSummaryBeforeGCPanel;
+    private HeapSummaryAfterGCPanel heapSummaryAfterGCPanel;
 
     public MetricsGraphTree(NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow) {
         this.newRelicJavaProfilerToolWindow = newRelicJavaProfilerToolWindow;
@@ -28,8 +32,22 @@ public class MetricsGraphTree {
 
         DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(rootNodeName);
 
-        cpuGraphPanel = new CpuLoadGraphPanel();
+        DefaultMutableTreeNode heapSummaryNode = new DefaultMutableTreeNode("GC Heap Summary");
+        String[] heapNodes = {"Before GC", "After GC"};
 
+        heapSummaryBeforeGCPanel = new HeapSummaryBeforeGCPanel();
+        heapSummaryAfterGCPanel = new HeapSummaryAfterGCPanel();
+
+        JComponent[] heapComponents = {heapSummaryBeforeGCPanel.getComponent(), heapSummaryAfterGCPanel.getComponent()};
+
+        for (int i = 0; i < heapNodes.length; i++) {
+            heapSummaryNode.add(new DefaultMutableTreeNode(heapNodes[i]));
+            componentMap.put(heapNodes[i], heapComponents[i]);
+        }
+
+        rootNode.add(heapSummaryNode);
+
+        cpuGraphPanel = new CpuLoadGraphPanel();
         JComponent[] metricGraphPanels = {cpuGraphPanel.getComponent()};
 
         for (int i = 0; i < viewNodes.length; i++) {
