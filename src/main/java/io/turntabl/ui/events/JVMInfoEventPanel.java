@@ -5,6 +5,7 @@ import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
 import io.turntabl.model.events.JVMInfoEvent;
 import io.turntabl.utils.JsonUtility;
+
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
@@ -12,10 +13,9 @@ import java.awt.*;
 import java.util.List;
 
 public class JVMInfoEventPanel {
-
+    private static final JsonUtility jsonUtil = new JsonUtility();
     private JBPanel panel;
     private JTable table;
-    private static final JsonUtility jsonUtil = new JsonUtility();
 
     public JVMInfoEventPanel(TableModel tableModel) {
         panel = new JBPanel(new BorderLayout());

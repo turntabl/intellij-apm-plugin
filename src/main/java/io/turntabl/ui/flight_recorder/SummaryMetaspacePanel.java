@@ -14,9 +14,9 @@ import java.util.List;
 
 
 public class SummaryMetaspacePanel {
+    private static final JsonUtility jsonUtil = new JsonUtility();
     private JBPanel panel;
     private JTable table;
-    private static final JsonUtility jsonUtil = new JsonUtility();
 
     public SummaryMetaspacePanel(TableModel tableModel) {
         panel = new JBPanel(new BorderLayout());
@@ -31,13 +31,16 @@ public class SummaryMetaspacePanel {
         table.getColumnModel().getColumn(4).setPreferredWidth(350);
         table.getColumnModel().getColumn(5).setPreferredWidth(350);
 
-        panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER),  BorderLayout.CENTER);
+        panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER), BorderLayout.CENTER);
     }
 
     public JBPanel getSummaryMetaspaceComponent() {
         return panel;
     }
 
+    public JTable getTable() {
+        return this.table;
+    }
 
     public static class SummaryMetaspaceTableModel extends AbstractTableModel {
         String[] columnNames = {"Timestamp", "Type", "Committed Value", "Used Value", "Reserved Value", "When"};
@@ -79,9 +82,6 @@ public class SummaryMetaspacePanel {
             return columnNames[column];
         }
 
-    }
-    public JTable getTable() {
-        return this.table;
     }
 }
 

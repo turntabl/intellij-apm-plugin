@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ThreadCpuLoadUtilTest {
     JsonUtility jsonUtil = new JsonUtility();
     ThreadCpuLoadUtil threadCpuLoadUtil = new ThreadCpuLoadUtil(jsonUtil);
-    String jsonString =  "[\n" +
+    String jsonString = "[\n" +
             "    {\n" +
             "        \"common\": {\n" +
             "            \"attributes\": {\n" +
@@ -40,7 +40,7 @@ class ThreadCpuLoadUtilTest {
             "                \"attributes\": {\n" +
             "                    \"thread.name\": \"main\"\n" +
             "                }\n" +
-            "            }"+
+            "            }" +
             "]\n" +
             "    }\n" +
             "]";
@@ -50,7 +50,7 @@ class ThreadCpuLoadUtilTest {
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
         List<ThreadCpuLoad> threadCpuLoadList = threadCpuLoadUtil.getThreadCpuLoad(jsonArray.get());
 
-        assertEquals(2,threadCpuLoadList.size());
+        assertEquals(2, threadCpuLoadList.size());
     }
 
     @Test
@@ -59,6 +59,6 @@ class ThreadCpuLoadUtilTest {
         List<ThreadCpuLoad> threadCpuLoadList = threadCpuLoadUtil.getThreadCpuLoad(jsonArray.get());
         List<ThreadCpuLoad> consolidatedList = threadCpuLoadUtil.getThreadCpuLoadConsolidated(threadCpuLoadList);
 
-        assertEquals(1,consolidatedList.size());
+        assertEquals(1, consolidatedList.size());
     }
 }

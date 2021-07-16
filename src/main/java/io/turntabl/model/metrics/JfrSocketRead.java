@@ -28,48 +28,48 @@ public abstract class JfrSocketRead {
     public JfrSocketRead() {
     }
 
-    public String getName(){
+    public String getName() {
         return name;
-    }
-
-    public Long getTimestamp() {
-        return timestamp;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public HashMap<String, Double> getValue() {
-        return value;
-    }
-
-    public int getInterval() {
-        return interval;
-    }
-
-    public HashMap<String, String> getAttributes() {
-        return attributes;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
+    public Long getTimestamp() {
+        return timestamp;
+    }
+
     public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public void setType(String type) {
         this.type = type;
     }
 
+    public HashMap<String, Double> getValue() {
+        return value;
+    }
+
     public void setValue(HashMap<String, Double> value) {
         this.value = value;
     }
 
+    public int getInterval() {
+        return interval;
+    }
+
     public void setInterval(int interval) {
         this.interval = interval;
+    }
+
+    public HashMap<String, String> getAttributes() {
+        return attributes;
     }
 
     public void setAttributes(HashMap<String, String> attributes) {

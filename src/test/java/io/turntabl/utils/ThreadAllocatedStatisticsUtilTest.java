@@ -11,8 +11,8 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ThreadAllocatedStatisticsUtilTest {
-     JsonUtility jsonUtil = new JsonUtility();
-     ThreadAllocatedStatisticsUtil threadAllocatedStatisticsUtil = new ThreadAllocatedStatisticsUtil(jsonUtil);
+    JsonUtility jsonUtil = new JsonUtility();
+    ThreadAllocatedStatisticsUtil threadAllocatedStatisticsUtil = new ThreadAllocatedStatisticsUtil(jsonUtil);
 
 
     String jsonString = "[\n" +
@@ -71,10 +71,10 @@ public class ThreadAllocatedStatisticsUtilTest {
             "]";
 
     @Test
-     void getThreadAllocatedStatistics() {
+    void getThreadAllocatedStatistics() {
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
         List<ThreadAllocationStatistics> threadAllocationStatisticsList = threadAllocatedStatisticsUtil.getThreadAllocatedStatistics(jsonArray.get());
 
-        assertEquals(1,threadAllocationStatisticsList.size());
+        assertEquals(1, threadAllocationStatisticsList.size());
     }
 }

@@ -24,36 +24,36 @@ public class ThreadContextSwitchRate {
         return name;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public Double getValue() {
-        return value;
-    }
-
-    public Long getTimestamp() {
-        return timestamp;
-    }
-
-    public HashMap<String, String> getAttributes() {
-        return attributes;
-    }
-
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public void setType(String type) {
         this.type = type;
     }
 
+    public Double getValue() {
+        return value;
+    }
+
     public void setValue(Double value) {
         this.value = value;
     }
 
+    public Long getTimestamp() {
+        return timestamp;
+    }
+
     public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public HashMap<String, String> getAttributes() {
+        return attributes;
     }
 
     public void setAttributes(HashMap<String, String> attributes) {

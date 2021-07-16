@@ -6,6 +6,7 @@ import io.turntabl.model.metrics.JfrSocketReadBytesRead;
 import io.turntabl.model.metrics.JfrSocketReadDuration;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -18,7 +19,7 @@ public class JfrSocketReadUtil {
         this.jsonUtils = jsonUtils;
     }
 
-    public List<JfrSocketReadBytesRead> getJfrSocketReadBytesRead (JSONArray metricsArray){
+    public List<JfrSocketReadBytesRead> getJfrSocketReadBytesRead(JSONArray metricsArray) {
         Stream<JSONObject> bytesReadMetric = jsonUtils.getStream(metricsArray);
 
         return bytesReadMetric
@@ -35,7 +36,7 @@ public class JfrSocketReadUtil {
                 }).collect(Collectors.toList());
     }
 
-    public List<JfrSocketReadDuration> getJfrSocketReadDuration (JSONArray metricsArray){
+    public List<JfrSocketReadDuration> getJfrSocketReadDuration(JSONArray metricsArray) {
         Stream<JSONObject> durationMetric = jsonUtils.getStream(metricsArray);
 
         return durationMetric

@@ -31,44 +31,44 @@ public class ThreadCpuLoad {
         return name;
     }
 
-    public Long getTimestamp() {
-        return timestamp;
-    }
-
-    public String getType(){
-        return type;
-    }
-
-    public Double getUserValue() {
-        return userValue;
-    }
-
-    public Double getSystemValue() {
-        return systemValue;
-    }
-
-    public HashMap<String, String> getAttributes() {
-        return attributes;
-    }
-
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Long getTimestamp() {
+        return timestamp;
     }
 
     public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
     }
 
+    public String getType() {
+        return type;
+    }
+
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Double getUserValue() {
+        return userValue;
     }
 
     public void setUserValue(Double userValue) {
         this.userValue = userValue;
     }
 
+    public Double getSystemValue() {
+        return systemValue;
+    }
+
     public void setSystemValue(Double systemValue) {
         this.systemValue = systemValue;
+    }
+
+    public HashMap<String, String> getAttributes() {
+        return attributes;
     }
 
     public void setAttributes(HashMap<String, String> attributes) {

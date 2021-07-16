@@ -1,4 +1,5 @@
 package io.turntabl.model.metrics;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.HashMap;

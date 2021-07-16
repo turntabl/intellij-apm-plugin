@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.turntabl.model.metrics.ThreadCpuLoad;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -76,8 +77,6 @@ public class ThreadCpuLoadUtil {
         DateFormat formatter = new SimpleDateFormat("ss");
         return formatter.format(date);
     }
-
-
 
 
 }

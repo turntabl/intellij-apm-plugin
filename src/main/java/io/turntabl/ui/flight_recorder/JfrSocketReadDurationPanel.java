@@ -5,6 +5,7 @@ import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
 import io.turntabl.model.metrics.JfrSocketReadDuration;
 import io.turntabl.utils.JsonUtility;
+
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
@@ -12,9 +13,9 @@ import java.awt.*;
 import java.util.List;
 
 public class JfrSocketReadDurationPanel {
+    private static final JsonUtility jsonUtil = new JsonUtility();
     private JBPanel panel;
     private JTable table;
-    private static final JsonUtility jsonUtil = new JsonUtility();
 
     public JfrSocketReadDurationPanel(TableModel tableModel) {
         panel = new JBPanel(new BorderLayout());
@@ -32,11 +33,15 @@ public class JfrSocketReadDurationPanel {
         table.getColumnModel().getColumn(7).setPreferredWidth(350);
         table.getColumnModel().getColumn(8).setPreferredWidth(350);
 
-        panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER),  BorderLayout.CENTER);
+        panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER), BorderLayout.CENTER);
     }
 
     public JBPanel getJfrSocketReadDurationComponent() {
         return panel;
+    }
+
+    public JTable getTable() {
+        return this.table;
     }
 
     public static class JfrSocketReadDurationTableModel extends AbstractTableModel {
@@ -81,9 +86,5 @@ public class JfrSocketReadDurationPanel {
         public String getColumnName(int column) {
             return columnNames[column];
         }
-    }
-
-    public JTable getTable() {
-        return this.table;
     }
 }

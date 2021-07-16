@@ -21,7 +21,7 @@ public class MetricGraphHandler extends HttpServlet {
 
         if (url.endsWith("cpu-load")) {
             resp.getWriter().println(cpuLoadString);
-        } else if (url.endsWith("thread-contextswitch-rate")){
+        } else if (url.endsWith("thread-contextswitch-rate")) {
             resp.getWriter().println(threadContextSwitchRateString);
         } else if (url.endsWith("heap-summary-before-gc")) {
             resp.getWriter().println(heapSummaryBeforeGC);
@@ -39,7 +39,7 @@ public class MetricGraphHandler extends HttpServlet {
 
         if (url.endsWith("cpu-load")) {
             cpuLoadString = req.getReader().lines().collect(Collectors.joining());
-        } else if (url.endsWith("thread-contextswitch-rate")){
+        } else if (url.endsWith("thread-contextswitch-rate")) {
             threadContextSwitchRateString = req.getReader().lines().collect(Collectors.joining());
         } else if (url.endsWith("heap-summary-before-gc")) {
             heapSummaryBeforeGC = req.getReader().lines().collect(Collectors.joining());

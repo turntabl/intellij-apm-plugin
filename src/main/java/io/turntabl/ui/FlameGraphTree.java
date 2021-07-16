@@ -15,15 +15,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FlameGraphTree {
+    private final NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow;
     private JBPanel treePanel;
     private JTree tree;
     private String rootNodeName = "Flame graph by view";
     private String[] viewNodes = {"With Thread Names", "Without Thread Names"};
-    private final NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow;
     private Map<String, JComponent> componentMap;
     private FlameGraphPanel flameGraphPanel;
     private FlameGraphWithoutThreadNamesPanel flameGraphWithoutThreadNamesPanel;
-
 
 
     public FlameGraphTree(NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow) {

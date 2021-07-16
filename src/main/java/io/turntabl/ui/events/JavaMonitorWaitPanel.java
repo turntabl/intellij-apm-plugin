@@ -12,9 +12,9 @@ import java.awt.*;
 import java.util.List;
 
 public class JavaMonitorWaitPanel {
+    private static final JsonUtility jsonUtil = new JsonUtility();
     private JBPanel panel;
     private JTable table;
-    private static final JsonUtility jsonUtil = new JsonUtility();
 
     public JavaMonitorWaitPanel(TableModel tableModel) {
         panel = new JBPanel(new BorderLayout());
@@ -36,6 +36,10 @@ public class JavaMonitorWaitPanel {
 
     public JBPanel getJavaMonitorWaitComponent() {
         return panel;
+    }
+
+    public JTable getTable() {
+        return this.table;
     }
 
     public static class JavaMonitorWaitTableModel extends AbstractTableModel {
@@ -79,9 +83,5 @@ public class JavaMonitorWaitPanel {
         public String getColumnName(int column) {
             return columnNames[column];
         }
-    }
-
-    public JTable getTable() {
-        return this.table;
     }
 }

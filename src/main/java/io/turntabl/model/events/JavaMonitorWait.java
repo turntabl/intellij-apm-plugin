@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.turntabl.model_template.AbstractEventsInfo;
 
 
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class JavaMonitorWait extends AbstractEventsInfo {
     private int duration;

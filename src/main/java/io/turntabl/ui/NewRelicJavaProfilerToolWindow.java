@@ -11,6 +11,7 @@ import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.components.JBTextArea;
 import com.intellij.ui.tabs.TabInfo;
 import com.intellij.util.ui.components.BorderLayoutPanel;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -41,7 +42,7 @@ public class NewRelicJavaProfilerToolWindow implements Disposable {
 
         flameGraphTextArea = new JBTextArea();
         flameGraphTextArea.setLineWrap(true);
-        
+
         eventTextArea = new JBTextArea();
         eventTextArea.setLineWrap(true);
 
@@ -74,7 +75,7 @@ public class NewRelicJavaProfilerToolWindow implements Disposable {
 
         flameGraphSplitter.setFirstComponent(new JBScrollPane(flameGraphTree.getFlameGraphTree(), JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
         flameGraphSplitter.setSecondComponent(new JBScrollPane(flameGraphPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
-        
+
         eventsSplitter.setFirstComponent(new JBScrollPane(eventsTree.getEventsTree(), JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
         eventsSplitter.setSecondComponent(new JBScrollPane(eventsPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
 

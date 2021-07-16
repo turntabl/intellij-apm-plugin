@@ -91,35 +91,35 @@ class GarbageCollectionUtilTest {
             "]";
 
     @Test
-    void canGetGCMinorDuration(){
+    void canGetGCMinorDuration() {
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
         List<GCMinorDuration> extractedList = gbUtil.getGCMinorDuration(jsonArray.get());
         assertEquals(1, extractedList.size());
     }
 
     @Test
-    void canGetGCMajorDuration(){
+    void canGetGCMajorDuration() {
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
         List<GCMajorDuration> extractedList = gbUtil.getGCMajorDuration(jsonArray.get());
         assertEquals(1, extractedList.size());
     }
 
     @Test
-    void canGetG1GCDuration(){
+    void canGetG1GCDuration() {
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
         List<G1GarbageCollectionDuration> extractedList = gbUtil.getG1GarbageCollectionDuration(jsonArray.get());
         assertEquals(1, extractedList.size());
     }
 
     @Test
-    void canGetGCDuration(){
+    void canGetGCDuration() {
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
         List<GCDuration> extractedList = gbUtil.getGCDuration(jsonArray.get());
         assertEquals(1, extractedList.size());
     }
 
     @Test
-    void canGetGCLongestPause(){
+    void canGetGCLongestPause() {
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
         List<GCLongestPause> extractedList = gbUtil.getGCLongestPause(jsonArray.get());
         assertEquals(1, extractedList.size());

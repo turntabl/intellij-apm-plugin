@@ -17,20 +17,20 @@ public class Profile {
     public Profile() {
     }
 
-    public void openStack(){
+    public void openStack() {
         this.stack = new ArrayList<>();
     }
 
-    public void closeStack(){
-        this.rootNode.add(this.stack, stack.size()- 1, 1);
+    public void closeStack() {
+        this.rootNode.add(this.stack, stack.size() - 1, 1);
         this.stack = new ArrayList<>();
     }
 
-    public void addFrame(String name){
+    public void addFrame(String name) {
         Pattern pattern = Pattern.compile("^\\(");
         Matcher matcher = pattern.matcher(name);
 
-        if(!matcher.find()){
+        if (!matcher.find()) {
             name = name.replace(";", ":");
             name = name.replace("<", "");
             name = name.replace(">", "");
@@ -38,7 +38,7 @@ public class Profile {
             name = name.replace("\"", "");
 
             int index = name.indexOf("(");
-            if (index != -1){
+            if (index != -1) {
                 name = name.substring(0, index);
             }
             this.stack.add(name);

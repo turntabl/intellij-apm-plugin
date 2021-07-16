@@ -5,6 +5,7 @@ import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
 import io.turntabl.model.metrics.GCMinorDuration;
 import io.turntabl.utils.JsonUtility;
+
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
@@ -12,9 +13,9 @@ import java.awt.*;
 import java.util.List;
 
 public class GCMinorDurationPanel {
+    private static final JsonUtility jsonUtil = new JsonUtility();
     private static JBPanel panel;
     private JTable table;
-    private static final JsonUtility jsonUtil = new JsonUtility();
 
     public GCMinorDurationPanel(TableModel tableModel) {
         panel = new JBPanel(new BorderLayout());
@@ -38,6 +39,10 @@ public class GCMinorDurationPanel {
 
     public JBPanel getGCMinorDurationComponent() {
         return panel;
+    }
+
+    public JTable getTable() {
+        return this.table;
     }
 
     public static class GCMinorDurationTableModel extends AbstractTableModel {
@@ -85,9 +90,5 @@ public class GCMinorDurationPanel {
         public String getColumnName(int column) {
             return columnNames[column];
         }
-    }
-
-    public JTable getTable() {
-        return this.table;
     }
 }

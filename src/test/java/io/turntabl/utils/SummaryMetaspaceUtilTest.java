@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SummaryMetaspaceUtilTest {
 
-    private static  SummaryMetaspaceUtil summaryMetaspaceUtil;
+    private static SummaryMetaspaceUtil summaryMetaspaceUtil;
     private static JsonUtility jsonUtility;
     private static String exampleJsonMetric;
     private static Optional<JSONArray> jsonArray;
@@ -22,7 +22,7 @@ class SummaryMetaspaceUtilTest {
     @BeforeAll
     public static void setupAll() {
         System.out.println("Pre Testing Setup running.....");
-        jsonUtility =   new JsonUtility();
+        jsonUtility = new JsonUtility();
         summaryMetaspaceUtil = new SummaryMetaspaceUtil(jsonUtility);
         exampleJsonMetric = "[\n" +
                 "    {\n" +
@@ -98,7 +98,7 @@ class SummaryMetaspaceUtilTest {
     void getSummaryMetaspaceConsolidated() {
         List<SummaryMetaspace> summaryMetaspaceList = summaryMetaspaceUtil.getSummaryMetaspaceMetric(jsonArray.get());
         List<SummaryMetaspace> consolidatedList = summaryMetaspaceUtil.getSummaryMetaspaceConsolidated(summaryMetaspaceList);
-        assertEquals(1,consolidatedList.size());
+        assertEquals(1, consolidatedList.size());
     }
 }
 

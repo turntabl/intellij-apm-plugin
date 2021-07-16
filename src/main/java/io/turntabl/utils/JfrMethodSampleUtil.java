@@ -66,11 +66,11 @@ public class JfrMethodSampleUtil {
 
             line += threadName + ";";
 
-            for (int i = eventStackTraces.size() - 1; i > -1; i--){
+            for (int i = eventStackTraces.size() - 1; i > -1; i--) {
                 String desc = eventStackTraces.get(i).getDesc();
                 int index = desc.indexOf("(");
 
-                if (i == 0){
+                if (i == 0) {
                     line += desc.substring(0, index);
                 } else {
                     line += desc.substring(0, index) + ";";
@@ -90,11 +90,11 @@ public class JfrMethodSampleUtil {
 
             List<EventStackTrace> eventStackTraces = s.getStackTraceList();
 
-            for (int i = eventStackTraces.size() - 1; i > -1; i--){
+            for (int i = eventStackTraces.size() - 1; i > -1; i--) {
                 String desc = eventStackTraces.get(i).getDesc();
                 int index = desc.indexOf("(");
 
-                if (i == 0){
+                if (i == 0) {
                     line += desc.substring(0, index);
                 } else {
                     line += desc.substring(0, index) + ";";

@@ -16,9 +16,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 class JsonUtilityTest {
-    private static JsonUtility jsonUtility;
     static String metricsJson, eventsJson;
     static JfrMethodSampleUtil jfrMethodSampleUtil;
+    private static JsonUtility jsonUtility;
 
     @BeforeAll
     public static void setupAll() {
@@ -99,7 +99,7 @@ class JsonUtilityTest {
 
     @Test
     void readEventsJson() {
-        assertTrue(jsonUtility.readEventsJson(eventsJson) instanceof  Stream);
+        assertTrue(jsonUtility.readEventsJson(eventsJson) instanceof Stream);
     }
 
     @Test

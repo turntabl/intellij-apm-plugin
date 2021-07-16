@@ -5,6 +5,7 @@ import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
 import io.turntabl.model.metrics.GCLongestPause;
 import io.turntabl.utils.JsonUtility;
+
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
@@ -12,9 +13,9 @@ import java.awt.*;
 import java.util.List;
 
 public class GCLongestPausePanel {
+    private static final JsonUtility jsonUtil = new JsonUtility();
     private static JBPanel panel;
     private JTable table;
-    private static final JsonUtility jsonUtil = new JsonUtility();
 
     public GCLongestPausePanel(TableModel tableModel) {
         panel = new JBPanel(new BorderLayout());
@@ -36,6 +37,10 @@ public class GCLongestPausePanel {
         return panel;
     }
 
+    public JTable getTable() {
+        return this.table;
+    }
+
     public static class GCLongestPauseTableModel extends AbstractTableModel {
 
         String[] columnNames = {"Timestamp", "Type", "Value", "Attribute Name", "Attribute Cause"};
@@ -49,7 +54,7 @@ public class GCLongestPausePanel {
             for (int i = 0; i < gcLongestPauseList.size(); i++) {
                 GCLongestPause gcLongestPause = gcLongestPauseList.get(i);
 
-                data[i][0] =jsonUtil.getTime(gcLongestPause.getTimestamp());
+                data[i][0] = jsonUtil.getTime(gcLongestPause.getTimestamp());
                 data[i][1] = gcLongestPause.getType();
                 data[i][2] = String.valueOf(gcLongestPause.getValue());
                 data[i][3] = String.valueOf(gcLongestPause.getAttributes().get("name") == null ? "" : gcLongestPause.getAttributes().get("name"));
@@ -76,9 +81,5 @@ public class GCLongestPausePanel {
         public String getColumnName(int column) {
             return columnNames[column];
         }
-    }
-
-    public JTable getTable() {
-        return this.table;
     }
 }

@@ -39,7 +39,7 @@ public class JettyServer implements Runnable {
         WebAppContext webAppContext6 = createWebAppContext("heap_summary_after_gc.html", "/heap-summary-after-gc-file");
 
         HandlerList handlers = new HandlerList();
-        handlers.setHandlers(new Handler[] { webAppContext1, webAppContext2, webAppContext3, webAppContext4, webAppContext5, webAppContext6, handler });
+        handlers.setHandlers(new Handler[]{webAppContext1, webAppContext2, webAppContext3, webAppContext4, webAppContext5, webAppContext6, handler});
         server.setHandler(handlers);
 
         try {

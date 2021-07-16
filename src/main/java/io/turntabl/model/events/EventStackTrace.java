@@ -12,7 +12,8 @@ public class EventStackTrace {
     @JsonProperty("bytecodeIndex")
     private String bytecodeIndex;
 
-    public EventStackTrace(){}
+    public EventStackTrace() {
+    }
 
     public String getLine() {
         return line;

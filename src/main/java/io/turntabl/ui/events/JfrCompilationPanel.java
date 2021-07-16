@@ -14,9 +14,9 @@ import java.awt.*;
 import java.util.List;
 
 public class JfrCompilationPanel {
+    private static final JsonUtility jsonUtil = new JsonUtility();
     private JBPanel panel;
     private JTable table;
-    private static final JsonUtility jsonUtil = new JsonUtility();
 
     public JfrCompilationPanel(TableModel tableModel) {
         panel = new JBPanel(new BorderLayout());
@@ -34,17 +34,21 @@ public class JfrCompilationPanel {
         table.getColumnModel().getColumn(7).setPreferredWidth(350);
         table.getColumnModel().getColumn(8).setPreferredWidth(350);
 
-        panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER),  BorderLayout.CENTER);
+        panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER), BorderLayout.CENTER);
     }
 
     public JBPanel getJfrCompilationComponent() {
         return panel;
     }
 
+    public JTable getTable() {
+        return this.table;
+    }
+
     public static class JfrCompilationTableModel extends AbstractTableModel {
 
         String[] columnNames = {"Timestamp",
-                "Duration", "Instrumentation Name", "Host Name", "Thread Name","Collector Name",
+                "Duration", "Instrumentation Name", "Host Name", "Thread Name", "Collector Name",
                 "Desc", "Succeeded", "Instrumentation Provider"};
 
         String[][] data;
@@ -87,10 +91,6 @@ public class JfrCompilationPanel {
         public String getColumnName(int column) {
             return columnNames[column];
         }
-    }
-
-    public JTable getTable() {
-        return this.table;
     }
 
 }

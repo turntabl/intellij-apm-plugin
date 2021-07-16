@@ -60,7 +60,7 @@ class ThreadContextSwitchRateUtilTest {
     @Test
     void getThreadContextSwitchRate() {
         List<ThreadContextSwitchRate> threadContextSwitchRateList = threadContextSwitchRateUtil.getThreadContextSwitchRate(jsonArray.get());
-        assertEquals(1,threadContextSwitchRateList.size());
+        assertEquals(1, threadContextSwitchRateList.size());
     }
 
 }

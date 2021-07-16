@@ -2,6 +2,7 @@ package io.turntabl.model.metrics;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.HashMap;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -32,52 +33,52 @@ public class GcHeapSummary {
         return name;
     }
 
-    public Long getTimestamp() {
-        return timestamp;
-    }
-
-    public Double getHeapCommittedSize() {
-        return heapCommittedSize;
-    }
-
-    public Double getReservedSize() {
-        return reservedSize;
-    }
-
-    public Double getHeapUsed() {
-        return heapUsed;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public HashMap<String, String> getAttributes() {
-        return attributes;
-    }
-
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Long getTimestamp() {
+        return timestamp;
     }
 
     public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public Double getHeapCommittedSize() {
+        return heapCommittedSize;
     }
 
     public void setHeapCommittedSize(Double heapCommittedSize) {
         this.heapCommittedSize = heapCommittedSize;
     }
 
+    public Double getReservedSize() {
+        return reservedSize;
+    }
+
     public void setReservedSize(Double reservedSize) {
         this.reservedSize = reservedSize;
     }
 
+    public Double getHeapUsed() {
+        return heapUsed;
+    }
+
     public void setHeapUsed(Double heapUsed) {
         this.heapUsed = heapUsed;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public HashMap<String, String> getAttributes() {
+        return attributes;
     }
 
     public void setAttributes(HashMap<String, String> attributes) {

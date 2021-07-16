@@ -12,9 +12,9 @@ import java.awt.*;
 import java.util.List;
 
 public class ObjectAllocationInNewTLabPanel {
+    private static final JsonUtility jsonUtil = new JsonUtility();
     private JBPanel panel;
     private JTable table;
-    private static final JsonUtility jsonUtil = new JsonUtility();
 
 
     public ObjectAllocationInNewTLabPanel(TableModel tableModel) {
@@ -38,6 +38,10 @@ public class ObjectAllocationInNewTLabPanel {
 
     public JBPanel getObjectAllocationInNewTLabComponent() {
         return panel;
+    }
+
+    public JTable getTable() {
+        return this.table;
     }
 
     public static class ObjectAllocationInNewTLabTableModel extends AbstractTableModel {
@@ -85,10 +89,6 @@ public class ObjectAllocationInNewTLabPanel {
         }
 
 
-
-    }
-    public JTable getTable() {
-        return this.table;
     }
 
 }

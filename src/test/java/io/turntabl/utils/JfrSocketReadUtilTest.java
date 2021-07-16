@@ -70,14 +70,14 @@ class JfrSocketReadUtilTest {
             "]";
 
     @Test
-    void canGetJfrSocketReadBytesRead(){
+    void canGetJfrSocketReadBytesRead() {
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
         List<JfrSocketReadBytesRead> extractedList = jfrSocketReadUtil.getJfrSocketReadBytesRead(jsonArray.get());
         assertEquals(1, extractedList.size());
     }
 
     @Test
-    void canGetJfrSocketReadDuration(){
+    void canGetJfrSocketReadDuration() {
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
         List<JfrSocketReadDuration> extractedList = jfrSocketReadUtil.getJfrSocketReadDuration(jsonArray.get());
         assertEquals(1, extractedList.size());

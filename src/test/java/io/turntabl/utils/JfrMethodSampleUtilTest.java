@@ -52,13 +52,13 @@ class JfrMethodSampleUtilTest {
 
     @Test
     void canGetJfrMethodSample() {
-        List<JfrMethodSample> extractedList  = jfrMethodSampleUtil.getJfrMethodSample(jsonString);
+        List<JfrMethodSample> extractedList = jfrMethodSampleUtil.getJfrMethodSample(jsonString);
         assertEquals(2, extractedList.size());
     }
 
     @Test
-    void canGetStackTrace(){
-        List<JfrMethodSample> extractedList  = jfrMethodSampleUtil.getJfrMethodSample(jsonString);
+    void canGetStackTrace() {
+        List<JfrMethodSample> extractedList = jfrMethodSampleUtil.getJfrMethodSample(jsonString);
         List<EventStackTrace> stackTraceList1 = jfrMethodSampleUtil.getStackTrace(extractedList.get(0).getStackTrace());
         List<EventStackTrace> stackTraceList2 = jfrMethodSampleUtil.getStackTrace(extractedList.get(1).getStackTrace());
         assertEquals(25, stackTraceList1.size());
@@ -66,8 +66,8 @@ class JfrMethodSampleUtilTest {
     }
 
     @Test
-    void canWriteToStackList(){
-        List<JfrMethodSample> extractedList  = jfrMethodSampleUtil.getJfrMethodSample(jsonString);
+    void canWriteToStackList() {
+        List<JfrMethodSample> extractedList = jfrMethodSampleUtil.getJfrMethodSample(jsonString);
         List<EventStackTrace> stackTraceList = jfrMethodSampleUtil.getStackTrace(extractedList.get(0).getStackTrace());
         List<EventStackTrace> stackTraceList2 = jfrMethodSampleUtil.getStackTrace(extractedList.get(1).getStackTrace());
 
@@ -81,8 +81,8 @@ class JfrMethodSampleUtilTest {
     }
 
     @Test
-    void canWriteToStackListWithoutThreadNames(){
-        List<JfrMethodSample> extractedList  = jfrMethodSampleUtil.getJfrMethodSample(jsonString);
+    void canWriteToStackListWithoutThreadNames() {
+        List<JfrMethodSample> extractedList = jfrMethodSampleUtil.getJfrMethodSample(jsonString);
         List<EventStackTrace> stackTraceList = jfrMethodSampleUtil.getStackTrace(extractedList.get(0).getStackTrace());
         List<EventStackTrace> stackTraceList2 = jfrMethodSampleUtil.getStackTrace(extractedList.get(1).getStackTrace());
 

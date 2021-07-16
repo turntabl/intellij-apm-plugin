@@ -5,6 +5,7 @@ import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
 import io.turntabl.model.metrics.CpuLoad;
 import io.turntabl.utils.JsonUtility;
+
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
@@ -12,9 +13,9 @@ import java.awt.*;
 import java.util.List;
 
 public class CpuLoadPanel {
+    private static final JsonUtility jsonUtil = new JsonUtility();
     private JBPanel panel;
     private JTable table;
-    private static final JsonUtility jsonUtil = new JsonUtility();
 
     public CpuLoadPanel(TableModel tableModel) {
         panel = new JBPanel(new BorderLayout());
@@ -35,6 +36,10 @@ public class CpuLoadPanel {
 
     public JBPanel getCpuLoadComponent() {
         return panel;
+    }
+
+    public JTable getTable() {
+        return this.table;
     }
 
     public static class CpuLoadTableModel extends AbstractTableModel {
@@ -77,9 +82,5 @@ public class CpuLoadPanel {
         public String getColumnName(int column) {
             return columnNames[column];
         }
-    }
-
-    public JTable getTable() {
-        return this.table;
     }
 }

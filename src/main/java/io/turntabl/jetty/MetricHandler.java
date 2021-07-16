@@ -22,6 +22,7 @@ import org.eclipse.jetty.client.util.StringContentProvider;
 import org.json.simple.JSONArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,11 +43,11 @@ public class MetricHandler extends HttpServlet {
     private final GarbageCollectionUtil gcUtil = new GarbageCollectionUtil(jsonUtil);
     private final ObjectAllocationInNewTLabUtil objectAllocationInNewTLabUtil = new ObjectAllocationInNewTLabUtil(jsonUtil);
     private final ObjectAllocationOutsideTLabUtil objectAllocationOutsideTLabUtil = new ObjectAllocationOutsideTLabUtil(jsonUtil);
-    private  final ThreadCpuLoadUtil threadCpuLoadUtil = new ThreadCpuLoadUtil(jsonUtil);
+    private final ThreadCpuLoadUtil threadCpuLoadUtil = new ThreadCpuLoadUtil(jsonUtil);
     private final JfrSocketReadUtil jfrSocketReadUtil = new JfrSocketReadUtil(jsonUtil);
     private final SummaryMetaspaceUtil summaryMetaspaceUtil = new SummaryMetaspaceUtil(jsonUtil);
     private final ThreadAllocatedStatisticsUtil threadAllocatedStatisticsUtil = new ThreadAllocatedStatisticsUtil(jsonUtil);
-
+    private final ThreadContextSwitchRateUtil threadContextSwitchRateUtil = new ThreadContextSwitchRateUtil(jsonUtil);
     private List<ObjectAllocationInNewTLab> cumulativeObjectAllocationList = new ArrayList<>();
     private List<ObjectAllocationOutsideTLab> cumulativeObjectAllocationOutsideList = new ArrayList<>();
     private List<CpuLoad> cumulativeCpuLoadList = new ArrayList<>();
@@ -63,9 +64,8 @@ public class MetricHandler extends HttpServlet {
     private List<JfrSocketReadDuration> cumulativeDurationList = new ArrayList<>();
     private List<ThreadAllocationStatistics> cumulativeThreadAllocatedStatisticsList = new ArrayList<>();
     private List<SummaryMetaspace> cumulativeSummaryMetaspaceList = new ArrayList<>();
-
-    private final ThreadContextSwitchRateUtil threadContextSwitchRateUtil = new ThreadContextSwitchRateUtil(jsonUtil);
     private List<ThreadContextSwitchRate> cumulativeThreadContextSwitchRateList = new ArrayList<>();
+
     public MetricHandler() {
         toolWindowComponent = null;
     }
@@ -118,11 +118,11 @@ public class MetricHandler extends HttpServlet {
             List<ThreadCpuLoad> consolidatedList = threadCpuLoadUtil.getThreadCpuLoadConsolidated(threadCpuLoadList);
 
             cumulativeThreadCpuLoadList.addAll(consolidatedList);
-            toolWindowComponent.getMetricsTree().updateComponentMap("Thread CPU Load",(new ThreadCpuLoadPanel(new ThreadCpuLoadPanel.ThreadCpuLoadTableModel(cumulativeThreadCpuLoadList))).getThreadCpuLoadComponent());
+            toolWindowComponent.getMetricsTree().updateComponentMap("Thread CPU Load", (new ThreadCpuLoadPanel(new ThreadCpuLoadPanel.ThreadCpuLoadTableModel(cumulativeThreadCpuLoadList))).getThreadCpuLoadComponent());
         }
     }
 
-    public void updateThreadContextSwitchRatePanel(String jsonString)  throws JsonProcessingException  {
+    public void updateThreadContextSwitchRatePanel(String jsonString) throws JsonProcessingException {
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
         if (jsonArray.isPresent()) {
             List<ThreadContextSwitchRate> threadContextSwitchRateList = threadContextSwitchRateUtil.getThreadContextSwitchRate(jsonArray.get());
@@ -132,14 +132,14 @@ public class MetricHandler extends HttpServlet {
             String cumulativeJsonString = jsonUtil.convertToJSONString(cumulativeThreadContextSwitchRateList);
             postObject("thread-contextswitch-rate", cumulativeJsonString);
 
-            toolWindowComponent.getMetricsTree().updateComponentMap("Thread Context Switch Rate",(new ThreadContextSwitchRatePanel(new ThreadContextSwitchRatePanel.ThreadContextSwitchRateTableModel(cumulativeThreadContextSwitchRateList))).getThreadContextSwitchRateComponent());
+            toolWindowComponent.getMetricsTree().updateComponentMap("Thread Context Switch Rate", (new ThreadContextSwitchRatePanel(new ThreadContextSwitchRatePanel.ThreadContextSwitchRateTableModel(cumulativeThreadContextSwitchRateList))).getThreadContextSwitchRateComponent());
         }
     }
 
-    private void updateJfrSocketReadPanels(String jsonString){
+    private void updateJfrSocketReadPanels(String jsonString) {
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
 
-        if (jsonArray.isPresent()){
+        if (jsonArray.isPresent()) {
             List<JfrSocketReadBytesRead> bytesReadList = jfrSocketReadUtil.getJfrSocketReadBytesRead(jsonArray.get());
             List<JfrSocketReadDuration> durationList = jfrSocketReadUtil.getJfrSocketReadDuration(jsonArray.get());
 
@@ -154,18 +154,18 @@ public class MetricHandler extends HttpServlet {
         }
     }
 
-    private void updateThreadAllocatedStatisticsPanel(String jsonString){
+    private void updateThreadAllocatedStatisticsPanel(String jsonString) {
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
         List<ThreadAllocationStatistics> threadAllocationStatisticsList = threadAllocatedStatisticsUtil.getThreadAllocatedStatistics(jsonArray.get());
         cumulativeThreadAllocatedStatisticsList.addAll(threadAllocationStatisticsList);
-        toolWindowComponent.getMetricsTree().updateComponentMap("Thread Allocated Statistics",(new ThreadAllocationStatisticsPanel(new ThreadAllocationStatisticsPanel.ThreadAllocationStatisticsTableModel(cumulativeThreadAllocatedStatisticsList))).getThreadAllocationStatisticsComponent());
+        toolWindowComponent.getMetricsTree().updateComponentMap("Thread Allocated Statistics", (new ThreadAllocationStatisticsPanel(new ThreadAllocationStatisticsPanel.ThreadAllocationStatisticsTableModel(cumulativeThreadAllocatedStatisticsList))).getThreadAllocationStatisticsComponent());
 
     }
 
     public void updateGarbageCollectionPanel(String jsonString) {
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
 
-        if (jsonArray.isPresent()){
+        if (jsonArray.isPresent()) {
             List<GCMinorDuration> gcMinorDurationList = gcUtil.getGCMinorDuration(jsonArray.get());
             List<GCMajorDuration> gcMajorDurationList = gcUtil.getGCMajorDuration(jsonArray.get());
             List<G1GarbageCollectionDuration> g1GCDurationList = gcUtil.getG1GarbageCollectionDuration(jsonArray.get());
@@ -196,7 +196,7 @@ public class MetricHandler extends HttpServlet {
     public void updateGcHeapSummaryPanel(String jsonString) throws JsonProcessingException {
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
 
-        if (jsonArray.isPresent()){
+        if (jsonArray.isPresent()) {
             List<GcHeapSummary> gcHeapSummaryList = gcHeapSummaryUtil.getGcHeapSummary(jsonArray.get());
             List<GcHeapSummary> consolidatedList = gcHeapSummaryUtil.getGcHeapSummaryConsolidated(gcHeapSummaryList);
             cumulativeGcHeapSummaryList.addAll(consolidatedList);
@@ -230,7 +230,7 @@ public class MetricHandler extends HttpServlet {
             toolWindowComponent.getMetricsTree().updateComponentMap("Summary Metaspace", (new SummaryMetaspacePanel(new SummaryMetaspacePanel.SummaryMetaspaceTableModel(cumulativeSummaryMetaspaceList))).getSummaryMetaspaceComponent());
         }
     }
-  
+
     public void updateObjectAllocationInNewTLabPanel(String jsonString) {
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
 

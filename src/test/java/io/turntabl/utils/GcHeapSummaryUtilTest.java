@@ -60,7 +60,7 @@ class GcHeapSummaryUtilTest {
             "                    \"when\": \"Before GC\"\n" +
             "                }\n" +
             "            },\n" +
-                        "{\n" +
+            "{\n" +
             "                \"name\": \"jfr.GCHeapSummary.heapCommittedSize\",\n" +
             "                \"type\": \"gauge\",\n" +
             "                \"value\": 2.65289728E8,\n" +
@@ -101,14 +101,14 @@ class GcHeapSummaryUtilTest {
             "]";
 
     @Test
-    void canGetGcHeapSummaryList(){
+    void canGetGcHeapSummaryList() {
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
         List<GcHeapSummary> extractedList = gcHeapSummaryUtil.getGcHeapSummary(jsonArray.get());
         assertEquals(6, extractedList.size());
     }
 
     @Test
-    void canGetGcHeapSummaryListConsolidated(){
+    void canGetGcHeapSummaryListConsolidated() {
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
         List<GcHeapSummary> extractedList = gcHeapSummaryUtil.getGcHeapSummary(jsonArray.get());
         List<GcHeapSummary> consolidatedList = gcHeapSummaryUtil.getGcHeapSummaryConsolidated(extractedList);
@@ -116,7 +116,7 @@ class GcHeapSummaryUtilTest {
     }
 
     @Test
-    void canGetGcHeapSummaryBeforeGC(){
+    void canGetGcHeapSummaryBeforeGC() {
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
         List<GcHeapSummary> extractedList = gcHeapSummaryUtil.getGcHeapSummary(jsonArray.get());
         List<GcHeapSummary> consolidatedList = gcHeapSummaryUtil.getGcHeapSummaryConsolidated(extractedList);
@@ -125,7 +125,7 @@ class GcHeapSummaryUtilTest {
     }
 
     @Test
-    void canGetGcHeapSummaryAfterGC(){
+    void canGetGcHeapSummaryAfterGC() {
         Optional<JSONArray> jsonArray = jsonUtil.readMetricsJson(jsonString);
         List<GcHeapSummary> extractedList = gcHeapSummaryUtil.getGcHeapSummary(jsonArray.get());
         List<GcHeapSummary> consolidatedList = gcHeapSummaryUtil.getGcHeapSummaryConsolidated(extractedList);

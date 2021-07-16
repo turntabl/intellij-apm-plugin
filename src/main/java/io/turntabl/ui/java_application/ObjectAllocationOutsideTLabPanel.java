@@ -12,12 +12,9 @@ import java.awt.*;
 import java.util.List;
 
 public class ObjectAllocationOutsideTLabPanel {
+    private static final JsonUtility jsonUtil = new JsonUtility();
     private JBPanel panel;
     private JTable table;
-    private static final JsonUtility jsonUtil = new JsonUtility();
-
-    TableModel myData;
-    DefaultTableColumnModel columnModel;
 
     public ObjectAllocationOutsideTLabPanel(TableModel tableModel) {
         panel = new JBPanel(new BorderLayout());
@@ -40,6 +37,10 @@ public class ObjectAllocationOutsideTLabPanel {
 
     public JBPanel getObjectAllocationOutsideTLabComponent() {
         return panel;
+    }
+
+    public JTable getTable() {
+        return this.table;
     }
 
     public static class ObjectAllocationOutsideTLabTableModel extends AbstractTableModel {
@@ -84,10 +85,6 @@ public class ObjectAllocationOutsideTLabPanel {
             return columnNames[column];
         }
 
-    }
-
-    public JTable getTable() {
-        return this.table;
     }
 
 }

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.turntabl.model.metrics.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -18,7 +19,7 @@ public class GarbageCollectionUtil {
     }
 
 
-    public List<GCMinorDuration> getGCMinorDuration(JSONArray metricsArray){
+    public List<GCMinorDuration> getGCMinorDuration(JSONArray metricsArray) {
         Stream<JSONObject> gcMinorDurationMetric = jsonUtils.getStream(metricsArray);
 
         return gcMinorDurationMetric
@@ -35,7 +36,7 @@ public class GarbageCollectionUtil {
                 }).collect(Collectors.toList());
     }
 
-    public List<GCMajorDuration> getGCMajorDuration(JSONArray metricsArray){
+    public List<GCMajorDuration> getGCMajorDuration(JSONArray metricsArray) {
         Stream<JSONObject> gcMajorDurationMetric = jsonUtils.getStream(metricsArray);
 
         return gcMajorDurationMetric
@@ -52,7 +53,7 @@ public class GarbageCollectionUtil {
                 }).collect(Collectors.toList());
     }
 
-    public List<G1GarbageCollectionDuration> getG1GarbageCollectionDuration(JSONArray metricsArray){
+    public List<G1GarbageCollectionDuration> getG1GarbageCollectionDuration(JSONArray metricsArray) {
         Stream<JSONObject> g1GCDurationMetric = jsonUtils.getStream(metricsArray);
 
         return g1GCDurationMetric
@@ -69,7 +70,7 @@ public class GarbageCollectionUtil {
                 }).collect(Collectors.toList());
     }
 
-    public List<GCDuration> getGCDuration(JSONArray metricsArray){
+    public List<GCDuration> getGCDuration(JSONArray metricsArray) {
         Stream<JSONObject> gcDurationMetric = jsonUtils.getStream(metricsArray);
 
         return gcDurationMetric
@@ -86,7 +87,7 @@ public class GarbageCollectionUtil {
                 }).collect(Collectors.toList());
     }
 
-    public List<GCLongestPause> getGCLongestPause(JSONArray metricsArray){
+    public List<GCLongestPause> getGCLongestPause(JSONArray metricsArray) {
         Stream<JSONObject> gcLongestPauseMetric = jsonUtils.getStream(metricsArray);
 
         return gcLongestPauseMetric

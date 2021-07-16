@@ -2,7 +2,9 @@ package io.turntabl.model.metrics;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.HashMap;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CpuLoad {
     private String name;
@@ -39,44 +41,44 @@ public class CpuLoad {
         return timestamp;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public double getJvmUserValue() {
-        return jvmUserValue;
-    }
-
-    public double getJvmSystemValue() {
-        return jvmSystemValue;
-    }
-
-    public double getMachineTotalValue() {
-        return machineTotalValue;
-    }
-
-    public HashMap<String, String> getAttributes() {
-        return attributes;
-    }
-
     public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public void setType(String type) {
         this.type = type;
     }
 
+    public double getJvmUserValue() {
+        return jvmUserValue;
+    }
+
     public void setJvmUserValue(double jvmUserValue) {
         this.jvmUserValue = jvmUserValue;
+    }
+
+    public double getJvmSystemValue() {
+        return jvmSystemValue;
     }
 
     public void setJvmSystemValue(double jvmSystemValue) {
         this.jvmSystemValue = jvmSystemValue;
     }
 
+    public double getMachineTotalValue() {
+        return machineTotalValue;
+    }
+
     public void setMachineTotalValue(double machineTotalValue) {
         this.machineTotalValue = machineTotalValue;
+    }
+
+    public HashMap<String, String> getAttributes() {
+        return attributes;
     }
 
     public void setAttributes(HashMap<String, String> attributes) {

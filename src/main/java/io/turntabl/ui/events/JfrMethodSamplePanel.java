@@ -13,9 +13,9 @@ import java.awt.*;
 import java.util.List;
 
 public class JfrMethodSamplePanel {
+    private static final JsonUtility jsonUtil = new JsonUtility();
     private JBPanel panel;
     private JTable table;
-    private static final JsonUtility jsonUtil = new JsonUtility();
 
     public JfrMethodSamplePanel(TableModel tableModel) {
         panel = new JBPanel(new BorderLayout());
@@ -32,11 +32,15 @@ public class JfrMethodSamplePanel {
         table.getColumnModel().getColumn(6).setPreferredWidth(350);
         table.getColumnModel().getColumn(7).setPreferredWidth(350);
 
-        panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER),  BorderLayout.CENTER);
+        panel.add(new JBScrollPane(table, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER), BorderLayout.CENTER);
     }
 
     public JBPanel getJfrMethodSampleComponent() {
         return panel;
+    }
+
+    public JTable getTable() {
+        return this.table;
     }
 
     public static class JfrMethodSampleTableModel extends AbstractTableModel {
@@ -79,9 +83,5 @@ public class JfrMethodSamplePanel {
         public String getColumnName(int column) {
             return columnNames[column];
         }
-    }
-
-    public JTable getTable() {
-        return this.table;
     }
 }

@@ -12,7 +12,7 @@ public class Folded {
             int sep = line.lastIndexOf(" ");
 
             String s = line.substring(0, sep);
-            String v = line.substring(sep+1);
+            String v = line.substring(sep + 1);
 
             String[] stack = s.split(";");
 

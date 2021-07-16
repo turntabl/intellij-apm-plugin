@@ -9,15 +9,15 @@ import java.awt.*;
 
 public class ThreadContextSwitchratePanel {
 
-        private JBPanel panel;
+    private JBPanel panel;
 
-        public ThreadContextSwitchratePanel() {
-            panel = new JBPanel(new BorderLayout());
-            panel.add(new JBCefBrowser("http://localhost:8787/thread-contextswitch-rate-file/").getComponent(), BorderLayout.CENTER);
-            panel.setVisible(true);
-        }
+    public ThreadContextSwitchratePanel() {
+        panel = new JBPanel(new BorderLayout());
+        panel.add(new JBCefBrowser("http://localhost:8787/thread-contextswitch-rate-file/").getComponent(), BorderLayout.CENTER);
+        panel.setVisible(true);
+    }
 
-        public JComponent getComponent() {
-            return new JBScrollPane(this.panel, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        }
+    public JComponent getComponent() {
+        return new JBScrollPane(this.panel, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+    }
 }

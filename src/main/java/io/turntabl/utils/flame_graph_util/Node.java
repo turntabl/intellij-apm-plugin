@@ -23,19 +23,19 @@ public class Node {
     public Node() {
     }
 
-    public void add(List<String> stack, int index, int value){
+    public void add(List<String> stack, int index, int value) {
         this.value += value;
 
-        if (index >= 0){
+        if (index >= 0) {
             String head = stack.get(index);
 
             Node child = this.children.get(head);
 
-            if(child == null){
+            if (child == null) {
                 child = new Node(head, 0, new HashMap<>());
                 this.children.put(head, child);
             }
-            child.add(stack, index-1, value);
+            child.add(stack, index - 1, value);
         }
     }
 
@@ -54,12 +54,12 @@ public class Node {
         return mapper.writeValueAsString(jsonNode);
     }
 
-    public JsonNode convertToArray(Node node){
+    public JsonNode convertToArray(Node node) {
         List<Node> nodes = new ArrayList<>(node.getChildren().values());
         JsonNode rootJsonNode = new JsonNode(node.getName(), node.getValue());
         List<JsonNode> jsonNodes = new ArrayList<>();
 
-        for (Node n : nodes){
+        for (Node n : nodes) {
             JsonNode newNode = convertToArray(n);
             jsonNodes.add(newNode);
         }

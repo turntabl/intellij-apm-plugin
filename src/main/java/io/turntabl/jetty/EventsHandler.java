@@ -10,6 +10,7 @@ import io.turntabl.ui.flame_graph.FlameGraphPanel;
 import io.turntabl.ui.flame_graph.FlameGraphWithoutThreadNamesPanel;
 import io.turntabl.utils.*;
 import io.turntabl.ui.events.JfrMethodSamplePanel;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,16 +20,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventsHandler extends HttpServlet {
-    private NewRelicJavaProfilerToolWindow toolWindowComponent;
     private final ServletUtils servletUtils = new ServletUtils();
     private final JsonUtility jsonUtil = new JsonUtility();
     private final JVMInfoEventUtil jvmInfoEventUtil = new JVMInfoEventUtil(jsonUtil);
-    private List<JVMInfoEvent> cumulativeJVMInfoEvents = new ArrayList<>();
     private final JfrCompilationEventUtil jfrCompilationEventUtil = new JfrCompilationEventUtil(jsonUtil);
-    private List<JfrCompilation> cumulativeJfrCompilationEvents = new ArrayList<>();
     private final JfrMethodSampleUtil jfrMethodSampleUtil = new JfrMethodSampleUtil(jsonUtil);
-    private List<JfrMethodSample> cumulativeJfrMethodSampleList = new ArrayList<>();
     private final JavaMonitorWaitUtil javaMonitorWaitUtil = new JavaMonitorWaitUtil(jsonUtil);
+    private NewRelicJavaProfilerToolWindow toolWindowComponent;
+    private List<JVMInfoEvent> cumulativeJVMInfoEvents = new ArrayList<>();
+    private List<JfrCompilation> cumulativeJfrCompilationEvents = new ArrayList<>();
+    private List<JfrMethodSample> cumulativeJfrMethodSampleList = new ArrayList<>();
     private List<JavaMonitorWait> cumulativeJavaMonitorWait = new ArrayList<>();
     private List<CollapsedEventSample> collapsedEventSampleList = new ArrayList<>();
 

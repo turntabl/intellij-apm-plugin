@@ -30,13 +30,17 @@
         .y2-axis text {
             fill: red;
         }
+
     </style>
 </head>
 
 <body>
 <center>
     <div class="container">
-        <h2 style="margin-top: 100px;">Heap Summary Graph Before Garbage Collection <button title="Refresh" style="font-size:24px; border:none; background:none;" onclick="window.location.reload();"><i class="fa fa-refresh"></i></button></h2>
+        <h2 style="margin-top: 100px;">Heap Summary Graph Before Garbage Collection
+            <button title="Refresh" style="font-size:24px; border:none; background:none;"
+                    onclick="window.location.reload();"><i class="fa fa-refresh"></i></button>
+        </h2>
         <div class="jumbotron">
             <svg id="chart" width="1000" height="500"></svg>
         </div>
@@ -183,4 +187,5 @@
         chart(d.data);
     })
     .catch(err=>console.log(err));
+
 </script>

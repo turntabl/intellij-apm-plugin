@@ -5,6 +5,7 @@ import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
 import io.turntabl.model.metrics.G1GarbageCollectionDuration;
 import io.turntabl.utils.JsonUtility;
+
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
@@ -12,9 +13,9 @@ import java.awt.*;
 import java.util.List;
 
 public class G1GarbageCollectionDurationPanel {
+    private static final JsonUtility jsonUtil = new JsonUtility();
     private static JBPanel panel;
     private JTable table;
-    private static final JsonUtility jsonUtil = new JsonUtility();
 
     public G1GarbageCollectionDurationPanel(TableModel tableModel) {
         panel = new JBPanel(new BorderLayout());
@@ -37,6 +38,10 @@ public class G1GarbageCollectionDurationPanel {
 
     public JBPanel getG1GarbageCollectionDurationComponent() {
         return panel;
+    }
+
+    public JTable getTable() {
+        return this.table;
     }
 
     public static class G1GarbageCollectionDurationTableModel extends AbstractTableModel {
@@ -82,9 +87,5 @@ public class G1GarbageCollectionDurationPanel {
         public String getColumnName(int column) {
             return columnNames[column];
         }
-    }
-
-    public JTable getTable() {
-        return this.table;
     }
 }

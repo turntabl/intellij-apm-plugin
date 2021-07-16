@@ -18,13 +18,17 @@
             font-family: Lato;
             font-size: 13px;
         }
+
     </style>
 </head>
 
 <body>
 <center>
     <div class="container">
-        <h2 style="margin-top: 100px;">Thread Context Switch Rate <button title="Refresh" style="font-size:24px; border:none; background:none;" onclick="window.location.reload();"><i class="fa fa-refresh"></i></button></h2>
+        <h2 style="margin-top: 100px;">Thread Context Switch Rate
+            <button title="Refresh" style="font-size:24px; border:none; background:none;"
+                    onclick="window.location.reload();"><i class="fa fa-refresh"></i></button>
+        </h2>
         <div class="jumbotron">
             <svg id="chart" width="1000" height="500"></svg>
         </div>
@@ -131,4 +135,5 @@
         chart(d.data);
     })
     .catch(err=>console.log(err));
+
 </script>

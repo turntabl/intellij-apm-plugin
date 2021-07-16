@@ -17,11 +17,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MetricsGraphTree {
+    private final NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow;
     private JBPanel treePanel;
     private JTree tree;
     private String rootNodeName = "Graphs by metric";
     private String[] viewNodes = {"CPU Load Graph", "Thread ContextSwitch Rate Graph"};
-    private final NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow;
     private Map<String, JComponent> componentMap;
     private CpuLoadGraphPanel cpuGraphPanel;
     private ThreadContextSwitchratePanel threadContextSwitchratePanel;
@@ -42,13 +42,13 @@ public class MetricsGraphTree {
         heapSummaryAfterGCPanel = new HeapSummaryAfterGCPanel();
 
         JComponent[] heapComponents = {heapSummaryBeforeGCPanel.getComponent(), heapSummaryAfterGCPanel.getComponent()};
-      
+
         for (int i = 0; i < heapNodes.length; i++) {
             heapSummaryNode.add(new DefaultMutableTreeNode(heapNodes[i]));
             componentMap.put(heapNodes[i], heapComponents[i]);
         }
         rootNode.add(heapSummaryNode);
-      
+
 
         cpuGraphPanel = new CpuLoadGraphPanel();
         threadContextSwitchratePanel = new ThreadContextSwitchratePanel();

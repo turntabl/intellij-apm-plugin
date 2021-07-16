@@ -12,6 +12,7 @@ import io.turntabl.ui.java_virtual_machine.GcHeapSummaryPanel;
 import io.turntabl.ui.java_virtual_machine.garbage_collection.*;
 import io.turntabl.ui.operating_system.CpuLoadPanel;
 import io.turntabl.ui.operating_system.ThreadCpuLoadPanel;
+
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
@@ -153,9 +154,9 @@ public class MetricsTree {
         }
 
         // define GC sub nodes
-         DefaultMutableTreeNode jvmSubNode = new DefaultMutableTreeNode("Garbage Collection");
+        DefaultMutableTreeNode jvmSubNode = new DefaultMutableTreeNode("Garbage Collection");
 
-         String[] jvmSubNodes = {"GC Minor Duration", "GC Major Duration", "G1 GC Duration", "GC Duration", "GC Longest Pause", "GC Heap Summary"};
+        String[] jvmSubNodes = {"GC Minor Duration", "GC Major Duration", "G1 GC Duration", "GC Duration", "GC Longest Pause", "GC Heap Summary"};
 
         // defining table info for GC branch sub nodes
         gcMinorDurationPanel = new GCMinorDurationPanel(
@@ -202,13 +203,13 @@ public class MetricsTree {
 
 
         // define components for jvm sub node
-         JBPanel[] gcComponents = {gcMinorDurationPanel.getGCMinorDurationComponent(),
-                 gcMajorDurationPanel.getGCMajorDurationComponent(),
-                 g1GarbageCollectionDurationPanel.getG1GarbageCollectionDurationComponent(),
-                 gcDurationPanel.getGCDurationComponent(),
-                 gcLongestPausePanel.getGCLongestPauseComponent(),
-                 gcHeapSummaryPanel.getGcHeapSummaryComponent()
-         };
+        JBPanel[] gcComponents = {gcMinorDurationPanel.getGCMinorDurationComponent(),
+                gcMajorDurationPanel.getGCMajorDurationComponent(),
+                g1GarbageCollectionDurationPanel.getG1GarbageCollectionDurationComponent(),
+                gcDurationPanel.getGCDurationComponent(),
+                gcLongestPausePanel.getGCLongestPauseComponent(),
+                gcHeapSummaryPanel.getGcHeapSummaryComponent()
+        };
 
         for (int i = 0; i < jvmSubNodes.length; i++) {
             jvmSubNode.add(new DefaultMutableTreeNode(jvmSubNodes[i]));

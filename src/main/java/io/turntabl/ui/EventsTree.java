@@ -24,11 +24,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EventsTree {
+    private final NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow;
     private JBPanel treePanel;
     private JTree tree;
     private String rootNodeName = "Events by type";
     private String[] eventNodes = {"JVM Information", "JFR Compilation", "JFR Method Sample", "Java Monitor Wait"};
-    private final NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow;
     private Map<String, JComponent> componentMap;
     private JVMInfoEventPanel jvmInfoEventPanel;
     private JavaMonitorWaitPanel javaMonitorWaitPanel;
