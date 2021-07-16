@@ -9,8 +9,10 @@ import java.util.stream.Collectors;
 
 public class MetricGraphHandler extends HttpServlet {
     private String cpuLoadString;
+    private String threadContextSwitchRateString;
     private String heapSummaryBeforeGC;
     private String heapSummaryAfterGC;
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -19,6 +21,8 @@ public class MetricGraphHandler extends HttpServlet {
 
         if (url.endsWith("cpu-load")) {
             resp.getWriter().println(cpuLoadString);
+        } else if (url.endsWith("thread-contextswitch-rate")){
+            resp.getWriter().println(threadContextSwitchRateString);
         } else if (url.endsWith("heap-summary-before-gc")) {
             resp.getWriter().println(heapSummaryBeforeGC);
         } else if (url.endsWith("heap-summary-after-gc")) {
@@ -35,6 +39,8 @@ public class MetricGraphHandler extends HttpServlet {
 
         if (url.endsWith("cpu-load")) {
             cpuLoadString = req.getReader().lines().collect(Collectors.joining());
+        } else if (url.endsWith("thread-contextswitch-rate")){
+            threadContextSwitchRateString = req.getReader().lines().collect(Collectors.joining());
         } else if (url.endsWith("heap-summary-before-gc")) {
             heapSummaryBeforeGC = req.getReader().lines().collect(Collectors.joining());
         } else if (url.endsWith("heap-summary-after-gc")) {

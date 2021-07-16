@@ -5,6 +5,7 @@ import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
 import com.intellij.util.ui.components.BorderLayoutPanel;
 import io.turntabl.ui.metric_graph.CpuLoadGraphPanel;
+import io.turntabl.ui.metric_graph.ThreadContextSwitchratePanel;
 import io.turntabl.ui.metric_graph.HeapSummaryAfterGCPanel;
 import io.turntabl.ui.metric_graph.HeapSummaryBeforeGCPanel;
 
@@ -19,10 +20,11 @@ public class MetricsGraphTree {
     private JBPanel treePanel;
     private JTree tree;
     private String rootNodeName = "Graphs by metric";
-    private String[] viewNodes = {"CPU Load Graph"};
+    private String[] viewNodes = {"CPU Load Graph", "Thread ContextSwitch Rate Graph"};
     private final NewRelicJavaProfilerToolWindow newRelicJavaProfilerToolWindow;
     private Map<String, JComponent> componentMap;
     private CpuLoadGraphPanel cpuGraphPanel;
+    private ThreadContextSwitchratePanel threadContextSwitchratePanel;
     private HeapSummaryBeforeGCPanel heapSummaryBeforeGCPanel;
     private HeapSummaryAfterGCPanel heapSummaryAfterGCPanel;
 
@@ -32,6 +34,7 @@ public class MetricsGraphTree {
 
         DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(rootNodeName);
 
+
         DefaultMutableTreeNode heapSummaryNode = new DefaultMutableTreeNode("GC Heap Summary");
         String[] heapNodes = {"Before GC", "After GC"};
 
@@ -39,16 +42,17 @@ public class MetricsGraphTree {
         heapSummaryAfterGCPanel = new HeapSummaryAfterGCPanel();
 
         JComponent[] heapComponents = {heapSummaryBeforeGCPanel.getComponent(), heapSummaryAfterGCPanel.getComponent()};
-
+      
         for (int i = 0; i < heapNodes.length; i++) {
             heapSummaryNode.add(new DefaultMutableTreeNode(heapNodes[i]));
             componentMap.put(heapNodes[i], heapComponents[i]);
         }
-
         rootNode.add(heapSummaryNode);
+      
 
         cpuGraphPanel = new CpuLoadGraphPanel();
-        JComponent[] metricGraphPanels = {cpuGraphPanel.getComponent()};
+        threadContextSwitchratePanel = new ThreadContextSwitchratePanel();
+        JComponent[] metricGraphPanels = {cpuGraphPanel.getComponent(), threadContextSwitchratePanel.getComponent()};
 
         for (int i = 0; i < viewNodes.length; i++) {
             rootNode.add(new DefaultMutableTreeNode(viewNodes[i]));
