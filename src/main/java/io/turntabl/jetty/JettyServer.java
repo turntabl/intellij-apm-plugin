@@ -31,58 +31,14 @@ public class JettyServer implements Runnable {
         handler.addServletWithMapping(new ServletHolder(new FlameGraphHandler()), "/fg/*");
         handler.addServletWithMapping(new ServletHolder(new MetricGraphHandler()), "/mg/*");
 
-        WebAppContext webAppContext = new WebAppContext();
-        try {
-            webAppContext.setResourceBase(String.valueOf(Resource.newResource(new URL(JettyServer.class.getResource("/webapp/html/flame_graph.html"), "."))));
-            webAppContext.setClassLoader(JettyServer.class.getClassLoader());
-            webAppContext.setContextPath("/flame-graph");
-            webAppContext.setWelcomeFiles(new String[]{"flame_graph.html"});
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-
-        WebAppContext webAppContext2 = new WebAppContext();
-        try {
-            webAppContext2.setResourceBase(String.valueOf(Resource.newResource(new URL(JettyServer.class.getResource("/webapp/html/flame_graph_no_thread_names.html"), "."))));
-            webAppContext2.setClassLoader(JettyServer.class.getClassLoader());
-            webAppContext2.setContextPath("/flame-graph-no-thread-names");
-            webAppContext2.setWelcomeFiles(new String[]{"flame_graph_no_thread_names.html"});
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-
-        WebAppContext webAppContext3 = new WebAppContext();
-        try {
-            webAppContext3.setResourceBase(String.valueOf(Resource.newResource(new URL(JettyServer.class.getResource("/webapp/html/cpu_load.html"), "."))));
-            webAppContext3.setClassLoader(JettyServer.class.getClassLoader());
-            webAppContext3.setContextPath("/cpu-load-file");
-            webAppContext3.setWelcomeFiles(new String[]{"cpu_load.html"});
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-
-        WebAppContext webAppContext5 = new WebAppContext();
-        try {
-            webAppContext5.setResourceBase(String.valueOf(Resource.newResource(new URL(JettyServer.class.getResource("/webapp/html/heap_summary_before_gc.html"), "."))));
-            webAppContext5.setClassLoader(JettyServer.class.getClassLoader());
-            webAppContext5.setContextPath("/heap-summary-before-gc-file");
-            webAppContext5.setWelcomeFiles(new String[]{"heap_summary_before_gc.html"});
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-
-        WebAppContext webAppContext6 = new WebAppContext();
-        try {
-            webAppContext6.setResourceBase(String.valueOf(Resource.newResource(new URL(JettyServer.class.getResource("/webapp/html/heap_summary_after_gc.html"), "."))));
-            webAppContext6.setClassLoader(JettyServer.class.getClassLoader());
-            webAppContext6.setContextPath("/heap-summary-after-gc-file");
-            webAppContext6.setWelcomeFiles(new String[]{"heap_summary_after_gc.html"});
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+        WebAppContext webAppContext1 = createWebAppContext("flame_graph.html", "/flame-graph");
+        WebAppContext webAppContext2 = createWebAppContext("flame_graph_no_thread_names.html", "/flame-graph-no-thread-names");
+        WebAppContext webAppContext3 = createWebAppContext("cpu_load.html", "/cpu-load-file");
+        WebAppContext webAppContext5 = createWebAppContext("heap_summary_before_gc.html", "/heap-summary-before-gc-file");
+        WebAppContext webAppContext6 = createWebAppContext("heap_summary_after_gc.html", "/heap-summary-after-gc-file");
 
         HandlerList handlers = new HandlerList();
-        handlers.setHandlers(new Handler[] { webAppContext, webAppContext2, webAppContext3, webAppContext5, webAppContext6, handler });
+        handlers.setHandlers(new Handler[] { webAppContext1, webAppContext2, webAppContext3, webAppContext5, webAppContext6, handler });
         server.setHandler(handlers);
 
         try {
@@ -93,5 +49,18 @@ public class JettyServer implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public WebAppContext createWebAppContext(String fullFilename, String endpoint) {
+        WebAppContext webAppContext = new WebAppContext();
+        try {
+            webAppContext.setResourceBase(String.valueOf(Resource.newResource(new URL(JettyServer.class.getResource("/webapp/html/" + fullFilename), "."))));
+            webAppContext.setClassLoader(JettyServer.class.getClassLoader());
+            webAppContext.setContextPath(endpoint);
+            webAppContext.setWelcomeFiles(new String[]{fullFilename});
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return webAppContext;
     }
 }
