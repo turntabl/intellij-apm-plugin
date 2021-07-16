@@ -43,7 +43,7 @@
         data.forEach(function(d) {
             var date = new Date(d.timestamp);
             d.timestamp = date;
-            d.value = d.value/100;
+            d.value = d.value;
             return d;
         });
 
@@ -57,7 +57,9 @@
             .domain(d3.extent(data, d => d.timestamp));
 
         var y = d3.scaleLinear()
-            .rangeRound([height - margin.bottom, margin.top].domain(0,300));
+            .rangeRound([height - margin.bottom, margin.top])
+            .domain([0, d3.max(data, function(d) {return d.value})]);
+
 
         var z = d3.scaleOrdinal(d3.schemeCategory10);
 
