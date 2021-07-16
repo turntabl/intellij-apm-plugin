@@ -58,7 +58,8 @@
             .domain(d3.extent(data, d => d.timestamp));
 
         var y = d3.scaleLinear()
-            .rangeRound([height - margin.bottom, margin.top]);
+            .rangeRound([height - margin.bottom, margin.top])
+            .domain([0, 0.3 + d3.max(data, function(d) {return d.machineTotalValue})]);
 
         var z = d3.scaleOrdinal(d3.schemeCategory10);
 
