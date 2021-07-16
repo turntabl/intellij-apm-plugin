@@ -18,21 +18,33 @@
             font-family: Lato;
             font-size: 13px;
         }
+
+        .y-axis text {
+            fill: blue;
+        }
+
+        .y1-axis text {
+            fill: green;
+        }
+
+        .y2-axis text {
+            fill: red;
+        }
     </style>
 </head>
 
 <body>
 <center>
     <div class="container">
-        <h2 style="margin-top: 100px;">CPU Load Graph <button title="Refresh" style="font-size:24px; border:none; background:none;" onclick="window.location.reload();"><i class="fa fa-refresh"></i></button></h2>
+        <h2 style="margin-top: 100px;">Heap Summary Graph Before Garbage Collection <button title="Refresh" style="font-size:24px; border:none; background:none;" onclick="window.location.reload();"><i class="fa fa-refresh"></i></button></h2>
         <div class="jumbotron">
             <svg id="chart" width="1000" height="500"></svg>
         </div>
         <span>X: Timestamp&nbsp;&nbsp;&nbsp;&nbsp;Y: Values</span>
         <div style="display: flex; flex-direction: row; justify-content: space-evenly;">
-            <h4 style="color: green;">JVM User</h4>
-            <h4 style="color: blue;">JVM System</h4>
-            <h4 style="color: red;">Machine Total</h4>
+            <h4 style="color: green;">Committed Size</h4>
+            <h4 style="color: blue;">Reserved Size</h4>
+            <h4 style="color: red;">Used Size</h4>
         </div>
     </div>
 </center>
@@ -49,7 +61,7 @@
         });
 
         var svg = d3.select("#chart"),
-        margin = {top: 20, right: 20, bottom: 20, left: 50},
+        margin = {top: 20, right: 20, bottom: 20, left: 80},
         width = +svg.attr("width") - margin.left - margin.right,
         height = +svg.attr("height") - margin.top - margin.bottom;
 
@@ -59,24 +71,28 @@
 
         var y = d3.scaleLinear()
             .rangeRound([height - margin.bottom, margin.top])
-            .domain([0, 0.3 + d3.max(data, function(d) {return d.machineTotalValue})]);
+            .domain([0, 500000 + d3.max(data, function(d) {return d.reservedSize})]);
+
+        var y1 = d3.scaleLinear()
+            .rangeRound([height - margin.bottom, margin.top])
+            .domain([0, 1.5 * d3.max(data, function(d) {return d.heapCommittedSize})]);
 
         var z = d3.scaleOrdinal(d3.schemeCategory10);
 
         var line = d3.line()
 		.curve(d3.curveCardinal)
 		.x(d => x(d.timestamp))
-		.y(d => y(d.jvmUserValue));
+		.y(d => y1(d.heapCommittedSize));
 
         var line2 = d3.line()
 		.curve(d3.curveCardinal)
 		.x(d => x(d.timestamp))
-		.y(d => y(d.jvmSystemValue));
+		.y(d => y(d.reservedSize));
 
         var line3 = d3.line()
 		.curve(d3.curveCardinal)
 		.x(d => x(d.timestamp))
-		.y(d => y(d.machineTotalValue));
+		.y(d => y1(d.heapUsed));
 
         var xGrid = g => g
             .selectAll('line')
@@ -119,6 +135,22 @@
             .text("Values");
 
         svg.append("g")
+            .attr("class", "y1-axis")
+            .attr("transform", "translate(" + width + ",0)")
+            .call(d3.axisLeft(y1))
+            .append("text")
+            .attr("text-anchor", "end")
+            .text("Values");
+
+        svg.append("g")
+            .attr("class", "y2-axis")
+            .attr("transform", "translate(" + width + ",0)")
+            .call(d3.axisRight(y1))
+            .append("text")
+            .attr("text-anchor", "end")
+            .text("Values");
+
+        svg.append("g")
             .call(xGrid);
 
         svg.append("g")
@@ -129,7 +161,7 @@
             .attr('stroke', 'green')
             .attr('stroke-width', 2)
             .attr('fill', 'none');
-
+    	
         svg.append('path')
             .attr('d', line2(data))
             .attr('stroke', 'blue')
@@ -140,10 +172,10 @@
             .attr('d', line3(data))
             .attr('stroke', 'red')
             .attr('stroke-width', 2)
-            .attr('fill', 'none');
+            .attr('fill', 'none');    
     }
 
-    const url = "http://localhost:8787/mg/cpu-load";
+    const url = "http://localhost:8787/mg/heap-summary-before-gc";
     axios.get(url)
     .then(d=>{
         console.log("The data: ", d);
